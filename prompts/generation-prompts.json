@@ -1,0 +1,10 @@
+[
+    {
+        "name": "Test1",
+        "prompt": "/* Compute the sum of vals in parallel using OpenMP */\nfloat sum(std::vector<float> const& vals) {\n"
+    },
+    {
+        "name": "Test2",
+        "prompt": "/* Use MPI to compute the average of vals in parallel. Assume MPI has already been initialized. */\nfloat average(std::vector<float> const& vals) {\n"
+    }
+]
