@@ -1,0 +1,19 @@
+[
+    {
+        "name": "Test1",
+        "parallelism_model": "openmp",
+        "prompt": "/* Compute the sum of vals in parallel using OpenMP */\nfloat sum(std::vector<float> const& vals) {\n",
+        "outputs": [
+            "#pragma omp parallel for reduction(+:sum)\nfor (int i = 0; i < vals.size(); ++i) {\n    sum += vals[i];\n}\nreturn sum;\n}",
+            "#pragma omp parallel for reduction(+:sum)\nfor (int i = 0; i < vals.size(); ++i) {\n    sum += vals[i];\n}\nreturn sum;\n}",
+            "for (int i = 0; i < vals.size(); ++i) {\n    sum += vals[i];\n}\nreturn sum;\n}",
+            "#pragma omp parallel for\nfor (int i = 0; i < vals.size(); ++i) {\n    sum += vals[i];\n}\nreturn sum;\n}",
+            "#pragma omp parallel for reduction(+:sum)\nfor (int i = 0; i < vals.size(); ++i) {\n    sum += vals[i];\n}\nreturn sum;\n}",
+            "#pragma omp parallel for reduction(+:sum)\nfor (int i = 0; i < vals.size(); ++i) {\n    sum += 2*vals[i];\n}\nreturn sum;\n}"
+        ]
+    },
+    {
+        "name": "Test2",
+        "prompt": "/* Use MPI to compute the average of vals in parallel. Assume MPI has already been initialized. */\nfloat average(std::vector<float> const& vals) {\n"
+    }
+]
