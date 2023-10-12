@@ -25,6 +25,7 @@ int main(int argc, char **argv) {
     /* initialize settings from arguments */
     if (argc <= 1) {
         printf("Usage: %s <num_iter> <?num_threads>\n", argv[0]);
+        exit(1);
     }
 
     const int NITER = std::stoi(std::string(argv[1]));
