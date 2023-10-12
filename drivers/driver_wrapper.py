@@ -12,6 +12,8 @@ class DriverWrapper(ABC):
     def __init__(self, parallelism_model):
         self.parallelism_model = parallelism_model
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}(parallelism_model={self.parallelism_model})"
 
     @abstractmethod
     def write_source(self, content, fpath):
