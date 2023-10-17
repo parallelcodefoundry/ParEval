@@ -91,7 +91,7 @@ class CppDriverWrapper(DriverWrapper):
             # run the code
             run_result = self.run(exec_path) if build_result.did_build else None
             logging.debug(f"Run result: {run_result}")
-            if run_result:# and run_result.exit_code != 0:
+            if run_result and run_result.exit_code != 0:
                 logging.debug(f"Ouputs:\n\tstdout: {run_result.stdout}\n\tstderr: {run_result.stderr}")
         
         return GeneratedTextResult(write_success, build_result, run_result)

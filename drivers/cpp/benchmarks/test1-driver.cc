@@ -34,7 +34,6 @@ bool validate(Context *ctx) {
     const float smallSum = sum(smallData);
     const float realSum = std::reduce(smallData.begin(), smallData.end());
 
-    printf("generated result: %f\treal result: %f\n", smallSum, realSum);
     return std::abs(smallSum - realSum) < 1e-4;
 }
 
