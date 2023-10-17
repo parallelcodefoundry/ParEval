@@ -134,7 +134,8 @@ class DriverWrapper(ABC):
         """ Run all the generated outputs in the given prompt. """
         root = prompt["language"]
         ext = LANGUAGE_EXTENSIONS[prompt["language"]]
-        test_driver_file = os.path.join(root, "benchmarks", prompt["name"].lower() + "-driver" + ext)
+        driver_base = f"{prompt['name'].lower()}-{self.parallelism_model}-driver"
+        test_driver_file = os.path.join(root, "benchmarks", driver_base + ext)
 
         outputs = []
         logging.info(f"Testing prompt {prompt['name']} with {self}...")

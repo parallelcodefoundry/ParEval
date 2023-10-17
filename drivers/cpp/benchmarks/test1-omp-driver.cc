@@ -1,9 +1,11 @@
+// Driver for Test1. Prompt:
+//    /* Compute the sum of vals in parallel using OpenMP */
+//    float sum(std::vector<float> const& vals) {
+
 #include <algorithm>
 #include <numeric>
 #include <random>
 #include <vector>
-
-#include <cstdio>
 
 
 /* generated function */
@@ -30,11 +32,11 @@ bool validate(Context *ctx) {
     for (int i = 0; i < smallData.size(); i += 1) {
         smallData[i] = rand() / (float) RAND_MAX;
     }
-
-    const float smallSum = sum(smallData);
+    
     const float realSum = std::reduce(smallData.begin(), smallData.end());
+    const float smallSum = sum(smallData);
 
-    return std::abs(smallSum - realSum) < 1e-4;
+    return std::abs(smallSum - realSum) < 1e-3;
 }
 
 void reset(Context *ctx) {

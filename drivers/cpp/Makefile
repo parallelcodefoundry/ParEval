@@ -1,17 +1,20 @@
 CXX = g++
+MPICXX = mpicxx
 CXX_FLAGS = -std=c++17 -O3
 
-BENCHMARK_DRIVERS = $(patsubst %.cc,%.o, $(wildcard benchmarks/*-driver.cc))
-MODEL_DRIVERS = $(patsubst %.cc,%.o, $(wildcard models/*-driver.cc))
+OMP_DRIVERS = $(patsubst %.cc,%.o, $(wildcard */*omp-driver.cc))
+MPI_DRIVERS = $(patsubst %.cc,%.o, $(wildcard */*mpi-driver.cc))
 
-all: $(BENCHMARK_DRIVERS) $(MODEL_DRIVERS)
+all: $(OMP_DRIVERS) $(MPI_DRIVERS)
 
 %.o: %.cc
 	$(CXX) $(CXX_FLAGS) -o $@ -c $<
 
-models/omp-driver.o: models/omp-driver.cc
+%omp-driver.o: %omp-driver.cc
 	$(CXX) $(CXX_FLAGS) -fopenmp -o $@ -c $<
 
+%mpi-driver.o: %mpi-driver.cc
+	$(MPICXX) $(CXX_FLAGS) -o $@ -c $<
 
 clean:
-	rm -f $(BENCHMARK_DRIVERS) $(MODEL_DRIVERS)
+	rm -f $(OMP_DRIVERS) $(MPI_DRIVERS)

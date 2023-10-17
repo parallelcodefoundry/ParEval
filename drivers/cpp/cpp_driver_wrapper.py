@@ -19,21 +19,28 @@ from drivers.driver_wrapper import DriverWrapper, BuildOutput, RunOutput, Genera
 """ Map parallelism models to driver files """
 DRIVER_MAP = {
     "serial": "serial-driver.o",
-    "openmp": "omp-driver.o",
+    "omp": "omp-driver.o",
     "mpi": "mpi-driver.o",
 }
 
 """ Compiler settings """
 COMPILER_SETTINGS = {
     "serial": {"CXX": "g++", "CXXFLAGS": "-std=c++17 -O3"},
-    "openmp": {"CXX": "g++", "CXXFLAGS": "-std=c++17 -O3 -fopenmp"},
+    "omp": {"CXX": "g++", "CXXFLAGS": "-std=c++17 -O3 -fopenmp"},
     "mpi": {"CXX": "mpicxx", "CXXFLAGS": "-std=c++17 -O3"},
+}
+
+""" Launch format """
+LAUNCH_FORMAT = {
+    "serial": "{exec_path} {args}",
+    "omp": "OMP_NUM_THREADS={num_threads} {exec_path} {args}",
+    "mpi": "mpirun -np {num_procs} {exec_path} {args}",
 }
 
 """ Imports """
 IMPORTS = {
     "serial": '#include "serial-driver.h"',
-    "openmp": '#include "omp-driver.h"',
+    "omp": '#include "omp-driver.h"',
     "mpi": '#include "mpi-driver.h"',
 }
 

@@ -1,4 +1,4 @@
-/* Main driver for generated openmp C++ code. This relies on five externally available
+/** Main driver for generated MPI C++ code. This relies on five externally available
 * functions:
 *
 *   - init() -- returns a pointer to a context object
@@ -13,7 +13,8 @@
 #include <cstdio>
 #include <string>
 
-#include <omp.h>
+#include <mpi.h>
+
 
 class Context;
 extern "C++" {
@@ -27,6 +28,7 @@ extern "C++" {
 }
 
 int main(int argc, char **argv) {
+    MPI_Init(&argc, &argv);
 
     /* initialize settings from arguments */
     if (argc > 2) {
@@ -39,26 +41,37 @@ int main(int argc, char **argv) {
         NITER = std::stoi(std::string(argv[1]));
     }
 
+    int rank;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+
     /* initialize */
     Context *ctx = init();
 
     /* benchmark */
     double totalTime = 0.0;
     for (int i = 0; i < NITER; i += 1) {
-        double start = omp_get_wtime();
+        double start = MPI_Wtime();
         benchmark(ctx);
-        totalTime += omp_get_wtime() - start;
+        totalTime += MPI_Wtime() - start;
     
+        MPI_Barrier(MPI_COMM_WORLD);
         reset(ctx);
+        MPI_Barrier(MPI_COMM_WORLD);
     }
-    printf("Time: %f\n", totalTime / NITER);
+    MPI_Reduce(MPI_IN_PLACE, &totalTime, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+    if (rank == 0) {
+        printf("Time: %f\n", totalTime / NITER);
+    }
 
     /* validate */
     const bool isValid = validate(ctx);
-    printf("Validation: %s\n", isValid ? "PASS" : "FAIL");
+    if (rank == 0) {
+        printf("Validation: %s\n", isValid ? "PASS" : "FAIL");
+    }
 
     /* cleanup */
     destroy(ctx);
 
+    MPI_Finalize();
     return 0;
 }
