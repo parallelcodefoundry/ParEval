@@ -1,6 +1,6 @@
 // Driver for Test2. Prompt:
 //  /* Use MPI to compute the average of all values across ranks and return it on each rank. Each rank has an equal sized subset of values stored in `vals`. Assume MPI has already been initialized in MPI_COMM_WORLD.
-//  Example, if vals on ranks 0, 1, and 2 stores:
+//  Example, if vals on ranks 0, 1, and 2 store:
 //      0: [1, 3, 2, 3]
 //      1: [0, 0, 1, 2]
 //      2: [5, 3, 9, 7]

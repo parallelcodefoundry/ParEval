@@ -7,7 +7,10 @@ from abc import ABC, abstractmethod
 import logging
 import os
 from os import PathLike
-from typing import Optional, Tuple
+from typing import List, Optional, Tuple
+
+# local imports
+from util import all_equal, mean
 
 
 class BuildOutput:
@@ -30,11 +33,13 @@ class RunOutput:
     exit_code: int
     stdout: str
     stderr: str
+    config: dict
 
-    def __init__(self, exit_code: int, stdout: str, stderr: str):
+    def __init__(self, exit_code: int, stdout: str, stderr: str, config: dict = {}):
         self.exit_code = exit_code
         self.stdout = stdout
         self.stderr = stderr
+        self.config = config
         self.is_valid, self.runtime = self._parse_output(stdout)
 
     def __repr__(self) -> str:
@@ -61,14 +66,14 @@ class GeneratedTextResult:
     """ The result of running a single prompt """
     source_write_success: bool
     build_output: BuildOutput
-    run_output: Optional[RunOutput]
+    run_outputs: Optional[List[RunOutput]]
 
-    def __init__(self, source_write_success: bool, build_output: BuildOutput, run_output: Optional[RunOutput] = None):
+    def __init__(self, source_write_success: bool, build_output: BuildOutput, run_outputs: Optional[List[RunOutput]] = None):
         self.source_write_success = source_write_success
         self.build_output = build_output
-        self.run_output = run_output
+        self.run_outputs = run_outputs
         
-        assert self.build_output.did_build == (self.run_output is not None), \
+        assert self.build_output.did_build == (self.run_outputs is not None), \
             "Build output and run output must be consistent."
         
     def __repr__(self) -> str:
@@ -78,17 +83,21 @@ class GeneratedTextResult:
         """ Return whether the code built successfully. """
         return self.build_output.did_build
     
-    def did_run(self) -> bool:
-        """ Return whether the code ran successfully. """
-        return self.run_output is not None and self.run_output.exit_code == 0
+    def did_any_run(self) -> bool:
+        """ Return whether the any of the code ran successfully. """
+        return self.run_outputs is not None and any(r.exit_code == 0 for r in self.run_outputs)
     
-    def is_valid(self) -> bool:
+    def did_all_run(self) -> bool:
+        """ Return whether all of the code ran successfully. """
+        return self.run_outputs is not None and all(r.exit_code == 0 for r in self.run_outputs)
+    
+    def are_any_valid(self) -> bool:
         """ Return whether the code ran successfully and the output was valid. """
-        return self.did_run() and self.run_output.is_valid
+        return self.did_any_run() and any(r.is_valid for r in self.run_outputs)
     
-    def runtime(self) -> Optional[float]:
-        """ Return the runtime of the code, if it ran successfully. """
-        return self.run_output.runtime if self.is_valid() else None
+    def are_all_valid(self) -> bool:
+        """ Return whether the code ran successfully and the output was valid. """
+        return self.did_all_run() and all(r.is_valid for r in self.run_outputs)
 
 
 """ LANGUAGE EXTENSIONS """
@@ -140,15 +149,24 @@ class DriverWrapper(ABC):
         outputs = []
         logging.info(f"Testing prompt {prompt['name']} with {self}...")
         for generated_output in prompt["outputs"]:
-            result = self.test_single_output(prompt["prompt"], generated_output, test_driver_file)
+            results = self.test_single_output(prompt["prompt"], generated_output, test_driver_file)
 
             outputs.append({
                 "generated_output": generated_output,
-                "source_write_success": result.source_write_success,
-                "did_build": result.did_build(),
-                "did_run": result.did_run(),
-                "is_valid": result.is_valid(),
-                "runtime": result.runtime(),
+                "source_write_success": results.source_write_success,
+                "did_build": results.did_build(),
+                "did_any_run": results.did_any_run(),
+                "did_all_run": results.did_all_run(),
+                "are_any_valid": results.are_any_valid(),
+                "are_all_valid": results.are_all_valid(),
+                "runs": [
+                    {
+                        "did_run": r.exit_code == 0,
+                        "is_valid": r.is_valid,
+                        "runtime": r.runtime,
+                        **r.config
+                    } for r in results.run_outputs
+                ] if results.run_outputs is not None else None
             })
         prompt["outputs"] = outputs
 
@@ -156,15 +174,15 @@ class DriverWrapper(ABC):
         num_outputs = len(outputs)
         num_successful_writes = sum(1 for o in outputs if o["source_write_success"])
         num_successful_builds = sum(1 for o in outputs if o["did_build"])
-        num_successful_runs = sum(1 for o in outputs if o["did_run"])
-        num_valid_outputs = sum(1 for o in outputs if o["is_valid"])
-        mean_runtime = sum(o["runtime"] for o in outputs if o["runtime"] is not None) / num_valid_outputs if num_valid_outputs > 0 else None
+        num_successful_runs = sum(1 for o in outputs if o["did_all_run"])
+        num_valid_outputs = sum(1 for o in outputs if o["are_all_valid"])
+        #mean_runtime = mean(r["runtime"] for o in outputs if o["runs"] is not None for r in o["runs"])
         logging.info(f"Results for prompt {prompt['name']}:")
         logging.info(f"  {num_outputs} total outputs")
         logging.info(f"  {num_successful_writes} successful writes")
         logging.info(f"  {num_successful_builds} successful builds")
-        logging.info(f"  {num_successful_runs} successful runs")
-        logging.info(f"  {num_valid_outputs} valid outputs")
-        logging.info(f"  {mean_runtime} mean runtime")
+        logging.info(f"  {num_successful_runs} successful runs (all)")
+        logging.info(f"  {num_valid_outputs} valid outputs (all)")
+        #logging.info(f"  {mean_runtime} mean runtime")
 
         return prompt

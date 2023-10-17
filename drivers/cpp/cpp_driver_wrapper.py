@@ -10,6 +10,7 @@ import shlex
 import subprocess
 import sys
 import tempfile
+from typing import List
 
 # local imports
 sys.path.append("..")
@@ -33,8 +34,14 @@ COMPILER_SETTINGS = {
 """ Launch format """
 LAUNCH_FORMAT = {
     "serial": "{exec_path} {args}",
-    "omp": "OMP_NUM_THREADS={num_threads} {exec_path} {args}",
-    "mpi": "mpirun -np {num_procs} {exec_path} {args}",
+    "omp": "{exec_path} {num_threads} {args}",
+    "mpi": "srun -n {num_procs} {exec_path} {args}",
+}
+
+RUN_CONFIGS = {
+    "serial": [{}],
+    "omp": [{"num_threads": 2**i} for i in range(6)],
+    "mpi": [{"num_procs": 2**i} for i in range(8)],
 }
 
 """ Imports """
@@ -75,10 +82,13 @@ class CppDriverWrapper(DriverWrapper):
         compile_process = subprocess.run(shlex.split(cmd), capture_output=True, text=True, timeout=10)
         return BuildOutput(compile_process.returncode, compile_process.stdout, compile_process.stderr)
 
-    def run(self, executable: PathLike) -> RunOutput:
+    def run(self, executable: PathLike, **run_config) -> RunOutput:
         """ Run the given executable. """
-        run_process = subprocess.run(shlex.split(str(executable)), capture_output=True, text=True, timeout=30)
-        return RunOutput(run_process.returncode, run_process.stdout, run_process.stderr)
+        launch_format = LAUNCH_FORMAT[self.parallelism_model]
+        launch_cmd = launch_format.format(exec_path=executable, args="", **run_config).strip()
+        logging.debug(f"Running command: {launch_cmd}")
+        run_process = subprocess.run(shlex.split(launch_cmd), capture_output=True, text=True, timeout=30)
+        return RunOutput(run_process.returncode, run_process.stdout, run_process.stderr, config=run_config)
 
     def test_single_output(self, prompt: str, output: str, test_driver_file: PathLike) -> GeneratedTextResult:
         """ Test a single generated output. """
@@ -96,9 +106,12 @@ class CppDriverWrapper(DriverWrapper):
             logging.debug(f"Build result: {build_result}")
 
             # run the code
-            run_result = self.run(exec_path) if build_result.did_build else None
-            logging.debug(f"Run result: {run_result}")
-            if run_result and run_result.exit_code != 0:
-                logging.debug(f"Ouputs:\n\tstdout: {run_result.stdout}\n\tstderr: {run_result.stderr}")
+            configs = RUN_CONFIGS[self.parallelism_model]
+            run_results = [self.run(exec_path, **c) for c in configs] if build_result.did_build else None
+            logging.debug(f"Run result: {run_results}")
+            if run_results:
+                for run_result in run_results:
+                    if run_result.exit_code != 0:
+                        logging.debug(f"Ouputs:\n\tstdout: {run_result.stdout}\n\tstderr: {run_result.stderr}")
         
-        return GeneratedTextResult(write_success, build_result, run_result)
+        return GeneratedTextResult(write_success, build_result, run_results)
