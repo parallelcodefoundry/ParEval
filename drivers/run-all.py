@@ -21,6 +21,7 @@ LANGUAGE_DRIVERS = {
 def get_args():
     parser = ArgumentParser(description="Run all the generated code.")
     parser.add_argument("input_json", type=str, help="Input JSON file containing the test cases.")
+    parser.add_argument("-o", "--output", type=str, help="Output JSON file containing the results.")
     parser.add_argument("--log", choices=["INFO", "DEBUG", "WARNING", "ERROR", "CRITICAL"], default="INFO",
         type=str.upper, help="logging level")
     return parser.parse_args()
@@ -44,10 +45,16 @@ def main():
     for prompt in data:
         driver_cls = LANGUAGE_DRIVERS[prompt["language"]]
         driver = driver_cls(prompt["parallelism_model"])
-        logging.info(f"Testing prompt {prompt['name']} with {driver}...")
 
         driver.test_all_outputs_in_prompt(prompt)
 
+    # write out results
+    if args.output and args.output != '-':
+        with open(args.output, "w") as fp:
+            json.dump(data, fp, indent=4)
+        logging.info(f"Wrote results to {args.output}.")
+    else:
+        print(json.dumps(data, indent=4))
 
 if __name__ == "__main__":
     main()

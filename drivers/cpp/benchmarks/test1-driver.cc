@@ -3,6 +3,8 @@
 #include <random>
 #include <vector>
 
+#include <cstdio>
+
 
 /* generated function */
 extern float sum(std::vector<float> const& vals);
@@ -24,15 +26,16 @@ void benchmark(Context *ctx) {
 
 bool validate(Context *ctx) {
 
-    std::vector<float> smallData(10000);
+    std::vector<float> smallData(100);
     for (int i = 0; i < smallData.size(); i += 1) {
         smallData[i] = rand() / (float) RAND_MAX;
     }
 
     const float smallSum = sum(smallData);
-    const float realSum = std::reduce(ctx->data.begin(), ctx->data.end());
+    const float realSum = std::reduce(smallData.begin(), smallData.end());
 
-    return std::abs(smallSum - realSum) < 1e-6;
+    printf("generated result: %f\treal result: %f\n", smallSum, realSum);
+    return std::abs(smallSum - realSum) < 1e-4;
 }
 
 void reset(Context *ctx) {

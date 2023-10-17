@@ -23,12 +23,16 @@ extern "C++" {
 int main(int argc, char **argv) {
 
     /* initialize settings from arguments */
-    if (argc <= 1) {
-        printf("Usage: %s <num_iter> <?num_threads>\n", argv[0]);
+    if (argc > 3) {
+        printf("Usage: %s <?num_iter> <?num_threads>\n", argv[0]);
         exit(1);
     }
 
-    const int NITER = std::stoi(std::string(argv[1]));
+    int NITER = 50;
+    if (argc > 1) {
+        NITER = std::stoi(std::string(argv[1]));
+    }
+
     int numThreads = 1;
     if (argc > 2) {
         numThreads = std::stoi(std::string(argv[2]));
