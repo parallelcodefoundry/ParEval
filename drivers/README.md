@@ -9,11 +9,33 @@ of the generated outputs using the below command.
 ```bash
 python run-all.py generated-outputs.json
 
-# Options:
-#   -o, --output    Path to json to store results in, otherwise prints to stdout
-#   --scratch-dir   Root of scratch space to build & run tests in; defaults to
-#                   `/tmp`, so make sure this has write/read access
-#   --log           log level; either INFO, DEBUG, WARNING, ERROR, or CRITICAL
+# usage: run-all.py [-h] [-o OUTPUT] [--scratch-dir SCRATCH_DIR] [--launch-configs LAUNCH_CONFIGS] [--yes-to-all] [--dry] [--overwrite]
+#                   [--exclude-models {serial,omp,mpi} [{serial,omp,mpi} ...] | --include-models {serial,omp,mpi} [{serial,omp,mpi} ...]]
+#                   [--log {INFO,DEBUG,WARNING,ERROR,CRITICAL}]
+#                   input_json
+# 
+# Run all the generated code.
+# 
+# positional arguments:
+#   input_json            Input JSON file containing the test cases.
+# 
+# optional arguments:
+#   -h, --help            show this help message and exit
+#   -o OUTPUT, --output OUTPUT
+#                         Output JSON file containing the results.
+#   --scratch-dir SCRATCH_DIR
+#                         If provided, put scratch files here.
+#   --launch-configs LAUNCH_CONFIGS
+#                         config for how to run samples.
+#   --yes-to-all          If provided, automatically answer yes to all prompts.
+#   --dry                 Dry run. Do not actually run the code snippets.
+#   --overwrite           If ouputs are already in DB for a given prompt, then overwrite them. Default behavior is to skip existing results.
+#   --exclude-models {serial,omp,mpi} [{serial,omp,mpi} ...]
+#                         Exclude the given parallelism models from testing.
+#   --include-models {serial,omp,mpi} [{serial,omp,mpi} ...]
+#                         Only test the given parallelism models.
+#   --log {INFO,DEBUG,WARNING,ERROR,CRITICAL}
+#                         logging level
 ```
 
 Depending on the parallel models being tested this will require a newer C++
