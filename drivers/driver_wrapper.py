@@ -183,8 +183,8 @@ class DriverWrapper(ABC):
         logging.info(f"  {num_outputs} total outputs")
         logging.info(f"  {num_successful_writes} successful writes")
         logging.info(f"  {num_successful_builds} successful builds")
-        logging.info(f"  {num_successful_runs} successful runs (all)")
-        logging.info(f"  {num_valid_outputs} valid outputs (all)")
+        logging.info(f"  {num_successful_runs} successful runs (all tests)")
+        logging.info(f"  {num_valid_outputs} valid outputs (all tests)")
         #logging.info(f"  {mean_runtime} mean runtime")
 
         return prompt
