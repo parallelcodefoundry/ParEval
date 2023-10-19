@@ -15,7 +15,7 @@ from typing import List
 # local imports
 sys.path.append("..")
 from drivers.driver_wrapper import DriverWrapper, BuildOutput, RunOutput, GeneratedTextResult
-
+from util import run_command
 
 """ Map parallelism models to driver files """
 DRIVER_MAP = {
@@ -31,19 +31,6 @@ COMPILER_SETTINGS = {
     "mpi": {"CXX": "mpicxx", "CXXFLAGS": "-std=c++17 -O3"},
 }
 
-""" Launch format """
-LAUNCH_FORMAT = {
-    "serial": "{exec_path} {args}",
-    "omp": "{exec_path} {num_threads} {args}",
-    "mpi": "srun -n {num_procs} {exec_path} {args}",
-}
-
-RUN_CONFIGS = {
-    "serial": [{}],
-    "omp": [{"num_threads": 2**i} for i in range(6)],
-    "mpi": [{"num_procs": 2**i} for i in range(7)],
-}
-
 """ Imports """
 IMPORTS = {
     "serial": '#include "serial-driver.h"',
@@ -53,9 +40,9 @@ IMPORTS = {
 
 class CppDriverWrapper(DriverWrapper):
 
-    def __init__(self, parallelism_model: str, scratch_dir: PathLike = None):
-        super().__init__(parallelism_model, scratch_dir=scratch_dir)
-        self.model_driver_file = os.path.join("cpp", "models", DRIVER_MAP[parallelism_model])
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.model_driver_file = os.path.join("cpp", "models", DRIVER_MAP[self.parallelism_model])
 
     def write_source(self, content: str, fpath: PathLike) -> bool:
         """ Write the given c++ source to the given file. """
@@ -76,18 +63,16 @@ class CppDriverWrapper(DriverWrapper):
         """ Compile the given binaries into a single executable. """
         binaries_str = ' '.join(binaries)
         cmd = f"{CXX} {CXXFLAGS} -Icpp/models {binaries_str} -o {output_path}"
-        logging.debug(f"Running command: {cmd}")
 
         # let subprocess errors propagate up
-        compile_process = subprocess.run(shlex.split(cmd), capture_output=True, text=True, timeout=10)
+        compile_process = run_command(cmd, timeout=10, dry=self.dry)
         return BuildOutput(compile_process.returncode, compile_process.stdout, compile_process.stderr)
 
     def run(self, executable: PathLike, **run_config) -> RunOutput:
         """ Run the given executable. """
-        launch_format = LAUNCH_FORMAT[self.parallelism_model]
+        launch_format = self.launch_configs["format"]
         launch_cmd = launch_format.format(exec_path=executable, args="", **run_config).strip()
-        logging.debug(f"Running command: {launch_cmd}")
-        run_process = subprocess.run(shlex.split(launch_cmd), capture_output=True, text=True, timeout=30)
+        run_process = run_command(launch_cmd, timeout=30, dry=self.dry)
         return RunOutput(run_process.returncode, run_process.stdout, run_process.stderr, config=run_config)
 
     def test_single_output(self, prompt: str, output: str, test_driver_file: PathLike) -> GeneratedTextResult:
@@ -106,7 +91,7 @@ class CppDriverWrapper(DriverWrapper):
             logging.debug(f"Build result: {build_result}")
 
             # run the code
-            configs = RUN_CONFIGS[self.parallelism_model]
+            configs = self.launch_configs["params"]
             run_results = [self.run(exec_path, **c) for c in configs] if build_result.did_build else None
             logging.debug(f"Run result: {run_results}")
             if run_results:

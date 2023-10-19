@@ -113,10 +113,20 @@ class DriverWrapper(ABC):
 
     parallelism_model: str
     scratch_dir: Optional[PathLike]
+    launch_configs: dict
+    dry: bool
 
-    def __init__(self, parallelism_model: str, scratch_dir: Optional[PathLike] = None):
+    def __init__(
+        self, 
+        parallelism_model: str = "serial", 
+        launch_configs: dict = {"format": "{exec_path} {args}", "params": [{}]},
+        scratch_dir: Optional[PathLike] = None, 
+        dry: bool = False
+    ):
         self.parallelism_model = parallelism_model
         self.scratch_dir = scratch_dir
+        self.launch_configs = launch_configs[parallelism_model]
+        self.dry = dry
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}(parallelism_model={self.parallelism_model}, scratch_dir={self.scratch_dir})"
