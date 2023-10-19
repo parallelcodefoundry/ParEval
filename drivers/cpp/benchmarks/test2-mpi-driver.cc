@@ -42,7 +42,7 @@ bool validate(Context *ctx) {
     }
 
     /* get correct output */
-    std::vector<float> sums(100);
+    std::vector<float> sums(smallData.size());
     int worldSize;
     MPI_Comm_size(MPI_COMM_WORLD, &worldSize);
     MPI_Allreduce(smallData.data(), sums.data(), smallData.size(), MPI_FLOAT, MPI_SUM, MPI_COMM_WORLD);

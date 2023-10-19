@@ -41,7 +41,7 @@ LAUNCH_FORMAT = {
 RUN_CONFIGS = {
     "serial": [{}],
     "omp": [{"num_threads": 2**i} for i in range(6)],
-    "mpi": [{"num_procs": 2**i} for i in range(8)],
+    "mpi": [{"num_procs": 2**i} for i in range(7)],
 }
 
 """ Imports """
@@ -53,8 +53,8 @@ IMPORTS = {
 
 class CppDriverWrapper(DriverWrapper):
 
-    def __init__(self, parallelism_model: str):
-        super().__init__(parallelism_model)
+    def __init__(self, parallelism_model: str, scratch_dir: PathLike = None):
+        super().__init__(parallelism_model, scratch_dir=scratch_dir)
         self.model_driver_file = os.path.join("cpp", "models", DRIVER_MAP[parallelism_model])
 
     def write_source(self, content: str, fpath: PathLike) -> bool:
@@ -93,7 +93,7 @@ class CppDriverWrapper(DriverWrapper):
     def test_single_output(self, prompt: str, output: str, test_driver_file: PathLike) -> GeneratedTextResult:
         """ Test a single generated output. """
         logging.debug(f"Testing output:\n{output}")
-        with tempfile.TemporaryDirectory() as tmpdir:
+        with tempfile.TemporaryDirectory(dir=self.scratch_dir) as tmpdir:
             # write out the prompt + output
             src_path = os.path.join(tmpdir, "llm-output.cc")
             write_success = self.write_source(prompt+"\n"+output, src_path)
