@@ -112,12 +112,14 @@ class DriverWrapper(ABC):
     """ Abstract base class for driver wrappers. """
 
     parallelism_model: str
+    scratch_dir: Optional[PathLike]
 
-    def __init__(self, parallelism_model: str):
+    def __init__(self, parallelism_model: str, scratch_dir: Optional[PathLike] = None):
         self.parallelism_model = parallelism_model
+        self.scratch_dir = scratch_dir
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}(parallelism_model={self.parallelism_model})"
+        return f"{self.__class__.__name__}(parallelism_model={self.parallelism_model}, scratch_dir={self.scratch_dir})"
 
     @abstractmethod
     def write_source(self, content: str, fpath: PathLike) -> bool:

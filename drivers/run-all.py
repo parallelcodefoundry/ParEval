@@ -22,6 +22,7 @@ def get_args():
     parser = ArgumentParser(description="Run all the generated code.")
     parser.add_argument("input_json", type=str, help="Input JSON file containing the test cases.")
     parser.add_argument("-o", "--output", type=str, help="Output JSON file containing the results.")
+    parser.add_argument("--scratch-dir", type=str, help="If provided, put scratch files here.")
     parser.add_argument("--log", choices=["INFO", "DEBUG", "WARNING", "ERROR", "CRITICAL"], default="INFO",
         type=str.upper, help="logging level")
     return parser.parse_args()
@@ -44,7 +45,7 @@ def main():
     # run each prompt
     for prompt in data:
         driver_cls = LANGUAGE_DRIVERS[prompt["language"]]
-        driver = driver_cls(prompt["parallelism_model"])
+        driver = driver_cls(prompt["parallelism_model"], scratch_dir=args.scratch_dir)
 
         driver.test_all_outputs_in_prompt(prompt)
 
