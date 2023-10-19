@@ -8,7 +8,28 @@ of the generated outputs using the below command.
 
 ```bash
 python run-all.py generated-outputs.json
+
+# Options:
+#   -o, --output    Path to json to store results in, otherwise prints to stdout
+#   --scratch-dir   Root of scratch space to build & run tests in; defaults to
+#                   `/tmp`, so make sure this has write/read access
+#   --log           log level; either INFO, DEBUG, WARNING, ERROR, or CRITICAL
 ```
+
+Depending on the parallel models being tested this will require a newer C++
+compiler and MPI being loaded. 
+
+### Running on Zaratan
+To run the drivers on Zaratan you needc the following modules (or similar).
+
+```bash
+ml gcc/11.3.0 openmpi/gcc/11.3.0 python
+```
+
+Additionally, the default `/tmp` scratch space for building and running is 
+node-local on Zaratan, so you need to pass `--scratch-dir` as some root 
+directory on the _scratch_ or _home_ filesystem, since these are accessible
+from all compute nodes and on the network.
 
 ## Organization of Drivers
 Within `drivers/` there are subdirectories for each programming language.
@@ -17,3 +38,23 @@ code for that language.
 This wrapper further uses functionality from drivers in `models/` and 
 `benchmarks/` in the language subdirectory.
 These define behavior for running each programming model and benchmark.
+
+### Notes on Drivers
+The benchmark drivers (in `benchmarks/`) follow the nameing convention 
+`<test-name>-<model>-driver.<ext>`. Likewise, the model drivers in `models/`
+follow the naming convention `<model>-driver.<ext>`. The test name is the name 
+used in the prompts data set. The model is one of the parallel backend models 
+available. These are used as keys in the code so this naming convention and 
+spelling needs to be followed.
+
+Make sure to run `make` in the corresponding subdirectories for models that need
+to be compiled. For example in `cpp/` run `make` to build the driver binaries.
+
+The way we currently launch executables in Python does not run them in a shell,
+but rather launches them directly. Because of this running
+`OMP_NUM_THREADS=4 ./a.out` does not work. So all OMP scripts take the number
+of threads as the first command line argument i.e. `./a.out 4`.
+
+Make sure you are running in a proper environment for the tests you want to run.
+For example, have a GPU for cuda tests or multiple nodes for MPI. Do not 
+execute `run-all.py` on a login node without the `--dry` flag.
