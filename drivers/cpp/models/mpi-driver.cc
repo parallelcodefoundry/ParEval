@@ -41,8 +41,9 @@ int main(int argc, char **argv) {
         NITER = std::stoi(std::string(argv[1]));
     }
 
-    int rank;
+    int rank, size;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
 
     /* initialize */
     Context *ctx = init();
@@ -58,9 +59,12 @@ int main(int argc, char **argv) {
         reset(ctx);
         MPI_Barrier(MPI_COMM_WORLD);
     }
-    MPI_Reduce(MPI_IN_PLACE, &totalTime, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+
     if (rank == 0) {
-        printf("Time: %f\n", totalTime / NITER);
+        MPI_Reduce(MPI_IN_PLACE, &totalTime, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+        printf("Time: %f\n", totalTime / size / NITER);
+    } else {
+        MPI_Reduce(&totalTime, nullptr, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
     }
 
     /* validate */
