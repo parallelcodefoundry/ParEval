@@ -29,7 +29,7 @@ for item in prompts:
 
     print(f"Generating code for: {name}")
     
-    response = generator(prompt, max_length=args.max_length, max_new_tokens=args.max_new_tokens, do_sample=args.do_sample)
+    response = generator(prompt, max_length=args.max_length, max_new_tokens=args.max_new_tokens, do_sample=args.do_sample, temperature=args.temperature, top_p=args.top_p)
 
     responses[name] = response[0]['generated_text']
 
