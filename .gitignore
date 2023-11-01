@@ -1,0 +1,12 @@
+# local
+.vscode
+
+# python
+*.pyc
+__pycache__
+
+# cpp
+*.out
+*.exe
+a.out
+*.o
