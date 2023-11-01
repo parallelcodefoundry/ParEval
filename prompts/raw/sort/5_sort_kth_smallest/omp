@@ -1,0 +1,8 @@
+/* Find the k-th smallest element of the vector x.
+   Use OpenMP to compute in parallel.
+   Example:
+   
+   input: x=[1, 7, 6, 0, 2, 2, 10, 6], k=4
+   output: 6
+*/
+int findKthSmallest(std::vector<int> const& x, int k) {
