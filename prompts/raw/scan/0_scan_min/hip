@@ -1,0 +1,11 @@
+/* Replace the i-th element of the vector x with the minimum value from indices 0 through i.
+   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as values in x.
+   Examples:
+
+   input: [8, 6, -1, 7, 3, 4, 4]
+   output: [8, 6, -1, -1, -1, -1, -1]
+
+   input: [5, 4, 6, 4, 3, 6, 1, 1]
+   output: [5, 4, 4, 4, 3, 3, 1, 1]
+*/
+__global__ void partialMinimums(float *x, size_t N) {

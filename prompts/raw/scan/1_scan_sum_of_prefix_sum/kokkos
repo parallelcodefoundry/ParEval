@@ -1,0 +1,8 @@
+/* Compute the prefix sum array of the vector x and return its sum.
+   Use Kokkos to compute in parallel. Assume Kokkos is already initialized.
+   Example:
+
+   input: [-7, 2, 1, 9, 4, 8]
+   output: 15
+*/
+double sumOfPrefixSum(Kokkos::View<const double*> const& x) {
