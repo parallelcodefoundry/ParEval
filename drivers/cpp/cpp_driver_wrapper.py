@@ -23,6 +23,7 @@ DRIVER_MAP = {
     "omp": "omp-driver.o",
     "mpi": "mpi-driver.o",
     "mpi+omp": "mpi-omp-driver.o",
+    "cuda": "cuda-driver.o",
 }
 
 """ Compiler settings """
@@ -31,6 +32,7 @@ COMPILER_SETTINGS = {
     "omp": {"CXX": "g++", "CXXFLAGS": "-std=c++17 -O3 -fopenmp"},
     "mpi": {"CXX": "mpicxx", "CXXFLAGS": "-std=c++17 -O3"},
     "mpi+omp": {"CXX": "mpicxx", "CXXFLAGS": "-std=c++17 -O3 -fopenmp"},
+    "cuda": {"CXX": "nvcc", "CXXFLAGS": "-std=c++17 -O3"},
 }
 
 class CppDriverWrapper(DriverWrapper):
@@ -73,7 +75,8 @@ class CppDriverWrapper(DriverWrapper):
         logging.debug(f"Testing output:\n{output}")
         with tempfile.TemporaryDirectory(dir=self.scratch_dir) as tmpdir:
             # write out the prompt + output
-            src_path = os.path.join(tmpdir, "generated-code.hpp")
+            src_ext = "cuh" if self.parallelism_model in ["cuda", "hip"] else "hpp"
+            src_path = os.path.join(tmpdir, f"generated-code.{src_ext}")
             write_success = self.write_source(prompt+"\n"+output, src_path)
             logging.debug(f"Wrote source to {src_path}.")
 

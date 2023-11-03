@@ -49,5 +49,19 @@
             "}",
             "undefinedFunctionCall(); }"
         ]
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "0_sort_non-zero",
+        "parallelism_model": "cuda",
+        "prompt": "/* Sort the array x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place. \n   Use CUDA to compute in parallel. The kernel will be launched with 1 thread per element.\n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\n__global__ void sortIgnoreZero(int *x, size_t N) {",
+        "outputs": [
+            "int index = threadIdx.x + blockIdx.x * blockDim.x; \n \n    // Step 1: Partition the array \n    __syncthreads(); \n    for (int i = index; i < N; i += blockDim.x * gridDim.x) { \n        if (x[i] == 0) { \n            for (int j = i + 1; j < N; j++) { \n                if (x[j] != 0) { \n                    // Swap x[i] and x[j] \n                    int temp = x[i]; \n                    x[i] = x[j]; \n                    x[j] = temp; \n                    break; \n                } \n            } \n        } \n    } \n \n    // Step 2: Sort the non-zero part of the array \n    __syncthreads(); \n    for (int i = 0; i < N; i++) { \n        if (i % 2 == 0) { \n            for (int j = index; j < N / 2; j += blockDim.x * gridDim.x) { \n                int k = 2 * j; \n                if (x[k] > x[k + 1] && x[k + 1] != 0) { \n                    // Swap x[k] and x[k + 1] \n                    int temp = x[k]; \n                    x[k] = x[k + 1]; \n                    x[k + 1] = temp; \n                } \n            } \n        } else { \n            for (int j = index; j < (N - 1) / 2; j += blockDim.x * gridDim.x) { \n                int k = 2 * j + 1; \n                if (x[k] > x[k + 1] && x[k + 1] != 0) { \n                    // Swap x[k] and x[k + 1] \n                    int temp = x[k]; \n                    x[k] = x[k + 1]; \n                    x[k + 1] = temp; \n                } \n            } \n        } \n        __syncthreads(); \n    } \n}",
+            " \n    int index = threadIdx.x + blockIdx.x * blockDim.x; \n \n    // Ensure we are within array bounds \n    if (index < N) { \n        for (int i = index + 1; i < N; i++) { \n            // Ignore zero valued elements \n            if (x[index] != 0 && x[i] != 0) { \n                // Swap elements if they are in the wrong order \n                if (x[index] > x[i]) { \n                    int temp = x[index]; \n                    x[index] = x[i]; \n                    x[i] = temp; \n                } \n            } \n        } \n    } \n}",
+            " \n    __shared__ int minVal; \n    __shared__ int minIndex; \n \n    int index = threadIdx.x + blockIdx.x * blockDim.x; \n \n    // Ensure we are within array bounds \n    if (index < N) { \n        for (int i = 0; i < N; i++) { \n            // Reset shared minimum value and index at the beginning of each iteration \n            if (index == 0) { \n                minVal = INT_MAX; \n                minIndex = -1; \n            } \n            __syncthreads(); \n \n            // Update shared minimum value and index \n            if (x[index] != 0 && x[index] < minVal) { \n                atomicMin(&minVal, x[index]); \n                minIndex = index; \n            } \n            __syncthreads(); \n \n            // Swap minimum value to the front \n            if (index == i) { \n                int temp = x[i]; \n                x[i] = minVal; \n                if (minIndex != -1) { \n                    x[minIndex] = temp; \n                } \n            } \n            __syncthreads(); \n        } \n    } \n}",
+            "}",
+            "undefinedFunctionCall(); }"
+        ]
     }
 ]
