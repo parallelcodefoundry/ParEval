@@ -1,4 +1,4 @@
-/* Main driver for generated MPI C++ code. This relies on five externally available
+/* Main driver for generated MPI+OMP C++ code. This relies on five externally available
 * functions:
 *
 *   - init() -- returns a pointer to a context object
@@ -15,6 +15,7 @@
 #include <string>
 
 #include <mpi.h>
+#include <omp.h>
 
 
 class Context;
@@ -35,14 +36,16 @@ int main(int argc, char **argv) {
 
     /* initialize settings from arguments */
     if (argc > 2) {
-        printf("Usage: %s <?num_iter>\n", argv[0]);
+        printf("Usage: %s <?num_threads>\n", argv[0]);
         exit(1);
     }
 
-    int NITER = 50;
+    const int NITER = 50;
+    int num_threads = 1;
     if (argc > 1) {
-        NITER = std::stoi(std::string(argv[1]));
+        num_threads = std::stoi(std::string(argv[1]));
     }
+    omp_set_num_threads(num_threads);
 
     int rank, size;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);

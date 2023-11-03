@@ -4,7 +4,7 @@
         "params": [{}]
     },
     "omp": {
-        "format": "{exec_path} {args} {num_threads}",
+        "format": "srun -N 1 -n 1 -c {num_threads} {exec_path} {args} {num_threads}",
         "params": [
             {"num_threads": 1},
             {"num_threads": 2},
@@ -25,6 +25,18 @@
             {"num_procs": 16},
             {"num_procs": 32},
             {"num_procs": 64}
+        ]
+    },
+    "mpi+omp": {
+        "format": "srun -n {num_procs} -c {num_threads} {exec_path} {args} {num_threads}",
+        "params": [
+            {"num_procs": 1, "num_threads": 1},
+            {"num_procs": 1, "num_threads": 2},
+            {"num_procs": 2, "num_threads": 1},
+            {"num_procs": 4, "num_threads": 4},
+            {"num_procs": 8, "num_threads": 8},
+            {"num_procs": 16, "num_threads": 8},
+            {"num_procs": 32, "num_threads": 4}
         ]
     }
 }

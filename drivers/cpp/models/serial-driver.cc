@@ -1,4 +1,4 @@
-/* Main driver for generated openmp C++ code. This relies on five externally available
+/* Main driver for generated serial C++ code. This relies on five externally available
 * functions:
 *
 *   - init() -- returns a pointer to a context object
@@ -11,10 +11,9 @@
 * These functions are defined in the driver for the given benchmark and handle
 * the data and calling the generated code.
 */
+#include <chrono>
 #include <cstdio>
 #include <string>
-
-#include <omp.h>
 
 class Context;
 extern "C++" {
@@ -32,16 +31,14 @@ int main(int argc, char **argv) {
 
     /* initialize settings from arguments */
     if (argc > 2) {
-        printf("Usage: %s <?num_threads>\n", argv[0]);
+        printf("Usage: %s <?niter>\n", argv[0]);
         exit(1);
     }
 
-    const int NITER = 50;
-    int num_threads = 1;
+    int NITER = 50;
     if (argc > 1) {
-        num_threads = std::stoi(std::string(argv[1]));
+        NITER = std::stoi(std::string(argv[1]));
     }
-    omp_set_num_threads(num_threads);
 
     /* initialize */
     Context *ctx = init();
@@ -49,9 +46,10 @@ int main(int argc, char **argv) {
     /* benchmark */
     double totalTime = 0.0;
     for (int i = 0; i < NITER; i += 1) {
-        double start = omp_get_wtime();
+        auto start = std::chrono::high_resolution_clock::now();
         compute(ctx);
-        totalTime += omp_get_wtime() - start;
+        auto end = std::chrono::high_resolution_clock::now();
+        totalTime += std::chrono::duration_cast<std::chrono::duration<double>>(end - start).count();
     
         reset(ctx);
     }
@@ -60,9 +58,10 @@ int main(int argc, char **argv) {
     /* benchmark best */
     totalTime = 0.0;
     for (int i = 0; i < NITER; i += 1) {
-        double start = omp_get_wtime();
+        auto start = std::chrono::high_resolution_clock::now();
         best(ctx);
-        totalTime += omp_get_wtime() - start;
+        auto end = std::chrono::high_resolution_clock::now();
+        totalTime += std::chrono::duration_cast<std::chrono::duration<double>>(end - start).count();
 
         reset(ctx);
     }

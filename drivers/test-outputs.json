@@ -1,0 +1,53 @@
+[
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "0_sort_non-zero",
+        "parallelism_model": "serial",
+        "prompt": "/* Sort the vector x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place.\n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(std::vector<int> &x) {",
+        "outputs": [
+            "std::vector<int> nonZeroElements; for (int num : x) { if (num != 0) { nonZeroElements.push_back(num); } } std::sort(nonZeroElements.begin(), nonZeroElements.end()); size_t nonZeroIndex = 0; for (int i = 0; i < x.size(); i += 1) { if (x[i] != 0) { x[i] = nonZeroElements[nonZeroIndex]; nonZeroIndex += 1; } } }",
+            "}",
+            "undefinedFunctionCall(); }"
+        ]
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "0_sort_non-zero",
+        "parallelism_model": "omp",
+        "prompt": "#include <omp.h>\n\n/* Sort the vector x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place. \n   Use OpenMP to sort x in parallel. \n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(std::vector<int> &x) {",
+        "outputs": [
+            "std::vector<int> nonZeroElements; for (int num : x) { if (num != 0) { nonZeroElements.push_back(num); } } std::sort(nonZeroElements.begin(), nonZeroElements.end()); size_t nonZeroIndex = 0; for (int i = 0; i < x.size(); i += 1) { if (x[i] != 0) { x[i] = nonZeroElements[nonZeroIndex]; nonZeroIndex += 1; } } }",
+            "std::vector<int> nonZeroElements; for (int num : x) { if (num != 0) { nonZeroElements.push_back(num); } } auto begin = nonZeroElements.begin(); auto end = nonZeroElements.end(); auto middle = begin + (end - begin) / 2;\n#pragma omp parallel for\nfor (int i = 0; i < 2; i++) { std::sort((i==0) ? begin : middle, (i==0) ? middle : end); } std::inplace_merge(nonZeroElements.begin(), middle, nonZeroElements.end()); size_t nonZeroIndex = 0; for (int i = 0; i < x.size(); i += 1) { if (x[i] != 0) { x[i] = nonZeroElements[nonZeroIndex]; nonZeroIndex += 1; } } }",
+            "}",
+            "undefinedFunctionCall(); }"
+        ]
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "0_sort_non-zero",
+        "parallelism_model": "mpi",
+        "prompt": "#include <mpi.h>\n\n/* Sort the vector x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place. \n   Use MPI to sort x in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(std::vector<int> &x) {",
+        "outputs": [
+            "std::vector<int> nonZeroElements; for (int num : x) { if (num != 0) { nonZeroElements.push_back(num); } } std::sort(nonZeroElements.begin(), nonZeroElements.end()); size_t nonZeroIndex = 0; for (int i = 0; i < x.size(); i += 1) { if (x[i] != 0) { x[i] = nonZeroElements[nonZeroIndex]; nonZeroIndex += 1; } } }",
+            "int rank, size; \n    MPI_Comm_rank(MPI_COMM_WORLD, &rank); \n    MPI_Comm_size(MPI_COMM_WORLD, &size); \n \n    // Separate non-zero elements from the vector \n    std::vector<int> nonZeroElements; \n    std::vector<int> zeroIndices; \n    for (int i = 0; i < x.size(); i++) { \n        if (x[i] != 0) { \n            nonZeroElements.push_back(x[i]); \n        } else { \n            zeroIndices.push_back(i); \n        } \n    } \n \n    // Sort non-zero elements \n    std::sort(nonZeroElements.begin(), nonZeroElements.end()); \n \n    // Merge sorted non-zero elements back with zero elements \n    for (int i = 0, j = 0; i < x.size(); i++) { \n        if (j < zeroIndices.size() && i == zeroIndices[j]) { \n            x[i] = 0; \n            j++; \n        } else { \n            x[i] = nonZeroElements[i - j]; \n        } \n    } \n \n    // Broadcast sorted vector to all processes \n    MPI_Bcast(x.data(), x.size(), MPI_INT, 0, MPI_COMM_WORLD); \n}",
+            "}",
+            "undefinedFunctionCall(); }"
+        ]
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "0_sort_non-zero",
+        "parallelism_model": "mpi+omp",
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Sort the vector x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place. \n   Use MPI and OpenMP to sort x in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(std::vector<int> &x) {",
+        "outputs": [
+            "std::vector<int> nonZeroElements; for (int num : x) { if (num != 0) { nonZeroElements.push_back(num); } } std::sort(nonZeroElements.begin(), nonZeroElements.end()); size_t nonZeroIndex = 0; for (int i = 0; i < x.size(); i += 1) { if (x[i] != 0) { x[i] = nonZeroElements[nonZeroIndex]; nonZeroIndex += 1; } } }",
+            "int rank, size; \n    MPI_Comm_rank(MPI_COMM_WORLD, &rank); \n    MPI_Comm_size(MPI_COMM_WORLD, &size); \n \n    // Separate non-zero elements from the vector \n    std::vector<int> nonZeroElements; \n    std::vector<int> zeroIndices; \n    for (int i = 0; i < x.size(); i++) { \n        if (x[i] != 0) { \n            nonZeroElements.push_back(x[i]); \n        } else { \n            zeroIndices.push_back(i); \n        } \n    } \n \n    // Sort non-zero elements \n    auto begin = nonZeroElements.begin(); auto end = nonZeroElements.end(); auto middle = begin + (end - begin) / 2;\n#pragma omp parallel for\nfor (int i = 0; i < 2; i++) { std::sort((i==0) ? begin : middle, (i==0) ? middle : end); } std::inplace_merge(nonZeroElements.begin(), middle, nonZeroElements.end()); \n \n    // Merge sorted non-zero elements back with zero elements \n    for (int i = 0, j = 0; i < x.size(); i++) { \n        if (j < zeroIndices.size() && i == zeroIndices[j]) { \n            x[i] = 0; \n            j++; \n        } else { \n            x[i] = nonZeroElements[i - j]; \n        } \n    } \n \n    // Broadcast sorted vector to all processes \n    MPI_Bcast(x.data(), x.size(), MPI_INT, 0, MPI_COMM_WORLD); \n}",
+            "}",
+            "undefinedFunctionCall(); }"
+        ]
+    }
+]

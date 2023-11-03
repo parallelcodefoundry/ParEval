@@ -22,6 +22,7 @@ DRIVER_MAP = {
     "serial": "serial-driver.o",
     "omp": "omp-driver.o",
     "mpi": "mpi-driver.o",
+    "mpi+omp": "mpi-omp-driver.o",
 }
 
 """ Compiler settings """
@@ -29,13 +30,7 @@ COMPILER_SETTINGS = {
     "serial": {"CXX": "g++", "CXXFLAGS": "-std=c++17 -O3"},
     "omp": {"CXX": "g++", "CXXFLAGS": "-std=c++17 -O3 -fopenmp"},
     "mpi": {"CXX": "mpicxx", "CXXFLAGS": "-std=c++17 -O3"},
-}
-
-""" Imports """
-IMPORTS = {
-    "serial": '#include "serial-driver.h"',
-    "omp": '#include "omp-driver.h"',
-    "mpi": '#include "mpi-driver.h"',
+    "mpi+omp": {"CXX": "mpicxx", "CXXFLAGS": "-std=c++17 -O3 -fopenmp"},
 }
 
 class CppDriverWrapper(DriverWrapper):
@@ -46,10 +41,7 @@ class CppDriverWrapper(DriverWrapper):
 
     def write_source(self, content: str, fpath: PathLike) -> bool:
         """ Write the given c++ source to the given file. """
-        includes = IMPORTS[self.parallelism_model]
-
         with open(fpath, "w") as fp:
-            fp.write(includes + "\n\n")
             fp.write(content)
         return True
 
@@ -62,7 +54,8 @@ class CppDriverWrapper(DriverWrapper):
     ) -> BuildOutput:
         """ Compile the given binaries into a single executable. """
         binaries_str = ' '.join(binaries)
-        cmd = f"{CXX} {CXXFLAGS} -Icpp/models {binaries_str} -o {output_path}"
+        macro = f"-DUSE_{self.parallelism_model.upper()}"
+        cmd = f"{CXX} {CXXFLAGS} -Icpp -Icpp/models {macro} {binaries_str} -o {output_path}"
 
         # let subprocess errors propagate up
         compile_process = run_command(cmd, timeout=10, dry=self.dry)
@@ -72,7 +65,7 @@ class CppDriverWrapper(DriverWrapper):
         """ Run the given executable. """
         launch_format = self.launch_configs["format"]
         launch_cmd = launch_format.format(exec_path=executable, args="", **run_config).strip()
-        run_process = run_command(launch_cmd, timeout=30, dry=self.dry)
+        run_process = run_command(launch_cmd, timeout=60, dry=self.dry)
         return RunOutput(run_process.returncode, run_process.stdout, run_process.stderr, config=run_config)
 
     def test_single_output(self, prompt: str, output: str, test_driver_file: PathLike) -> GeneratedTextResult:
@@ -80,14 +73,15 @@ class CppDriverWrapper(DriverWrapper):
         logging.debug(f"Testing output:\n{output}")
         with tempfile.TemporaryDirectory(dir=self.scratch_dir) as tmpdir:
             # write out the prompt + output
-            src_path = os.path.join(tmpdir, "llm-output.cc")
+            src_path = os.path.join(tmpdir, "generated-code.hpp")
             write_success = self.write_source(prompt+"\n"+output, src_path)
             logging.debug(f"Wrote source to {src_path}.")
 
             # compile and run the output
             exec_path = os.path.join(tmpdir, "a.out")
             compiler_kwargs = COMPILER_SETTINGS[self.parallelism_model]
-            build_result = self.compile(src_path, self.model_driver_file, test_driver_file, output_path=exec_path, **compiler_kwargs)
+            compiler_kwargs["CXXFLAGS"] += f" -I{tmpdir}"
+            build_result = self.compile(self.model_driver_file, test_driver_file, output_path=exec_path, **compiler_kwargs)
             logging.debug(f"Build result: {build_result}")
 
             # run the code

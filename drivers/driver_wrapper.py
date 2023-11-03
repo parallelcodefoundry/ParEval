@@ -11,6 +11,7 @@ from typing import List, Optional, Tuple
 
 # local imports
 from util import all_equal, mean
+from cpp.parallel_validation import Validator, OMPValidator, MPIValidator, MPIandOMPValidator, EmptyValidator
 
 
 class BuildOutput:
@@ -40,26 +41,30 @@ class RunOutput:
         self.stdout = stdout
         self.stderr = stderr
         self.config = config
-        self.is_valid, self.runtime = self._parse_output(stdout)
+        self.is_valid, self.runtime, self.best_sequential_runtime = self._parse_output(stdout)
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}(exit_code={self.exit_code}, is_valid={self.is_valid}, runtime={self.runtime})"
+        return f"{self.__class__.__name__}(exit_code={self.exit_code}, is_valid={self.is_valid}, runtime={self.runtime}, best_sequential_runtime={self.best_sequential_runtime}, config={self.config})"
 
-    def _parse_output(self, output: str) -> Tuple[Optional[bool], Optional[float]]:
+    def _parse_output(self, output: str) -> Tuple[Optional[bool], Optional[float], Optional[float]]:
         """ Parse the output of a single run. 
             Output should have two lines:
                 Time: <runtime>
+                BestSequential: <runtime>
                 Validation: <PASS|FAIL>
-            This returns a tuple of (validation, runtime)
+            This returns a tuple of (validation, runtime, best_sequential_runtime)
         """
-        validation, runtime = None, None
+        validation, runtime, best_sequential_runtime = None, None, None
         lines = output.split("\n")
         for line in lines:
             if line.startswith("Time:"):
                 runtime = float(line.split(":")[1].strip())
             elif line.startswith("Validation:"):
                 validation = line.split(":")[1].strip() == "PASS"
-        return validation, runtime
+            elif line.startswith("BestSequential:"):
+                best_sequential_runtime = float(line.split(":")[1].strip())
+
+        return validation, runtime, best_sequential_runtime
 
 
 class GeneratedTextResult:
@@ -99,6 +104,13 @@ class GeneratedTextResult:
         """ Return whether the code ran successfully and the output was valid. """
         return self.did_all_run() and all(r.is_valid for r in self.run_outputs)
 
+    def best_sequential_runtime(self) -> Optional[float]:
+        """ Return the min value for sequential runtime. """
+        if self.did_build() and self.did_any_run():
+            return min(r.best_sequential_runtime for r in self.run_outputs if r.best_sequential_runtime is not None)
+        else:
+            return None
+
 
 """ LANGUAGE EXTENSIONS """
 LANGUAGE_EXTENSIONS = {
@@ -108,10 +120,33 @@ LANGUAGE_EXTENSIONS = {
     "fortran": ".f90",
 }
 
+""" MODEL TO DRIVER FILE BASENAME MAPPING """
+DRIVER_MAP = {
+    "serial": "cpu",
+    "omp": "cpu",
+    "mpi": "cpu",
+    "mpi+omp": "cpu",
+    "kokkos": "kokkos",
+    "cuda": "gpu",
+    "hip": "gpu"
+}
+
+""" Validators """
+VALIDATORS = {
+    "serial": EmptyValidator(),
+    "omp": OMPValidator(),
+    "mpi": MPIValidator(),
+    "mpi+omp": MPIandOMPValidator(),
+    "kokkos": EmptyValidator(),
+    "cuda": EmptyValidator(),
+    "hip": EmptyValidator()
+}
+
 class DriverWrapper(ABC):
     """ Abstract base class for driver wrappers. """
 
     parallelism_model: str
+    validator: Validator
     scratch_dir: Optional[PathLike]
     launch_configs: dict
     dry: bool
@@ -124,6 +159,7 @@ class DriverWrapper(ABC):
         dry: bool = False
     ):
         self.parallelism_model = parallelism_model
+        self.validator = VALIDATORS[parallelism_model]
         self.scratch_dir = scratch_dir
         self.launch_configs = launch_configs[parallelism_model]
         self.dry = dry
@@ -154,12 +190,15 @@ class DriverWrapper(ABC):
     def test_all_outputs_in_prompt(self, prompt: dict) -> dict:
         """ Run all the generated outputs in the given prompt. """
         root = prompt["language"]
+        type = prompt["problem_type"]
+        name = prompt["name"]
         ext = LANGUAGE_EXTENSIONS[prompt["language"]]
-        driver_base = f"{prompt['name'].lower()}-{self.parallelism_model}-driver"
-        test_driver_file = os.path.join(root, "benchmarks", driver_base + ext)
+        driver_root = f"{name}-drivers"
+        driver_base = DRIVER_MAP[self.parallelism_model]
+        test_driver_file = os.path.join(root, "benchmarks", type, driver_root, driver_base + ext)
 
         outputs = []
-        logging.info(f"Testing prompt {prompt['name']} with {self}...")
+        logging.info(f"Testing prompt {name} with {self}...")
         for generated_output in prompt["outputs"]:
             results = self.test_single_output(prompt["prompt"], generated_output, test_driver_file)
 
@@ -167,10 +206,12 @@ class DriverWrapper(ABC):
                 "generated_output": generated_output,
                 "source_write_success": results.source_write_success,
                 "did_build": results.did_build(),
+                "is_source_valid": self.validator.validate(generated_output),
                 "did_any_run": results.did_any_run(),
                 "did_all_run": results.did_all_run(),
                 "are_any_valid": results.are_any_valid(),
                 "are_all_valid": results.are_all_valid(),
+                "best_sequential_runtime": results.best_sequential_runtime(),
                 "runs": [
                     {
                         "did_run": r.exit_code == 0,
@@ -187,7 +228,7 @@ class DriverWrapper(ABC):
         num_successful_writes = sum(1 for o in outputs if o["source_write_success"])
         num_successful_builds = sum(1 for o in outputs if o["did_build"])
         num_successful_runs = sum(1 for o in outputs if o["did_all_run"])
-        num_valid_outputs = sum(1 for o in outputs if o["are_all_valid"])
+        num_valid_outputs = sum(1 for o in outputs if o["are_all_valid"] if o["is_source_valid"])
         #mean_runtime = mean(r["runtime"] for o in outputs if o["runs"] is not None for r in o["runs"])
         logging.info(f"Results for prompt {prompt['name']}:")
         logging.info(f"  {num_outputs} total outputs")

@@ -10,6 +10,9 @@ import os
 import tempfile
 from typing import Optional
 
+# tpl imports
+from tqdm import tqdm
+
 # local imports
 from driver_wrapper import DriverWrapper
 from cpp.cpp_driver_wrapper import CppDriverWrapper
@@ -32,10 +35,11 @@ def get_args():
     parser.add_argument("--dry", action="store_true", help="Dry run. Do not actually run the code snippets.")
     parser.add_argument("--overwrite", action="store_true", help="If ouputs are already in DB for a given prompt, \
         then overwrite them. Default behavior is to skip existing results.")
+    parser.add_argument("--hide-progress", action="store_true", help="If provided, do not show progress bar.")
     model_group = parser.add_mutually_exclusive_group()
-    model_group.add_argument("--exclude-models", nargs="+", type=str, choices=["serial", "omp", "mpi"], 
+    model_group.add_argument("--exclude-models", nargs="+", type=str, choices=["serial", "omp", "mpi", "mpi+omp"], 
         help="Exclude the given parallelism models from testing.")
-    model_group.add_argument("--include-models", nargs="+", type=str, choices=["serial", "omp", "mpi"],
+    model_group.add_argument("--include-models", nargs="+", type=str, choices=["serial", "omp", "mpi", "mpi+omp"],
         help="Only test the given parallelism models.")
     parser.add_argument("--log", choices=["INFO", "DEBUG", "WARNING", "ERROR", "CRITICAL"], default="INFO",
         type=str.upper, help="logging level")
@@ -87,12 +91,13 @@ def main():
     logging.info(f"Loaded launch configs from {args.launch_configs}.")
 
     # gather the list of parallelism models to test
-    models_to_test = args.include_models if args.include_models else ["serial", "omp", "mpi"]
+    models_to_test = args.include_models if args.include_models else ["serial", "omp", "mpi", "mpi+omp"]
     if args.exclude_models:
         models_to_test = [m for m in models_to_test if m not in args.exclude_models]
 
     # run each prompt
-    for prompt in data:
+    all_prompts = data if args.hide_progress else tqdm(data, desc="Testing prompts")
+    for prompt in all_prompts:
         if prompt["parallelism_model"] not in models_to_test:
             logging.debug(f"Skipping prompt {prompt['name']} because it uses {prompt['parallelism_model']}.")
             continue

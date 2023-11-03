@@ -2,12 +2,17 @@ CXX = g++
 MPICXX = mpicxx
 CXX_FLAGS = -std=c++17 -O3
 
+SERIAL_DRIVERS = $(patsubst %.cc,%.o, $(wildcard */*serial-driver.cc))
 OMP_DRIVERS = $(patsubst %.cc,%.o, $(wildcard */*omp-driver.cc))
 MPI_DRIVERS = $(patsubst %.cc,%.o, $(wildcard */*mpi-driver.cc))
+MPI_OMP_DRIVERS = $(patsubst %.cc,%.o, $(wildcard */*mpi-omp-driver.cc))
 
-all: $(OMP_DRIVERS) $(MPI_DRIVERS)
+all: $(SERIAL_DRIVERS) $(OMP_DRIVERS) $(MPI_DRIVERS) $(MPI_OMP_DRIVERS)
 
 %.o: %.cc
+	$(CXX) $(CXX_FLAGS) -o $@ -c $<
+
+%serial-driver.o: %serial-driver.cc
 	$(CXX) $(CXX_FLAGS) -o $@ -c $<
 
 %omp-driver.o: %omp-driver.cc
@@ -16,5 +21,8 @@ all: $(OMP_DRIVERS) $(MPI_DRIVERS)
 %mpi-driver.o: %mpi-driver.cc
 	$(MPICXX) $(CXX_FLAGS) -o $@ -c $<
 
+%mpi-omp-driver.o: %mpi-omp-driver.cc
+	$(MPICXX) $(CXX_FLAGS) -fopenmp -o $@ -c $<
+
 clean:
-	rm -f $(OMP_DRIVERS) $(MPI_DRIVERS)
+	rm -f $(SERIAL_DRIVERS) $(OMP_DRIVERS) $(MPI_DRIVERS) $(MPI_OMP_DRIVERS)
