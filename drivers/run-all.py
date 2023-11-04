@@ -37,9 +37,9 @@ def get_args():
         then overwrite them. Default behavior is to skip existing results.")
     parser.add_argument("--hide-progress", action="store_true", help="If provided, do not show progress bar.")
     model_group = parser.add_mutually_exclusive_group()
-    model_group.add_argument("--exclude-models", nargs="+", type=str, choices=["serial", "omp", "mpi", "mpi+omp", "cuda"], 
+    model_group.add_argument("--exclude-models", nargs="+", type=str, choices=["serial", "omp", "mpi", "mpi+omp", "kokkos", "cuda"], 
         help="Exclude the given parallelism models from testing.")
-    model_group.add_argument("--include-models", nargs="+", type=str, choices=["serial", "omp", "mpi", "mpi+omp", "cuda"],
+    model_group.add_argument("--include-models", nargs="+", type=str, choices=["serial", "omp", "mpi", "mpi+omp", "kokkos", "cuda"],
         help="Only test the given parallelism models.")
     parser.add_argument("--log", choices=["INFO", "DEBUG", "WARNING", "ERROR", "CRITICAL"], default="INFO",
         type=str.upper, help="logging level")
@@ -91,7 +91,7 @@ def main():
     logging.info(f"Loaded launch configs from {args.launch_configs}.")
 
     # gather the list of parallelism models to test
-    models_to_test = args.include_models if args.include_models else ["serial", "omp", "mpi", "mpi+omp", "cuda"]
+    models_to_test = args.include_models if args.include_models else ["serial", "omp", "mpi", "mpi+omp", "kokkos", "cuda"]
     if args.exclude_models:
         models_to_test = [m for m in models_to_test if m not in args.exclude_models]
 

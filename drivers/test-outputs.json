@@ -63,5 +63,16 @@
             "}",
             "undefinedFunctionCall(); }"
         ]
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "0_sort_non-zero",
+        "parallelism_model": "kokkos",
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Sort the array x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place. \n   Use Kokkos to sort in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(Kokkos::View<int*> &x) {",
+        "outputs": [
+            "}",
+            "undefinedFunctionCall(); }"
+        ]
     }
 ]

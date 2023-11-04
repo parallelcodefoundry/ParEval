@@ -5,7 +5,7 @@
 # std imports
 import logging
 import os
-from os import PathLike
+from os import PathLike, environ
 import shlex
 import subprocess
 import sys
@@ -23,6 +23,7 @@ DRIVER_MAP = {
     "omp": "omp-driver.o",
     "mpi": "mpi-driver.o",
     "mpi+omp": "mpi-omp-driver.o",
+    "kokkos": "kokkos-driver.o",
     "cuda": "cuda-driver.o",
 }
 
@@ -32,6 +33,7 @@ COMPILER_SETTINGS = {
     "omp": {"CXX": "g++", "CXXFLAGS": "-std=c++17 -O3 -fopenmp"},
     "mpi": {"CXX": "mpicxx", "CXXFLAGS": "-std=c++17 -O3"},
     "mpi+omp": {"CXX": "mpicxx", "CXXFLAGS": "-std=c++17 -O3 -fopenmp"},
+    "kokkos": {"CXX": "g++", "CXXFLAGS": "-std=c++17 -O3 -fopenmp -I../tpl/kokkos/build/include ../tpl/kokkos/build/lib64/libkokkoscore.a ../tpl/kokkos/build/lib64/libkokkoscontainers.a ../tpl/kokkos/build/lib64/libkokkossimd.a"},
     "cuda": {"CXX": "nvcc", "CXXFLAGS": "-std=c++17 -O3"},
 }
 
@@ -86,6 +88,7 @@ class CppDriverWrapper(DriverWrapper):
             compiler_kwargs["CXXFLAGS"] += f" -I{tmpdir}"
             build_result = self.compile(self.model_driver_file, test_driver_file, output_path=exec_path, **compiler_kwargs)
             logging.debug(f"Build result: {build_result}")
+            print(build_result.stderr)
 
             # run the code
             configs = self.launch_configs["params"]

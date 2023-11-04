@@ -2,19 +2,23 @@
 #include <cassert>
 #include <type_traits>
 
-
+// make sure some parallel model is defined
 #if !defined(USE_SERIAL) && !defined(USE_OMP) && !defined(USE_MPI) && !defined(USE_MPI_OMP) && !defined(USE_KOKKOS) && !defined(USE_CUDA) && !defined(USE_HIP)
 #error "No parallel model not defined"
 #endif
 
+// include the necessary libraries for the parallel model
 #if defined(USE_OMP) || defined(USE_MPI_OMP)
 #include <omp.h>
 #elif defined(USE_MPI) || defined(USE_MPI_OMP)
 #include <mpi.h>
+#elif defined(USE_KOKKOS)
+#include <Kokkos_Core.hpp>
 #elif defined(USE_CUDA)
 #include <cuda_runtime.h>
 #endif
 
+// some helper macros to unify CUDA and HIP interfaces
 #if defined(USE_CUDA)
 #define GRID_STRIDE_LOOP(i, n) for (int i = blockIdx.x * blockDim.x + threadIdx.x; i < (n); i += blockDim.x * gridDim.x)
 #define ALLOC(ptr, size) cudaMalloc(&(ptr), (size))
@@ -29,4 +33,23 @@
 #define COPY_D2H(dst, src, size) hipMemcpy((dst), (src), (size), hipMemcpyDeviceToHost)
 #define FREE(ptr) hipFree((ptr))
 #define SYNC() hipDeviceSynchronize()
+#endif
+
+// Kokkos utilities
+#if defined(USE_KOKKOS)
+template <typename DType>
+void copyVectorToView(std::vector<int> const& vec, Kokkos::View<DType*> view) {
+    assert(vec.size() == view.size());
+    for (int i = 0; i < vec.size(); i += 1) {
+        view(i) = vec[i];
+    }
+}
+
+template <typename DType>
+void copyViewToVector(Kokkos::View<DType*> view, std::vector<int>& vec) {
+    assert(vec.size() == view.size());
+    for (int i = 0; i < vec.size(); i += 1) {
+        vec[i] = view(i);
+    }
+}
 #endif
