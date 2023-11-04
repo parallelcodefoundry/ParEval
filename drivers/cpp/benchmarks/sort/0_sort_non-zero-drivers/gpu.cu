@@ -50,7 +50,7 @@ void reset(Context *ctx) {
 
 Context *init() {
     Context *ctx = new Context();
-    ctx->N = 10000;
+    ctx->N = 100000;
     ALLOC(ctx->x, ctx->N * sizeof(int));
     ctx->cpuScratch.resize(ctx->N);
     reset(ctx);

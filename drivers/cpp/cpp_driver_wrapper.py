@@ -36,7 +36,7 @@ COMPILER_SETTINGS = {
     "cuda": {"CXX": "nvcc", "CXXFLAGS": "-std=c++17 -O3"},
 }
 
-def build_kokkos(output_root: PathLike):
+def build_kokkos(driver_src: PathLike, output_root: PathLike):
     """ Custom steps for the Kokkos programs, since they require cmake """
     # cp cmake file into the output directory
     cmake_path = "cpp/KokkosCMakeLists.txt"
@@ -45,9 +45,8 @@ def build_kokkos(output_root: PathLike):
 
     # run cmake and make
     pwd = os.getcwd()
-    cmake_flags = f"-DKokkos_DIR=../tpl/kokkos/build -DDRIVER_PATH={pwd}"
+    cmake_flags = f"-DKokkos_DIR=../tpl/kokkos/build -DDRIVER_PATH={pwd} -DDRIVER_SRC_FILE={driver_src}"
     cmake_out = run_command(f"cmake -B{output_root} -S{output_root} {cmake_flags}", dry=False)
-    logging.debug(f"CMake output:\n{cmake_out.stdout}\n{cmake_out.stderr}")
     return run_command(f"make -C {output_root}", dry=False)
 
 class CppDriverWrapper(DriverWrapper):
@@ -71,7 +70,8 @@ class CppDriverWrapper(DriverWrapper):
     ) -> BuildOutput:
         """ Compile the given binaries into a single executable. """
         if self.parallelism_model == "kokkos":
-            compile_process = build_kokkos(os.path.dirname(output_path))
+            driver_src = [b for b in binaries if b.endswith(".cc")][0]
+            compile_process = build_kokkos(driver_src, os.path.dirname(output_path))
         else:
             binaries_str = ' '.join(binaries)
             macro = f"-DUSE_{self.parallelism_model.upper()}"

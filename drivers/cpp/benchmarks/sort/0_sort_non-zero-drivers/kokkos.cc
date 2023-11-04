@@ -14,6 +14,7 @@
 #include <vector>
 
 #include <Kokkos_Core.hpp>
+#include <Kokkos_Sort.hpp>
 
 #include "baseline.hpp"
 #include "utilities.hpp"
@@ -52,8 +53,8 @@ void reset(Context *ctx) {
 
 Context *init() {
     Context *ctx = new Context();
-    ctx->x = Kokkos::View<int*>("x", 1000000);
-    ctx->cpuX.resize(1000000);
+    ctx->x = Kokkos::View<int*>("x", 100000);
+    ctx->cpuX.resize(100000);
     reset(ctx);
     return ctx;
 }

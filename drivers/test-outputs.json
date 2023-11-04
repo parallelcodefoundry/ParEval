@@ -71,6 +71,7 @@
         "parallelism_model": "kokkos",
         "prompt": "#include <Kokkos_Core.hpp>\n\n/* Sort the array x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place. \n   Use Kokkos to sort in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(Kokkos::View<int*> &x) {",
         "outputs": [
+            " \n    int N = x.extent(0); \n \n    // Create a view to hold non-zero elements \n    Kokkos::View<int*> nonZero(\"nonZero\", N); \n    int nonZeroCount = 0; \n \n    // Extract non-zero elements sequentially \n    for (int i = 0; i < N; ++i) { \n        if (x(i) != 0) { \n            nonZero(nonZeroCount) = x(i); \n            ++nonZeroCount; \n        } \n    } \n \n    // Sort non-zero elements in parallel \n    Kokkos::sort(Kokkos::subview(nonZero, Kokkos::pair<int, int>(0, nonZeroCount))); \n \n    // Merge non-zero elements back into x sequentially \n    for (int i = 0, j = 0; i < N; ++i) { \n        if (x(i) != 0) { \n            x(i) = nonZero(j); \n            ++j; \n        } \n    } \n}",
             "}",
             "undefinedFunctionCall(); }"
         ]

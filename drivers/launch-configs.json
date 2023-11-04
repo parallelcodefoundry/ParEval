@@ -40,7 +40,7 @@
         ]
     },
     "kokkos": {
-        "format": "srun -N 1 -n 1 -c {num_threads} {exec_path} {args} {num_threads}",
+        "format": "srun -N 1 -n 1 -c {num_threads} {exec_path} {args} --kokkos-threads={num_threads}",
         "params": [
             {"num_threads": 1},
             {"num_threads": 2},

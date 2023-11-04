@@ -38,7 +38,7 @@ void reset(Context *ctx) {
 
 Context *init() {
     Context *ctx = new Context();
-    ctx->x.resize(1000000);
+    ctx->x.resize(100000);
     reset(ctx);
     return ctx;
 }
