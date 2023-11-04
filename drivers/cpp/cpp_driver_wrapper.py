@@ -7,7 +7,6 @@ import logging
 import os
 from os import PathLike, environ
 import shlex
-import subprocess
 import sys
 import tempfile
 from typing import List
@@ -37,6 +36,20 @@ COMPILER_SETTINGS = {
     "cuda": {"CXX": "nvcc", "CXXFLAGS": "-std=c++17 -O3"},
 }
 
+def build_kokkos(output_root: PathLike):
+    """ Custom steps for the Kokkos programs, since they require cmake """
+    # cp cmake file into the output directory
+    cmake_path = "cpp/KokkosCMakeLists.txt"
+    cmake_dest = os.path.join(output_root, "CMakeLists.txt")
+    run_command(f"cp {cmake_path} {cmake_dest}", dry=False)
+
+    # run cmake and make
+    pwd = os.getcwd()
+    cmake_flags = f"-DKokkos_DIR=../tpl/kokkos/build -DDRIVER_PATH={pwd}"
+    cmake_out = run_command(f"cmake -B{output_root} -S{output_root} {cmake_flags}", dry=False)
+    logging.debug(f"CMake output:\n{cmake_out.stdout}\n{cmake_out.stderr}")
+    return run_command(f"make -C {output_root}", dry=False)
+
 class CppDriverWrapper(DriverWrapper):
 
     def __init__(self, **kwargs):
@@ -57,12 +70,13 @@ class CppDriverWrapper(DriverWrapper):
         CXXFLAGS: str = "-std=c++17 -O3"
     ) -> BuildOutput:
         """ Compile the given binaries into a single executable. """
-        binaries_str = ' '.join(binaries)
-        macro = f"-DUSE_{self.parallelism_model.upper()}"
-        cmd = f"{CXX} {CXXFLAGS} -Icpp -Icpp/models {macro} {binaries_str} -o {output_path}"
-
-        # let subprocess errors propagate up
-        compile_process = run_command(cmd, timeout=10, dry=self.dry)
+        if self.parallelism_model == "kokkos":
+            compile_process = build_kokkos(os.path.dirname(output_path))
+        else:
+            binaries_str = ' '.join(binaries)
+            macro = f"-DUSE_{self.parallelism_model.upper()}"
+            cmd = f"{CXX} {CXXFLAGS} -Icpp -Icpp/models {macro} {binaries_str} -o {output_path}"
+            compile_process = run_command(cmd, timeout=10, dry=self.dry)
         return BuildOutput(compile_process.returncode, compile_process.stdout, compile_process.stderr)
 
     def run(self, executable: PathLike, **run_config) -> RunOutput:
