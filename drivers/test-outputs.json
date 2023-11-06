@@ -75,5 +75,48 @@
             "}",
             "undefinedFunctionCall(); }"
         ]
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "1_scan_sum_of_prefix_sum",
+        "parallelism_model": "omp",
+        "prompt": "#include <omp.h>\n\n/* Compute the prefix sum array of the vector x and return its sum.\n   Use OpenMP to compute in parallel.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {",
+        "outputs": [
+            " \n    int n = x.size(); \n    std::vector<double> prefixSum(n, 0.0); \n    double totalSum = 0.0; \n \n    // Compute prefix sum using std::inclusive_scan \n    std::inclusive_scan(x.begin(), x.end(), prefixSum.begin()); \n \n    // Compute total sum in parallel \n    #pragma omp parallel for reduction(+:totalSum) \n    for(int i = 0; i < n; i++) { \n        totalSum += prefixSum[i]; \n    } \n \n    return totalSum; \n}",
+            "return 0.0; }",
+            "undefinedFunctionCall(); }"
+        ]
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "1_scan_sum_of_prefix_sum",
+        "parallelism_model": "serial",
+        "prompt": "/* Compute the prefix sum array of the vector x and return its sum.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {",
+        "outputs": [
+            " \n    std::vector<double> prefixSum(x.size()); \n    std::inclusive_scan(x.begin(), x.end(), prefixSum.begin()); \n    return std::accumulate(prefixSum.begin(), prefixSum.end(), 0.0); \n}",
+            "return 0.0; }",
+            "undefinedFunctionCall(); }"
+        ]
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "1_scan_sum_of_prefix_sum",
+        "parallelism_model": "mpi",
+        "prompt": "#include <mpi.h>\n\n/* Compute the prefix sum array of the vector x and return its sum.\n   Use MPI to compute in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {",
+        "outputs": [
+            " \n    int rank, size; \n    MPI_Comm_rank(MPI_COMM_WORLD, &rank); \n    MPI_Comm_size(MPI_COMM_WORLD, &size); \n \n    int local_n = x.size() / size; \n    std::vector<double> local_x(local_n); \n    MPI_Scatter(x.data(), local_n, MPI_DOUBLE, local_x.data(), local_n, MPI_DOUBLE, 0, MPI_COMM_WORLD); \n \n    for (int i = 1; i < local_n; ++i) { \n        local_x[i] += local_x[i - 1]; \n    } \n \n    double local_sum = std::accumulate(local_x.begin(), local_x.end(), 0.0); \n \n    double global_sum; \n    MPI_Allreduce(&local_sum, &global_sum, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD); \n \n    return global_sum; \n}",
+            "return 0.0; }",
+            "undefinedFunctionCall(); }"
+        ]
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "1_scan_sum_of_prefix_sum",
+        "parallelism_model": "mpi+omp",
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the prefix sum array of the vector x and return its sum.\n   Use MPI and OpenMP to compute in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {"
     }
 ]

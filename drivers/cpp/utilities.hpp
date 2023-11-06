@@ -53,3 +53,27 @@ void copyViewToVector(Kokkos::View<DType*> view, std::vector<int>& vec) {
     }
 }
 #endif
+
+
+
+// utility functions
+template <typename T, typename DType>
+void fillRand(T &x, DType min, DType max) {
+    #if defined(USE_CUDA) || defined(USE_HIP)
+    #error "fillRand not implemented for CUDA or HIP"
+    #endif
+
+    for (int i = 0; i < x.size(); i += 1) {
+        DType val;
+        if constexpr (std::is_floating_point_v<DType>) {
+            val = (rand() / (double) RAND_MAX) * (max - min) + min;
+        } else if constexpr (std::is_integral_v<DType>) {
+            val = rand() % (max - min) + min;
+        }
+        #if defined(USE_KOKKOS)
+        x(i) = val;
+        #else
+        x[i] = val;
+        #endif
+    }
+}
