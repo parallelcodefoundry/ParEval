@@ -3,6 +3,7 @@
     date: October 2023
 """
 # std imports
+import copy
 import logging
 import os
 from os import PathLike, environ
@@ -98,11 +99,10 @@ class CppDriverWrapper(DriverWrapper):
 
             # compile and run the output
             exec_path = os.path.join(tmpdir, "a.out")
-            compiler_kwargs = COMPILER_SETTINGS[self.parallelism_model]
+            compiler_kwargs = copy.deepcopy(COMPILER_SETTINGS[self.parallelism_model])
             compiler_kwargs["CXXFLAGS"] += f" -I{tmpdir}"
             build_result = self.compile(self.model_driver_file, test_driver_file, output_path=exec_path, **compiler_kwargs)
             logging.debug(f"Build result: {build_result}")
-            print(build_result.stderr)
 
             # run the code
             configs = self.launch_configs["params"]
