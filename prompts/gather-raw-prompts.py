@@ -162,7 +162,7 @@ class HIPPrompt(Prompt):
     
     def check_valid(self, prompt: str):
         super().check_valid(prompt)
-        for substr in ["HIP", "thread", "__global__"]:
+        for substr in ["AMD HIP", "thread", "__global__"]:
             self.must_contain(prompt, substr)
     
     def get_model_name_for_function_suffix(self):

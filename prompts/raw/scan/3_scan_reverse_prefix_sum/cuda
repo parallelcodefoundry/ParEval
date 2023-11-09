@@ -8,4 +8,4 @@
    input: [3, 3, 7, 1, -2]
    output: [-2, -1, 6, 9, 12]
 */
-__global__ void reversePrefixSum(thrust::device_vector<int> const& x, thrust::device_vector<int> &output) {
+__global__ void reversePrefixSum(const double *x, double *output, size_t N) {

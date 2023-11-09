@@ -1,8 +1,8 @@
-/* Compute the prefix sum array of the vector x and return its sum.
+/* Compute the prefix sum array of the vector x. Store the result in sum.
    Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.
    Example:
 
    input: [-7, 2, 1, 9, 4, 8]
    output: 15
 */
-__global__ double sumOfPrefixSum(thrust::device_vector<double> const& x) {
+__global__ void sumOfPrefixSum(const double *x, size_t N, double *sum) {

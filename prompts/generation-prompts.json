@@ -39,7 +39,7 @@
         "language": "cpp",
         "name": "2_scan_prefix_sum",
         "parallelism_model": "cuda",
-        "prompt": "/* Compute the prefix sum of the vector x into output.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as elements in x.\n   Example:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [1, 8, 12, 18, 24, 26]\n*/\n__global__ void prefixSum(thrust::device_vector<double> const& x, thrust::device_vector<double> &output) {"
+        "prompt": "/* Compute the prefix sum of the vector x into output.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as elements in x.\n   Example:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [1, 8, 12, 18, 24, 26]\n*/\n__global__ void prefixSum(const double *x, double *output, size_t N) {"
     },
     {
         "problem_type": "scan",
@@ -88,7 +88,7 @@
         "language": "cpp",
         "name": "0_scan_min",
         "parallelism_model": "cuda",
-        "prompt": "/* Replace the i-th element of the vector x with the minimum value from indices 0 through i.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Examples:\n\n   input: [8, 6, -1, 7, 3, 4, 4]\n   output: [8, 6, -1, -1, -1, -1, -1]\n\n   input: [5, 4, 6, 4, 3, 6, 1, 1]\n   output: [5, 4, 4, 4, 3, 3, 1, 1]\n*/\n__global__ void partialMinimums(thrust::device_vector<float> &x) {"
+        "prompt": "/* Replace the i-th element of the vector x with the minimum value from indices 0 through i.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Examples:\n\n   input: [8, 6, -1, 7, 3, 4, 4]\n   output: [8, 6, -1, -1, -1, -1, -1]\n\n   input: [5, 4, 6, 4, 3, 6, 1, 1]\n   output: [5, 4, 4, 4, 3, 3, 1, 1]\n*/\n__global__ void partialMinimums(float *x, size_t N) {"
     },
     {
         "problem_type": "scan",
@@ -123,7 +123,7 @@
         "language": "cpp",
         "name": "1_scan_sum_of_prefix_sum",
         "parallelism_model": "hip",
-        "prompt": "/* Compute the prefix sum array of the vector x and return its sum.\n   Use HIP to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\n__global__ double sumOfPrefixSum(const double *x, size_t N) {"
+        "prompt": "/* Compute the prefix sum array of the vector x. Store the result in sum.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\n__global__ void sumOfPrefixSum(const double *x, size_t N, double *sum) {"
     },
     {
         "problem_type": "scan",
@@ -137,7 +137,7 @@
         "language": "cpp",
         "name": "1_scan_sum_of_prefix_sum",
         "parallelism_model": "cuda",
-        "prompt": "/* Compute the prefix sum array of the vector x and return its sum.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\n__global__ double sumOfPrefixSum(thrust::device_vector<double> const& x) {"
+        "prompt": "/* Compute the prefix sum array of the vector x. Store the result in sum.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\n__global__ void sumOfPrefixSum(const double *x, size_t N, double *sum) {"
     },
     {
         "problem_type": "scan",
@@ -186,7 +186,7 @@
         "language": "cpp",
         "name": "3_scan_reverse_prefix_sum",
         "parallelism_model": "cuda",
-        "prompt": "/* Compute the reverse prefix sum of the vector x into output.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Examples:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [2, 8, 14, 18, 25, 26]\n\n   input: [3, 3, 7, 1, -2]\n   output: [-2, -1, 6, 9, 12]\n*/\n__global__ void reversePrefixSum(thrust::device_vector<int> const& x, thrust::device_vector<int> &output) {"
+        "prompt": "/* Compute the reverse prefix sum of the vector x into output.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Examples:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [2, 8, 14, 18, 25, 26]\n\n   input: [3, 3, 7, 1, -2]\n   output: [-2, -1, 6, 9, 12]\n*/\n__global__ void reversePrefixSum(const double *x, double *output, size_t N) {"
     },
     {
         "problem_type": "scan",
@@ -221,7 +221,7 @@
         "language": "cpp",
         "name": "4_scan_largest_subarray",
         "parallelism_model": "hip",
-        "prompt": "/* Return the largest sum of any contiguous subarray in the vector x.\n   i.e. if x=[\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4] then [4, \u22121, 2, 1] is the contiguous\n   subarray with the largest sum of 6.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4]\n   output: 6\n*/\n__global__ int maximumSubarray(const int *x, size_t N) {"
+        "prompt": "/* Compute the largest sum of any contiguous subarray in the vector x. Store the result in sum.\n   i.e. if x=[\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4] then [4, \u22121, 2, 1] is the contiguous\n   subarray with the largest sum of 6.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4]\n   output: 6\n*/\n__global__ void maximumSubarray(const int *x, size_t N, int *sum) {"
     },
     {
         "problem_type": "scan",
@@ -235,7 +235,7 @@
         "language": "cpp",
         "name": "4_scan_largest_subarray",
         "parallelism_model": "cuda",
-        "prompt": "/* Return the largest sum of any contiguous subarray in the vector x.\n   i.e. if x=[\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4] then [4, \u22121, 2, 1] is the contiguous\n   subarray with the largest sum of 6.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4]\n   output: 6\n*/\n__global__ int maximumSubarray(thrust::device_vector<int> const& x) {"
+        "prompt": "/* Compute the largest sum of any contiguous subarray in the vector x. Store the result in sum.\n   i.e. if x=[\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4] then [4, \u22121, 2, 1] is the contiguous\n   subarray with the largest sum of 6.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4]\n   output: 6\n*/\n__global__ void maximumSubarray(const int *x, size_t N, int *sum) {"
     },
     {
         "problem_type": "scan",

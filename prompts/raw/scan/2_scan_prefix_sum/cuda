@@ -5,4 +5,4 @@
    input: [1, 7, 4, 6, 6, 2]
    output: [1, 8, 12, 18, 24, 26]
 */
-__global__ void prefixSum(thrust::device_vector<double> const& x, thrust::device_vector<double> &output) {
+__global__ void prefixSum(const double *x, double *output, size_t N) {
