@@ -1,0 +1,8 @@
+/* In the vector x negate the odd values and divide the even values by 2.
+   Use OpenMP to compute in parallel.
+   Example:
+
+   input: [16, 11, 12, 14, 1, 0, 5]
+   output: [8, -11, 6, 7, -1, 0, -5]
+*/
+void negateOddsAndHalveEvens(std::vector<int> &x) {

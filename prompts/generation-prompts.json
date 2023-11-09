@@ -245,6 +245,251 @@
         "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the largest sum of any contiguous subarray in the vector x.\n   i.e. if x=[\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4] then [4, \u22121, 2, 1] is the contiguous\n   subarray with the largest sum of 6.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4]\n   output: 6\n*/\nint maximumSubarray(std::vector<int> const& x) {"
     },
     {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "4_transform_negate_odds",
+        "parallelism_model": "kokkos",
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* In the vector x negate the odd values and divide the even values by 2.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n   input: [16, 11, 12, 14, 1, 0, 5]\n   output: [8, -11, 6, 7, -1, 0, -5]\n*/\nvoid negateOddsAndHalveEvens(Kokkos::View<int*> &x) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "4_transform_negate_odds",
+        "parallelism_model": "omp",
+        "prompt": "#include <omp.h>\n\n/* In the vector x negate the odd values and divide the even values by 2.\n   Use OpenMP to compute in parallel.\n   Example:\n\n   input: [16, 11, 12, 14, 1, 0, 5]\n   output: [8, -11, 6, 7, -1, 0, -5]\n*/\nvoid negateOddsAndHalveEvens(std::vector<int> &x) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "4_transform_negate_odds",
+        "parallelism_model": "serial",
+        "prompt": "/* In the vector x negate the odd values and divide the even values by 2.\n   Example:\n\n   input: [16, 11, 12, 14, 1, 0, 5]\n   output: [8, -11, 6, 7, -1, 0, -5]\n*/\nvoid negateOddsAndHalveEvens(std::vector<int> &x) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "4_transform_negate_odds",
+        "parallelism_model": "hip",
+        "prompt": "/* In the vector x negate the odd values and divide the even values by 2.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [16, 11, 12, 14, 1, 0, 5]\n   output: [8, -11, 6, 7, -1, 0, -5]\n*/\n__global__ void negateOddsAndHalveEvens(int *x, size_t N) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "4_transform_negate_odds",
+        "parallelism_model": "mpi",
+        "prompt": "#include <mpi.h>\n\n/* In the vector x negate the odd values and divide the even values by 2.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [16, 11, 12, 14, 1, 0, 5]\n   output: [8, -11, 6, 7, -1, 0, -5]\n*/\nvoid negateOddsAndHalveEvens(std::vector<int> &x) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "4_transform_negate_odds",
+        "parallelism_model": "cuda",
+        "prompt": "/* In the vector x negate the odd values and divide the even values by 2.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [16, 11, 12, 14, 1, 0, 5]\n   output: [8, -11, 6, 7, -1, 0, -5]\n*/\n__global__ void negateOddsAndHalveEvens(int *x, size_t N) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "4_transform_negate_odds",
+        "parallelism_model": "mpi+omp",
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* In the vector x negate the odd values and divide the even values by 2.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [16, 11, 12, 14, 1, 0, 5]\n   output: [8, -11, 6, 7, -1, 0, -5]\n*/\nvoid negateOddsAndHalveEvens(std::vector<int> &x) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "2_transform_squaring",
+        "parallelism_model": "kokkos",
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Replace every element of x with the square of its value.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n   input: [5, 1, 2, -4, 8]\n   output: [25, 1, 4, 16, 64]\n*/\nvoid squareEach(Kokkos::View<int*> &x) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "2_transform_squaring",
+        "parallelism_model": "omp",
+        "prompt": "#include <omp.h>\n\n/* Replace every element of x with the square of its value.\n   Use OpenMP to compute in parallel.\n   Example:\n\n   input: [5, 1, 2, -4, 8]\n   output: [25, 1, 4, 16, 64]\n*/\nvoid squareEach(std::vector<int> &x) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "2_transform_squaring",
+        "parallelism_model": "serial",
+        "prompt": "/* Replace every element of x with the square of its value.\n   Example:\n\n   input: [5, 1, 2, -4, 8]\n   output: [25, 1, 4, 16, 64]\n*/\nvoid squareEach(std::vector<int> &x) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "2_transform_squaring",
+        "parallelism_model": "hip",
+        "prompt": "/* Replace every element of x with the square of its value.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [5, 1, 2, -4, 8]\n   output: [25, 1, 4, 16, 64]\n*/\n__global__ void squareEach(int *x, size_t N) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "2_transform_squaring",
+        "parallelism_model": "mpi",
+        "prompt": "#include <mpi.h>\n\n/* Replace every element of x with the square of its value.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [5, 1, 2, -4, 8]\n   output: [25, 1, 4, 16, 64]\n*/\nvoid squareEach(std::vector<int> &x) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "2_transform_squaring",
+        "parallelism_model": "cuda",
+        "prompt": "/* Replace every element of x with the square of its value.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [5, 1, 2, -4, 8]\n   output: [25, 1, 4, 16, 64]\n*/\n__global__ void squareEach(int *x, size_t N) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "2_transform_squaring",
+        "parallelism_model": "mpi+omp",
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Replace every element of x with the square of its value.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [5, 1, 2, -4, 8]\n   output: [25, 1, 4, 16, 64]\n*/\nvoid squareEach(std::vector<int> &x) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "3_transform_map_function",
+        "parallelism_model": "kokkos",
+        "prompt": "#include <Kokkos_Core.hpp>\n\nbool isPowerOfTwo(int x) {\n\treturn (x > 0) && !(x & (x - 1));\n}\n\n/* Apply the isPowerOfTwo function to every value in x and store the results in mask.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n   input: [8, 0, 9, 7, 15, 64, 3]\n   output: [true, false, false, false, false, true, false]\n*/\nvoid mapPowersOfTwo(Kokkos::View<const int*> const& x, Kokkos::View<bool*> &mask) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "3_transform_map_function",
+        "parallelism_model": "omp",
+        "prompt": "#include <omp.h>\n\nbool isPowerOfTwo(int x) {\n\treturn (x > 0) && !(x & (x - 1));\n}\n\n/* Apply the isPowerOfTwo function to every value in x and store the results in mask.\n   Use OpenMP to compute in parallel.\n   Example:\n\n   input: [8, 0, 9, 7, 15, 64, 3]\n   output: [true, false, false, false, false, true, false]\n*/\nvoid mapPowersOfTwo(std::vector<int> const& x, std::vector<bool> &mask) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "3_transform_map_function",
+        "parallelism_model": "serial",
+        "prompt": "bool isPowerOfTwo(int x) {\n\treturn (x > 0) && !(x & (x - 1));\n}\n\n/* Apply the isPowerOfTwo function to every value in x and store the results in mask.\n   Example:\n\n   input: [8, 0, 9, 7, 15, 64, 3]\n   output: [true, false, false, false, false, true, false]\n*/\nvoid mapPowersOfTwo(std::vector<int> const& x, std::vector<bool> &mask) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "3_transform_map_function",
+        "parallelism_model": "hip",
+        "prompt": "__device__ bool isPowerOfTwo(int x) {\n\treturn (x > 0) && !(x & (x - 1));\n}\n\n/* Apply the isPowerOfTwo function to every value in x and store the results in mask.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as elements in x.\n   Example:\n\n   input: [8, 0, 9, 7, 15, 64, 3]\n   output: [true, false, false, false, false, true, false]\n*/\n__global__ void mapPowersOfTwo(const int *x, bool *mask, size_t N) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "3_transform_map_function",
+        "parallelism_model": "mpi",
+        "prompt": "#include <mpi.h>\n\nbool isPowerOfTwo(int x) {\n\treturn (x > 0) && !(x & (x - 1));\n}\n\n/* Apply the isPowerOfTwo function to every value in x and store the results in mask.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [8, 0, 9, 7, 15, 64, 3]\n   output: [true, false, false, false, false, true, false]\n*/\nvoid mapPowersOfTwo(std::vector<int> const& x, std::vector<bool> &mask) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "3_transform_map_function",
+        "parallelism_model": "cuda",
+        "prompt": "__device__ bool isPowerOfTwo(int x) {\n\treturn (x > 0) && !(x & (x - 1));\n}\n\n/* Apply the isPowerOfTwo function to every value in x and store the results in mask.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as elements in x.\n   Example:\n\n   input: [8, 0, 9, 7, 15, 64, 3]\n   output: [true, false, false, false, false, true, false]\n*/\n__global__ void mapPowersOfTwo(const int *x, bool *mask, size_t N) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "3_transform_map_function",
+        "parallelism_model": "mpi+omp",
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nbool isPowerOfTwo(int x) {\n\treturn (x > 0) && !(x & (x - 1));\n}\n\n/* Apply the isPowerOfTwo function to every value in x and store the results in mask.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [8, 0, 9, 7, 15, 64, 3]\n   output: [true, false, false, false, false, true, false]\n*/\nvoid mapPowersOfTwo(std::vector<int> const& x, std::vector<bool> &mask) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "1_transform_relu",
+        "parallelism_model": "kokkos",
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Compute the ReLU function on every element of x. Elements less than zero become zero,\n   while elements greater than zero stay the same.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n   input: [-1.8, 24.0, 1.2, 0.0, -5.1, -0.2, 4.5]\n   output: [0, 24.0, 1.2, 0, 0, 0, 4.5]\n*/\nvoid relu(Kokkos::View<double*> &x) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "1_transform_relu",
+        "parallelism_model": "omp",
+        "prompt": "#include <omp.h>\n\n/* Compute the ReLU function on every element of x. Elements less than zero become zero,\n   while elements greater than zero stay the same.\n   Use OpenMP to compute in parallel.\n   Example:\n\n   input: [-1.8, 24.0, 1.2, 0.0, -5.1, -0.2, 4.5]\n   output: [0, 24.0, 1.2, 0, 0, 0, 4.5]\n*/\nvoid relu(std::vector<double> &x) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "1_transform_relu",
+        "parallelism_model": "serial",
+        "prompt": "/* Compute the ReLU function on every element of x. Elements less than zero become zero,\n   while elements greater than zero stay the same.\n   Example:\n\n   input: [-1.8, 24.0, 1.2, 0.0, -5.1, -0.2, 4.5]\n   output: [0, 24.0, 1.2, 0, 0, 0, 4.5]\n*/\nvoid relu(std::vector<double> &x) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "1_transform_relu",
+        "parallelism_model": "hip",
+        "prompt": "/* Compute the ReLU function on every element of x. Elements less than zero become zero,\n   while elements greater than zero stay the same.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [-1.8, 24.0, 1.2, 0.0, -5.1, -0.2, 4.5]\n   output: [0, 24.0, 1.2, 0, 0, 0, 4.5]\n*/\n__global__ void relu(double *x, size_t N) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "1_transform_relu",
+        "parallelism_model": "mpi",
+        "prompt": "#include <mpi.h>\n\n/* Compute the ReLU function on every element of x. Elements less than zero become zero,\n   while elements greater than zero stay the same.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [-1.8, 24.0, 1.2, 0.0, -5.1, -0.2, 4.5]\n   output: [0, 24.0, 1.2, 0, 0, 0, 4.5]\n*/\nvoid relu(std::vector<double> &x) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "1_transform_relu",
+        "parallelism_model": "cuda",
+        "prompt": "/* Compute the ReLU function on every element of x. Elements less than zero become zero,\n   while elements greater than zero stay the same.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [-1.8, 24.0, 1.2, 0.0, -5.1, -0.2, 4.5]\n   output: [0, 24.0, 1.2, 0, 0, 0, 4.5]\n*/\n__global__ void relu(double *x, size_t N) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "1_transform_relu",
+        "parallelism_model": "mpi+omp",
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the ReLU function on every element of x. Elements less than zero become zero,\n   while elements greater than zero stay the same.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [-1.8, 24.0, 1.2, 0.0, -5.1, -0.2, 4.5]\n   output: [0, 24.0, 1.2, 0, 0, 0, 4.5]\n*/\nvoid relu(std::vector<double> &x) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "0_transform_inverse_offset",
+        "parallelism_model": "kokkos",
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Replace every element of the vector x with 1-1/x.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n   input: [2, 4, 1, 12, -2]\n   output: [0.5, 0.75, 0, 0.91666666, 1.5]\n*/\nvoid oneMinusInverse(Kokkos::View<double*> &x) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "0_transform_inverse_offset",
+        "parallelism_model": "omp",
+        "prompt": "#include <omp.h>\n\n/* Replace every element of the vector x with 1-1/x.\n   Use OpenMP to compute in parallel.\n   Example:\n\n   input: [2, 4, 1, 12, -2]\n   output: [0.5, 0.75, 0, 0.91666666, 1.5]\n*/\nvoid oneMinusInverse(std::vector<double> &x) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "0_transform_inverse_offset",
+        "parallelism_model": "serial",
+        "prompt": "/* Replace every element of the vector x with 1-1/x.\n   Example:\n\n   input: [2, 4, 1, 12, -2]\n   output: [0.5, 0.75, 0, 0.91666666, 1.5]\n*/\nvoid oneMinusInverse(std::vector<double> &x) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "0_transform_inverse_offset",
+        "parallelism_model": "hip",
+        "prompt": "/* Replace every element of the vector x with 1-1/x.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as elements in x.\n   Example:\n\n   input: [2, 4, 1, 12, -2]\n   output: [0.5, 0.75, 0, 0.91666666, 1.5]\n*/\n__global__ void oneMinusInverse(double *x, size_t N) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "0_transform_inverse_offset",
+        "parallelism_model": "mpi",
+        "prompt": "#include <mpi.h>\n\n/* Replace every element of the vector x with 1-1/x.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [2, 4, 1, 12, -2]\n   output: [0.5, 0.75, 0, 0.91666666, 1.5]\n*/\nvoid oneMinusInverse(std::vector<double> &x) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "0_transform_inverse_offset",
+        "parallelism_model": "cuda",
+        "prompt": "/* Replace every element of the vector x with 1-1/x.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as elements in x.\n   Example:\n\n   input: [2, 4, 1, 12, -2]\n   output: [0.5, 0.75, 0, 0.91666666, 1.5]\n*/\n__global__ void oneMinusInverse(double *x, size_t N) {"
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "0_transform_inverse_offset",
+        "parallelism_model": "mpi+omp",
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Replace every element of the vector x with 1-1/x.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [2, 4, 1, 12, -2]\n   output: [0.5, 0.75, 0, 0.91666666, 1.5]\n*/\nvoid oneMinusInverse(std::vector<double> &x) {"
+    },
+    {
         "problem_type": "sort",
         "language": "cpp",
         "name": "3_sort_complex",

@@ -1,0 +1,12 @@
+__device__ bool isPowerOfTwo(int x) {
+	return (x > 0) && !(x & (x - 1));
+}
+
+/* Apply the isPowerOfTwo function to every value in x and store the results in mask.
+   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as elements in x.
+   Example:
+
+   input: [8, 0, 9, 7, 15, 64, 3]
+   output: [true, false, false, false, false, true, false]
+*/
+__global__ void mapPowersOfTwo(const int *x, bool *mask, size_t N) {

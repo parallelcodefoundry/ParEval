@@ -1,0 +1,8 @@
+/* Replace every element of x with the square of its value.
+   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.
+   Example:
+
+   input: [5, 1, 2, -4, 8]
+   output: [25, 1, 4, 16, 64]
+*/
+void squareEach(Kokkos::View<int*> &x) {
