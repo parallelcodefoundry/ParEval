@@ -1,0 +1,17 @@
+struct Point {
+	double x, y;
+};
+
+__device__ double distance(Point const& p1, Point const& p2) {
+	return sqrt(pow(p2.x-p1.x, 2) + pow(p2.y-p1.y, 2));
+}
+
+/* Compute the distance between the closest two points in the vector points.
+   Store the result in distance.
+   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as points.
+   Example: 
+
+   input: [{2, 3}, {12, 30}, {40, 50}, {5, 1}, {12, 10}, {3, 4}]
+   output: 1.41421
+*/
+__global__ void closestPair(const Point *points, size_t numPoints, double *distance) {

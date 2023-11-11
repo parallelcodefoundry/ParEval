@@ -1,0 +1,11 @@
+/* Set `found` to true if the vector x contains the value `target`. Set it to false otherwise.
+   Use CUDA to search in parallel. The kernel is launched with at least N threads.
+   Examples:
+
+   input: x=[1, 8, 2, 6, 4, 6], target=3
+   output: false
+   
+   input: x=[1, 8, 2, 6, 4, 6], target=8
+   output: true
+*/
+__global__ void contains(const int *x, size_t N, int target, bool *found) {

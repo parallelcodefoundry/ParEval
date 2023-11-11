@@ -1,0 +1,9 @@
+/* Solve the linear system Ax=b for x.
+   A is an NxN matrix. x and b have N elements.
+   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.
+   Example:
+   
+   input: A=[[1,4,2], [1,2,3], [2,1,3]] b=[11, 11, 13]
+   output: x=[3, 1, 2]
+*/
+void solveLinearSystem(Kokkos::View<const double**> &A, Kokkos::View<const double*> &b, Kokkos::View<double*> &x, size_t N) {

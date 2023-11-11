@@ -1,0 +1,10 @@
+/* Compute the sum of the minimum value at each index of vectors x and y for all indices.
+   i.e. sum = min(x_0, y_0) + min(x_1, y_1) + min(x_2, y_2) + ...
+   Store the result in sum.
+   Use AMD HIP to sum in parallel. The kernel is launched with at least as many threads as values in x.
+   Example:
+
+   input: x=[3, 4, 0, 2, 3], y=[2, 5, 3, 1, 7]
+   output: 10
+*/
+__global__ void sumOfMinimumElements(const double *x, const double *y, size_t N, double *sum) {

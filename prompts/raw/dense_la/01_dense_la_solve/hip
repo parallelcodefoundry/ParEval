@@ -1,0 +1,9 @@
+/* Solve the linear system Ax=b for x.
+   A is an NxN matrix in row-major. x and b have N elements.
+   Use AMD HIP to compute in parallel. The kernel is launched on an NxN grid of threads.
+   Example:
+   
+   input: A=[[1,4,2], [1,2,3], [2,1,3]] b=[11, 11, 13]
+   output: x=[3, 1, 2]
+*/
+__global__ void solveLinearSystem(const double *A, const double *b, double *x, size_t N) {

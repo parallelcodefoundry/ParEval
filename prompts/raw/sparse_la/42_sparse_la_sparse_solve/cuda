@@ -1,0 +1,14 @@
+struct COOElement {
+   size_t row, column;
+   double value;
+};
+
+/* Solve the sparse linear system Ax=b for x.
+   A is a sparse NxN matrix in COO format with sizeA elements. x and b are dense vectors with N elements.
+   Use CUDA to compute in parallel. The kernel is launched with at least sizeA threads.
+   Example:
+   
+   input: A=[{0,0,1}, {0,1,1}, {1,1,-2}] b=[1,4]
+   output: x=[3,-2]
+*/
+__global__ void solveLinearSystem(const COOElement *A, size_t sizeA, const double *b, double *x, size_t N) {

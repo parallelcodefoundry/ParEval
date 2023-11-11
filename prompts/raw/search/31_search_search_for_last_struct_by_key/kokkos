@@ -1,0 +1,13 @@
+struct Book {
+   const char *title;
+   int pages;
+};
+
+/* Return the index of the last Book item in the vector books where Book.pages is less than 100.
+   Use Kokkos to search in parallel. Assume Kokkos is already initialized.
+	 Example:
+
+   input: [{title="Green Eggs and Ham", pages=72}, {title="gulliver's travels", pages=362}, {title="Stories of Your Life", pages=54}, {title="Hamilton", pages=818}]
+   output: 2
+*/
+size_t findLastShortBook(Kokkos::View<const Book*> const& books) {

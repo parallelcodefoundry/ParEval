@@ -1,0 +1,14 @@
+struct COOElement {
+   size_t row, column;
+   double value;
+};
+
+/* Solve the sparse linear system Ax=b for x.
+   A is a sparse NxN matrix in COO format. x and b are dense vectors with N elements.
+   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.
+   Example:
+   
+   input: A=[{0,0,1}, {0,1,1}, {1,1,-2}] b=[1,4]
+   output: x=[3,-2]
+*/
+void solveLinearSystem(Kokkos::View<const COOElement*> &A, Kokkos::View<const double*> &b, Kokkos::View<double*> &x, size_t N) {

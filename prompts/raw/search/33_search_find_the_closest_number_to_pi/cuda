@@ -1,0 +1,9 @@
+/* Find the index of the value in the vector x that is closest to the math constant PI. Store the index in closestToPiIndex.
+   Use M_PI for the value of PI.
+   Use CUDA to search in parallel. The kernel is launched with at least N threads.
+   Example:
+
+   input: [9.18, 3.05, 7.24, 11.3, -166.49, 2.1]
+   output: 1
+*/
+__global__ void findClosestToPi(const double *x, size_t N, size_t *closestToPiIndex) {

@@ -1,0 +1,8 @@
+/* Return the logical XOR reduction of the vector of bools x.
+   Use Kokkos to reduce in parallel. Assume Kokkos is already initialized.
+   Example:
+
+   input: [false, false, false, true]
+   output: true
+*/
+bool reduceLogicalXOR(Kokkos::View<const bool*> const& x) {

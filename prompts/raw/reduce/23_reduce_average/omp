@@ -1,0 +1,11 @@
+/* Return the average of the vector x.
+   Use OpenMP to compute in parallel.
+   Examples:
+		
+	 input: [1, 8, 4, 5, 1]
+   output: 3.8
+
+   input: [2, 2, 2, 3]
+   output: 2.25
+*/
+double average(std::vector<double> const& x) {

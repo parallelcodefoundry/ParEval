@@ -1,0 +1,13 @@
+struct Element {
+	size_t index;
+  double value;
+};
+
+/* Compute z = alpha*x+y where x and y are sparse vectors. Store the result in z.
+   Use MPI to compute in parallel. Assume MPI has already been initialized.
+   Example:
+   
+   input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1
+   output: z=[{3, 1}, {5, 10}, {7, 1}, {12, -1}]
+*/
+void sparseAxpy(double alpha, std::vector<Element> const& x, std::vector<Element> const& y, std::vector<Element> &z) {

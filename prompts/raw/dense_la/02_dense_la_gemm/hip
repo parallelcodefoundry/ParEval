@@ -1,0 +1,9 @@
+/* Multiply the matrix A by the matrix B. Store the results in the matrix C.
+   A is an MxK matrix, B is a KxN matrix, and C is a MxN matrix. The matrices are stored in row-major.
+   Use AMD HIP to compute in parallel. The kernel is launched on an MxN grid of threads.
+   Example:
+
+   input: A=[[1, -1, 2], [0, -2, 1]] B=[[4, 1], [-1, 0], [2, 2]]
+   output: C=[[9, 5], [4, 2]]
+*/
+__global__ void gemm(const double *A, const double *B, double *C, size_t M, size_t K, size_t N) {

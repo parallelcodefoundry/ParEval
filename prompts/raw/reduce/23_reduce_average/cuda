@@ -1,0 +1,11 @@
+/* Compute the average of the vector x. Store the result in average.
+   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.
+   Examples:
+   
+	 input: [1, 8, 4, 5, 1]
+   output: 3.8
+
+   input: [2, 2, 2, 3]
+   output: 2.25
+*/
+__global__ void average(const double *x, size_t N, double *average) {

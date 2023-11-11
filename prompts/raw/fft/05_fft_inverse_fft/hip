@@ -1,0 +1,8 @@
+/* Compute the inverse fourier transform of x in-place.
+   Use AMD HIP to compute in parallel. The kernel is launched with at least N threads.
+   Example:
+   
+   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+   output: [{0.5,0}, {0.125,0.301777}, {0,-0}, {0.125,0.0517767}, {0,-0}, {0.125,-0.0517767}, {0,-0}, {0.125,-0.301777}]
+*/
+__global__ void ifft(hipDoubleComplex *x, size_t N) {
