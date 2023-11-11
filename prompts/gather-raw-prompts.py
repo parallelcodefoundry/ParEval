@@ -34,6 +34,18 @@ class Prompt:
     def must_contain(self, prompt: str, substr: str):
         if substr not in prompt:
             raise ValueError(f"Prompt '{prompt}' does not contain '{substr}'")
+    
+    def must_contain_all(self, prompt: str, substrs: List[str]):
+        for substr in substrs:
+            self.must_contain(prompt, substr)
+    
+    def must_not_contain(self, prompt: str, substr: str):
+        if substr in prompt:
+            raise ValueError(f"Prompt '{prompt}' contains '{substr}'")
+    
+    def must_not_contain_any(self, prompt: str, substrs: List[str]):
+        for substr in substrs:
+            self.must_not_contain(prompt, substr)
 
     def append_to_function_name(self, prompt: str, suffix: str) -> str:
         """ prompt is a c++ docstring and function header. Add a suffix to the
@@ -95,8 +107,7 @@ class MPIPrompt(Prompt):
     
     def check_valid(self, prompt: str):
         super().check_valid(prompt)
-        self.must_contain(prompt, "MPI")
-        self.must_contain(prompt, "initialized")
+        self.must_contain_all(prompt, ["MPI", "initialized"])
     
     def get_model_name_for_function_suffix(self):
         return "MPI"
@@ -128,14 +139,14 @@ class KokkosPrompt(Prompt):
     
     def check_valid(self, prompt: str):
         super().check_valid(prompt)
-        self.must_contain(prompt, "Kokkos")
-        self.must_contain(prompt, "initialized")
+        self.must_contain_all(prompt, ["Kokkos", "initialized"])
+        self.must_not_contain_any(prompt, ["MPI"])
     
     def get_model_name_for_function_suffix(self):
         return "Kokkos"
 
     def add_imports(self, prompt: str) -> str:
-        return "#include <Kokkos_Core.hpp>\n\n" + prompt # todo -- figure out if this is ok
+        return "#include <Kokkos_Core.hpp>\n\n" + prompt
 
 
 class CUDAPrompt(Prompt):
@@ -145,8 +156,8 @@ class CUDAPrompt(Prompt):
     
     def check_valid(self, prompt: str):
         super().check_valid(prompt)
-        for substr in ["CUDA", "thread", "__global__"]:
-            self.must_contain(prompt, substr)
+        self.must_contain_all(prompt, ["CUDA", "thread", "__global__ void"])
+        self.must_not_contain_any(prompt, ["MPI", "Kokkos", "std::vector", "thrust::", "device_vector", "HIP"])
     
     def get_model_name_for_function_suffix(self):
         return "CUDA"
@@ -162,8 +173,8 @@ class HIPPrompt(Prompt):
     
     def check_valid(self, prompt: str):
         super().check_valid(prompt)
-        for substr in ["AMD HIP", "thread", "__global__"]:
-            self.must_contain(prompt, substr)
+        self.must_contain_all(prompt, ["AMD HIP", "thread", "__global__ void"])
+        self.must_not_contain_any(prompt, ["MPI", "Kokkos", "std::vector", "thrust::", "device_vector", "CUDA"])
     
     def get_model_name_for_function_suffix(self):
         return "HIP"
