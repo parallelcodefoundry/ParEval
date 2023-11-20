@@ -1,24 +1,12 @@
 [
     {
-        "problem_type": "transform",
+        "problem_type": "scan",
         "language": "cpp",
-        "name": "53_transform_negate_odds",
-        "parallelism_model": "kokkos",
-        "prompt": "#include <Kokkos_Core.hpp>\n\n/* In the vector x negate the odd values and divide the even values by 2.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n   input: [16, 11, 12, 14, 1, 0, 5]\n   output: [8, -11, 6, 7, -1, 0, -5]\n*/\nvoid negateOddsAndHalveEvens(Kokkos::View<int*> &x) {",
+        "name": "28_scan_sum_of_prefix_sum_array",
+        "parallelism_model": "serial",
+        "prompt": "/* Compute the prefix sum array of the vector x and return its sum.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {",
         "outputs": [
-            "\n    std::transform(x.begin(), x.end(), x.begin(), [](int i) {\n        if (i % 2 == 0) {\n            return i / 2;\n        } else {\n            return -i;\n        }\n    });\n}",
-            " }",
-            " undefinedFunction(); }"
-        ]
-    },
-    {
-        "problem_type": "transform",
-        "language": "cpp",
-        "name": "53_transform_negate_odds",
-        "parallelism_model": "omp",
-        "prompt": "#include <omp.h>\n\n/* In the vector x negate the odd values and divide the even values by 2.\n   Use OpenMP to compute in parallel.\n   Example:\n\n   input: [16, 11, 12, 14, 1, 0, 5]\n   output: [8, -11, 6, 7, -1, 0, -5]\n*/\nvoid negateOddsAndHalveEvens(std::vector<int> &x) {",
-        "outputs": [
-            "\n    std::transform(x.begin(), x.end(), x.begin(), [](int i) {\n        if (i % 2 == 0) {\n            return i / 2;\n        } else {\n            return -i;\n        }\n    });\n}",
+            "\n    std::vector<double> prefixSum(x.size());\n    std::inclusive_scan(x.begin(), x.end(), prefixSum.begin());\n    return std::accumulate(prefixSum.begin(), prefixSum.end(), 0.0);\n}",
             " }",
             " undefinedFunction(); }"
         ]
@@ -36,49 +24,13 @@
         ]
     },
     {
-        "problem_type": "transform",
+        "problem_type": "sort",
         "language": "cpp",
-        "name": "53_transform_negate_odds",
-        "parallelism_model": "hip",
-        "prompt": "/* In the vector x negate the odd values and divide the even values by 2.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [16, 11, 12, 14, 1, 0, 5]\n   output: [8, -11, 6, 7, -1, 0, -5]\n*/\n__global__ void negateOddsAndHalveEvens(int *x, size_t N) {",
+        "name": "41_sort_sort_non-zero_elements",
+        "parallelism_model": "serial",
+        "prompt": "/* Sort the vector x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place.\n   Example:\n\n\t input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(std::vector<int> &x) {",
         "outputs": [
-            "\n    std::transform(x.begin(), x.end(), x.begin(), [](int i) {\n        if (i % 2 == 0) {\n            return i / 2;\n        } else {\n            return -i;\n        }\n    });\n}",
-            " }",
-            " undefinedFunction(); }"
-        ]
-    },
-    {
-        "problem_type": "transform",
-        "language": "cpp",
-        "name": "53_transform_negate_odds",
-        "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* In the vector x negate the odd values and divide the even values by 2.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [16, 11, 12, 14, 1, 0, 5]\n   output: [8, -11, 6, 7, -1, 0, -5]\n*/\nvoid negateOddsAndHalveEvens(std::vector<int> &x) {",
-        "outputs": [
-            "\n    std::transform(x.begin(), x.end(), x.begin(), [](int i) {\n        if (i % 2 == 0) {\n            return i / 2;\n        } else {\n            return -i;\n        }\n    });\n}",
-            " }",
-            " undefinedFunction(); }"
-        ]
-    },
-    {
-        "problem_type": "transform",
-        "language": "cpp",
-        "name": "53_transform_negate_odds",
-        "parallelism_model": "cuda",
-        "prompt": "/* In the vector x negate the odd values and divide the even values by 2.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [16, 11, 12, 14, 1, 0, 5]\n   output: [8, -11, 6, 7, -1, 0, -5]\n*/\n__global__ void negateOddsAndHalveEvens(int *x, size_t N) {",
-        "outputs": [
-            "\n    std::transform(x.begin(), x.end(), x.begin(), [](int i) {\n        if (i % 2 == 0) {\n            return i / 2;\n        } else {\n            return -i;\n        }\n    });\n}",
-            " }",
-            " undefinedFunction(); }"
-        ]
-    },
-    {
-        "problem_type": "transform",
-        "language": "cpp",
-        "name": "53_transform_negate_odds",
-        "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* In the vector x negate the odd values and divide the even values by 2.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [16, 11, 12, 14, 1, 0, 5]\n   output: [8, -11, 6, 7, -1, 0, -5]\n*/\nvoid negateOddsAndHalveEvens(std::vector<int> &x) {",
-        "outputs": [
-            "\n    std::transform(x.begin(), x.end(), x.begin(), [](int i) {\n        if (i % 2 == 0) {\n            return i / 2;\n        } else {\n            return -i;\n        }\n    });\n}",
+            "\n    std::vector<int> nonZeroElements;\n    for (int num : x) {\n        if (num != 0) {\n            nonZeroElements.push_back(num);\n        }\n    }\n\n    std::sort(nonZeroElements.begin(), nonZeroElements.end());\n\n    size_t nonZeroIndex = 0;\n    for (int i = 0; i < x.size(); i += 1) {\n        if (x[i] != 0) {\n            x[i] = nonZeroElements[nonZeroIndex];\n            nonZeroIndex += 1;\n        }\n    }\n}",
             " }",
             " undefinedFunction(); }"
         ]

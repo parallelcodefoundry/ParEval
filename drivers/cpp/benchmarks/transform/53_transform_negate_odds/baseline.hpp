@@ -1,3 +1,5 @@
+#pragma once
+
 /* In the vector x negate the odd values and divide the even values by 2.
    Example:
    
