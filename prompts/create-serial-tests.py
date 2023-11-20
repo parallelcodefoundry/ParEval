@@ -7,7 +7,7 @@ from argparse import ArgumentParser
 import glob
 import json
 from os import PathLike
-from os.path import join as path_join
+from os.path import join as path_join, exists as path_exists
 
 
 def get_file_contents(fpath: PathLike) -> str:
@@ -28,18 +28,20 @@ def main():
     with open(args.prompts, 'r') as f:
         prompts = json.load(f)
     
+    output = []
     for prompt in prompts:
         baseline_fpath = path_join(args.benchmarks_root, prompt['problem_type'], prompt['name'], 'baseline.hpp')
 
-        if not PathLike(baseline_fpath).exists():
+        if not path_exists(baseline_fpath):
             continue
 
         baseline = get_file_contents(baseline_fpath)
         impl = get_substr_after_first_of(baseline, ') {')
-        prompts['outputs'] = [impl, ' }', ' undefinedFunction(); }']
+        prompt['outputs'] = [impl, ' }', ' undefinedFunction(); }']
+        output.append(prompt)
 
     with open(args.output, 'w') as f:
-        json.dump(prompts, f, indent=4)
+        json.dump(output, f, indent=4)
 
 
 if __name__ == '__main__':
