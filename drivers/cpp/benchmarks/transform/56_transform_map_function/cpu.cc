@@ -28,6 +28,7 @@ struct Context {
 
 void reset(Context *ctx) {
     fillRand(ctx->x, 1, 1025);
+    BCAST(ctx->x, INT);
 }
 
 Context *init() {
@@ -48,10 +49,14 @@ void best(Context *ctx) {
 
 bool validate(Context *ctx) {
 
+    int rank;
+    GET_RANK(rank);
+
     const size_t numTries = 5;
     for (int i = 0; i < numTries; i += 1) {
         std::vector<int> input(1024);
         fillRand(input, 1, 1025);
+        BCAST(input, INT);
 
         // compute correct result
         std::vector<bool> correctResult(input.size());
@@ -60,8 +65,9 @@ bool validate(Context *ctx) {
         // compute test result
         std::vector<bool> testResult(input.size());
         mapPowersOfTwo(input, testResult);
+        SYNC();
         
-        if (!std::equal(correctResult.begin(), correctResult.end(), testResult.begin())) {
+        if (IS_ROOT(rank) && !std::equal(correctResult.begin(), correctResult.end(), testResult.begin())) {
             return false;
         }
     }

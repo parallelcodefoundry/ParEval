@@ -73,10 +73,12 @@ void fillRandKokkos(Kokkos::View<DType*> &x, DType min, DType max) {
 #define IS_ROOT(rank) ((rank) == 0)
 #define BCAST(vec,dtype) MPI_Bcast((vec).data(), (vec).size(), MPI_##dtype, 0, MPI_COMM_WORLD)
 #define SYNC() MPI_Barrier(MPI_COMM_WORLD)
+#define GET_RANK(rank) MPI_Comm_rank(MPI_COMM_WORLD, &(rank))
 #else
 #define IS_ROOT(rank) true
 #define BCAST(vec,dtype)
 #define SYNC()
+#define GET_RANK(rank) rank = 0
 #endif
 
 
