@@ -1,5 +1,5 @@
 /* Sort the first half of the vector x in descending order. Leave the second half in-place. 
-   If x.size() is odd, then include the middle element in the first half. 
+   If x.size() is odd, then include the middle element in the first half.
    Examples:
    
    input: [2, 5, -4, 7, 3, 6, -1]

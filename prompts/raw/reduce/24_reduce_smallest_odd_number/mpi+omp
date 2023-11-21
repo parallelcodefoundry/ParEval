@@ -1,5 +1,6 @@
 /* Return the value of the smallest odd number in the vector x.
    Use MPI and OpenMP to compute in parallel. Assume MPI is already initialized.
+   Every rank has a complete copy of x. Return the result on all ranks.
    Examples:
 
    input: [7, 9, 5, 2, 8, 16, 4, 1]

@@ -6,6 +6,7 @@
    If a cell is dead and has exactly 3 live neighbors then it becomes alive.
    `input` and `output` are NxN grids stored in row-major.
    Use MPI to compute in parallel. Assume MPI is already initialized.
+   Every rank has a complete copy of input. The result is stored in output on rank 0.
    Example:
 
    input:  [[0, 0, 0, 0, 0],

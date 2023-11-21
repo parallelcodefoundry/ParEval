@@ -8,6 +8,7 @@ double distance(Point const& p1, Point const& p2) {
 
 /* Return the perimeter of the smallest convex polygon that contains all the points in the vector points.
    Use MPI to compute in parallel. Assume MPI has already been initialized.
+   Every rank has a complete copy of points. The final result is returned on rank 0.
    Example:
 
    input: [{0, 3}, {1, 1}, {2, 2}, {4, 4}, {0, 0}, {1, 2}, {3, 1}, {3, 3}]

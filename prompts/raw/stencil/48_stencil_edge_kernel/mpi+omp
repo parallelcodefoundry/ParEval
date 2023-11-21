@@ -6,6 +6,7 @@ const int edgeKernel[3][3] = {{-1, -1, -1}, {-1, 8, -1}, {-1, -1, -1}};
    imageIn and imageOut are NxN grayscale images stored in row-major.
    Store the output of the computation in imageOut.
    Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.
+   Every rank has a complete copy of imageIn. The result is stored in imageOut on rank 0.
    Example:
 
    input: [[112, 118, 141, 152],

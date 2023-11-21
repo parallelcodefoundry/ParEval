@@ -1,5 +1,6 @@
 /* Compute the reverse prefix sum of the vector x into output.
    Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.
+   Every rank has a complete copy of x. Store the result in output on rank 0.
    Examples:
    
    input: [1, 7, 4, 6, 6, 2]

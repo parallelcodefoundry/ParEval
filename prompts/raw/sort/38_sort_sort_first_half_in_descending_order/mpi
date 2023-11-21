@@ -1,6 +1,7 @@
 /* Sort the first half of the vector x in descending order. Leave the second half in-place. 
    If x.size() is odd, then include the middle element in the first half. 
    Use MPI to sort in parallel. Assume MPI is already initialized.
+   Every rank has a complete copy of x. Store the result in x on rank 0.
    Examples:
    
    input: [2, 5, -4, 7, 3, 6, -1]

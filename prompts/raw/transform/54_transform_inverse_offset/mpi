@@ -1,5 +1,6 @@
 /* Replace every element of the vector x with 1-1/x.
    Use MPI to compute in parallel. Assume MPI has already been initialized.
+   Every rank has a complete copy of x. The final result is stored on rank 0.
    Example:
 
    input: [2, 4, 1, 12, -2]

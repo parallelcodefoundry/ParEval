@@ -5,6 +5,7 @@ struct Element {
 
 /* Compute z = alpha*x+y where x and y are sparse vectors. Store the result in z.
    Use MPI to compute in parallel. Assume MPI has already been initialized.
+   Every rank has a complete copy of x and y. Store the result in z on rank 0.
    Example:
    
    input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1
