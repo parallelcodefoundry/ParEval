@@ -1,10 +1,541 @@
 [
     {
-        "name": "Test1",
-        "prompt": "/* Compute the sum of vals in parallel using OpenMP */\nfloat sum(std::vector<float> const& vals) {\n"
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "2_scan_prefix_sum",
+        "parallelism_model": "kokkos",
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Compute the prefix sum of the vector x into output.\n   Use Kokkos to compute in parallel. Assume Kokkos is already initialized.\n   Example:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [1, 8, 12, 18, 24, 26]\n*/\nvoid prefixSum(Kokkos::View<const double*> const& x, Kokkos::View<double*> &output) {"
     },
     {
-        "name": "Test2",
-        "prompt": "/* Use MPI to compute the average of vals in parallel. Assume MPI has already been initialized. */\nfloat average(std::vector<float> const& vals) {\n"
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "2_scan_prefix_sum",
+        "parallelism_model": "omp",
+        "prompt": "#include <omp.h>\n\n/* Compute the prefix sum of the vector x into output.\n   Use OpenMP to compute in parallel.\n   Example:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [1, 8, 12, 18, 24, 26]\n*/\nvoid prefixSum(std::vector<double> const& x, std::vector<double> &output) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "2_scan_prefix_sum",
+        "parallelism_model": "serial",
+        "prompt": "/* Compute the prefix sum of the vector x into output.\n   Example:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [1, 8, 12, 18, 24, 26]\n*/\nvoid prefixSum(std::vector<double> const& x, std::vector<double> &output) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "2_scan_prefix_sum",
+        "parallelism_model": "hip",
+        "prompt": "/* Compute the prefix sum of the vector x into output.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as elements in x.\n   Example:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [1, 8, 12, 18, 24, 26]\n*/\n__global__ void prefixSum(const double* x, double *output, size_t N) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "2_scan_prefix_sum",
+        "parallelism_model": "mpi",
+        "prompt": "#include <mpi.h>\n\n/* Compute the prefix sum of the vector x into output.\n   Use MPI to compute in parallel. Assume MPI is already initialized.\n   Example:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [1, 8, 12, 18, 24, 26]\n*/\nvoid prefixSum(std::vector<double> const& x, std::vector<double> &output) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "2_scan_prefix_sum",
+        "parallelism_model": "cuda",
+        "prompt": "/* Compute the prefix sum of the vector x into output.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as elements in x.\n   Example:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [1, 8, 12, 18, 24, 26]\n*/\n__global__ void prefixSum(thrust::device_vector<double> const& x, thrust::device_vector<double> &output) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "2_scan_prefix_sum",
+        "parallelism_model": "mpi+omp",
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the prefix sum of the vector x into output.\n   Use MPI and OpenMP to compute in parallel. Assume MPI is already initialized.\n   Example:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [1, 8, 12, 18, 24, 26]\n*/\nvoid prefixSum(std::vector<double> const& x, std::vector<double> &output) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "0_scan_min",
+        "parallelism_model": "kokkos",
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Replace the i-th element of the array x with the minimum value from indices 0 through i.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Examples:\n\n   input: [8, 6, -1, 7, 3, 4, 4]\n   output: [8, 6, -1, -1, -1, -1, -1]\n\n   input: [5, 4, 6, 4, 3, 6, 1, 1]\n   output: [5, 4, 4, 4, 3, 3, 1, 1]\n*/\nvoid partialMinimums(Kokkos::View<float*> &x) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "0_scan_min",
+        "parallelism_model": "omp",
+        "prompt": "#include <omp.h>\n\n/* Replace the i-th element of the vector x with the minimum value from indices 0 through i.\n   Use OpenMP to compute in parallel.\n   Examples:\n\n   input: [8, 6, -1, 7, 3, 4, 4]\n   output: [8, 6, -1, -1, -1, -1, -1]\n\n   input: [5, 4, 6, 4, 3, 6, 1, 1]\n   output: [5, 4, 4, 4, 3, 3, 1, 1]\n*/\nvoid partialMinimums(std::vector<float> &x) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "0_scan_min",
+        "parallelism_model": "serial",
+        "prompt": "/* Replace the i-th element of the vector x with the minimum value from indices 0 through i.\n   Examples:\n\n   input: [8, 6, -1, 7, 3, 4, 4]\n   output: [8, 6, -1, -1, -1, -1, -1]\n\n   input: [5, 4, 6, 4, 3, 6, 1, 1]\n   output: [5, 4, 4, 4, 3, 3, 1, 1]\n*/\nvoid partialMinimums(std::vector<float> &x) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "0_scan_min",
+        "parallelism_model": "hip",
+        "prompt": "/* Replace the i-th element of the vector x with the minimum value from indices 0 through i.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Examples:\n\n   input: [8, 6, -1, 7, 3, 4, 4]\n   output: [8, 6, -1, -1, -1, -1, -1]\n\n   input: [5, 4, 6, 4, 3, 6, 1, 1]\n   output: [5, 4, 4, 4, 3, 3, 1, 1]\n*/\n__global__ void partialMinimums(float *x, size_t N) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "0_scan_min",
+        "parallelism_model": "mpi",
+        "prompt": "#include <mpi.h>\n\n/* Replace the i-th element of the vector x with the minimum value from indices 0 through i.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Examples:\n\n   input: [8, 6, -1, 7, 3, 4, 4]\n   output: [8, 6, -1, -1, -1, -1, -1]\n\n   input: [5, 4, 6, 4, 3, 6, 1, 1]\n   output: [5, 4, 4, 4, 3, 3, 1, 1]\n*/\nvoid partialMinimums(std::vector<float> &x) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "0_scan_min",
+        "parallelism_model": "cuda",
+        "prompt": "/* Replace the i-th element of the vector x with the minimum value from indices 0 through i.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Examples:\n\n   input: [8, 6, -1, 7, 3, 4, 4]\n   output: [8, 6, -1, -1, -1, -1, -1]\n\n   input: [5, 4, 6, 4, 3, 6, 1, 1]\n   output: [5, 4, 4, 4, 3, 3, 1, 1]\n*/\n__global__ void partialMinimums(thrust::device_vector<float> &x) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "0_scan_min",
+        "parallelism_model": "mpi+omp",
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Replace the i-th element of the vector x with the minimum value from indices 0 through i.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Examples:\n\n   input: [8, 6, -1, 7, 3, 4, 4]\n   output: [8, 6, -1, -1, -1, -1, -1]\n\n   input: [5, 4, 6, 4, 3, 6, 1, 1]\n   output: [5, 4, 4, 4, 3, 3, 1, 1]\n*/\nvoid partialMinimums(std::vector<float> &x) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "1_scan_sum_of_prefix_sum",
+        "parallelism_model": "kokkos",
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Compute the prefix sum array of the vector x and return its sum.\n   Use Kokkos to compute in parallel. Assume Kokkos is already initialized.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(Kokkos::View<const double*> const& x) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "1_scan_sum_of_prefix_sum",
+        "parallelism_model": "omp",
+        "prompt": "#include <omp.h>\n\n/* Compute the prefix sum array of the vector x and return its sum.\n   Use OpenMP to compute in parallel.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "1_scan_sum_of_prefix_sum",
+        "parallelism_model": "serial",
+        "prompt": "/* Compute the prefix sum array of the vector x and return its sum.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "1_scan_sum_of_prefix_sum",
+        "parallelism_model": "hip",
+        "prompt": "/* Compute the prefix sum array of the vector x and return its sum.\n   Use HIP to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\n__global__ double sumOfPrefixSum(const double *x, size_t N) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "1_scan_sum_of_prefix_sum",
+        "parallelism_model": "mpi",
+        "prompt": "#include <mpi.h>\n\n/* Compute the prefix sum array of the vector x and return its sum.\n   Use MPI to compute in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "1_scan_sum_of_prefix_sum",
+        "parallelism_model": "cuda",
+        "prompt": "/* Compute the prefix sum array of the vector x and return its sum.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\n__global__ double sumOfPrefixSum(thrust::device_vector<double> const& x) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "1_scan_sum_of_prefix_sum",
+        "parallelism_model": "mpi+omp",
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the prefix sum array of the vector x and return its sum.\n   Use MPI and OpenMP to compute in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "3_scan_reverse_prefix_sum",
+        "parallelism_model": "kokkos",
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Compute the reverse prefix sum of the array x into output.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Examples:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [2, 8, 14, 18, 25, 26]\n\n   input: [3, 3, 7, 1, -2]\n   output: [-2, -1, 6, 9, 12]\n*/\nvoid reversePrefixSum(Kokkos::View<const int*> const& x, Kokkos::View<int*> &output) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "3_scan_reverse_prefix_sum",
+        "parallelism_model": "omp",
+        "prompt": "#include <omp.h>\n\n/* Compute the reverse prefix sum of the vector x into output.\n   Use OpenMP to compute in parallel.\n   Examples:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [2, 8, 14, 18, 25, 26]\n\n   input: [3, 3, 7, 1, -2]\n   output: [-2, -1, 6, 9, 12]\n*/\nvoid reversePrefixSum(std::vector<int> const& x, std::vector<int> &output) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "3_scan_reverse_prefix_sum",
+        "parallelism_model": "serial",
+        "prompt": "/* Compute the reverse prefix sum of the vector x into output.\n   Examples:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [2, 8, 14, 18, 25, 26]\n\n   input: [3, 3, 7, 1, -2]\n   output: [-2, -1, 6, 9, 12]\n*/\nvoid reversePrefixSum(std::vector<int> const& x, std::vector<int> &output) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "3_scan_reverse_prefix_sum",
+        "parallelism_model": "hip",
+        "prompt": "/* Compute the reverse prefix sum of the vector x into output.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Examples:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [2, 8, 14, 18, 25, 26]\n\n   input: [3, 3, 7, 1, -2]\n   output: [-2, -1, 6, 9, 12]\n*/\n__global__ void reversePrefixSum(const int *x, int *output, size_t N) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "3_scan_reverse_prefix_sum",
+        "parallelism_model": "mpi",
+        "prompt": "#include <mpi.h>\n\n/* Compute the reverse prefix sum of the vector x into output.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Examples:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [2, 8, 14, 18, 25, 26]\n\n   input: [3, 3, 7, 1, -2]\n   output: [-2, -1, 6, 9, 12]\n*/\nvoid reversePrefixSum(std::vector<int> const& x, std::vector<int> &output) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "3_scan_reverse_prefix_sum",
+        "parallelism_model": "cuda",
+        "prompt": "/* Compute the reverse prefix sum of the vector x into output.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Examples:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [2, 8, 14, 18, 25, 26]\n\n   input: [3, 3, 7, 1, -2]\n   output: [-2, -1, 6, 9, 12]\n*/\n__global__ void reversePrefixSum(thrust::device_vector<int> const& x, thrust::device_vector<int> &output) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "3_scan_reverse_prefix_sum",
+        "parallelism_model": "mpi+omp",
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the reverse prefix sum of the vector x into output.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Examples:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [2, 8, 14, 18, 25, 26]\n\n   input: [3, 3, 7, 1, -2]\n   output: [-2, -1, 6, 9, 12]\n*/\nvoid reversePrefixSum(std::vector<int> const& x, std::vector<int> &output) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "4_scan_largest_subarray",
+        "parallelism_model": "kokkos",
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Return the largest sum of any contiguous subarray in the vector x.\n   i.e. if x=[\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4] then [4, \u22121, 2, 1] is the contiguous\n   subarray with the largest sum of 6.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n   input: [\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4]\n   output: 6\n*/\nint maximumSubarray(Kokkos::View<int*> const& x) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "4_scan_largest_subarray",
+        "parallelism_model": "omp",
+        "prompt": "#include <omp.h>\n\n/* Return the largest sum of any contiguous subarray in the vector x.\n   i.e. if x=[\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4] then [4, \u22121, 2, 1] is the contiguous\n   subarray with the largest sum of 6.\n   Use OpenMP to compute in parallel.\n   Example:\n\n   input: [\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4]\n   output: 6\n*/\nint maximumSubarray(std::vector<int> const& x) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "4_scan_largest_subarray",
+        "parallelism_model": "serial",
+        "prompt": "/* Return the largest sum of any contiguous subarray in the vector x.\n   i.e. if x=[\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4] then [4, \u22121, 2, 1] is the contiguous\n   subarray with the largest sum of 6.\n   Example:\n\n   input: [\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4]\n   output: 6\n*/\nint maximumSubarray(std::vector<int> const& x) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "4_scan_largest_subarray",
+        "parallelism_model": "hip",
+        "prompt": "/* Return the largest sum of any contiguous subarray in the vector x.\n   i.e. if x=[\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4] then [4, \u22121, 2, 1] is the contiguous\n   subarray with the largest sum of 6.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4]\n   output: 6\n*/\n__global__ int maximumSubarray(const int *x, size_t N) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "4_scan_largest_subarray",
+        "parallelism_model": "mpi",
+        "prompt": "#include <mpi.h>\n\n/* Return the largest sum of any contiguous subarray in the vector x.\n   i.e. if x=[\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4] then [4, \u22121, 2, 1] is the contiguous\n   subarray with the largest sum of 6.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4]\n   output: 6\n*/\nint maximumSubarray(std::vector<int> const& x) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "4_scan_largest_subarray",
+        "parallelism_model": "cuda",
+        "prompt": "/* Return the largest sum of any contiguous subarray in the vector x.\n   i.e. if x=[\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4] then [4, \u22121, 2, 1] is the contiguous\n   subarray with the largest sum of 6.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4]\n   output: 6\n*/\n__global__ int maximumSubarray(thrust::device_vector<int> const& x) {"
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "4_scan_largest_subarray",
+        "parallelism_model": "mpi+omp",
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the largest sum of any contiguous subarray in the vector x.\n   i.e. if x=[\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4] then [4, \u22121, 2, 1] is the contiguous\n   subarray with the largest sum of 6.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4]\n   output: 6\n*/\nint maximumSubarray(std::vector<int> const& x) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "3_sort_complex",
+        "parallelism_model": "kokkos",
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Sort the array x of complex numbers by their magnitude in ascending order.\n   Use Kokkos to sort in parallel. Assume Kokkos has already been initialized.\n   Example:\n   \n   input: [3.0-1.0i, 4.5+2.1i, 0.0-1.0i, 1.0-0.0i, 0.5+0.5i]\n   output: [0.5+0.5i, 0.0-1.0i, 1.0-0.0i, 3.0-1.0i, 4.5+2.1i]\n*/\nvoid sortComplexByMagnitude(Kokkos::View<Kokkos::complex<double>*> &x) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "3_sort_complex",
+        "parallelism_model": "omp",
+        "prompt": "#include <omp.h>\n\n/* Sort the vector x of complex numbers by their magnitude in ascending order.\n   Use OpenMP to sort in parallel.\n   Example:\n   \n   input: [3.0-1.0i, 4.5+2.1i, 0.0-1.0i, 1.0-0.0i, 0.5+0.5i]\n   output: [0.5+0.5i, 0.0-1.0i, 1.0-0.0i, 3.0-1.0i, 4.5+2.1i]\n*/\nvoid sortComplexByMagnitude(std::vector<std::complex<double>> &x) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "3_sort_complex",
+        "parallelism_model": "serial",
+        "prompt": "/* Sort the vector x of complex numbers by their magnitude in ascending order.\n   Example:\n   \n   input: [3.0-1.0i, 4.5+2.1i, 0.0-1.0i, 1.0-0.0i, 0.5+0.5i]\n   output: [0.5+0.5i, 0.0-1.0i, 1.0-0.0i, 3.0-1.0i, 4.5+2.1i]\n*/\nvoid sortComplexByMagnitude(std::vector<std::complex<double>> &x) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "3_sort_complex",
+        "parallelism_model": "hip",
+        "prompt": "/* Sort the vector x of complex numbers by their magnitude in ascending order.\n   Use AMD HIP to sort in parallel. The kernel is launched with at least as many threads as elements in x.\n   Example:\n   \n   input: [3.0-1.0i, 4.5+2.1i, 0.0-1.0i, 1.0-0.0i, 0.5+0.5i]\n   output: [0.5+0.5i, 0.0-1.0i, 1.0-0.0i, 3.0-1.0i, 4.5+2.1i]\n*/\n__global__ void sortComplexByMagnitude(hipDoubleComplex *x, size_t N) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "3_sort_complex",
+        "parallelism_model": "mpi",
+        "prompt": "#include <mpi.h>\n\n/* Sort the vector x of complex numbers by their magnitude in ascending order.\n   Use MPI to sort in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: [3.0-1.0i, 4.5+2.1i, 0.0-1.0i, 1.0-0.0i, 0.5+0.5i]\n   output: [0.5+0.5i, 0.0-1.0i, 1.0-0.0i, 3.0-1.0i, 4.5+2.1i]\n*/\nvoid sortComplexByMagnitude(std::vector<std::complex<double>> &x) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "3_sort_complex",
+        "parallelism_model": "cuda",
+        "prompt": "/* Sort the vector x of complex numbers by their magnitude in ascending order.\n   Use CUDA to sort in parallel. The kernel is launched with at least as many threads as elements in x.\n   Example:\n   \n   input: [3.0-1.0i, 4.5+2.1i, 0.0-1.0i, 1.0-0.0i, 0.5+0.5i]\n   output: [0.5+0.5i, 0.0-1.0i, 1.0-0.0i, 3.0-1.0i, 4.5+2.1i]\n*/\n__global__ void sortComplexByMagnitude(thrust::device_vector<cuDoubleComplex> &x) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "3_sort_complex",
+        "parallelism_model": "mpi+omp",
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Sort the vector x of complex numbers by their magnitude in ascending order.\n   Use MPI and OpenMP to sort in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: [3.0-1.0i, 4.5+2.1i, 0.0-1.0i, 1.0-0.0i, 0.5+0.5i]\n   output: [0.5+0.5i, 0.0-1.0i, 1.0-0.0i, 3.0-1.0i, 4.5+2.1i]\n*/\nvoid sortComplexByMagnitude(std::vector<std::complex<double>> &x) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "0_sort_non-zero",
+        "parallelism_model": "kokkos",
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Sort the array x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place. \n   Use Kokkos to sort in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(Kokkos::View<int*> &x) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "0_sort_non-zero",
+        "parallelism_model": "omp",
+        "prompt": "#include <omp.h>\n\n/* Sort the vector x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place. \n   Use OpenMP to sort x in parallel. \n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(std::vector<int> &x) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "0_sort_non-zero",
+        "parallelism_model": "serial",
+        "prompt": "/* Sort the vector x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place.\n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(std::vector<int> &x) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "0_sort_non-zero",
+        "parallelism_model": "hip",
+        "prompt": "/* Sort the array x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place. \n   Use AMD HIP to compute in parallel. The kernel will be launched with 1 thread per element.\n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\n__global__ void sortIgnoreZero(int *x, size_t N) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "0_sort_non-zero",
+        "parallelism_model": "mpi",
+        "prompt": "#include <mpi.h>\n\n/* Sort the vector x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place. \n   Use MPI to sort x in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(std::vector<int> &x) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "0_sort_non-zero",
+        "parallelism_model": "cuda",
+        "prompt": "/* Sort the array x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place. \n   Use CUDA to compute in parallel. The kernel will be launched with 1 thread per element.\n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\n__global__ void sortIgnoreZero(thrust::device_vector<int> &x) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "0_sort_non-zero",
+        "parallelism_model": "mpi+omp",
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Sort the vector x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place. \n   Use MPI and OpenMP to sort x in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(std::vector<int> &x) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "1_sort_first_half",
+        "parallelism_model": "kokkos",
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Sort the first half of the array x in descending order. Leave the second half in-place. \n   If x.size() is odd, then include the middle element in the first half. \n   Use Kokkos to sort in parallel. Assume Kokkos is already initialized.\n   Examples:\n   \n   input: [2, 5, -4, 7, 3, 6, -1]\n   output: [7, 5, 2, -4, 3, 6, -1]\n\n   input: [-8, 4, 6, 1, 3, 1]\n   output: [6, 4, -8, 1, 3, 1]\n*/\nvoid sortFirstHalfDescending(Kokkos::View<int*> &x) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "1_sort_first_half",
+        "parallelism_model": "omp",
+        "prompt": "#include <omp.h>\n\n/* Sort the first half of the vector x in descending order. Leave the second half in-place. \n   If x.size() is odd, then include the middle element in the first half. \n   Use OpenMP to sort in parallel.\n   Examples:\n   \n   input: [2, 5, -4, 7, 3, 6, -1]\n   output: [7, 5, 2, -4, 3, 6, -1]\n\n   input: [-8, 4, 6, 1, 3, 1]\n   output: [6, 4, -8, 1, 3, 1]\n*/\nvoid sortFirstHalfDescending(std::vector<int> &x) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "1_sort_first_half",
+        "parallelism_model": "serial",
+        "prompt": "/* Sort the first half of the vector x in descending order. Leave the second half in-place. \n   If x.size() is odd, then include the middle element in the first half. \n   Examples:\n   \n   input: [2, 5, -4, 7, 3, 6, -1]\n   output: [7, 5, 2, -4, 3, 6, -1]\n\n   input: [-8, 4, 6, 1, 3, 1]\n   output: [6, 4, -8, 1, 3, 1]\n*/\nvoid sortFirstHalfDescending(std::vector<int> &x) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "1_sort_first_half",
+        "parallelism_model": "hip",
+        "prompt": "/* Sort the first half of the array x in descending order. Leave the second half in-place. \n   If x.size() is odd, then include the middle element in the first half. \n   Use AMD HIP to sort in parallel. Kernel will be launched with 1 thread per element.\n   Examples:\n   \n   input: [2, 5, -4, 7, 3, 6, -1]\n   output: [7, 5, 2, -4, 3, 6, -1]\n\n   input: [-8, 4, 6, 1, 3, 1]\n   output: [6, 4, -8, 1, 3, 1]\n*/\n__global__ void sortFirstHalfDescending(int *x, size_t N) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "1_sort_first_half",
+        "parallelism_model": "mpi",
+        "prompt": "#include <mpi.h>\n\n/* Sort the first half of the vector x in descending order. Leave the second half in-place. \n   If x.size() is odd, then include the middle element in the first half. \n   Use MPI to sort in parallel. Assume MPI is already initialized.\n   Examples:\n   \n   input: [2, 5, -4, 7, 3, 6, -1]\n   output: [7, 5, 2, -4, 3, 6, -1]\n\n   input: [-8, 4, 6, 1, 3, 1]\n   output: [6, 4, -8, 1, 3, 1]\n*/\nvoid sortFirstHalfDescending(std::vector<int> &x) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "1_sort_first_half",
+        "parallelism_model": "cuda",
+        "prompt": "/* Sort the first half of the vector x in descending order. Leave the second half in-place. \n   If x.size() is odd, then include the middle element in the first half. \n   Use CUDA to sort in parallel. Kernel will be launched with 1 thread per element.\n   Examples:\n   \n   input: [2, 5, -4, 7, 3, 6, -1]\n   output: [7, 5, 2, -4, 3, 6, -1]\n\n   input: [-8, 4, 6, 1, 3, 1]\n   output: [6, 4, -8, 1, 3, 1]\n*/\n__global__ void sortFirstHalfDescending(thrust::device_vector<int> &x) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "1_sort_first_half",
+        "parallelism_model": "mpi+omp",
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Sort the first half of the vector x in descending order. Leave the second half in-place. \n   If x.size() is odd, then include the middle element in the first half. \n   Use MPI and OpenMP to sort in parallel. Assume MPI is already initialized.\n   Examples:\n   \n   input: [2, 5, -4, 7, 3, 6, -1]\n   output: [7, 5, 2, -4, 3, 6, -1]\n\n   input: [-8, 4, 6, 1, 3, 1]\n   output: [6, 4, -8, 1, 3, 1]\n*/\nvoid sortFirstHalfDescending(std::vector<int> &x) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "4_sort_ranks",
+        "parallelism_model": "kokkos",
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* For each value in the array x compute its index in the sorted vector.\n   Store the results in `ranks`.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Examples:\n\n   input: [3.1, 2.8, 9.1, 0.4, 3.14]\n   output: [2, 1, 4, 0, 3]\n \n   input: [100, 7.6, 16.1, 18, 7.6]\n   output: [4, 0, 1, 2, 3]\n*/\nvoid ranks(Kokkos::View<const float*> const& x, Kokkos::View<size_t*> &ranks) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "4_sort_ranks",
+        "parallelism_model": "omp",
+        "prompt": "#include <omp.h>\n\n/* For each value in the vector x compute its index in the sorted vector.\n   Store the results in `ranks`.\n   Use OpenMP to compute in parallel.\n   Examples:\n\n   input: [3.1, 2.8, 9.1, 0.4, 3.14]\n   output: [2, 1, 4, 0, 3]\n \n   input: [100, 7.6, 16.1, 18, 7.6]\n   output: [4, 0, 1, 2, 3]\n*/\nvoid ranks(std::vector<float> const& x, std::vector<size_t> &ranks) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "4_sort_ranks",
+        "parallelism_model": "serial",
+        "prompt": "/* For each value in the vector x compute its index in the sorted vector.\n   Store the results in `ranks`.\n   Examples:\n\n   input: [3.1, 2.8, 9.1, 0.4, 3.14]\n   output: [2, 1, 4, 0, 3]\n \n   input: [100, 7.6, 16.1, 18, 7.6]\n   output: [4, 0, 1, 2, 3]\n*/\nvoid ranks(std::vector<float> const& x, std::vector<size_t> &ranks) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "4_sort_ranks",
+        "parallelism_model": "hip",
+        "prompt": "/* For each value in the vector x compute its index in the sorted vector.\n   Store the results in `ranks`.\n   Use AMD HIP to compute in parallel. The kernel will be launched with at least as many threads as elements in x.\n   Examples:\n\n   input: [3.1, 2.8, 9.1, 0.4, 3.14]\n   output: [2, 1, 4, 0, 3]\n \n   input: [100, 7.6, 16.1, 18, 7.6]\n   output: [4, 0, 1, 2, 3]\n*/\n__global__ void ranks(float const* x, size_t *ranks, size_t N) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "4_sort_ranks",
+        "parallelism_model": "mpi",
+        "prompt": "#include <mpi.h>\n\n/* For each value in the vector x compute its index in the sorted vector.\n   Store the results in `ranks`.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Examples:\n\n   input: [3.1, 2.8, 9.1, 0.4, 3.14]\n   output: [2, 1, 4, 0, 3]\n \n   input: [100, 7.6, 16.1, 18, 7.6]\n   output: [4, 0, 1, 2, 3]\n*/\nvoid ranks(std::vector<float> const& x, std::vector<size_t> &ranks) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "4_sort_ranks",
+        "parallelism_model": "cuda",
+        "prompt": "/* For each value in the vector x compute its index in the sorted vector.\n   Store the results in `ranks`.\n   Use CUDA to compute in parallel. The kernel will be launched with at least as many threads as elements in x.\n   Examples:\n\n   input: [3.1, 2.8, 9.1, 0.4, 3.14]\n   output: [2, 1, 4, 0, 3]\n \n   input: [100, 7.6, 16.1, 18, 7.6]\n   output: [4, 0, 1, 2, 3]\n*/\n__global__ void ranks(thrust::device_vector<float> const& x, thrust::device_vector<size_t> &ranks) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "4_sort_ranks",
+        "parallelism_model": "mpi+omp",
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* For each value in the vector x compute its index in the sorted vector.\n   Store the results in `ranks`.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Examples:\n\n   input: [3.1, 2.8, 9.1, 0.4, 3.14]\n   output: [2, 1, 4, 0, 3]\n \n   input: [100, 7.6, 16.1, 18, 7.6]\n   output: [4, 0, 1, 2, 3]\n*/\nvoid ranks(std::vector<float> const& x, std::vector<size_t> &ranks) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "2_sort_structs_by_key",
+        "parallelism_model": "kokkos",
+        "prompt": "#include <Kokkos_Core.hpp>\n\nstruct Result {\n   int startTime, duration;\n   float value;\n};\n\n/* Sort vector of Result structs by start time in ascending order.\n   Use Kokkos to sort in parallel. Assume Kokkos has already been initialized.\n   Example:\n   \n   input: [{startTime=8, duration=4, value=-1.22}, {startTime=2, duration=10, value=1.0}, {startTime=10, duration=3, value=0.0}]\n   output: [{startTime=2, duration=10, value=1.0}, {startTime=8, duration=4, value=-1.22}, {startTime=10, duration=3, value=0.0}]\n*/\nvoid sortByStartTime(Kokkos::View<Result*> &results) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "2_sort_structs_by_key",
+        "parallelism_model": "omp",
+        "prompt": "#include <omp.h>\n\nstruct Result {\n   int startTime, duration;\n   float value;\n};\n\n/* Sort vector of Result structs by start time in ascending order.\n   Use OpenMP to sort in parallel.\n   Example:\n   \n   input: [{startTime=8, duration=4, value=-1.22}, {startTime=2, duration=10, value=1.0}, {startTime=10, duration=3, value=0.0}]\n   output: [{startTime=2, duration=10, value=1.0}, {startTime=8, duration=4, value=-1.22}, {startTime=10, duration=3, value=0.0}]\n*/\nvoid sortByStartTime(std::vector<Result> &results) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "2_sort_structs_by_key",
+        "parallelism_model": "serial",
+        "prompt": "struct Result {\n   int startTime, duration;\n   float value;\n};\n\n/* Sort vector of Result structs by start time in ascending order.\n   Example:\n   \n   input: [{startTime=8, duration=4, value=-1.22}, {startTime=2, duration=10, value=1.0}, {startTime=10, duration=3, value=0.0}]\n   output: [{startTime=2, duration=10, value=1.0}, {startTime=8, duration=4, value=-1.22}, {startTime=10, duration=3, value=0.0}]\n*/\nvoid sortByStartTime(std::vector<Result> &results) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "2_sort_structs_by_key",
+        "parallelism_model": "hip",
+        "prompt": "struct Result {\n   int startTime, duration;\n   float value;\n};\n\n/* Sort vector of Result structs by start time in ascending order.\n   Use AMD HIP to sort in parallel. The kernel is launched with at least as many threads as there are elements.\n   Example:\n   \n   input: [{startTime=8, duration=4, value=-1.22}, {startTime=2, duration=10, value=1.0}, {startTime=10, duration=3, value=0.0}]\n   output: [{startTime=2, duration=10, value=1.0}, {startTime=8, duration=4, value=-1.22}, {startTime=10, duration=3, value=0.0}]\n*/\n__global__ void sortByStartTime(Result *results, size_t N) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "2_sort_structs_by_key",
+        "parallelism_model": "mpi",
+        "prompt": "#include <mpi.h>\n\nstruct Result {\n   int startTime, duration;\n   float value;\n};\n\n/* Sort vector of Result structs by start time in ascending order.\n   Use MPI to sort in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: [{startTime=8, duration=4, value=-1.22}, {startTime=2, duration=10, value=1.0}, {startTime=10, duration=3, value=0.0}]\n   output: [{startTime=2, duration=10, value=1.0}, {startTime=8, duration=4, value=-1.22}, {startTime=10, duration=3, value=0.0}]\n*/\nvoid sortByStartTime(std::vector<Result> &results) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "2_sort_structs_by_key",
+        "parallelism_model": "cuda",
+        "prompt": "struct Result {\n   int startTime, duration;\n   float value;\n};\n\n/* Sort vector of Result structs by start time in ascending order.\n   Use CUDA to sort in parallel. The kernel is launched with at least as many threads as there are elements.\n   Example:\n   \n   input: [{startTime=8, duration=4, value=-1.22}, {startTime=2, duration=10, value=1.0}, {startTime=10, duration=3, value=0.0}]\n   output: [{startTime=2, duration=10, value=1.0}, {startTime=8, duration=4, value=-1.22}, {startTime=10, duration=3, value=0.0}]\n*/\n__global__ void sortByStartTime(thrust::device_vector<Result> &results) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "2_sort_structs_by_key",
+        "parallelism_model": "mpi+omp",
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct Result {\n   int startTime, duration;\n   float value;\n};\n\n/* Sort vector of Result structs by start time in ascending order.\n   Use MPI and OpenMP to sort in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: [{startTime=8, duration=4, value=-1.22}, {startTime=2, duration=10, value=1.0}, {startTime=10, duration=3, value=0.0}]\n   output: [{startTime=2, duration=10, value=1.0}, {startTime=8, duration=4, value=-1.22}, {startTime=10, duration=3, value=0.0}]\n*/\nvoid sortByStartTime(std::vector<Result> &results) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "5_sort_kth_smallest",
+        "parallelism_model": "kokkos",
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Find the k-th smallest element of the vector x.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n   \n   input: x=[1, 7, 6, 0, 2, 2, 10, 6], k=4\n   output: 6\n*/\nint findKthSmallest(Kokkos::View<const int*> const& x, int k) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "5_sort_kth_smallest",
+        "parallelism_model": "omp",
+        "prompt": "#include <omp.h>\n\n/* Find the k-th smallest element of the vector x.\n   Use OpenMP to compute in parallel.\n   Example:\n   \n   input: x=[1, 7, 6, 0, 2, 2, 10, 6], k=4\n   output: 6\n*/\nint findKthSmallest(std::vector<int> const& x, int k) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "5_sort_kth_smallest",
+        "parallelism_model": "serial",
+        "prompt": "/* Find the k-th smallest element of the vector x.\n   Example:\n   \n   input: x=[1, 7, 6, 0, 2, 2, 10, 6], k=4\n   output: 6\n*/\nint findKthSmallest(std::vector<int> const& x, int k) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "5_sort_kth_smallest",
+        "parallelism_model": "hip",
+        "prompt": "/* Find the k-th smallest element of the vector x.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n   \n   input: x=[1, 7, 6, 0, 2, 2, 10, 6], k=4\n   output: 6\n*/\n__global__ void findKthSmallest(const int *x, size_t N, int k, int &kthSmallest) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "5_sort_kth_smallest",
+        "parallelism_model": "mpi",
+        "prompt": "#include <mpi.h>\n\n/* Find the k-th smallest element of the vector x.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: x=[1, 7, 6, 0, 2, 2, 10, 6], k=4\n   output: 6\n*/\nint findKthSmallest(std::vector<int> const& x, int k) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "5_sort_kth_smallest",
+        "parallelism_model": "cuda",
+        "prompt": "/* Find the k-th smallest element of the vector x.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n   \n   input: x=[1, 7, 6, 0, 2, 2, 10, 6], k=4\n   output: 6\n*/\n__global__ void findKthSmallest(thrust::device_vector<int> const& x, int k, int &kthSmallest) {"
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "5_sort_kth_smallest",
+        "parallelism_model": "mpi+omp",
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Find the k-th smallest element of the vector x.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: x=[1, 7, 6, 0, 2, 2, 10, 6], k=4\n   output: 6\n*/\nint findKthSmallest(std::vector<int> const& x, int k) {"
     }
 ]
