@@ -18,6 +18,15 @@ def get_substr_after_first_of(s: str, substr: str) -> str:
     """ Return the substring in s after the first instance of substr. """
     return s[s.find(substr) + len(substr):]
 
+def get_return_type(code: str) -> str:
+    """ First identify the line that has a function definition, then return the return type. """
+    # find the last line that has a function definition: type name(args) {
+    # then return the type
+    lines = code.split('\n')
+    for line in lines:
+        if line.strip().endswith(') {'):
+            return line.split()[0]
+
 def main():
     parser = ArgumentParser(description=__doc__)
     parser.add_argument('benchmarks_root', help='Root directory of the benchmarks')
@@ -37,7 +46,12 @@ def main():
 
         baseline = get_file_contents(baseline_fpath)
         impl = get_substr_after_first_of(baseline, ') {')
-        prompt['outputs'] = [impl, ' }', ' undefinedFunction(); }']
+        return_type = get_return_type(baseline)
+        prompt['outputs'] = [
+            impl, 
+            ' }' if return_type == 'void' else ' return 0; }', 
+            ' undefinedFunction(); }'
+        ]
         output.append(prompt)
 
     with open(args.output, 'w') as f:

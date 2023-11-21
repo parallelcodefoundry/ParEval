@@ -77,14 +77,17 @@ class CppDriverWrapper(DriverWrapper):
             binaries_str = ' '.join(binaries)
             macro = f"-DUSE_{self.parallelism_model.upper()}"
             cmd = f"{CXX} {CXXFLAGS} -Icpp -Icpp/models {macro} {binaries_str} -o {output_path}"
-            compile_process = run_command(cmd, timeout=10, dry=self.dry)
+            compile_process = run_command(cmd, timeout=20, dry=self.dry)
         return BuildOutput(compile_process.returncode, compile_process.stdout, compile_process.stderr)
 
     def run(self, executable: PathLike, **run_config) -> RunOutput:
         """ Run the given executable. """
         launch_format = self.launch_configs["format"]
         launch_cmd = launch_format.format(exec_path=executable, args="", **run_config).strip()
-        run_process = run_command(launch_cmd, timeout=60, dry=self.dry)
+        try:
+            run_process = run_command(launch_cmd, timeout=60, dry=self.dry)
+        except subprocess.TimeoutExpired:
+            return RunOutput(-1, "", "Timeout", config=run_config)
         return RunOutput(run_process.returncode, run_process.stdout, run_process.stderr, config=run_config)
 
     def test_single_output(self, prompt: str, output: str, test_driver_file: PathLike) -> GeneratedTextResult:

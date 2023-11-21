@@ -38,7 +38,7 @@
 // Kokkos utilities
 #if defined(USE_KOKKOS)
 template <typename DType>
-void copyVectorToView(std::vector<int> const& vec, Kokkos::View<DType*> view) {
+void copyVectorToView(std::vector<DType> const& vec, Kokkos::View<DType*> view) {
     assert(vec.size() == view.size());
     for (int i = 0; i < vec.size(); i += 1) {
         view(i) = vec[i];
@@ -46,12 +46,37 @@ void copyVectorToView(std::vector<int> const& vec, Kokkos::View<DType*> view) {
 }
 
 template <typename DType>
-void copyViewToVector(Kokkos::View<DType*> view, std::vector<int>& vec) {
+void copyViewToVector(Kokkos::View<DType*> view, std::vector<DType>& vec) {
     assert(vec.size() == view.size());
     for (int i = 0; i < vec.size(); i += 1) {
         vec[i] = view(i);
     }
 }
+
+template <typename DType>
+void fillRandKokkos(Kokkos::View<DType*> &x, DType min, DType max) {
+    for (int i = 0; i < x.size(); i += 1) {
+        DType val;
+        if constexpr (std::is_floating_point_v<DType>) {
+            val = (rand() / (double) RAND_MAX) * (max - min) + min;
+        } else if constexpr (std::is_integral_v<DType>) {
+            val = rand() % (max - min) + min;
+        }
+        x(i) = val;
+    }
+}
+#endif
+
+
+// MPI utilities
+#if defined(USE_MPI) || defined(USE_MPI_OMP)
+#define IS_ROOT(rank) ((rank) == 0)
+#define BCAST(vec,dtype) MPI_Bcast((vec).data(), (vec).size(), MPI_##dtype, 0, MPI_COMM_WORLD)
+#define SYNC() MPI_Barrier(MPI_COMM_WORLD)
+#else
+#define IS_ROOT(rank) true
+#define BCAST(vec,dtype)
+#define SYNC()
 #endif
 
 
@@ -66,10 +91,18 @@ void fillRand(T &x, DType min, DType max) {
         } else if constexpr (std::is_integral_v<DType>) {
             val = rand() % (max - min) + min;
         }
-        #if defined(USE_KOKKOS)
-        x(i) = val;
-        #else
         x[i] = val;
-        #endif
     }
+}
+
+// compare two vectors of floating point numbers
+template <typename Vec, typename FType>
+bool fequal(Vec const& a, Vec const& b, FType epsilon = 1e-6) {
+    assert(a.size() == b.size());
+    for (int i = 0; i < a.size(); i += 1) {
+        if (std::abs(a[i] - b[i]) > epsilon) {
+            return false;
+        }
+    }
+    return true;
 }

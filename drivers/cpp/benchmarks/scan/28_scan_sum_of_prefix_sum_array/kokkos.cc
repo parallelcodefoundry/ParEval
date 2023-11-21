@@ -23,7 +23,8 @@ struct Context {
 };
 
 void reset(Context *ctx) {
-    fillRand(ctx->x, -100.0, 100.0);
+    fillRandKokkos(ctx->x, -100.0, 100.0);
+    fillRand(ctx->xVec, -100.0, 100.0);
 }
 
 Context *init() {

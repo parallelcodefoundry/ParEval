@@ -2,7 +2,7 @@
     {
         "problem_type": "sort",
         "language": "cpp",
-        "name": "0_sort_non-zero",
+        "name": "41_sort_sort_non-zero_elements",
         "parallelism_model": "serial",
         "prompt": "/* Sort the vector x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place.\n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(std::vector<int> &x) {",
         "outputs": [
@@ -14,7 +14,7 @@
     {
         "problem_type": "sort",
         "language": "cpp",
-        "name": "0_sort_non-zero",
+        "name": "41_sort_sort_non-zero_elements",
         "parallelism_model": "omp",
         "prompt": "#include <omp.h>\n\n/* Sort the vector x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place. \n   Use OpenMP to sort x in parallel. \n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(std::vector<int> &x) {",
         "outputs": [
@@ -27,7 +27,7 @@
     {
         "problem_type": "sort",
         "language": "cpp",
-        "name": "0_sort_non-zero",
+        "name": "41_sort_sort_non-zero_elements",
         "parallelism_model": "mpi",
         "prompt": "#include <mpi.h>\n\n/* Sort the vector x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place. \n   Use MPI to sort x in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(std::vector<int> &x) {",
         "outputs": [
@@ -40,7 +40,7 @@
     {
         "problem_type": "sort",
         "language": "cpp",
-        "name": "0_sort_non-zero",
+        "name": "41_sort_sort_non-zero_elements",
         "parallelism_model": "mpi+omp",
         "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Sort the vector x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place. \n   Use MPI and OpenMP to sort x in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(std::vector<int> &x) {",
         "outputs": [
@@ -53,7 +53,7 @@
     {
         "problem_type": "sort",
         "language": "cpp",
-        "name": "0_sort_non-zero",
+        "name": "41_sort_sort_non-zero_elements",
         "parallelism_model": "cuda",
         "prompt": "/* Sort the array x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place. \n   Use CUDA to compute in parallel. The kernel will be launched with 1 thread per element.\n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\n__global__ void sortIgnoreZero(int *x, size_t N) {",
         "outputs": [
@@ -67,7 +67,7 @@
     {
         "problem_type": "sort",
         "language": "cpp",
-        "name": "0_sort_non-zero",
+        "name": "41_sort_sort_non-zero_elements",
         "parallelism_model": "kokkos",
         "prompt": "#include <Kokkos_Core.hpp>\n\n/* Sort the array x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place. \n   Use Kokkos to sort in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(Kokkos::View<int*> &x) {",
         "outputs": [
@@ -79,7 +79,7 @@
     {
         "problem_type": "scan",
         "language": "cpp",
-        "name": "1_scan_sum_of_prefix_sum",
+        "name": "28_scan_sum_of_prefix_sum_array",
         "parallelism_model": "omp",
         "prompt": "#include <omp.h>\n\n/* Compute the prefix sum array of the vector x and return its sum.\n   Use OpenMP to compute in parallel.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {",
         "outputs": [
@@ -91,7 +91,7 @@
     {
         "problem_type": "scan",
         "language": "cpp",
-        "name": "1_scan_sum_of_prefix_sum",
+        "name": "28_scan_sum_of_prefix_sum_array",
         "parallelism_model": "serial",
         "prompt": "/* Compute the prefix sum array of the vector x and return its sum.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {",
         "outputs": [
@@ -103,7 +103,7 @@
     {
         "problem_type": "scan",
         "language": "cpp",
-        "name": "1_scan_sum_of_prefix_sum",
+        "name": "28_scan_sum_of_prefix_sum_array",
         "parallelism_model": "mpi",
         "prompt": "#include <mpi.h>\n\n/* Compute the prefix sum array of the vector x and return its sum.\n   Use MPI to compute in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {",
         "outputs": [
@@ -115,12 +115,95 @@
     {
         "problem_type": "scan",
         "language": "cpp",
-        "name": "1_scan_sum_of_prefix_sum",
+        "name": "28_scan_sum_of_prefix_sum_array",
         "parallelism_model": "mpi+omp",
         "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the prefix sum array of the vector x and return its sum.\n   Use MPI and OpenMP to compute in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {",
         "outputs": [
             "return 0.0; }",
             "undefinedFunctionCall(); }"
+        ]
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "52_transform_relu",
+        "parallelism_model": "kokkos",
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Compute the ReLU function on every element of x. Elements less than zero become zero,\n   while elements greater than zero stay the same.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n   input: [-1.8, 24.0, 1.2, 0.0, -5.1, -0.2, 4.5]\n   output: [0, 24.0, 1.2, 0, 0, 0, 4.5]\n*/\nvoid relu(Kokkos::View<double*> &x) {",
+        "outputs": [
+            "    int size = x.size(); \n \n    Kokkos::parallel_for(size, KOKKOS_LAMBDA(int i) { \n        if (x(i) < 0.0) { \n            x(i) = 0.0;  \n        } \n    }); \n}",
+            " }",
+            " undefinedFunctionCall(); }"
+        ]
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "52_transform_relu",
+        "parallelism_model": "omp",
+        "prompt": "#include <omp.h>\n\n/* Compute the ReLU function on every element of x. Elements less than zero become zero,\n   while elements greater than zero stay the same.\n   Use OpenMP to compute in parallel.\n   Example:\n\n   input: [-1.8, 24.0, 1.2, 0.0, -5.1, -0.2, 4.5]\n   output: [0, 24.0, 1.2, 0, 0, 0, 4.5]\n*/\nvoid relu(std::vector<double> &x) {",
+        "outputs": [
+            "#pragma omp parallel for\n    for (int i = 0; i < x.size(); i++) { \n        if (x[i] < 0.0) { \n            x[i] = 0.0;  \n        } \n    }  }",
+            " }",
+            " undefinedFunctionCall(); }"
+        ]
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "52_transform_relu",
+        "parallelism_model": "serial",
+        "prompt": "/* Compute the ReLU function on every element of x. Elements less than zero become zero,\n   while elements greater than zero stay the same.\n   Example:\n\n   input: [-1.8, 24.0, 1.2, 0.0, -5.1, -0.2, 4.5]\n   output: [0, 24.0, 1.2, 0, 0, 0, 4.5]\n*/\nvoid relu(std::vector<double> &x) {",
+        "outputs": [
+            "for (int i = 0; i < x.size(); i++) { \n        if (x[i] < 0.0) { \n            x[i] = 0.0;  \n        } \n    }\n   }",
+            " }",
+            " undefinedFunctionCall(); }"
+        ]
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "52_transform_relu",
+        "parallelism_model": "hip",
+        "prompt": "/* Compute the ReLU function on every element of x. Elements less than zero become zero,\n   while elements greater than zero stay the same.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [-1.8, 24.0, 1.2, 0.0, -5.1, -0.2, 4.5]\n   output: [0, 24.0, 1.2, 0, 0, 0, 4.5]\n*/\n__global__ void relu(double *x, size_t N) {",
+        "outputs": [
+            "",
+            " }",
+            " undefinedFunctionCall(); }"
+        ]
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "52_transform_relu",
+        "parallelism_model": "mpi",
+        "prompt": "#include <mpi.h>\n\n/* Compute the ReLU function on every element of x. Elements less than zero become zero,\n   while elements greater than zero stay the same.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [-1.8, 24.0, 1.2, 0.0, -5.1, -0.2, 4.5]\n   output: [0, 24.0, 1.2, 0, 0, 0, 4.5]\n*/\nvoid relu(std::vector<double> &x) {",
+        "outputs": [
+            " \n    int rank, size; \n    MPI_Comm_rank(MPI_COMM_WORLD, &rank); \n    MPI_Comm_size(MPI_COMM_WORLD, &size); \n \n    // Compute the size of the local portion of the data \n    int local_size = x.size() / size; \n    if (rank < x.size() % size) { \n        ++local_size; \n    } \n \n    // Compute the displacements for the gather operation \n    std::vector<int> displs(size, 0); \n    for (int i = 1; i < size; ++i) { \n        displs[i] = displs[i - 1] + x.size() / size + (i - 1 < x.size() % size); \n    } \n \n    // Compute the ReLU function on the local portion of the data \n    std::transform(x.begin(), x.begin() + local_size, x.begin(), [](double val) { \n        return std::max(0.0, val); \n    }); \n \n    // Gather the results back to the root process \n    if (rank == 0) { \n        MPI_Gatherv(MPI_IN_PLACE, local_size, MPI_DOUBLE, x.data(), displs.data(), displs.data(), MPI_DOUBLE, 0, MPI_COMM_WORLD); \n    } else { \n        MPI_Gatherv(x.data(), local_size, MPI_DOUBLE, nullptr, nullptr, nullptr, MPI_DOUBLE, 0, MPI_COMM_WORLD); \n    } \n}",
+            " }",
+            " undefinedFunctionCall(); }"
+        ]
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "52_transform_relu",
+        "parallelism_model": "cuda",
+        "prompt": "/* Compute the ReLU function on every element of x. Elements less than zero become zero,\n   while elements greater than zero stay the same.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [-1.8, 24.0, 1.2, 0.0, -5.1, -0.2, 4.5]\n   output: [0, 24.0, 1.2, 0, 0, 0, 4.5]\n*/\n__global__ void relu(double *x, size_t N) {",
+        "outputs": [
+            "int idx = threadIdx.x + blockIdx.x * blockDim.x; \n    if (idx < N) { \n        if (x[idx] < 0.0) { \n            x[idx] = 0.0;  \n        } \n    }",
+            " }",
+            " undefinedFunctionCall(); }"
+        ]
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "52_transform_relu",
+        "parallelism_model": "mpi+omp",
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the ReLU function on every element of x. Elements less than zero become zero,\n   while elements greater than zero stay the same.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [-1.8, 24.0, 1.2, 0.0, -5.1, -0.2, 4.5]\n   output: [0, 24.0, 1.2, 0, 0, 0, 4.5]\n*/\nvoid relu(std::vector<double> &x) {",
+        "outputs": [
+            " }",
+            " undefinedFunctionCall(); }"
         ]
     }
 ]

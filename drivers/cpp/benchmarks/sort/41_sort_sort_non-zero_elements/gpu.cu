@@ -80,7 +80,7 @@ bool validate(Context *ctx) {
         int *testResultDevice;
         ALLOC(testResultDevice, input.size() * sizeof(int));
         COPY_H2D(testResultDevice, input.data(), input.size() * sizeof(int));
-        sortIgnoreZero<<<ctx->N,1,0>>>(testResultDevice, ctx->N);
+        sortIgnoreZero<<<input.size(),1>>>(testResultDevice, input.size());
         SYNC();
 
         std::vector<int> testResult(input.size());
