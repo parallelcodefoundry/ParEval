@@ -37,10 +37,13 @@ def get_args():
         then overwrite them. Default behavior is to skip existing results.")
     parser.add_argument("--hide-progress", action="store_true", help="If provided, do not show progress bar.")
     model_group = parser.add_mutually_exclusive_group()
-    model_group.add_argument("--exclude-models", nargs="+", type=str, choices=["serial", "omp", "mpi", "mpi+omp", "kokkos", "cuda"], 
+    model_group.add_argument("--exclude-models", nargs="+", type=str, choices=["serial", "omp", "mpi", "mpi+omp", "kokkos", "cuda", "hip"], 
         help="Exclude the given parallelism models from testing.")
-    model_group.add_argument("--include-models", nargs="+", type=str, choices=["serial", "omp", "mpi", "mpi+omp", "kokkos", "cuda"],
+    model_group.add_argument("--include-models", nargs="+", type=str, choices=["serial", "omp", "mpi", "mpi+omp", "kokkos", "cuda", "hip"],
         help="Only test the given parallelism models.")
+    model_group = parser.add_mutually_exclusive_group()
+    model_group.add_argument("--problem", type=str, help="Only test this probem if provided.")
+    model_group.add_argument("--problem-type", type=str, help="Only test problems of this type if provided.")
     parser.add_argument("--log", choices=["INFO", "DEBUG", "WARNING", "ERROR", "CRITICAL"], default="INFO",
         type=str.upper, help="logging level")
     return parser.parse_args()
@@ -91,7 +94,7 @@ def main():
     logging.info(f"Loaded launch configs from {args.launch_configs}.")
 
     # gather the list of parallelism models to test
-    models_to_test = args.include_models if args.include_models else ["serial", "omp", "mpi", "mpi+omp", "kokkos", "cuda"]
+    models_to_test = args.include_models if args.include_models else ["serial", "omp", "mpi", "mpi+omp", "kokkos", "cuda", "hip"]
     if args.exclude_models:
         models_to_test = [m for m in models_to_test if m not in args.exclude_models]
 
@@ -100,6 +103,14 @@ def main():
     for prompt in all_prompts:
         if prompt["parallelism_model"] not in models_to_test:
             logging.debug(f"Skipping prompt {prompt['name']} because it uses {prompt['parallelism_model']}.")
+            continue
+
+        if args.problem and prompt["problem"] != args.problem:
+            logging.debug(f"Skipping prompt {prompt['name']} because it is not {args.problem}.")
+            continue
+
+        if args.problem_type and prompt["problem_type"] != args.problem_type:
+            logging.debug(f"Skipping prompt {prompt['name']} because it is not {args.problem_type}.")
             continue
 
         if already_has_results(prompt) and not args.overwrite:
