@@ -32,7 +32,7 @@
         "language": "cpp",
         "name": "10_geometry_closest_pair",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\nstruct Point {\n\tdouble x, y;\n};\n\ndouble distance(Point const& p1, Point const& p2) {\n\treturn std::sqrt(std::pow(p2.x-p1.x, 2) + std::pow(p2.y-p1.y, 2));\n}\n\n/* Return the distance between the closest two points in the vector points.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example: \n\n   input: [{2, 3}, {12, 30}, {40, 50}, {5, 1}, {12, 10}, {3, 4}]\n   output: 1.41421\n*/\ndouble closestPair(std::vector<Point> const& points) {"
+        "prompt": "#include <mpi.h>\n\nstruct Point {\n\tdouble x, y;\n};\n\ndouble distance(Point const& p1, Point const& p2) {\n\treturn std::sqrt(std::pow(p2.x-p1.x, 2) + std::pow(p2.y-p1.y, 2));\n}\n\n/* Return the distance between the closest two points in the vector points.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of points. The final result is returned on rank 0.\n   Example: \n\n   input: [{2, 3}, {12, 30}, {40, 50}, {5, 1}, {12, 10}, {3, 4}]\n   output: 1.41421\n*/\ndouble closestPair(std::vector<Point> const& points) {"
     },
     {
         "problem_type": "geometry",
@@ -46,7 +46,7 @@
         "language": "cpp",
         "name": "10_geometry_closest_pair",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct Point {\n\tdouble x, y;\n};\n\ndouble distance(Point const& p1, Point const& p2) {\n\treturn std::sqrt(std::pow(p2.x-p1.x, 2) + std::pow(p2.y-p1.y, 2));\n}\n\n/* Return the distance between the closest two points in the vector points.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example: \n\n   input: [{2, 3}, {12, 30}, {40, 50}, {5, 1}, {12, 10}, {3, 4}]\n   output: 1.41421\n*/\ndouble closestPair(std::vector<Point> const& points) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct Point {\n\tdouble x, y;\n};\n\ndouble distance(Point const& p1, Point const& p2) {\n\treturn std::sqrt(std::pow(p2.x-p1.x, 2) + std::pow(p2.y-p1.y, 2));\n}\n\n/* Return the distance between the closest two points in the vector points.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of points. The final result is returned on rank 0.\n   Example: \n\n   input: [{2, 3}, {12, 30}, {40, 50}, {5, 1}, {12, 10}, {3, 4}]\n   output: 1.41421\n*/\ndouble closestPair(std::vector<Point> const& points) {"
     },
     {
         "problem_type": "geometry",
@@ -81,7 +81,7 @@
         "language": "cpp",
         "name": "08_geometry_convex_hull",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\nstruct Point {\n   double x, y;\n};\n\n/* Find the set of points that defined the smallest convex polygon that contains all the points in the vector points. Store the result in `hull`.\n   Use MPI to compute in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [{0, 3}, {1, 1}, {2, 2}, {4, 4}, {0, 0}, {1, 2}, {3, 1}, {3, 3}]\n   output: [{0, 3}, {4, 4}, {3, 1}, {0, 0}]\n*/\nvoid convexHull(std::vector<Point> const& points, std::vector<Point> &hull) {"
+        "prompt": "#include <mpi.h>\n\nstruct Point {\n   double x, y;\n};\n\n/* Find the set of points that defined the smallest convex polygon that contains all the points in the vector points. Store the result in `hull`.\n   Use MPI to compute in parallel. Assume MPI is already initialized.\n   Every rank has a complete copy of points. The final hull is returned on rank 0.\n   Example:\n\n   input: [{0, 3}, {1, 1}, {2, 2}, {4, 4}, {0, 0}, {1, 2}, {3, 1}, {3, 3}]\n   output: [{0, 3}, {4, 4}, {3, 1}, {0, 0}]\n*/\nvoid convexHull(std::vector<Point> const& points, std::vector<Point> &hull) {"
     },
     {
         "problem_type": "geometry",
@@ -95,7 +95,7 @@
         "language": "cpp",
         "name": "08_geometry_convex_hull",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct Point {\n   double x, y;\n};\n\n/* Find the set of points that defined the smallest convex polygon that contains all the points in the vector points. Store the result in `hull`.\n   Use MPI and OpenMP to compute in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [{0, 3}, {1, 1}, {2, 2}, {4, 4}, {0, 0}, {1, 2}, {3, 1}, {3, 3}]\n   output: [{0, 3}, {4, 4}, {3, 1}, {0, 0}]\n*/\nvoid convexHull(std::vector<Point> const& points, std::vector<Point> &hull) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct Point {\n   double x, y;\n};\n\n/* Find the set of points that defined the smallest convex polygon that contains all the points in the vector points. Store the result in `hull`.\n   Use MPI and OpenMP to compute in parallel. Assume MPI is already initialized.\n   Every rank has a complete copy of points. The final hull is returned on rank 0.\n   Example:\n\n   input: [{0, 3}, {1, 1}, {2, 2}, {4, 4}, {0, 0}, {1, 2}, {3, 1}, {3, 3}]\n   output: [{0, 3}, {4, 4}, {3, 1}, {0, 0}]\n*/\nvoid convexHull(std::vector<Point> const& points, std::vector<Point> &hull) {"
     },
     {
         "problem_type": "geometry",
@@ -130,7 +130,7 @@
         "language": "cpp",
         "name": "09_geometry_convex_hull_perimeter",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\nstruct Point {\n\tdouble x, y;\n};\n\ndouble distance(Point const& p1, Point const& p2) {\n\treturn std::sqrt(std::pow(p2.x-p1.x, 2) + std::pow(p2.y-p1.y, 2));\n}\n\n/* Return the perimeter of the smallest convex polygon that contains all the points in the vector points.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [{0, 3}, {1, 1}, {2, 2}, {4, 4}, {0, 0}, {1, 2}, {3, 1}, {3, 3}]\n   output: 13.4477\n*/\ndouble convexHullPerimeter(std::vector<Point> const& points) {"
+        "prompt": "#include <mpi.h>\n\nstruct Point {\n\tdouble x, y;\n};\n\ndouble distance(Point const& p1, Point const& p2) {\n\treturn std::sqrt(std::pow(p2.x-p1.x, 2) + std::pow(p2.y-p1.y, 2));\n}\n\n/* Return the perimeter of the smallest convex polygon that contains all the points in the vector points.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of points. The final result is returned on rank 0.\n   Example:\n\n   input: [{0, 3}, {1, 1}, {2, 2}, {4, 4}, {0, 0}, {1, 2}, {3, 1}, {3, 3}]\n   output: 13.4477\n*/\ndouble convexHullPerimeter(std::vector<Point> const& points) {"
     },
     {
         "problem_type": "geometry",
@@ -144,7 +144,7 @@
         "language": "cpp",
         "name": "09_geometry_convex_hull_perimeter",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct Point {\n\tdouble x, y;\n};\n\ndouble distance(Point const& p1, Point const& p2) {\n\treturn std::sqrt(std::pow(p2.x-p1.x, 2) + std::pow(p2.y-p1.y, 2));\n}\n\n/* Return the perimeter of the smallest convex polygon that contains all the points in the vector points.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [{0, 3}, {1, 1}, {2, 2}, {4, 4}, {0, 0}, {1, 2}, {3, 1}, {3, 3}]\n   output: 13.4477\n*/\ndouble convexHullPerimeter(std::vector<Point> const& points) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct Point {\n\tdouble x, y;\n};\n\ndouble distance(Point const& p1, Point const& p2) {\n\treturn std::sqrt(std::pow(p2.x-p1.x, 2) + std::pow(p2.y-p1.y, 2));\n}\n\n/* Return the perimeter of the smallest convex polygon that contains all the points in the vector points.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of points. The final result is returned on rank 0.\n   Example:\n\n   input: [{0, 3}, {1, 1}, {2, 2}, {4, 4}, {0, 0}, {1, 2}, {3, 1}, {3, 3}]\n   output: 13.4477\n*/\ndouble convexHullPerimeter(std::vector<Point> const& points) {"
     },
     {
         "problem_type": "graph",
@@ -179,7 +179,7 @@
         "language": "cpp",
         "name": "12_graph_largest_component",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Return the number of vertices in the largest component of the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint largestComponent(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <mpi.h>\n\n/* Return the number of vertices in the largest component of the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The result is returned on rank 0.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint largestComponent(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
@@ -193,7 +193,7 @@
         "language": "cpp",
         "name": "12_graph_largest_component",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the number of vertices in the largest component of the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint largestComponent(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the number of vertices in the largest component of the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The result is returned on rank 0.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint largestComponent(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
@@ -228,7 +228,7 @@
         "language": "cpp",
         "name": "13_graph_highest_degree",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Compute the highest node degree in the graph. The graph is defined in the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint maxDegree(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <mpi.h>\n\n/* Compute the highest node degree in the graph. The graph is defined in the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The result is returned on rank 0.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint maxDegree(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
@@ -242,7 +242,7 @@
         "language": "cpp",
         "name": "13_graph_highest_degree",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the highest node degree in the graph. The graph is defined in the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint maxDegree(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the highest node degree in the graph. The graph is defined in the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The result is returned on rank 0.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint maxDegree(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
@@ -277,7 +277,7 @@
         "language": "cpp",
         "name": "11_graph_edge_count",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Count the number of edges in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint edgeCount(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <mpi.h>\n\n/* Count the number of edges in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The result is returned on rank 0.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint edgeCount(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
@@ -291,7 +291,7 @@
         "language": "cpp",
         "name": "11_graph_edge_count",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Count the number of edges in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint edgeCount(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Count the number of edges in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The result is returned on rank 0.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint edgeCount(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
@@ -326,7 +326,7 @@
         "language": "cpp",
         "name": "14_graph_count_components",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Count the number of connected components in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n\t Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint componentCount(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <mpi.h>\n\n/* Count the number of connected components in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n\t Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The component count is returned on rank 0.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint componentCount(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
@@ -340,7 +340,7 @@
         "language": "cpp",
         "name": "14_graph_count_components",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Count the number of connected components in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n\t Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint componentCount(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Count the number of connected components in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n\t Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The component count is returned on rank 0.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint componentCount(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
@@ -375,7 +375,7 @@
         "language": "cpp",
         "name": "15_graph_shortest_path",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Return the length of the shortest path from source to dest in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n\t input: [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]], source=0, dest=3\n   output: 2\n*/\nint shortestPathLength(std::vector<int> const& A, size_t N, int source, int dest) {"
+        "prompt": "#include <mpi.h>\n\n/* Return the length of the shortest path from source to dest in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The shortest path length is returned on rank 0.\n   Example:\n\n\t input: [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]], source=0, dest=3\n   output: 2\n*/\nint shortestPathLength(std::vector<int> const& A, size_t N, int source, int dest) {"
     },
     {
         "problem_type": "graph",
@@ -389,7 +389,7 @@
         "language": "cpp",
         "name": "15_graph_shortest_path",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the length of the shortest path from source to dest in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n\t input: [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]], source=0, dest=3\n   output: 2\n*/\nint shortestPathLength(std::vector<int> const& A, size_t N, int source, int dest) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the length of the shortest path from source to dest in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The shortest path length is returned on rank 0.\n   Example:\n\n\t input: [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]], source=0, dest=3\n   output: 2\n*/\nint shortestPathLength(std::vector<int> const& A, size_t N, int source, int dest) {"
     },
     {
         "problem_type": "reduce",
@@ -424,7 +424,7 @@
         "language": "cpp",
         "name": "25_reduce_sum_of_min_of_pairs",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Return the sum of the minimum value at each index of vectors x and y for all indices.\n   i.e. sum = min(x_0, y_0) + min(x_1, y_1) + min(x_2, y_2) + ...\n   Use MPI to sum in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: x=[3, 4, 0, 2, 3], y=[2, 5, 3, 1, 7]\n   output: 10\n*/\ndouble sumOfMinimumElements(std::vector<double> const& x, std::vector<double> const& y) {"
+        "prompt": "#include <mpi.h>\n\n/* Return the sum of the minimum value at each index of vectors x and y for all indices.\n   i.e. sum = min(x_0, y_0) + min(x_1, y_1) + min(x_2, y_2) + ...\n   Use MPI to sum in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x and y. Return the sum on all ranks.\n   Example:\n\n   input: x=[3, 4, 0, 2, 3], y=[2, 5, 3, 1, 7]\n   output: 10\n*/\ndouble sumOfMinimumElements(std::vector<double> const& x, std::vector<double> const& y) {"
     },
     {
         "problem_type": "reduce",
@@ -438,7 +438,7 @@
         "language": "cpp",
         "name": "25_reduce_sum_of_min_of_pairs",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the sum of the minimum value at each index of vectors x and y for all indices.\n   i.e. sum = min(x_0, y_0) + min(x_1, y_1) + min(x_2, y_2) + ...\n   Use MPI and OpenMP to sum in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: x=[3, 4, 0, 2, 3], y=[2, 5, 3, 1, 7]\n   output: 10\n*/\ndouble sumOfMinimumElements(std::vector<double> const& x, std::vector<double> const& y) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the sum of the minimum value at each index of vectors x and y for all indices.\n   i.e. sum = min(x_0, y_0) + min(x_1, y_1) + min(x_2, y_2) + ...\n   Use MPI and OpenMP to sum in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x and y. Return the sum on all ranks.\n   Example:\n\n   input: x=[3, 4, 0, 2, 3], y=[2, 5, 3, 1, 7]\n   output: 10\n*/\ndouble sumOfMinimumElements(std::vector<double> const& x, std::vector<double> const& y) {"
     },
     {
         "problem_type": "reduce",
@@ -473,7 +473,7 @@
         "language": "cpp",
         "name": "23_reduce_average",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Return the average of the vector x.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Examples:\n\t\t\n\t input: [1, 8, 4, 5, 1]\n   output: 3.8\n\n   input: [2, 2, 2, 3]\n   output: 2.25\n*/\ndouble average(std::vector<double> const& x) {"
+        "prompt": "#include <mpi.h>\n\n/* Return the average of the vector x.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. Return the average on all ranks.\n   Examples:\n\t\t\n\t input: [1, 8, 4, 5, 1]\n   output: 3.8\n\n   input: [2, 2, 2, 3]\n   output: 2.25\n*/\ndouble average(std::vector<double> const& x) {"
     },
     {
         "problem_type": "reduce",
@@ -487,7 +487,7 @@
         "language": "cpp",
         "name": "23_reduce_average",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the average of the vector x.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Examples:\n\t\t\n\t input: [1, 8, 4, 5, 1]\n   output: 3.8\n\n   input: [2, 2, 2, 3]\n   output: 2.25\n*/\ndouble average(std::vector<double> const& x) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the average of the vector x.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. Return the average on all ranks.\n   Examples:\n\t\t\n\t input: [1, 8, 4, 5, 1]\n   output: 3.8\n\n   input: [2, 2, 2, 3]\n   output: 2.25\n*/\ndouble average(std::vector<double> const& x) {"
     },
     {
         "problem_type": "reduce",
@@ -522,7 +522,7 @@
         "language": "cpp",
         "name": "22_reduce_product_of_inverses",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Return the product of the vector x with every odd indexed element inverted.\n   i.e. x_0 * 1/x_1 * x_2 * 1/x_3 * x_4 ...\n   Use MPI to compute product in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [4, 2, 10, 4, 5]\n   output: 25\n*/\ndouble productWithInverses(std::vector<double> const& x) {"
+        "prompt": "#include <mpi.h>\n\n/* Return the product of the vector x with every odd indexed element inverted.\n   i.e. x_0 * 1/x_1 * x_2 * 1/x_3 * x_4 ...\n   Use MPI to compute product in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. Return the product on all ranks.\n   Example:\n\n   input: [4, 2, 10, 4, 5]\n   output: 25\n*/\ndouble productWithInverses(std::vector<double> const& x) {"
     },
     {
         "problem_type": "reduce",
@@ -536,7 +536,7 @@
         "language": "cpp",
         "name": "22_reduce_product_of_inverses",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the product of the vector x with every odd indexed element inverted.\n   i.e. x_0 * 1/x_1 * x_2 * 1/x_3 * x_4 ...\n   Use MPI and OpenMP to compute product in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [4, 2, 10, 4, 5]\n   output: 25\n*/\ndouble productWithInverses(std::vector<double> const& x) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the product of the vector x with every odd indexed element inverted.\n   i.e. x_0 * 1/x_1 * x_2 * 1/x_3 * x_4 ...\n   Use MPI and OpenMP to compute product in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. Return the product on all ranks.\n   Example:\n\n   input: [4, 2, 10, 4, 5]\n   output: 25\n*/\ndouble productWithInverses(std::vector<double> const& x) {"
     },
     {
         "problem_type": "reduce",
@@ -571,7 +571,7 @@
         "language": "cpp",
         "name": "21_reduce_xor",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Return the logical XOR reduction of the vector of bools x.\n   Use MPI to reduce in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [false, false, false, true]\n   output: true\n*/\nbool reduceLogicalXOR(std::vector<bool> const& x) {"
+        "prompt": "#include <mpi.h>\n\n/* Return the logical XOR reduction of the vector of bools x.\n   Use MPI to reduce in parallel. Assume MPI is already initialized.\n   Every rank has a complete copy of x. Return the result on all ranks.\n   Example:\n\n   input: [false, false, false, true]\n   output: true\n*/\nbool reduceLogicalXOR(std::vector<bool> const& x) {"
     },
     {
         "problem_type": "reduce",
@@ -585,7 +585,7 @@
         "language": "cpp",
         "name": "21_reduce_xor",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the logical XOR reduction of the vector of bools x.\n   Use MPI and OpenMP to reduce in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [false, false, false, true]\n   output: true\n*/\nbool reduceLogicalXOR(std::vector<bool> const& x) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the logical XOR reduction of the vector of bools x.\n   Use MPI and OpenMP to reduce in parallel. Assume MPI is already initialized.\n   Every rank has a complete copy of x. Return the result on all ranks.\n   Example:\n\n   input: [false, false, false, true]\n   output: true\n*/\nbool reduceLogicalXOR(std::vector<bool> const& x) {"
     },
     {
         "problem_type": "reduce",
@@ -620,7 +620,7 @@
         "language": "cpp",
         "name": "24_reduce_smallest_odd_number",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Return the value of the smallest odd number in the vector x.\n   Use MPI to compute in parallel. Assume MPI is already initialized.\n   Examples:\n\n   input: [7, 9, 5, 2, 8, 16, 4, 1]\n   output: 1\n\n   input: [8, 36, 7, 2, 11]\n   output: 7\n*/\nint smallestOdd(std::vector<int> const& x) {"
+        "prompt": "#include <mpi.h>\n\n/* Return the value of the smallest odd number in the vector x.\n   Use MPI to compute in parallel. Assume MPI is already initialized.\n   Every rank has a complete copy of x. Return the result on all ranks.\n   Examples:\n\n   input: [7, 9, 5, 2, 8, 16, 4, 1]\n   output: 1\n\n   input: [8, 36, 7, 2, 11]\n   output: 7\n*/\nint smallestOdd(std::vector<int> const& x) {"
     },
     {
         "problem_type": "reduce",
@@ -634,7 +634,7 @@
         "language": "cpp",
         "name": "24_reduce_smallest_odd_number",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the value of the smallest odd number in the vector x.\n   Use MPI and OpenMP to compute in parallel. Assume MPI is already initialized.\n   Examples:\n\n   input: [7, 9, 5, 2, 8, 16, 4, 1]\n   output: 1\n\n   input: [8, 36, 7, 2, 11]\n   output: 7\n*/\nint smallestOdd(std::vector<int> const& x) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the value of the smallest odd number in the vector x.\n   Use MPI and OpenMP to compute in parallel. Assume MPI is already initialized.\n   Every rank has a complete copy of x. Return the result on all ranks.\n   Examples:\n\n   input: [7, 9, 5, 2, 8, 16, 4, 1]\n   output: 1\n\n   input: [8, 36, 7, 2, 11]\n   output: 7\n*/\nint smallestOdd(std::vector<int> const& x) {"
     },
     {
         "problem_type": "scan",
@@ -669,7 +669,7 @@
         "language": "cpp",
         "name": "27_scan_scan_with_min_function",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Replace the i-th element of the vector x with the minimum value from indices 0 through i.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Examples:\n\n   input: [8, 6, -1, 7, 3, 4, 4]\n   output: [8, 6, -1, -1, -1, -1, -1]\n\n   input: [5, 4, 6, 4, 3, 6, 1, 1]\n   output: [5, 4, 4, 4, 3, 3, 1, 1]\n*/\nvoid partialMinimums(std::vector<float> &x) {"
+        "prompt": "#include <mpi.h>\n\n/* Replace the i-th element of the vector x with the minimum value from indices 0 through i.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. Store the result in x on rank 0.\n   Examples:\n\n   input: [8, 6, -1, 7, 3, 4, 4]\n   output: [8, 6, -1, -1, -1, -1, -1]\n\n   input: [5, 4, 6, 4, 3, 6, 1, 1]\n   output: [5, 4, 4, 4, 3, 3, 1, 1]\n*/\nvoid partialMinimums(std::vector<float> &x) {"
     },
     {
         "problem_type": "scan",
@@ -683,7 +683,7 @@
         "language": "cpp",
         "name": "27_scan_scan_with_min_function",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Replace the i-th element of the vector x with the minimum value from indices 0 through i.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Examples:\n\n   input: [8, 6, -1, 7, 3, 4, 4]\n   output: [8, 6, -1, -1, -1, -1, -1]\n\n   input: [5, 4, 6, 4, 3, 6, 1, 1]\n   output: [5, 4, 4, 4, 3, 3, 1, 1]\n*/\nvoid partialMinimums(std::vector<float> &x) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Replace the i-th element of the vector x with the minimum value from indices 0 through i.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. Store the result in x on rank 0.\n   Examples:\n\n   input: [8, 6, -1, 7, 3, 4, 4]\n   output: [8, 6, -1, -1, -1, -1, -1]\n\n   input: [5, 4, 6, 4, 3, 6, 1, 1]\n   output: [5, 4, 4, 4, 3, 3, 1, 1]\n*/\nvoid partialMinimums(std::vector<float> &x) {"
     },
     {
         "problem_type": "scan",
@@ -718,7 +718,7 @@
         "language": "cpp",
         "name": "28_scan_sum_of_prefix_sum_array",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Compute the prefix sum array of the vector x and return its sum.\n   Use MPI to compute in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {"
+        "prompt": "#include <mpi.h>\n\n/* Compute the prefix sum array of the vector x and return its sum.\n   Use MPI to compute in parallel. Assume MPI is already initialized.\n   Every rank has a complete copy of x. Return the result on rank 0.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {"
     },
     {
         "problem_type": "scan",
@@ -732,7 +732,7 @@
         "language": "cpp",
         "name": "28_scan_sum_of_prefix_sum_array",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the prefix sum array of the vector x and return its sum.\n   Use MPI and OpenMP to compute in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the prefix sum array of the vector x and return its sum.\n   Use MPI and OpenMP to compute in parallel. Assume MPI is already initialized.\n   Every rank has a complete copy of x. Return the result on rank 0.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {"
     },
     {
         "problem_type": "scan",
@@ -767,7 +767,7 @@
         "language": "cpp",
         "name": "26_scan_prefix_sum",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Compute the prefix sum of the vector x into output.\n   Use MPI to compute in parallel. Assume MPI is already initialized.\n   Example:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [1, 8, 12, 18, 24, 26]\n*/\nvoid prefixSum(std::vector<double> const& x, std::vector<double> &output) {"
+        "prompt": "#include <mpi.h>\n\n/* Compute the prefix sum of the vector x into output.\n   Use MPI to compute in parallel. Assume MPI is already initialized.\n   Every rank has a complete copy of x. Store the result in output on rank 0.\n   Example:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [1, 8, 12, 18, 24, 26]\n*/\nvoid prefixSum(std::vector<double> const& x, std::vector<double> &output) {"
     },
     {
         "problem_type": "scan",
@@ -781,7 +781,7 @@
         "language": "cpp",
         "name": "26_scan_prefix_sum",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the prefix sum of the vector x into output.\n   Use MPI and OpenMP to compute in parallel. Assume MPI is already initialized.\n   Example:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [1, 8, 12, 18, 24, 26]\n*/\nvoid prefixSum(std::vector<double> const& x, std::vector<double> &output) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the prefix sum of the vector x into output.\n   Use MPI and OpenMP to compute in parallel. Assume MPI is already initialized.\n   Every rank has a complete copy of x. Store the result in output on rank 0.\n   Example:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [1, 8, 12, 18, 24, 26]\n*/\nvoid prefixSum(std::vector<double> const& x, std::vector<double> &output) {"
     },
     {
         "problem_type": "scan",
@@ -816,7 +816,7 @@
         "language": "cpp",
         "name": "29_scan_reverse_prefix_sum",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Compute the reverse prefix sum of the vector x into output.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Examples:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [2, 8, 14, 18, 25, 26]\n\n   input: [3, 3, 7, 1, -2]\n   output: [-2, -1, 6, 9, 12]\n*/\nvoid reversePrefixSum(std::vector<int> const& x, std::vector<int> &output) {"
+        "prompt": "#include <mpi.h>\n\n/* Compute the reverse prefix sum of the vector x into output.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. Store the result in output on rank 0.\n   Examples:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [2, 8, 14, 18, 25, 26]\n\n   input: [3, 3, 7, 1, -2]\n   output: [-2, -1, 6, 9, 12]\n*/\nvoid reversePrefixSum(std::vector<int> const& x, std::vector<int> &output) {"
     },
     {
         "problem_type": "scan",
@@ -830,7 +830,7 @@
         "language": "cpp",
         "name": "29_scan_reverse_prefix_sum",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the reverse prefix sum of the vector x into output.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Examples:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [2, 8, 14, 18, 25, 26]\n\n   input: [3, 3, 7, 1, -2]\n   output: [-2, -1, 6, 9, 12]\n*/\nvoid reversePrefixSum(std::vector<int> const& x, std::vector<int> &output) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the reverse prefix sum of the vector x into output.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. Store the result in output on rank 0.\n   Examples:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [2, 8, 14, 18, 25, 26]\n\n   input: [3, 3, 7, 1, -2]\n   output: [-2, -1, 6, 9, 12]\n*/\nvoid reversePrefixSum(std::vector<int> const& x, std::vector<int> &output) {"
     },
     {
         "problem_type": "scan",
@@ -865,7 +865,7 @@
         "language": "cpp",
         "name": "30_scan_largest_contiguous_subarray_sum",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Return the largest sum of any contiguous subarray in the vector x.\n   i.e. if x=[\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4] then [4, \u22121, 2, 1] is the contiguous\n   subarray with the largest sum of 6.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4]\n   output: 6\n*/\nint maximumSubarray(std::vector<int> const& x) {"
+        "prompt": "#include <mpi.h>\n\n/* Return the largest sum of any contiguous subarray in the vector x.\n   i.e. if x=[\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4] then [4, \u22121, 2, 1] is the contiguous\n   subarray with the largest sum of 6.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. Return the result on rank 0.\n   Example:\n\n   input: [\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4]\n   output: 6\n*/\nint maximumSubarray(std::vector<int> const& x) {"
     },
     {
         "problem_type": "scan",
@@ -879,7 +879,7 @@
         "language": "cpp",
         "name": "30_scan_largest_contiguous_subarray_sum",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the largest sum of any contiguous subarray in the vector x.\n   i.e. if x=[\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4] then [4, \u22121, 2, 1] is the contiguous\n   subarray with the largest sum of 6.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4]\n   output: 6\n*/\nint maximumSubarray(std::vector<int> const& x) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the largest sum of any contiguous subarray in the vector x.\n   i.e. if x=[\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4] then [4, \u22121, 2, 1] is the contiguous\n   subarray with the largest sum of 6.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. Return the result on rank 0.\n   Example:\n\n   input: [\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4]\n   output: 6\n*/\nint maximumSubarray(std::vector<int> const& x) {"
     },
     {
         "problem_type": "transform",
@@ -914,7 +914,7 @@
         "language": "cpp",
         "name": "53_transform_negate_odds",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* In the vector x negate the odd values and divide the even values by 2.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [16, 11, 12, 14, 1, 0, 5]\n   output: [8, -11, 6, 7, -1, 0, -5]\n*/\nvoid negateOddsAndHalveEvens(std::vector<int> &x) {"
+        "prompt": "#include <mpi.h>\n\n/* In the vector x negate the odd values and divide the even values by 2.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. The final result is stored on rank 0.\n   Example:\n\n   input: [16, 11, 12, 14, 1, 0, 5]\n   output: [8, -11, 6, 7, -1, 0, -5]\n*/\nvoid negateOddsAndHalveEvens(std::vector<int> &x) {"
     },
     {
         "problem_type": "transform",
@@ -928,7 +928,7 @@
         "language": "cpp",
         "name": "53_transform_negate_odds",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* In the vector x negate the odd values and divide the even values by 2.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [16, 11, 12, 14, 1, 0, 5]\n   output: [8, -11, 6, 7, -1, 0, -5]\n*/\nvoid negateOddsAndHalveEvens(std::vector<int> &x) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* In the vector x negate the odd values and divide the even values by 2.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. The final result is stored on rank 0.\n   Example:\n\n   input: [16, 11, 12, 14, 1, 0, 5]\n   output: [8, -11, 6, 7, -1, 0, -5]\n*/\nvoid negateOddsAndHalveEvens(std::vector<int> &x) {"
     },
     {
         "problem_type": "transform",
@@ -963,7 +963,7 @@
         "language": "cpp",
         "name": "56_transform_map_function",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\nbool isPowerOfTwo(int x) {\n\treturn (x > 0) && !(x & (x - 1));\n}\n\n/* Apply the isPowerOfTwo function to every value in x and store the results in mask.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [8, 0, 9, 7, 15, 64, 3]\n   output: [true, false, false, false, false, true, false]\n*/\nvoid mapPowersOfTwo(std::vector<int> const& x, std::vector<bool> &mask) {"
+        "prompt": "#include <mpi.h>\n\nbool isPowerOfTwo(int x) {\n\treturn (x > 0) && !(x & (x - 1));\n}\n\n/* Apply the isPowerOfTwo function to every value in x and store the results in mask.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. The final result is stored in mask on rank 0.\n   Example:\n\n   input: [8, 0, 9, 7, 15, 64, 3]\n   output: [true, false, false, false, false, true, false]\n*/\nvoid mapPowersOfTwo(std::vector<int> const& x, std::vector<bool> &mask) {"
     },
     {
         "problem_type": "transform",
@@ -977,7 +977,7 @@
         "language": "cpp",
         "name": "56_transform_map_function",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nbool isPowerOfTwo(int x) {\n\treturn (x > 0) && !(x & (x - 1));\n}\n\n/* Apply the isPowerOfTwo function to every value in x and store the results in mask.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [8, 0, 9, 7, 15, 64, 3]\n   output: [true, false, false, false, false, true, false]\n*/\nvoid mapPowersOfTwo(std::vector<int> const& x, std::vector<bool> &mask) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nbool isPowerOfTwo(int x) {\n\treturn (x > 0) && !(x & (x - 1));\n}\n\n/* Apply the isPowerOfTwo function to every value in x and store the results in mask.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. The final result is stored in mask on rank 0.\n   Example:\n\n   input: [8, 0, 9, 7, 15, 64, 3]\n   output: [true, false, false, false, false, true, false]\n*/\nvoid mapPowersOfTwo(std::vector<int> const& x, std::vector<bool> &mask) {"
     },
     {
         "problem_type": "transform",
@@ -1012,7 +1012,7 @@
         "language": "cpp",
         "name": "55_transform_squaring",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Replace every element of x with the square of its value.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [5, 1, 2, -4, 8]\n   output: [25, 1, 4, 16, 64]\n*/\nvoid squareEach(std::vector<int> &x) {"
+        "prompt": "#include <mpi.h>\n\n/* Replace every element of x with the square of its value.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. The final result is stored on rank 0.\n   Example:\n\n   input: [5, 1, 2, -4, 8]\n   output: [25, 1, 4, 16, 64]\n*/\nvoid squareEach(std::vector<int> &x) {"
     },
     {
         "problem_type": "transform",
@@ -1026,7 +1026,7 @@
         "language": "cpp",
         "name": "55_transform_squaring",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Replace every element of x with the square of its value.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [5, 1, 2, -4, 8]\n   output: [25, 1, 4, 16, 64]\n*/\nvoid squareEach(std::vector<int> &x) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Replace every element of x with the square of its value.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. The final result is stored on rank 0.\n   Example:\n\n   input: [5, 1, 2, -4, 8]\n   output: [25, 1, 4, 16, 64]\n*/\nvoid squareEach(std::vector<int> &x) {"
     },
     {
         "problem_type": "transform",
@@ -1061,7 +1061,7 @@
         "language": "cpp",
         "name": "52_transform_relu",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Compute the ReLU function on every element of x. Elements less than zero become zero,\n   while elements greater than zero stay the same.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [-1.8, 24.0, 1.2, 0.0, -5.1, -0.2, 4.5]\n   output: [0, 24.0, 1.2, 0, 0, 0, 4.5]\n*/\nvoid relu(std::vector<double> &x) {"
+        "prompt": "#include <mpi.h>\n\n/* Compute the ReLU function on every element of x. Elements less than zero become zero,\n   while elements greater than zero stay the same.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. The final result is stored on rank 0.\n   Example:\n\n   input: [-1.8, 24.0, 1.2, 0.0, -5.1, -0.2, 4.5]\n   output: [0, 24.0, 1.2, 0, 0, 0, 4.5]\n*/\nvoid relu(std::vector<double> &x) {"
     },
     {
         "problem_type": "transform",
@@ -1075,7 +1075,7 @@
         "language": "cpp",
         "name": "52_transform_relu",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the ReLU function on every element of x. Elements less than zero become zero,\n   while elements greater than zero stay the same.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [-1.8, 24.0, 1.2, 0.0, -5.1, -0.2, 4.5]\n   output: [0, 24.0, 1.2, 0, 0, 0, 4.5]\n*/\nvoid relu(std::vector<double> &x) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the ReLU function on every element of x. Elements less than zero become zero,\n   while elements greater than zero stay the same.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. The final result is stored on rank 0.\n   Example:\n\n   input: [-1.8, 24.0, 1.2, 0.0, -5.1, -0.2, 4.5]\n   output: [0, 24.0, 1.2, 0, 0, 0, 4.5]\n*/\nvoid relu(std::vector<double> &x) {"
     },
     {
         "problem_type": "transform",
@@ -1110,7 +1110,7 @@
         "language": "cpp",
         "name": "54_transform_inverse_offset",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Replace every element of the vector x with 1-1/x.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [2, 4, 1, 12, -2]\n   output: [0.5, 0.75, 0, 0.91666666, 1.5]\n*/\nvoid oneMinusInverse(std::vector<double> &x) {"
+        "prompt": "#include <mpi.h>\n\n/* Replace every element of the vector x with 1-1/x.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. The final result is stored on rank 0.\n   Example:\n\n   input: [2, 4, 1, 12, -2]\n   output: [0.5, 0.75, 0, 0.91666666, 1.5]\n*/\nvoid oneMinusInverse(std::vector<double> &x) {"
     },
     {
         "problem_type": "transform",
@@ -1124,7 +1124,7 @@
         "language": "cpp",
         "name": "54_transform_inverse_offset",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Replace every element of the vector x with 1-1/x.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [2, 4, 1, 12, -2]\n   output: [0.5, 0.75, 0, 0.91666666, 1.5]\n*/\nvoid oneMinusInverse(std::vector<double> &x) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Replace every element of the vector x with 1-1/x.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. The final result is stored on rank 0.\n   Example:\n\n   input: [2, 4, 1, 12, -2]\n   output: [0.5, 0.75, 0, 0.91666666, 1.5]\n*/\nvoid oneMinusInverse(std::vector<double> &x) {"
     },
     {
         "problem_type": "sparse_la",
@@ -1159,7 +1159,7 @@
         "language": "cpp",
         "name": "43_sparse_la_spmm",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute the matrix multiplication Y=AX. A is a sparse MxK matrix in COO format.\n   X is a sparse KxN matrix in COO format. Y is a dense MxN matrix in row-major.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: A=[{0,0,-2}, {0,1,1}, {1,1,-1}] X=[{0,1,2}, {1,0,-1}]\n   output: Y=[{-1,-4}, {1,0}]\n*/\nvoid spmm(std::vector<COOElement> const& A, std::vector<COOElement> const& X, std::vector<double> &Y, size_t M, size_t K, size_t N) {"
+        "prompt": "#include <mpi.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute the matrix multiplication Y=AX. A is a sparse MxK matrix in COO format.\n   X is a sparse KxN matrix in COO format. Y is a dense MxN matrix in row-major.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A and X. Store the result in Y on rank 0.\n   Example:\n\n   input: A=[{0,0,-2}, {0,1,1}, {1,1,-1}] X=[{0,1,2}, {1,0,-1}]\n   output: Y=[{-1,-4}, {1,0}]\n*/\nvoid spmm(std::vector<COOElement> const& A, std::vector<COOElement> const& X, std::vector<double> &Y, size_t M, size_t K, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
@@ -1173,7 +1173,7 @@
         "language": "cpp",
         "name": "43_sparse_la_spmm",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute the matrix multiplication Y=AX. A is a sparse MxK matrix in COO format.\n   X is a sparse KxN matrix in COO format. Y is a dense MxN matrix in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: A=[{0,0,-2}, {0,1,1}, {1,1,-1}] X=[{0,1,2}, {1,0,-1}]\n   output: Y=[{-1,-4}, {1,0}]\n*/\nvoid spmm(std::vector<COOElement> const& A, std::vector<COOElement> const& X, std::vector<double> &Y, size_t M, size_t K, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute the matrix multiplication Y=AX. A is a sparse MxK matrix in COO format.\n   X is a sparse KxN matrix in COO format. Y is a dense MxN matrix in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A and X. Store the result in Y on rank 0.\n   Example:\n\n   input: A=[{0,0,-2}, {0,1,1}, {1,1,-1}] X=[{0,1,2}, {1,0,-1}]\n   output: Y=[{-1,-4}, {1,0}]\n*/\nvoid spmm(std::vector<COOElement> const& A, std::vector<COOElement> const& X, std::vector<double> &Y, size_t M, size_t K, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
@@ -1208,7 +1208,7 @@
         "language": "cpp",
         "name": "44_sparse_la_spmv",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute y = alpha*A*x + beta*y where alpha and beta are scalars, x and y are vectors,\n   and A is a sparse matrix stored in COO format.\n   x and y are length N and A is M x N.\n   Use MPI to parallelize. Assume MPI has already been initialized.\n   Example:\n\n   input: alpha=0.5 beta=1.0 A=[{0,1,3}, {1,0,-1}] x=[-4, 2] y=[-1,1]\n   output: y=[2, 3]\n*/\nvoid spmv(double alpha, std::vector<COOElement> const& A, std::vector<double> const& x, double beta, std::vector<double> &y, size_t M, size_t N) {"
+        "prompt": "#include <mpi.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute y = alpha*A*x + beta*y where alpha and beta are scalars, x and y are vectors,\n   and A is a sparse matrix stored in COO format.\n   x and y are length N and A is M x N.\n   Use MPI to parallelize. Assume MPI has already been initialized.\n   Every rank has a complete copy of A, x, and y. Store the result in y on rank 0.\n   Example:\n\n   input: alpha=0.5 beta=1.0 A=[{0,1,3}, {1,0,-1}] x=[-4, 2] y=[-1,1]\n   output: y=[2, 3]\n*/\nvoid spmv(double alpha, std::vector<COOElement> const& A, std::vector<double> const& x, double beta, std::vector<double> &y, size_t M, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
@@ -1222,7 +1222,7 @@
         "language": "cpp",
         "name": "44_sparse_la_spmv",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute y = alpha*A*x + beta*y where alpha and beta are scalars, x and y are vectors,\n   and A is a sparse matrix stored in COO format.\n   x and y are length N and A is M x N.\n   Use MPI and OpenMP to parallelize. Assume MPI has already been initialized.\n   Example:\n\n   input: alpha=0.5 beta=1.0 A=[{0,1,3}, {1,0,-1}] x=[-4, 2] y=[-1,1]\n   output: y=[2, 3]\n*/\nvoid spmv(double alpha, std::vector<COOElement> const& A, std::vector<double> const& x, double beta, std::vector<double> &y, size_t M, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute y = alpha*A*x + beta*y where alpha and beta are scalars, x and y are vectors,\n   and A is a sparse matrix stored in COO format.\n   x and y are length N and A is M x N.\n   Use MPI and OpenMP to parallelize. Assume MPI has already been initialized.\n   Every rank has a complete copy of A, x, and y. Store the result in y on rank 0.\n   Example:\n\n   input: alpha=0.5 beta=1.0 A=[{0,1,3}, {1,0,-1}] x=[-4, 2] y=[-1,1]\n   output: y=[2, 3]\n*/\nvoid spmv(double alpha, std::vector<COOElement> const& A, std::vector<double> const& x, double beta, std::vector<double> &y, size_t M, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
@@ -1257,7 +1257,7 @@
         "language": "cpp",
         "name": "46_sparse_la_sparse_lu_decomp",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Factorize the sparse matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   A is a sparse NxN matrix stored in COO format.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: A=[{0,0,4}, {0,1,3}, {1,0,6}, {1,1,3}]\n   output: L=[{0,0,1},{1,0,1.5}, {1,1,1}] U=[{0,0,4}, {0,1,3}, {1,1,-1.5}]\n*/\nvoid luFactorize(std::vector<COOElement> const& A, std::vector<COOElement> &L, std::vector<COOElement> &U, size_t N) {"
+        "prompt": "#include <mpi.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Factorize the sparse matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   A is a sparse NxN matrix stored in COO format.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. Store the result in L and U on rank 0.\n   Example:\n\n   input: A=[{0,0,4}, {0,1,3}, {1,0,6}, {1,1,3}]\n   output: L=[{0,0,1},{1,0,1.5}, {1,1,1}] U=[{0,0,4}, {0,1,3}, {1,1,-1.5}]\n*/\nvoid luFactorize(std::vector<COOElement> const& A, std::vector<COOElement> &L, std::vector<COOElement> &U, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
@@ -1271,7 +1271,7 @@
         "language": "cpp",
         "name": "46_sparse_la_sparse_lu_decomp",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Factorize the sparse matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   A is a sparse NxN matrix stored in COO format.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: A=[{0,0,4}, {0,1,3}, {1,0,6}, {1,1,3}]\n   output: L=[{0,0,1},{1,0,1.5}, {1,1,1}] U=[{0,0,4}, {0,1,3}, {1,1,-1.5}]\n*/\nvoid luFactorize(std::vector<COOElement> const& A, std::vector<COOElement> &L, std::vector<COOElement> &U, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Factorize the sparse matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   A is a sparse NxN matrix stored in COO format.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. Store the result in L and U on rank 0.\n   Example:\n\n   input: A=[{0,0,4}, {0,1,3}, {1,0,6}, {1,1,3}]\n   output: L=[{0,0,1},{1,0,1.5}, {1,1,1}] U=[{0,0,4}, {0,1,3}, {1,1,-1.5}]\n*/\nvoid luFactorize(std::vector<COOElement> const& A, std::vector<COOElement> &L, std::vector<COOElement> &U, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
@@ -1306,7 +1306,7 @@
         "language": "cpp",
         "name": "45_sparse_la_sparse_axpy",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\nstruct Element {\n\tsize_t index;\n  double value;\n};\n\n/* Compute z = alpha*x+y where x and y are sparse vectors. Store the result in z.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1\n   output: z=[{3, 1}, {5, 10}, {7, 1}, {12, -1}]\n*/\nvoid sparseAxpy(double alpha, std::vector<Element> const& x, std::vector<Element> const& y, std::vector<Element> &z) {"
+        "prompt": "#include <mpi.h>\n\nstruct Element {\n\tsize_t index;\n  double value;\n};\n\n/* Compute z = alpha*x+y where x and y are sparse vectors. Store the result in z.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x and y. Store the result in z on rank 0.\n   Example:\n   \n   input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1\n   output: z=[{3, 1}, {5, 10}, {7, 1}, {12, -1}]\n*/\nvoid sparseAxpy(double alpha, std::vector<Element> const& x, std::vector<Element> const& y, std::vector<Element> &z) {"
     },
     {
         "problem_type": "sparse_la",
@@ -1320,7 +1320,7 @@
         "language": "cpp",
         "name": "45_sparse_la_sparse_axpy",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct Element {\n\tsize_t index;\n  double value;\n};\n\n/* Compute z = alpha*x+y where x and y are sparse vectors. Store the result in z.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1\n   output: z=[{3, 1}, {5, 10}, {7, 1}, {12, -1}]\n*/\nvoid sparseAxpy(double alpha, std::vector<Element> const& x, std::vector<Element> const& y, std::vector<Element> &z) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct Element {\n\tsize_t index;\n  double value;\n};\n\n/* Compute z = alpha*x+y where x and y are sparse vectors. Store the result in z.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x and y. Store the result in z on rank 0.\n   Example:\n   \n   input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1\n   output: z=[{3, 1}, {5, 10}, {7, 1}, {12, -1}]\n*/\nvoid sparseAxpy(double alpha, std::vector<Element> const& x, std::vector<Element> const& y, std::vector<Element> &z) {"
     },
     {
         "problem_type": "sparse_la",
@@ -1355,7 +1355,7 @@
         "language": "cpp",
         "name": "42_sparse_la_sparse_solve",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Solve the sparse linear system Ax=b for x.\n   A is a sparse NxN matrix in COO format. x and b are dense vectors with N elements.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: A=[{0,0,1}, {0,1,1}, {1,1,-2}] b=[1,4]\n   output: x=[3,-2]\n*/\nvoid solveLinearSystem(std::vector<COOElement> const& A, std::vector<double> const& b, std::vector<double> &x, size_t N) {"
+        "prompt": "#include <mpi.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Solve the sparse linear system Ax=b for x.\n   A is a sparse NxN matrix in COO format. x and b are dense vectors with N elements.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A and b. Store the result in x on rank 0.\n   Example:\n   \n   input: A=[{0,0,1}, {0,1,1}, {1,1,-2}] b=[1,4]\n   output: x=[3,-2]\n*/\nvoid solveLinearSystem(std::vector<COOElement> const& A, std::vector<double> const& b, std::vector<double> &x, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
@@ -1369,7 +1369,7 @@
         "language": "cpp",
         "name": "42_sparse_la_sparse_solve",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Solve the sparse linear system Ax=b for x.\n   A is a sparse NxN matrix in COO format. x and b are dense vectors with N elements.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: A=[{0,0,1}, {0,1,1}, {1,1,-2}] b=[1,4]\n   output: x=[3,-2]\n*/\nvoid solveLinearSystem(std::vector<COOElement> const& A, std::vector<double> const& b, std::vector<double> &x, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Solve the sparse linear system Ax=b for x.\n   A is a sparse NxN matrix in COO format. x and b are dense vectors with N elements.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A and b. Store the result in x on rank 0.\n   Example:\n   \n   input: A=[{0,0,1}, {0,1,1}, {1,1,-2}] b=[1,4]\n   output: x=[3,-2]\n*/\nvoid solveLinearSystem(std::vector<COOElement> const& A, std::vector<double> const& b, std::vector<double> &x, size_t N) {"
     },
     {
         "problem_type": "histogram",
@@ -1404,7 +1404,7 @@
         "language": "cpp",
         "name": "16_histogram_pixel_histogram",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Count the number of pixels in image with each grayscale intensity.\n   The vector `image` is a grayscale image with values 0-255.\n   Store the results in `bins`.\n   Use MPI to count in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: image=[2, 116, 201, 11, 92, 92, 201, 4, 2]\n   output: [0, 0, 2, 0, 1, ...]\n*/\n void pixelCounts(std::vector<int> const& image, std::array<size_t, 256> &bins) {"
+        "prompt": "#include <mpi.h>\n\n/* Count the number of pixels in image with each grayscale intensity.\n   The vector `image` is a grayscale image with values 0-255.\n   Store the results in `bins`.\n   Use MPI to count in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of image. The result is stored in bins on rank 0.\n   Example:\n   \n   input: image=[2, 116, 201, 11, 92, 92, 201, 4, 2]\n   output: [0, 0, 2, 0, 1, ...]\n*/\n void pixelCounts(std::vector<int> const& image, std::array<size_t, 256> &bins) {"
     },
     {
         "problem_type": "histogram",
@@ -1418,7 +1418,7 @@
         "language": "cpp",
         "name": "16_histogram_pixel_histogram",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Count the number of pixels in image with each grayscale intensity.\n   The vector `image` is a grayscale image with values 0-255.\n   Store the results in `bins`.\n   Use MPI and OpenMP to count in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: image=[2, 116, 201, 11, 92, 92, 201, 4, 2]\n   output: [0, 0, 2, 0, 1, ...]\n*/\n void pixelCounts(std::vector<int> const& image, std::array<size_t, 256> &bins) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Count the number of pixels in image with each grayscale intensity.\n   The vector `image` is a grayscale image with values 0-255.\n   Store the results in `bins`.\n   Use MPI and OpenMP to count in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of image. The result is stored in bins on rank 0.\n   Example:\n   \n   input: image=[2, 116, 201, 11, 92, 92, 201, 4, 2]\n   output: [0, 0, 2, 0, 1, ...]\n*/\n void pixelCounts(std::vector<int> const& image, std::array<size_t, 256> &bins) {"
     },
     {
         "problem_type": "histogram",
@@ -1453,7 +1453,7 @@
         "language": "cpp",
         "name": "19_histogram_first_letter_counts",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* For each letter in the alphabet, count the number of strings in the vector s that start with that letter.\n   Assume all strings are in lower case. Store the output in `bins` array.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [\"dog\", \"cat\", \"xray\", \"cow\", \"code\", \"type\", \"flower\"]\n   output: [0, 0, 3, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0]\n*/\nvoid firstLetterCounts(std::vector<std::string> const& s, std::array<size_t, 26> &bins) {"
+        "prompt": "#include <mpi.h>\n\n/* For each letter in the alphabet, count the number of strings in the vector s that start with that letter.\n   Assume all strings are in lower case. Store the output in `bins` array.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of s. The result is stored in bins on rank 0.\n   Example:\n\n   input: [\"dog\", \"cat\", \"xray\", \"cow\", \"code\", \"type\", \"flower\"]\n   output: [0, 0, 3, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0]\n*/\nvoid firstLetterCounts(std::vector<std::string> const& s, std::array<size_t, 26> &bins) {"
     },
     {
         "problem_type": "histogram",
@@ -1467,7 +1467,7 @@
         "language": "cpp",
         "name": "19_histogram_first_letter_counts",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* For each letter in the alphabet, count the number of strings in the vector s that start with that letter.\n   Assume all strings are in lower case. Store the output in `bins` array.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [\"dog\", \"cat\", \"xray\", \"cow\", \"code\", \"type\", \"flower\"]\n   output: [0, 0, 3, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0]\n*/\nvoid firstLetterCounts(std::vector<std::string> const& s, std::array<size_t, 26> &bins) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* For each letter in the alphabet, count the number of strings in the vector s that start with that letter.\n   Assume all strings are in lower case. Store the output in `bins` array.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of s. The result is stored in bins on rank 0.\n   Example:\n\n   input: [\"dog\", \"cat\", \"xray\", \"cow\", \"code\", \"type\", \"flower\"]\n   output: [0, 0, 3, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0]\n*/\nvoid firstLetterCounts(std::vector<std::string> const& s, std::array<size_t, 26> &bins) {"
     },
     {
         "problem_type": "histogram",
@@ -1502,7 +1502,7 @@
         "language": "cpp",
         "name": "17_histogram_bin_0-100",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Vector x contains values between 0 and 100, inclusive. Count the number of\n   values in [0,10), [10, 20), [20, 30), ... and store the counts in `bins`.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [7, 32, 95, 12, 39, 32, 11, 71, 70, 66]\n   output: [1, 2, 0, 3, 0, 0, 1, 2, 0, 1]\n*/\nvoid binsBy10Count(std::vector<double> const& x, std::array<size_t, 10> &bins) {"
+        "prompt": "#include <mpi.h>\n\n/* Vector x contains values between 0 and 100, inclusive. Count the number of\n   values in [0,10), [10, 20), [20, 30), ... and store the counts in `bins`.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. The result is stored in bins on rank 0.\n   Example:\n\n   input: [7, 32, 95, 12, 39, 32, 11, 71, 70, 66]\n   output: [1, 2, 0, 3, 0, 0, 1, 2, 0, 1]\n*/\nvoid binsBy10Count(std::vector<double> const& x, std::array<size_t, 10> &bins) {"
     },
     {
         "problem_type": "histogram",
@@ -1516,7 +1516,7 @@
         "language": "cpp",
         "name": "17_histogram_bin_0-100",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Vector x contains values between 0 and 100, inclusive. Count the number of\n   values in [0,10), [10, 20), [20, 30), ... and store the counts in `bins`.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [7, 32, 95, 12, 39, 32, 11, 71, 70, 66]\n   output: [1, 2, 0, 3, 0, 0, 1, 2, 0, 1]\n*/\nvoid binsBy10Count(std::vector<double> const& x, std::array<size_t, 10> &bins) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Vector x contains values between 0 and 100, inclusive. Count the number of\n   values in [0,10), [10, 20), [20, 30), ... and store the counts in `bins`.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. The result is stored in bins on rank 0.\n   Example:\n\n   input: [7, 32, 95, 12, 39, 32, 11, 71, 70, 66]\n   output: [1, 2, 0, 3, 0, 0, 1, 2, 0, 1]\n*/\nvoid binsBy10Count(std::vector<double> const& x, std::array<size_t, 10> &bins) {"
     },
     {
         "problem_type": "histogram",
@@ -1551,7 +1551,7 @@
         "language": "cpp",
         "name": "20_histogram_count_quartile",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Count the number of doubles in the vector x that have a fractional part \n   in [0, 0.25), [0.25, 0.5), [0.5, 0.75), and [0.75, 1). Store the counts in `bins`.\n   Use MPI to compute in parallel. Assume that MPI has already been initialized.\n   Examples:\n\n   input: [7.8, 4.2, 9.1, 7.6, 0.27, 1.5, 3.8]\n   output: [2, 1, 2, 2]\n\n   input: [1.9, 0.2, 0.6, 10.1, 7.4]\n   output: [2, 1, 1, 1]\n*/\nvoid countQuartiles(std::vector<double> const& x, std::array<size_t, 4> &bins) {"
+        "prompt": "#include <mpi.h>\n\n/* Count the number of doubles in the vector x that have a fractional part \n   in [0, 0.25), [0.25, 0.5), [0.5, 0.75), and [0.75, 1). Store the counts in `bins`.\n   Use MPI to compute in parallel. Assume that MPI has already been initialized.\n   Every rank has a complete copy of x. The result is stored in bins on rank 0.\n   Examples:\n\n   input: [7.8, 4.2, 9.1, 7.6, 0.27, 1.5, 3.8]\n   output: [2, 1, 2, 2]\n\n   input: [1.9, 0.2, 0.6, 10.1, 7.4]\n   output: [2, 1, 1, 1]\n*/\nvoid countQuartiles(std::vector<double> const& x, std::array<size_t, 4> &bins) {"
     },
     {
         "problem_type": "histogram",
@@ -1565,7 +1565,7 @@
         "language": "cpp",
         "name": "20_histogram_count_quartile",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Count the number of doubles in the vector x that have a fractional part \n   in [0, 0.25), [0.25, 0.5), [0.5, 0.75), and [0.75, 1). Store the counts in `bins`.\n   Use MPI and OpenMP to compute in parallel. Assume that MPI has already been initialized.\n   Examples:\n\n   input: [7.8, 4.2, 9.1, 7.6, 0.27, 1.5, 3.8]\n   output: [2, 1, 2, 2]\n\n   input: [1.9, 0.2, 0.6, 10.1, 7.4]\n   output: [2, 1, 1, 1]\n*/\nvoid countQuartiles(std::vector<double> const& x, std::array<size_t, 4> &bins) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Count the number of doubles in the vector x that have a fractional part \n   in [0, 0.25), [0.25, 0.5), [0.5, 0.75), and [0.75, 1). Store the counts in `bins`.\n   Use MPI and OpenMP to compute in parallel. Assume that MPI has already been initialized.\n   Every rank has a complete copy of x. The result is stored in bins on rank 0.\n   Examples:\n\n   input: [7.8, 4.2, 9.1, 7.6, 0.27, 1.5, 3.8]\n   output: [2, 1, 2, 2]\n\n   input: [1.9, 0.2, 0.6, 10.1, 7.4]\n   output: [2, 1, 1, 1]\n*/\nvoid countQuartiles(std::vector<double> const& x, std::array<size_t, 4> &bins) {"
     },
     {
         "problem_type": "histogram",
@@ -1600,7 +1600,7 @@
         "language": "cpp",
         "name": "18_histogram_count_quadrants",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\nstruct Point {\n   double x, y;\n};\n\n/* Count the number of cartesian points in each quadrant. The vector points contains a list of `Point` objects.\n   Store the counts in `bins`.\n   Use MPI to count in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [{x=1.5, y=0.1}, {x=-3, y=1.1}, {x=5, y=9}, {x=1.5, y=-1}, {x=3, y=-7}, {x=0.1, y=2}]\n   output: [3, 1, 0, 2]\n*/\nvoid countQuadrants(std::vector<Point> const& points, std::array<size_t, 4> &bins) {"
+        "prompt": "#include <mpi.h>\n\nstruct Point {\n   double x, y;\n};\n\n/* Count the number of cartesian points in each quadrant. The vector points contains a list of `Point` objects.\n   Store the counts in `bins`.\n   Use MPI to count in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of points. The result is stored in bins on rank 0.\n   Example:\n\n   input: [{x=1.5, y=0.1}, {x=-3, y=1.1}, {x=5, y=9}, {x=1.5, y=-1}, {x=3, y=-7}, {x=0.1, y=2}]\n   output: [3, 1, 0, 2]\n*/\nvoid countQuadrants(std::vector<Point> const& points, std::array<size_t, 4> &bins) {"
     },
     {
         "problem_type": "histogram",
@@ -1614,7 +1614,7 @@
         "language": "cpp",
         "name": "18_histogram_count_quadrants",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct Point {\n   double x, y;\n};\n\n/* Count the number of cartesian points in each quadrant. The vector points contains a list of `Point` objects.\n   Store the counts in `bins`.\n   Use MPI and OpenMP to count in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [{x=1.5, y=0.1}, {x=-3, y=1.1}, {x=5, y=9}, {x=1.5, y=-1}, {x=3, y=-7}, {x=0.1, y=2}]\n   output: [3, 1, 0, 2]\n*/\nvoid countQuadrants(std::vector<Point> const& points, std::array<size_t, 4> &bins) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct Point {\n   double x, y;\n};\n\n/* Count the number of cartesian points in each quadrant. The vector points contains a list of `Point` objects.\n   Store the counts in `bins`.\n   Use MPI and OpenMP to count in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of image. The result is stored in bins on rank 0.\n   Example:\n\n   input: [{x=1.5, y=0.1}, {x=-3, y=1.1}, {x=5, y=9}, {x=1.5, y=-1}, {x=3, y=-7}, {x=0.1, y=2}]\n   output: [3, 1, 0, 2]\n*/\nvoid countQuadrants(std::vector<Point> const& points, std::array<size_t, 4> &bins) {"
     },
     {
         "problem_type": "search",
@@ -1649,7 +1649,7 @@
         "language": "cpp",
         "name": "35_search_xor_contains",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Return true if `val` is only in one of vectors x or y.\n   Return false if it is in both or neither.\n   Use MPI to search in parallel. Assume MPI has already been initialized.\n   Examples:\n\n   input: x=[1,8,4,3,2], y=[3,4,4,1,1,7], val=7\n   output: true\n\n   input: x=[1,8,4,3,2], y=[3,4,4,1,1,7], val=1\n   output: false\n*/\nbool xorContains(std::vector<int> const& x, std::vector<int> const& y, int val) {"
+        "prompt": "#include <mpi.h>\n\n/* Return true if `val` is only in one of vectors x or y.\n   Return false if it is in both or neither.\n   Use MPI to search in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x and y. Return the result on rank 0.\n   Examples:\n\n   input: x=[1,8,4,3,2], y=[3,4,4,1,1,7], val=7\n   output: true\n\n   input: x=[1,8,4,3,2], y=[3,4,4,1,1,7], val=1\n   output: false\n*/\nbool xorContains(std::vector<int> const& x, std::vector<int> const& y, int val) {"
     },
     {
         "problem_type": "search",
@@ -1663,7 +1663,7 @@
         "language": "cpp",
         "name": "35_search_xor_contains",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return true if `val` is only in one of vectors x or y.\n   Return false if it is in both or neither.\n   Use MPI and OpenMP to search in parallel. Assume MPI has already been initialized.\n   Examples:\n\n   input: x=[1,8,4,3,2], y=[3,4,4,1,1,7], val=7\n   output: true\n\n   input: x=[1,8,4,3,2], y=[3,4,4,1,1,7], val=1\n   output: false\n*/\nbool xorContains(std::vector<int> const& x, std::vector<int> const& y, int val) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return true if `val` is only in one of vectors x or y.\n   Return false if it is in both or neither.\n   Use MPI and OpenMP to search in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x and y. Return the result on rank 0.\n   Examples:\n\n   input: x=[1,8,4,3,2], y=[3,4,4,1,1,7], val=7\n   output: true\n\n   input: x=[1,8,4,3,2], y=[3,4,4,1,1,7], val=1\n   output: false\n*/\nbool xorContains(std::vector<int> const& x, std::vector<int> const& y, int val) {"
     },
     {
         "problem_type": "search",
@@ -1698,7 +1698,7 @@
         "language": "cpp",
         "name": "34_search_find_the_first_even_number",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Return the index of the first even number in the vector x.\n   Use MPI to parallelize the search. Assume MPI has already been initialized.\n   Examples:\n\n   input: [7, 3, 9, 5, 5, 7, 2, 9, 12, 11]\n   output: 6\n\n   input: [3, 8, 9, 9, 3, 4, 8, 6]\n   output: 1\n*/\nsize_t findFirstEven(std::vector<int> const& x) {"
+        "prompt": "#include <mpi.h>\n\n/* Return the index of the first even number in the vector x.\n   Use MPI to parallelize the search. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. Return the result on rank 0.\n   Examples:\n\n   input: [7, 3, 9, 5, 5, 7, 2, 9, 12, 11]\n   output: 6\n\n   input: [3, 8, 9, 9, 3, 4, 8, 6]\n   output: 1\n*/\nsize_t findFirstEven(std::vector<int> const& x) {"
     },
     {
         "problem_type": "search",
@@ -1712,7 +1712,7 @@
         "language": "cpp",
         "name": "34_search_find_the_first_even_number",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the index of the first even number in the vector x.\n   Use MPI and OpenMP to parallelize the search. Assume MPI has already been initialized.\n   Examples:\n\n   input: [7, 3, 9, 5, 5, 7, 2, 9, 12, 11]\n   output: 6\n\n   input: [3, 8, 9, 9, 3, 4, 8, 6]\n   output: 1\n*/\nsize_t findFirstEven(std::vector<int> const& x) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the index of the first even number in the vector x.\n   Use MPI and OpenMP to parallelize the search. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. Return the result on rank 0.\n   Examples:\n\n   input: [7, 3, 9, 5, 5, 7, 2, 9, 12, 11]\n   output: 6\n\n   input: [3, 8, 9, 9, 3, 4, 8, 6]\n   output: 1\n*/\nsize_t findFirstEven(std::vector<int> const& x) {"
     },
     {
         "problem_type": "search",
@@ -1747,7 +1747,7 @@
         "language": "cpp",
         "name": "31_search_search_for_last_struct_by_key",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\nstruct Book {\n   std::string title;\n   int pages;\n};\n\n/* Return the index of the last Book item in the vector books where Book.pages is less than 100.\n   Use MPI to search in parallel. Assume MPI is already initialized.\n\t Example:\n\n   input: [{title=\"Green Eggs and Ham\", pages=72}, {title=\"gulliver's travels\", pages=362}, {title=\"Stories of Your Life\", pages=54}, {title=\"Hamilton\", pages=818}]\n   output: 2\n*/\nsize_t findLastShortBook(std::vector<Book> const& books) {"
+        "prompt": "#include <mpi.h>\n\nstruct Book {\n   std::string title;\n   int pages;\n};\n\n/* Return the index of the last Book item in the vector books where Book.pages is less than 100.\n   Use MPI to search in parallel. Assume MPI is already initialized.\n   Every rank has a complete copy of books. Return the result on rank 0.\n\t Example:\n\n   input: [{title=\"Green Eggs and Ham\", pages=72}, {title=\"gulliver's travels\", pages=362}, {title=\"Stories of Your Life\", pages=54}, {title=\"Hamilton\", pages=818}]\n   output: 2\n*/\nsize_t findLastShortBook(std::vector<Book> const& books) {"
     },
     {
         "problem_type": "search",
@@ -1761,7 +1761,7 @@
         "language": "cpp",
         "name": "31_search_search_for_last_struct_by_key",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct Book {\n   std::string title;\n   int pages;\n};\n\n/* Return the index of the last Book item in the vector books where Book.pages is less than 100.\n   Use MPI and OpenMP to search in parallel. Assume MPI is already initialized.\n\t Example:\n\n   input: [{title=\"Green Eggs and Ham\", pages=72}, {title=\"gulliver's travels\", pages=362}, {title=\"Stories of Your Life\", pages=54}, {title=\"Hamilton\", pages=818}]\n   output: 2\n*/\nsize_t findLastShortBook(std::vector<Book> const& books) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct Book {\n   std::string title;\n   int pages;\n};\n\n/* Return the index of the last Book item in the vector books where Book.pages is less than 100.\n   Use MPI and OpenMP to search in parallel. Assume MPI is already initialized.\n   Every rank has a complete copy of books. Return the result on rank 0.\n\t Example:\n\n   input: [{title=\"Green Eggs and Ham\", pages=72}, {title=\"gulliver's travels\", pages=362}, {title=\"Stories of Your Life\", pages=54}, {title=\"Hamilton\", pages=818}]\n   output: 2\n*/\nsize_t findLastShortBook(std::vector<Book> const& books) {"
     },
     {
         "problem_type": "search",
@@ -1796,7 +1796,7 @@
         "language": "cpp",
         "name": "33_search_find_the_closest_number_to_pi",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Return the index of the value in the vector x that is closest to the math constant PI.\n   Use M_PI for the value of PI.\n   Use MPI to search in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [9.18, 3.05, 7.24, 11.3, -166.49, 2.1]\n   output: 1\n*/\nsize_t findClosestToPi(std::vector<double> const& x) {"
+        "prompt": "#include <mpi.h>\n\n/* Return the index of the value in the vector x that is closest to the math constant PI.\n   Use M_PI for the value of PI.\n   Use MPI to search in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. Return the result on rank 0.\n   Example:\n\n   input: [9.18, 3.05, 7.24, 11.3, -166.49, 2.1]\n   output: 1\n*/\nsize_t findClosestToPi(std::vector<double> const& x) {"
     },
     {
         "problem_type": "search",
@@ -1810,7 +1810,7 @@
         "language": "cpp",
         "name": "33_search_find_the_closest_number_to_pi",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the index of the value in the vector x that is closest to the math constant PI.\n   Use M_PI for the value of PI.\n   Use MPI and OpenMP to search in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [9.18, 3.05, 7.24, 11.3, -166.49, 2.1]\n   output: 1\n*/\nsize_t findClosestToPi(std::vector<double> const& x) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the index of the value in the vector x that is closest to the math constant PI.\n   Use M_PI for the value of PI.\n   Use MPI and OpenMP to search in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. Return the result on rank 0.\n   Example:\n\n   input: [9.18, 3.05, 7.24, 11.3, -166.49, 2.1]\n   output: 1\n*/\nsize_t findClosestToPi(std::vector<double> const& x) {"
     },
     {
         "problem_type": "search",
@@ -1845,7 +1845,7 @@
         "language": "cpp",
         "name": "32_search_check_if_array_contains_value",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Return true if the vector x contains the value `target`. Return false otherwise.\n   Use MPI to search in parallel. Assume MPI has already been initialized.\n   Examples:\n\n   input: x=[1, 8, 2, 6, 4, 6], target=3\n   output: false\n   \n   input: x=[1, 8, 2, 6, 4, 6], target=8\n   output: true\n*/\nbool contains(std::vector<int> const& x, int target) {"
+        "prompt": "#include <mpi.h>\n\n/* Return true if the vector x contains the value `target`. Return false otherwise.\n   Use MPI to search in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. Return the result on rank 0.\n   Examples:\n\n   input: x=[1, 8, 2, 6, 4, 6], target=3\n   output: false\n   \n   input: x=[1, 8, 2, 6, 4, 6], target=8\n   output: true\n*/\nbool contains(std::vector<int> const& x, int target) {"
     },
     {
         "problem_type": "search",
@@ -1859,7 +1859,7 @@
         "language": "cpp",
         "name": "32_search_check_if_array_contains_value",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return true if the vector x contains the value `target`. Return false otherwise.\n   Use MPI and OpenMP to search in parallel. Assume MPI has already been initialized.\n   Examples:\n\n   input: x=[1, 8, 2, 6, 4, 6], target=3\n   output: false\n   \n   input: x=[1, 8, 2, 6, 4, 6], target=8\n   output: true\n*/\nbool contains(std::vector<int> const& x, int target) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return true if the vector x contains the value `target`. Return false otherwise.\n   Use MPI and OpenMP to search in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. Return the result on rank 0.\n   Examples:\n\n   input: x=[1, 8, 2, 6, 4, 6], target=3\n   output: false\n   \n   input: x=[1, 8, 2, 6, 4, 6], target=8\n   output: true\n*/\nbool contains(std::vector<int> const& x, int target) {"
     },
     {
         "problem_type": "fft",
@@ -1894,7 +1894,7 @@
         "language": "cpp",
         "name": "05_fft_inverse_fft",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* forward declare fft. computes fourier transform in-place */\nvoid fft(std::vector<std::complex<double>> &x);\n\n/* Compute the inverse fourier transform of x in-place.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{0.5,0}, {0.125,0.301777}, {0,-0}, {0.125,0.0517767}, {0,-0}, {0.125,-0.0517767}, {0,-0}, {0.125,-0.301777}]\n*/\nvoid ifft(std::vector<std::complex<double>> &x) {"
+        "prompt": "#include <mpi.h>\n\n/* forward declare fft. computes fourier transform in-place */\nvoid fft(std::vector<std::complex<double>> &x);\n\n/* Compute the inverse fourier transform of x in-place.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. The final result is stored on rank 0.\n   Example:\n   \n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{0.5,0}, {0.125,0.301777}, {0,-0}, {0.125,0.0517767}, {0,-0}, {0.125,-0.0517767}, {0,-0}, {0.125,-0.301777}]\n*/\nvoid ifft(std::vector<std::complex<double>> &x) {"
     },
     {
         "problem_type": "fft",
@@ -1908,7 +1908,7 @@
         "language": "cpp",
         "name": "05_fft_inverse_fft",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* forward declare fft. computes fourier transform in-place */\nvoid fft(std::vector<std::complex<double>> &x);\n\n/* Compute the inverse fourier transform of x in-place.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{0.5,0}, {0.125,0.301777}, {0,-0}, {0.125,0.0517767}, {0,-0}, {0.125,-0.0517767}, {0,-0}, {0.125,-0.301777}]\n*/\nvoid ifft(std::vector<std::complex<double>> &x) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* forward declare fft. computes fourier transform in-place */\nvoid fft(std::vector<std::complex<double>> &x);\n\n/* Compute the inverse fourier transform of x in-place.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. The final result is stored on rank 0.\n   Example:\n   \n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{0.5,0}, {0.125,0.301777}, {0,-0}, {0.125,0.0517767}, {0,-0}, {0.125,-0.0517767}, {0,-0}, {0.125,-0.301777}]\n*/\nvoid ifft(std::vector<std::complex<double>> &x) {"
     },
     {
         "problem_type": "fft",
@@ -1943,7 +1943,7 @@
         "language": "cpp",
         "name": "06_fft_fft_conjugate",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Compute the fourier transform of x in-place. Return the imaginary conjugate of each value.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.41421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fft(std::vector<std::complex<double>> &x) {"
+        "prompt": "#include <mpi.h>\n\n/* Compute the fourier transform of x in-place. Return the imaginary conjugate of each value.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. The final result is stored on rank 0.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.41421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fft(std::vector<std::complex<double>> &x) {"
     },
     {
         "problem_type": "fft",
@@ -1957,7 +1957,7 @@
         "language": "cpp",
         "name": "06_fft_fft_conjugate",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the fourier transform of x in-place. Return the imaginary conjugate of each value.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.41421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fft(std::vector<std::complex<double>> &x) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the fourier transform of x in-place. Return the imaginary conjugate of each value.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. The final result is stored on rank 0.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.41421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fft(std::vector<std::complex<double>> &x) {"
     },
     {
         "problem_type": "fft",
@@ -1992,7 +1992,7 @@
         "language": "cpp",
         "name": "07_fft_split_fft",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Compute the fourier transform of x. Store real part of results in r and imaginary in i.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: r: [4, 1, 0, 1, 0, 1, 0, 1] i: [0, -2.41421, 0, -0.414214, 0, 0.414214, 0, 2.41421]\n*/\nvoid fft(std::vector<std::complex<double>> const& x, std::vector<double> &r, std::vector<double> &i) {"
+        "prompt": "#include <mpi.h>\n\n/* Compute the fourier transform of x. Store real part of results in r and imaginary in i.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. The final result is stored on rank 0.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: r: [4, 1, 0, 1, 0, 1, 0, 1] i: [0, -2.41421, 0, -0.414214, 0, 0.414214, 0, 2.41421]\n*/\nvoid fft(std::vector<std::complex<double>> const& x, std::vector<double> &r, std::vector<double> &i) {"
     },
     {
         "problem_type": "fft",
@@ -2006,7 +2006,7 @@
         "language": "cpp",
         "name": "07_fft_split_fft",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the fourier transform of x. Store real part of results in r and imaginary in i.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: r: [4, 1, 0, 1, 0, 1, 0, 1] i: [0, -2.41421, 0, -0.414214, 0, 0.414214, 0, 2.41421]\n*/\nvoid fft(std::vector<std::complex<double>> const& x, std::vector<double> &r, std::vector<double> &i) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the fourier transform of x. Store real part of results in r and imaginary in i.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. The final result is stored on rank 0.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: r: [4, 1, 0, 1, 0, 1, 0, 1] i: [0, -2.41421, 0, -0.414214, 0, 0.414214, 0, 2.41421]\n*/\nvoid fft(std::vector<std::complex<double>> const& x, std::vector<double> &r, std::vector<double> &i) {"
     },
     {
         "problem_type": "dense_la",
@@ -2041,7 +2041,7 @@
         "language": "cpp",
         "name": "03_dense_la_axpy",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Compute z = alpha*x+y where x and y are vectors. Store the result in z.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: x=[1, -5, 2, 9] y=[0, 4, 1, -1] alpha=2\n   output: z=[2, -6, 5, 17]\n*/\nvoid axpy(double alpha, std::vector<double> const& x, std::vector<double> const& y, std::vector<double> &z) {"
+        "prompt": "#include <mpi.h>\n\n/* Compute z = alpha*x+y where x and y are vectors. Store the result in z.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x and y. Store the result in z on rank 0.\n   Example:\n   \n   input: x=[1, -5, 2, 9] y=[0, 4, 1, -1] alpha=2\n   output: z=[2, -6, 5, 17]\n*/\nvoid axpy(double alpha, std::vector<double> const& x, std::vector<double> const& y, std::vector<double> &z) {"
     },
     {
         "problem_type": "dense_la",
@@ -2055,7 +2055,7 @@
         "language": "cpp",
         "name": "03_dense_la_axpy",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute z = alpha*x+y where x and y are vectors. Store the result in z.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: x=[1, -5, 2, 9] y=[0, 4, 1, -1] alpha=2\n   output: z=[2, -6, 5, 17]\n*/\nvoid axpy(double alpha, std::vector<double> const& x, std::vector<double> const& y, std::vector<double> &z) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute z = alpha*x+y where x and y are vectors. Store the result in z.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x and y. Store the result in z on rank 0.\n   Example:\n   \n   input: x=[1, -5, 2, 9] y=[0, 4, 1, -1] alpha=2\n   output: z=[2, -6, 5, 17]\n*/\nvoid axpy(double alpha, std::vector<double> const& x, std::vector<double> const& y, std::vector<double> &z) {"
     },
     {
         "problem_type": "dense_la",
@@ -2090,7 +2090,7 @@
         "language": "cpp",
         "name": "01_dense_la_solve",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Solve the linear system Ax=b for x.\n   A is an NxN matrix in row-major. x and b have N elements.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: A=[[1,4,2], [1,2,3], [2,1,3]] b=[11, 11, 13]\n   output: x=[3, 1, 2]\n*/\nvoid solveLinearSystem(std::vector<double> const& A, std::vector<double> const& b, std::vector<double> &x, size_t N) {"
+        "prompt": "#include <mpi.h>\n\n/* Solve the linear system Ax=b for x.\n   A is an NxN matrix in row-major. x and b have N elements.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A and b. Store the result in x on rank 0.\n   Example:\n   \n   input: A=[[1,4,2], [1,2,3], [2,1,3]] b=[11, 11, 13]\n   output: x=[3, 1, 2]\n*/\nvoid solveLinearSystem(std::vector<double> const& A, std::vector<double> const& b, std::vector<double> &x, size_t N) {"
     },
     {
         "problem_type": "dense_la",
@@ -2104,7 +2104,7 @@
         "language": "cpp",
         "name": "01_dense_la_solve",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Solve the linear system Ax=b for x.\n   A is an NxN matrix in row-major. x and b have N elements.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: A=[[1,4,2], [1,2,3], [2,1,3]] b=[11, 11, 13]\n   output: x=[3, 1, 2]\n*/\nvoid solveLinearSystem(std::vector<double> const& A, std::vector<double> const& b, std::vector<double> &x, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Solve the linear system Ax=b for x.\n   A is an NxN matrix in row-major. x and b have N elements.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A and b. Store the result in x on rank 0.\n   Example:\n   \n   input: A=[[1,4,2], [1,2,3], [2,1,3]] b=[11, 11, 13]\n   output: x=[3, 1, 2]\n*/\nvoid solveLinearSystem(std::vector<double> const& A, std::vector<double> const& b, std::vector<double> &x, size_t N) {"
     },
     {
         "problem_type": "dense_la",
@@ -2139,7 +2139,7 @@
         "language": "cpp",
         "name": "02_dense_la_gemm",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Multiply the matrix A by the matrix B. Store the results in the matrix C.\n   A is an MxK matrix, B is a KxN matrix, and C is a MxN matrix. The matrices are stored in row-major.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: A=[[1, -1, 2], [0, -2, 1]] B=[[4, 1], [-1, 0], [2, 2]]\n   output: C=[[9, 5], [4, 2]]\n*/\nvoid gemm(std::vector<double> const& A, std::vector<double> const& B, std::vector<double> &C, size_t M, size_t K, size_t N) {"
+        "prompt": "#include <mpi.h>\n\n/* Multiply the matrix A by the matrix B. Store the results in the matrix C.\n   A is an MxK matrix, B is a KxN matrix, and C is a MxN matrix. The matrices are stored in row-major.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A and B. Store the result in C on rank 0.\n   Example:\n\n   input: A=[[1, -1, 2], [0, -2, 1]] B=[[4, 1], [-1, 0], [2, 2]]\n   output: C=[[9, 5], [4, 2]]\n*/\nvoid gemm(std::vector<double> const& A, std::vector<double> const& B, std::vector<double> &C, size_t M, size_t K, size_t N) {"
     },
     {
         "problem_type": "dense_la",
@@ -2153,7 +2153,7 @@
         "language": "cpp",
         "name": "02_dense_la_gemm",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Multiply the matrix A by the matrix B. Store the results in the matrix C.\n   A is an MxK matrix, B is a KxN matrix, and C is a MxN matrix. The matrices are stored in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: A=[[1, -1, 2], [0, -2, 1]] B=[[4, 1], [-1, 0], [2, 2]]\n   output: C=[[9, 5], [4, 2]]\n*/\nvoid gemm(std::vector<double> const& A, std::vector<double> const& B, std::vector<double> &C, size_t M, size_t K, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Multiply the matrix A by the matrix B. Store the results in the matrix C.\n   A is an MxK matrix, B is a KxN matrix, and C is a MxN matrix. The matrices are stored in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A and B. Store the result in C on rank 0.\n   Example:\n\n   input: A=[[1, -1, 2], [0, -2, 1]] B=[[4, 1], [-1, 0], [2, 2]]\n   output: C=[[9, 5], [4, 2]]\n*/\nvoid gemm(std::vector<double> const& A, std::vector<double> const& B, std::vector<double> &C, size_t M, size_t K, size_t N) {"
     },
     {
         "problem_type": "dense_la",
@@ -2188,7 +2188,7 @@
         "language": "cpp",
         "name": "04_dense_la_gemv",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Multiply the matrix A by the vector x. Store the results in the vector y.\n   A is an MxN matrix stored in row-major, x has N elements, and y has M elements.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: A=[[1, -1, 2], [0, -3, 1]] x=[2, 1, 0]\n   output: y=[1, -3]\n*/\nvoid gemv(std::vector<double> const& A, std::vector<double> const& x, std::vector<double> &y, size_t M, size_t N) {"
+        "prompt": "#include <mpi.h>\n\n/* Multiply the matrix A by the vector x. Store the results in the vector y.\n   A is an MxN matrix stored in row-major, x has N elements, and y has M elements.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A and x. Store the result in y on rank 0.\n   Example:\n\n   input: A=[[1, -1, 2], [0, -3, 1]] x=[2, 1, 0]\n   output: y=[1, -3]\n*/\nvoid gemv(std::vector<double> const& A, std::vector<double> const& x, std::vector<double> &y, size_t M, size_t N) {"
     },
     {
         "problem_type": "dense_la",
@@ -2202,7 +2202,7 @@
         "language": "cpp",
         "name": "04_dense_la_gemv",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Multiply the matrix A by the vector x. Store the results in the vector y.\n   A is an MxN matrix stored in row-major, x has N elements, and y has M elements.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: A=[[1, -1, 2], [0, -3, 1]] x=[2, 1, 0]\n   output: y=[1, -3]\n*/\nvoid gemv(std::vector<double> const& A, std::vector<double> const& x, std::vector<double> &y, size_t M, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Multiply the matrix A by the vector x. Store the results in the vector y.\n   A is an MxN matrix stored in row-major, x has N elements, and y has M elements.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A and x. Store the result in y on rank 0.\n   Example:\n\n   input: A=[[1, -1, 2], [0, -3, 1]] x=[2, 1, 0]\n   output: y=[1, -3]\n*/\nvoid gemv(std::vector<double> const& A, std::vector<double> const& x, std::vector<double> &y, size_t M, size_t N) {"
     },
     {
         "problem_type": "dense_la",
@@ -2237,7 +2237,7 @@
         "language": "cpp",
         "name": "00_dense_la_lu_decomp",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Factorize the matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   Store the results for L and U into the original matrix A. \n   A is an NxN matrix stored in row-major.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [[4, 3], [6, 3]]\n   output: [[4, 3], [1.5, -1.5]]\n*/\nvoid luFactorize(std::vector<double> &A, size_t N) {"
+        "prompt": "#include <mpi.h>\n\n/* Factorize the matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   Store the results for L and U into the original matrix A. \n   A is an NxN matrix stored in row-major.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. Store the result in A on rank 0.\n   Example:\n\n   input: [[4, 3], [6, 3]]\n   output: [[4, 3], [1.5, -1.5]]\n*/\nvoid luFactorize(std::vector<double> &A, size_t N) {"
     },
     {
         "problem_type": "dense_la",
@@ -2251,7 +2251,7 @@
         "language": "cpp",
         "name": "00_dense_la_lu_decomp",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Factorize the matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   Store the results for L and U into the original matrix A. \n   A is an NxN matrix stored in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [[4, 3], [6, 3]]\n   output: [[4, 3], [1.5, -1.5]]\n*/\nvoid luFactorize(std::vector<double> &A, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Factorize the matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   Store the results for L and U into the original matrix A. \n   A is an NxN matrix stored in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. Store the result in A on rank 0.\n   Example:\n\n   input: [[4, 3], [6, 3]]\n   output: [[4, 3], [1.5, -1.5]]\n*/\nvoid luFactorize(std::vector<double> &A, size_t N) {"
     },
     {
         "problem_type": "sort",
@@ -2272,7 +2272,7 @@
         "language": "cpp",
         "name": "38_sort_sort_first_half_in_descending_order",
         "parallelism_model": "serial",
-        "prompt": "/* Sort the first half of the vector x in descending order. Leave the second half in-place. \n   If x.size() is odd, then include the middle element in the first half. \n   Examples:\n   \n   input: [2, 5, -4, 7, 3, 6, -1]\n   output: [7, 5, 2, -4, 3, 6, -1]\n\n   input: [-8, 4, 6, 1, 3, 1]\n   output: [6, 4, -8, 1, 3, 1]\n*/\nvoid sortFirstHalfDescending(std::vector<int> &x) {"
+        "prompt": "/* Sort the first half of the vector x in descending order. Leave the second half in-place. \n   If x.size() is odd, then include the middle element in the first half.\n   Examples:\n   \n   input: [2, 5, -4, 7, 3, 6, -1]\n   output: [7, 5, 2, -4, 3, 6, -1]\n\n   input: [-8, 4, 6, 1, 3, 1]\n   output: [6, 4, -8, 1, 3, 1]\n*/\nvoid sortFirstHalfDescending(std::vector<int> &x) {"
     },
     {
         "problem_type": "sort",
@@ -2286,7 +2286,7 @@
         "language": "cpp",
         "name": "38_sort_sort_first_half_in_descending_order",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Sort the first half of the vector x in descending order. Leave the second half in-place. \n   If x.size() is odd, then include the middle element in the first half. \n   Use MPI to sort in parallel. Assume MPI is already initialized.\n   Examples:\n   \n   input: [2, 5, -4, 7, 3, 6, -1]\n   output: [7, 5, 2, -4, 3, 6, -1]\n\n   input: [-8, 4, 6, 1, 3, 1]\n   output: [6, 4, -8, 1, 3, 1]\n*/\nvoid sortFirstHalfDescending(std::vector<int> &x) {"
+        "prompt": "#include <mpi.h>\n\n/* Sort the first half of the vector x in descending order. Leave the second half in-place. \n   If x.size() is odd, then include the middle element in the first half. \n   Use MPI to sort in parallel. Assume MPI is already initialized.\n   Every rank has a complete copy of x. Store the result in x on rank 0.\n   Examples:\n   \n   input: [2, 5, -4, 7, 3, 6, -1]\n   output: [7, 5, 2, -4, 3, 6, -1]\n\n   input: [-8, 4, 6, 1, 3, 1]\n   output: [6, 4, -8, 1, 3, 1]\n*/\nvoid sortFirstHalfDescending(std::vector<int> &x) {"
     },
     {
         "problem_type": "sort",
@@ -2300,7 +2300,7 @@
         "language": "cpp",
         "name": "38_sort_sort_first_half_in_descending_order",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Sort the first half of the vector x in descending order. Leave the second half in-place. \n   If x.size() is odd, then include the middle element in the first half. \n   Use MPI and OpenMP to sort in parallel. Assume MPI is already initialized.\n   Examples:\n   \n   input: [2, 5, -4, 7, 3, 6, -1]\n   output: [7, 5, 2, -4, 3, 6, -1]\n\n   input: [-8, 4, 6, 1, 3, 1]\n   output: [6, 4, -8, 1, 3, 1]\n*/\nvoid sortFirstHalfDescending(std::vector<int> &x) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Sort the first half of the vector x in descending order. Leave the second half in-place. \n   If x.size() is odd, then include the middle element in the first half. \n   Use MPI and OpenMP to sort in parallel. Assume MPI is already initialized.\n   Every rank has a complete copy of x. Store the result in x on rank 0.\n   Examples:\n   \n   input: [2, 5, -4, 7, 3, 6, -1]\n   output: [7, 5, 2, -4, 3, 6, -1]\n\n   input: [-8, 4, 6, 1, 3, 1]\n   output: [6, 4, -8, 1, 3, 1]\n*/\nvoid sortFirstHalfDescending(std::vector<int> &x) {"
     },
     {
         "problem_type": "sort",
@@ -2335,7 +2335,7 @@
         "language": "cpp",
         "name": "40_sort_sort_an_array_of_structs_by_key",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\nstruct Result {\n   int startTime, duration;\n   float value;\n};\n\n/* Sort vector of Result structs by start time in ascending order.\n   Use MPI to sort in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: [{startTime=8, duration=4, value=-1.22}, {startTime=2, duration=10, value=1.0}, {startTime=10, duration=3, value=0.0}]\n   output: [{startTime=2, duration=10, value=1.0}, {startTime=8, duration=4, value=-1.22}, {startTime=10, duration=3, value=0.0}]\n*/\nvoid sortByStartTime(std::vector<Result> &results) {"
+        "prompt": "#include <mpi.h>\n\nstruct Result {\n   int startTime, duration;\n   float value;\n};\n\n/* Sort vector of Result structs by start time in ascending order.\n   Use MPI to sort in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of results. Store the output in results on rank 0.\n   Example:\n   \n   input: [{startTime=8, duration=4, value=-1.22}, {startTime=2, duration=10, value=1.0}, {startTime=10, duration=3, value=0.0}]\n   output: [{startTime=2, duration=10, value=1.0}, {startTime=8, duration=4, value=-1.22}, {startTime=10, duration=3, value=0.0}]\n*/\nvoid sortByStartTime(std::vector<Result> &results) {"
     },
     {
         "problem_type": "sort",
@@ -2349,7 +2349,7 @@
         "language": "cpp",
         "name": "40_sort_sort_an_array_of_structs_by_key",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct Result {\n   int startTime, duration;\n   float value;\n};\n\n/* Sort vector of Result structs by start time in ascending order.\n   Use MPI and OpenMP to sort in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: [{startTime=8, duration=4, value=-1.22}, {startTime=2, duration=10, value=1.0}, {startTime=10, duration=3, value=0.0}]\n   output: [{startTime=2, duration=10, value=1.0}, {startTime=8, duration=4, value=-1.22}, {startTime=10, duration=3, value=0.0}]\n*/\nvoid sortByStartTime(std::vector<Result> &results) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct Result {\n   int startTime, duration;\n   float value;\n};\n\n/* Sort vector of Result structs by start time in ascending order.\n   Use MPI and OpenMP to sort in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of results. Store the outputs in results on rank 0.\n   Example:\n   \n   input: [{startTime=8, duration=4, value=-1.22}, {startTime=2, duration=10, value=1.0}, {startTime=10, duration=3, value=0.0}]\n   output: [{startTime=2, duration=10, value=1.0}, {startTime=8, duration=4, value=-1.22}, {startTime=10, duration=3, value=0.0}]\n*/\nvoid sortByStartTime(std::vector<Result> &results) {"
     },
     {
         "problem_type": "sort",
@@ -2384,7 +2384,7 @@
         "language": "cpp",
         "name": "41_sort_sort_non-zero_elements",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Sort the vector x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place. \n\t Use MPI to sort x in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(std::vector<int> &x) {"
+        "prompt": "#include <mpi.h>\n\n/* Sort the vector x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place. \n\t Use MPI to sort x in parallel. Assume MPI is already initialized.\n   Every rank has a complete copy of x. Store the result in x on rank 0.\n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(std::vector<int> &x) {"
     },
     {
         "problem_type": "sort",
@@ -2398,7 +2398,7 @@
         "language": "cpp",
         "name": "41_sort_sort_non-zero_elements",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Sort the vector x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place. \n\t Use MPI and OpenMP to sort x in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(std::vector<int> &x) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Sort the vector x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place. \n\t Use MPI and OpenMP to sort x in parallel. Assume MPI is already initialized.\n   Every rank has a complete copy of x. Store the result in x on rank 0.\n   Example:\n\n   input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(std::vector<int> &x) {"
     },
     {
         "problem_type": "sort",
@@ -2433,7 +2433,7 @@
         "language": "cpp",
         "name": "39_sort_sorted_ranks",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* For each value in the vector x compute its index in the sorted vector.\n   Store the results in `ranks`.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Examples:\n\n   input: [3.1, 2.8, 9.1, 0.4, 3.14]\n   output: [2, 1, 4, 0, 3]\n \n   input: [100, 7.6, 16.1, 18, 7.6]\n   output: [4, 0, 1, 2, 3]\n*/\nvoid ranks(std::vector<float> const& x, std::vector<size_t> &ranks) {"
+        "prompt": "#include <mpi.h>\n\n/* For each value in the vector x compute its index in the sorted vector.\n   Store the results in `ranks`.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every process has a complete copy of x. Store the result in ranks on process 0.\n   Examples:\n\n   input: [3.1, 2.8, 9.1, 0.4, 3.14]\n   output: [2, 1, 4, 0, 3]\n \n   input: [100, 7.6, 16.1, 18, 7.6]\n   output: [4, 0, 1, 2, 3]\n*/\nvoid ranks(std::vector<float> const& x, std::vector<size_t> &ranks) {"
     },
     {
         "problem_type": "sort",
@@ -2447,7 +2447,7 @@
         "language": "cpp",
         "name": "39_sort_sorted_ranks",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* For each value in the vector x compute its index in the sorted vector.\n   Store the results in `ranks`.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Examples:\n\n   input: [3.1, 2.8, 9.1, 0.4, 3.14]\n   output: [2, 1, 4, 0, 3]\n \n   input: [100, 7.6, 16.1, 18, 7.6]\n   output: [4, 0, 1, 2, 3]\n*/\nvoid ranks(std::vector<float> const& x, std::vector<size_t> &ranks) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* For each value in the vector x compute its index in the sorted vector.\n   Store the results in `ranks`.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every process has a complete copy of x. Store the result in ranks on process 0.\n   Examples:\n\n   input: [3.1, 2.8, 9.1, 0.4, 3.14]\n   output: [2, 1, 4, 0, 3]\n \n   input: [100, 7.6, 16.1, 18, 7.6]\n   output: [4, 0, 1, 2, 3]\n*/\nvoid ranks(std::vector<float> const& x, std::vector<size_t> &ranks) {"
     },
     {
         "problem_type": "sort",
@@ -2482,7 +2482,7 @@
         "language": "cpp",
         "name": "36_sort_sort_an_array_of_complex_numbers_by_magnitude",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Sort the vector x of complex numbers by their magnitude in ascending order.\n   Use MPI to sort in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: [3.0-1.0i, 4.5+2.1i, 0.0-1.0i, 1.0-0.0i, 0.5+0.5i]\n   output: [0.5+0.5i, 0.0-1.0i, 1.0-0.0i, 3.0-1.0i, 4.5+2.1i]\n*/\nvoid sortComplexByMagnitude(std::vector<std::complex<double>> &x) {"
+        "prompt": "#include <mpi.h>\n\n/* Sort the vector x of complex numbers by their magnitude in ascending order.\n   Use MPI to sort in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. Store the result in x on rank 0.\n   Example:\n   \n   input: [3.0-1.0i, 4.5+2.1i, 0.0-1.0i, 1.0-0.0i, 0.5+0.5i]\n   output: [0.5+0.5i, 0.0-1.0i, 1.0-0.0i, 3.0-1.0i, 4.5+2.1i]\n*/\nvoid sortComplexByMagnitude(std::vector<std::complex<double>> &x) {"
     },
     {
         "problem_type": "sort",
@@ -2496,7 +2496,7 @@
         "language": "cpp",
         "name": "36_sort_sort_an_array_of_complex_numbers_by_magnitude",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Sort the vector x of complex numbers by their magnitude in ascending order.\n   Use MPI and OpenMP to sort in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: [3.0-1.0i, 4.5+2.1i, 0.0-1.0i, 1.0-0.0i, 0.5+0.5i]\n   output: [0.5+0.5i, 0.0-1.0i, 1.0-0.0i, 3.0-1.0i, 4.5+2.1i]\n*/\nvoid sortComplexByMagnitude(std::vector<std::complex<double>> &x) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Sort the vector x of complex numbers by their magnitude in ascending order.\n   Use MPI and OpenMP to sort in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. Store the result in x on rank 0.\n   Example:\n   \n   input: [3.0-1.0i, 4.5+2.1i, 0.0-1.0i, 1.0-0.0i, 0.5+0.5i]\n   output: [0.5+0.5i, 0.0-1.0i, 1.0-0.0i, 3.0-1.0i, 4.5+2.1i]\n*/\nvoid sortComplexByMagnitude(std::vector<std::complex<double>> &x) {"
     },
     {
         "problem_type": "sort",
@@ -2531,7 +2531,7 @@
         "language": "cpp",
         "name": "37_sort_k-th_smallest_element",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Find the k-th smallest element of the vector x.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: x=[1, 7, 6, 0, 2, 2, 10, 6], k=4\n   output: 6\n*/\nint findKthSmallest(std::vector<int> const& x, int k) {"
+        "prompt": "#include <mpi.h>\n\n/* Find the k-th smallest element of the vector x.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. Return the result on rank 0.\n   Example:\n   \n   input: x=[1, 7, 6, 0, 2, 2, 10, 6], k=4\n   output: 6\n*/\nint findKthSmallest(std::vector<int> const& x, int k) {"
     },
     {
         "problem_type": "sort",
@@ -2545,7 +2545,7 @@
         "language": "cpp",
         "name": "37_sort_k-th_smallest_element",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Find the k-th smallest element of the vector x.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n   \n   input: x=[1, 7, 6, 0, 2, 2, 10, 6], k=4\n   output: 6\n*/\nint findKthSmallest(std::vector<int> const& x, int k) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Find the k-th smallest element of the vector x.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. Return the result on rank 0.\n   Example:\n   \n   input: x=[1, 7, 6, 0, 2, 2, 10, 6], k=4\n   output: 6\n*/\nint findKthSmallest(std::vector<int> const& x, int k) {"
     },
     {
         "problem_type": "stencil",
@@ -2580,7 +2580,7 @@
         "language": "cpp",
         "name": "49_stencil_1d_jacobi_3-point_stencil",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Compute one iteration of a 3-point 1D jacobi stencil on `input`. Store the results in `output`.\n   Each element of `input` will be averaged with its two neighbors and stored in the corresponding element of `output`.\n   i.e. output[i] = (input[i-1]+input[i]+input[i+1])/3\n   Replace with 0 when reading past the boundaries of `input`.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [9, -6, -1, 2, 3]\n   output: [1, 2/3, -5/3, 4/3, 5/3]\n*/\nvoid jacobi1D(std::vector<double> const& input, std::vector<double> &output) {"
+        "prompt": "#include <mpi.h>\n\n/* Compute one iteration of a 3-point 1D jacobi stencil on `input`. Store the results in `output`.\n   Each element of `input` will be averaged with its two neighbors and stored in the corresponding element of `output`.\n   i.e. output[i] = (input[i-1]+input[i]+input[i+1])/3\n   Replace with 0 when reading past the boundaries of `input`.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of input. The result is stored in output on rank 0.\n   Example:\n\n   input: [9, -6, -1, 2, 3]\n   output: [1, 2/3, -5/3, 4/3, 5/3]\n*/\nvoid jacobi1D(std::vector<double> const& input, std::vector<double> &output) {"
     },
     {
         "problem_type": "stencil",
@@ -2594,7 +2594,7 @@
         "language": "cpp",
         "name": "49_stencil_1d_jacobi_3-point_stencil",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute one iteration of a 3-point 1D jacobi stencil on `input`. Store the results in `output`.\n   Each element of `input` will be averaged with its two neighbors and stored in the corresponding element of `output`.\n   i.e. output[i] = (input[i-1]+input[i]+input[i+1])/3\n   Replace with 0 when reading past the boundaries of `input`.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [9, -6, -1, 2, 3]\n   output: [1, 2/3, -5/3, 4/3, 5/3]\n*/\nvoid jacobi1D(std::vector<double> const& input, std::vector<double> &output) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute one iteration of a 3-point 1D jacobi stencil on `input`. Store the results in `output`.\n   Each element of `input` will be averaged with its two neighbors and stored in the corresponding element of `output`.\n   i.e. output[i] = (input[i-1]+input[i]+input[i+1])/3\n   Replace with 0 when reading past the boundaries of `input`.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of input. The result is stored in output on rank 0.\n   Example:\n\n   input: [9, -6, -1, 2, 3]\n   output: [1, 2/3, -5/3, 4/3, 5/3]\n*/\nvoid jacobi1D(std::vector<double> const& input, std::vector<double> &output) {"
     },
     {
         "problem_type": "stencil",
@@ -2629,7 +2629,7 @@
         "language": "cpp",
         "name": "51_stencil_game_of_life",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Simulate one generation of Game of Life on `input`. Store the results in `output`.\n   A cell is 1 if it is alive and 0 if it is dead.\n   If a live cell has fewer than 2 live neighbors then it dies.\n   If a live cell has 2 or 3 live neighbors then it lives on.\n   If a live cell has more than 3 live neighbords then it dies.\n   If a cell is dead and has exactly 3 live neighbors then it becomes alive.\n   `input` and `output` are NxN grids stored in row-major.\n   Use MPI to compute in parallel. Assume MPI is already initialized.\n   Example:\n\n   input:  [[0, 0, 0, 0, 0],\n\t\t\t\t\t  [0, 1, 0, 0, 0],\n            [0, 1, 1, 0, 0],\n            [0, 0, 1, 1, 0],\n            [0, 1, 0, 0, 0]]\n   output: [[0, 0, 0, 0, 0],\n\t\t\t\t\t  [0, 1, 1, 0, 0],\n            [0, 1, 0, 1, 0],\n            [0, 0, 0, 1, 0],\n            [0, 0, 1, 0, 0]]\n*/\nvoid gameOfLife(std::vector<int> const& input, std::vector<int> &output, size_t N) {"
+        "prompt": "#include <mpi.h>\n\n/* Simulate one generation of Game of Life on `input`. Store the results in `output`.\n   A cell is 1 if it is alive and 0 if it is dead.\n   If a live cell has fewer than 2 live neighbors then it dies.\n   If a live cell has 2 or 3 live neighbors then it lives on.\n   If a live cell has more than 3 live neighbords then it dies.\n   If a cell is dead and has exactly 3 live neighbors then it becomes alive.\n   `input` and `output` are NxN grids stored in row-major.\n   Use MPI to compute in parallel. Assume MPI is already initialized.\n   Every rank has a complete copy of input. The result is stored in output on rank 0.\n   Example:\n\n   input:  [[0, 0, 0, 0, 0],\n\t\t\t\t\t  [0, 1, 0, 0, 0],\n            [0, 1, 1, 0, 0],\n            [0, 0, 1, 1, 0],\n            [0, 1, 0, 0, 0]]\n   output: [[0, 0, 0, 0, 0],\n\t\t\t\t\t  [0, 1, 1, 0, 0],\n            [0, 1, 0, 1, 0],\n            [0, 0, 0, 1, 0],\n            [0, 0, 1, 0, 0]]\n*/\nvoid gameOfLife(std::vector<int> const& input, std::vector<int> &output, size_t N) {"
     },
     {
         "problem_type": "stencil",
@@ -2643,7 +2643,7 @@
         "language": "cpp",
         "name": "51_stencil_game_of_life",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Simulate one generation of Game of Life on `input`. Store the results in `output`.\n   A cell is 1 if it is alive and 0 if it is dead.\n   If a live cell has fewer than 2 live neighbors then it dies.\n   If a live cell has 2 or 3 live neighbors then it lives on.\n   If a live cell has more than 3 live neighbords then it dies.\n   If a cell is dead and has exactly 3 live neighbors then it becomes alive.\n   `input` and `output` are NxN grids stored in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI is already initialized.\n   Example:\n\n   input:  [[0, 0, 0, 0, 0],\n\t\t\t\t\t  [0, 1, 0, 0, 0],\n            [0, 1, 1, 0, 0],\n            [0, 0, 1, 1, 0],\n            [0, 1, 0, 0, 0]]\n   output: [[0, 0, 0, 0, 0],\n\t\t\t\t\t  [0, 1, 1, 0, 0],\n            [0, 1, 0, 1, 0],\n            [0, 0, 0, 1, 0],\n            [0, 0, 1, 0, 0]]\n*/\nvoid gameOfLife(std::vector<int> const& input, std::vector<int> &output, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Simulate one generation of Game of Life on `input`. Store the results in `output`.\n   A cell is 1 if it is alive and 0 if it is dead.\n   If a live cell has fewer than 2 live neighbors then it dies.\n   If a live cell has 2 or 3 live neighbors then it lives on.\n   If a live cell has more than 3 live neighbords then it dies.\n   If a cell is dead and has exactly 3 live neighbors then it becomes alive.\n   `input` and `output` are NxN grids stored in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI is already initialized.\n   Every rank has a complete copy of input. The result is stored in output on rank 0.\n   Example:\n\n   input:  [[0, 0, 0, 0, 0],\n\t\t\t\t\t  [0, 1, 0, 0, 0],\n            [0, 1, 1, 0, 0],\n            [0, 0, 1, 1, 0],\n            [0, 1, 0, 0, 0]]\n   output: [[0, 0, 0, 0, 0],\n\t\t\t\t\t  [0, 1, 1, 0, 0],\n            [0, 1, 0, 1, 0],\n            [0, 0, 0, 1, 0],\n            [0, 0, 1, 0, 0]]\n*/\nvoid gameOfLife(std::vector<int> const& input, std::vector<int> &output, size_t N) {"
     },
     {
         "problem_type": "stencil",
@@ -2678,7 +2678,7 @@
         "language": "cpp",
         "name": "48_stencil_edge_kernel",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\nconst int edgeKernel[3][3] = {{-1, -1, -1}, {-1, 8, -1}, {-1, -1, -1}};\n\n/* Convolve the edge kernel with a grayscale image. Each pixel will be replaced with\n   the dot product of itself and its neighbors with the edge kernel.\n   Use a value of 0 for pixels outside the image's boundaries and clip outputs between 0 and 255.\n   imageIn and imageOut are NxN grayscale images stored in row-major.\n   Store the output of the computation in imageOut.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [[112, 118, 141, 152],\n           [93, 101, 119, 203],\n           [45, 17, 16, 232],\n           [82, 31, 49, 101]]\n   output: [[255, 255, 255, 255],\n            [255, 147, 0, 255],\n            [36, 0, 0, 255],\n            [255, 39, 0, 255]]\n*/\nvoid convolveKernel(std::vector<int> const& imageIn, std::vector<int> &imageOut, size_t N) {"
+        "prompt": "#include <mpi.h>\n\nconst int edgeKernel[3][3] = {{-1, -1, -1}, {-1, 8, -1}, {-1, -1, -1}};\n\n/* Convolve the edge kernel with a grayscale image. Each pixel will be replaced with\n   the dot product of itself and its neighbors with the edge kernel.\n   Use a value of 0 for pixels outside the image's boundaries and clip outputs between 0 and 255.\n   imageIn and imageOut are NxN grayscale images stored in row-major.\n   Store the output of the computation in imageOut.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of imageIn. The result is stored in imageOut on rank 0.\n   Example:\n\n   input: [[112, 118, 141, 152],\n           [93, 101, 119, 203],\n           [45, 17, 16, 232],\n           [82, 31, 49, 101]]\n   output: [[255, 255, 255, 255],\n            [255, 147, 0, 255],\n            [36, 0, 0, 255],\n            [255, 39, 0, 255]]\n*/\nvoid convolveKernel(std::vector<int> const& imageIn, std::vector<int> &imageOut, size_t N) {"
     },
     {
         "problem_type": "stencil",
@@ -2692,7 +2692,7 @@
         "language": "cpp",
         "name": "48_stencil_edge_kernel",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nconst int edgeKernel[3][3] = {{-1, -1, -1}, {-1, 8, -1}, {-1, -1, -1}};\n\n/* Convolve the edge kernel with a grayscale image. Each pixel will be replaced with\n   the dot product of itself and its neighbors with the edge kernel.\n   Use a value of 0 for pixels outside the image's boundaries and clip outputs between 0 and 255.\n   imageIn and imageOut are NxN grayscale images stored in row-major.\n   Store the output of the computation in imageOut.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [[112, 118, 141, 152],\n           [93, 101, 119, 203],\n           [45, 17, 16, 232],\n           [82, 31, 49, 101]]\n   output: [[255, 255, 255, 255],\n            [255, 147, 0, 255],\n            [36, 0, 0, 255],\n            [255, 39, 0, 255]]\n*/\nvoid convolveKernel(std::vector<int> const& imageIn, std::vector<int> &imageOut, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nconst int edgeKernel[3][3] = {{-1, -1, -1}, {-1, 8, -1}, {-1, -1, -1}};\n\n/* Convolve the edge kernel with a grayscale image. Each pixel will be replaced with\n   the dot product of itself and its neighbors with the edge kernel.\n   Use a value of 0 for pixels outside the image's boundaries and clip outputs between 0 and 255.\n   imageIn and imageOut are NxN grayscale images stored in row-major.\n   Store the output of the computation in imageOut.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of imageIn. The result is stored in imageOut on rank 0.\n   Example:\n\n   input: [[112, 118, 141, 152],\n           [93, 101, 119, 203],\n           [45, 17, 16, 232],\n           [82, 31, 49, 101]]\n   output: [[255, 255, 255, 255],\n            [255, 147, 0, 255],\n            [36, 0, 0, 255],\n            [255, 39, 0, 255]]\n*/\nvoid convolveKernel(std::vector<int> const& imageIn, std::vector<int> &imageOut, size_t N) {"
     },
     {
         "problem_type": "stencil",
@@ -2727,7 +2727,7 @@
         "language": "cpp",
         "name": "50_stencil_2d_jacobi_5-point_stencil",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Compute one iteration of a 5-point 2D jacobi stencil on `input`. Store the results in `output`.\n   Each element of `input` will be averaged with its four neighbors and stored in the corresponding element of `output`.\n   i.e. output_{i,j} = (input_{i,j-1} + input_{i,j+1} + input_{i-1,j} + input_{i+1,j} + input_{i,j})/5\n   Replace with 0 when reading past the boundaries of `input`.\n   `input` and `output` are NxN grids stored in row-major.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [[3, 4, 1], [0, 1, 7], [5, 3, 2]]\n   output: [[1.4, 1.8, 2.4],[1.8, 3, 2.2], [1.6, 2.2, 2.4]]\n*/\nvoid jacobi2D(std::vector<double> const& input, std::vector<double> &output, size_t N) {"
+        "prompt": "#include <mpi.h>\n\n/* Compute one iteration of a 5-point 2D jacobi stencil on `input`. Store the results in `output`.\n   Each element of `input` will be averaged with its four neighbors and stored in the corresponding element of `output`.\n   i.e. output_{i,j} = (input_{i,j-1} + input_{i,j+1} + input_{i-1,j} + input_{i+1,j} + input_{i,j})/5\n   Replace with 0 when reading past the boundaries of `input`.\n   `input` and `output` are NxN grids stored in row-major.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of input. The result is stored in output on rank 0.\n   Example:\n\n   input: [[3, 4, 1], [0, 1, 7], [5, 3, 2]]\n   output: [[1.4, 1.8, 2.4],[1.8, 3, 2.2], [1.6, 2.2, 2.4]]\n*/\nvoid jacobi2D(std::vector<double> const& input, std::vector<double> &output, size_t N) {"
     },
     {
         "problem_type": "stencil",
@@ -2741,7 +2741,7 @@
         "language": "cpp",
         "name": "50_stencil_2d_jacobi_5-point_stencil",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute one iteration of a 5-point 2D jacobi stencil on `input`. Store the results in `output`.\n   Each element of `input` will be averaged with its four neighbors and stored in the corresponding element of `output`.\n   i.e. output_{i,j} = (input_{i,j-1} + input_{i,j+1} + input_{i-1,j} + input_{i+1,j} + input_{i,j})/5\n   Replace with 0 when reading past the boundaries of `input`.\n   `input` and `output` are NxN grids stored in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [[3, 4, 1], [0, 1, 7], [5, 3, 2]]\n   output: [[1.4, 1.8, 2.4],[1.8, 3, 2.2], [1.6, 2.2, 2.4]]\n*/\nvoid jacobi2D(std::vector<double> const& input, std::vector<double> &output, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute one iteration of a 5-point 2D jacobi stencil on `input`. Store the results in `output`.\n   Each element of `input` will be averaged with its four neighbors and stored in the corresponding element of `output`.\n   i.e. output_{i,j} = (input_{i,j-1} + input_{i,j+1} + input_{i-1,j} + input_{i+1,j} + input_{i,j})/5\n   Replace with 0 when reading past the boundaries of `input`.\n   `input` and `output` are NxN grids stored in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of input. The result is stored in output on rank 0.\n   Example:\n\n   input: [[3, 4, 1], [0, 1, 7], [5, 3, 2]]\n   output: [[1.4, 1.8, 2.4],[1.8, 3, 2.2], [1.6, 2.2, 2.4]]\n*/\nvoid jacobi2D(std::vector<double> const& input, std::vector<double> &output, size_t N) {"
     },
     {
         "problem_type": "stencil",
@@ -2776,7 +2776,7 @@
         "language": "cpp",
         "name": "47_stencil_xor_kernel",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Set every cell's value to 1 if it has exactly one neighbor that's a 1. Otherwise set it to 0.\n   Note that we only consider neighbors and not input_{i,j} when computing output_{i,j}.\n   input and output are NxN grids of ints in row-major.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [[0, 1, 1, 0],\n           [1, 0, 0, 0],\n           [0, 0, 0, 0],\n           [0, 1, 0, 0]\n   output: [[0, 0, 1, 1],\n            [1, 0, 0, 1],\n            [0, 0, 1, 0],\n            [1, 0, 1, 0]]\n*/\nvoid cellsXOR(std::vector<int> const& input, std::vector<int> &output, size_t N) {"
+        "prompt": "#include <mpi.h>\n\n/* Set every cell's value to 1 if it has exactly one neighbor that's a 1. Otherwise set it to 0.\n   Note that we only consider neighbors and not input_{i,j} when computing output_{i,j}.\n   input and output are NxN grids of ints in row-major.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of input. The result is stored in output on rank 0.\n   Example:\n\n   input: [[0, 1, 1, 0],\n           [1, 0, 0, 0],\n           [0, 0, 0, 0],\n           [0, 1, 0, 0]\n   output: [[0, 0, 1, 1],\n            [1, 0, 0, 1],\n            [0, 0, 1, 0],\n            [1, 0, 1, 0]]\n*/\nvoid cellsXOR(std::vector<int> const& input, std::vector<int> &output, size_t N) {"
     },
     {
         "problem_type": "stencil",
@@ -2790,6 +2790,6 @@
         "language": "cpp",
         "name": "47_stencil_xor_kernel",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Set every cell's value to 1 if it has exactly one neighbor that's a 1. Otherwise set it to 0.\n   Note that we only consider neighbors and not input_{i,j} when computing output_{i,j}.\n   input and output are NxN grids of ints in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Example:\n\n   input: [[0, 1, 1, 0],\n           [1, 0, 0, 0],\n           [0, 0, 0, 0],\n           [0, 1, 0, 0]\n   output: [[0, 0, 1, 1],\n            [1, 0, 0, 1],\n            [0, 0, 1, 0],\n            [1, 0, 1, 0]]\n*/\nvoid cellsXOR(std::vector<int> const& input, std::vector<int> &output, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Set every cell's value to 1 if it has exactly one neighbor that's a 1. Otherwise set it to 0.\n   Note that we only consider neighbors and not input_{i,j} when computing output_{i,j}.\n   input and output are NxN grids of ints in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of input. The result is stored in output on rank 0.\n   Example:\n\n   input: [[0, 1, 1, 0],\n           [1, 0, 0, 0],\n           [0, 0, 0, 0],\n           [0, 1, 0, 0]\n   output: [[0, 0, 1, 1],\n            [1, 0, 0, 1],\n            [0, 0, 1, 0],\n            [1, 0, 1, 0]]\n*/\nvoid cellsXOR(std::vector<int> const& input, std::vector<int> &output, size_t N) {"
     }
 ]
