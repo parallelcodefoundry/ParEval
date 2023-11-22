@@ -16,7 +16,8 @@ MAX_NEW_TKNS=2048
 SAMPLES_PER_PROMPT=20
 BATCH_SIZE=16
 hash=$(md5sum ../prompts/generation-prompts.json | cut -d' ' -f1)
-OUTPUT="../outputs/output_${hash:0:8}_${MODEL//[/]/--}_temp${TEMP}.json"
+OUTPUT="../outputs/output_${hash:0:8}_${MODEL//\//--}_temp${TEMP}.json"
+echo "Writing to $OUTPUT"
 
 # setup
 ml cuda/11.8.0
