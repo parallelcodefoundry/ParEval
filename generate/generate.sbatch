@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH -n 1
-#SBATCH -c 4
-#SBATCH --mem=64000
-#SBATCH -t 08:00:00
+#SBATCH -c 8
+#SBATCH --mem=128000
+#SBATCH -t 09:00:00
 #SBATCH -p gpu
 #SBATCH --gpus=a100:1
 #SBATCH -J generate-code
@@ -14,7 +14,7 @@ TEMP=0.2
 TOPP=0.95
 MAX_NEW_TKNS=2048
 SAMPLES_PER_PROMPT=20
-BATCH_SIZE=8
+BATCH_SIZE=16
 hash=$(md5sum ../prompts/generation-prompts.json | cut -d' ' -f1)
 OUTPUT="../outputs/output_${hash:0:8}_${MODEL//[/]/--}_temp${TEMP}.json"
 
@@ -22,7 +22,7 @@ OUTPUT="../outputs/output_${hash:0:8}_${MODEL//[/]/--}_temp${TEMP}.json"
 ml cuda/11.8.0
 source .env/bin/activate
 export HF_HOME=~/scratch/.cache/huggingface
-export OMP_NUM_THREADS=4
+export OMP_NUM_THREADS=8
 
 # generate
 python generate.py \
