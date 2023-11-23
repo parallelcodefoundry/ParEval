@@ -1,20 +1,20 @@
 #!/bin/bash
 #SBATCH -n 1
-#SBATCH -c 4
+#SBATCH -c 8
 #SBATCH --mem=128000
 #SBATCH -t 23:59:59
 #SBATCH -p gpu
 #SBATCH --gpus=a100:1
-#SBATCH -J generate-code
-#SBATCH -o generate-%A.out
+#SBATCH -J generate-codellama-34b-bs2
+#SBATCH -o generate-codellama-34b-bs2-%A.out
 
 # settings
-MODEL="NinedayWang/PolyCoder-2.7B"
+MODEL="codellama/CodeLlama-13b-hf"
 TEMP=0.2
 TOPP=0.95
 MAX_NEW_TKNS=1024
 SAMPLES_PER_PROMPT=20
-BATCH_SIZE=1
+BATCH_SIZE=2
 hash=$(md5sum ../prompts/generation-prompts.json | cut -d' ' -f1)
 OUTPUT="../outputs/output_${hash:0:8}_${MODEL//\//--}_temp${TEMP}.json"
 echo "Writing to $OUTPUT"
@@ -24,7 +24,7 @@ echo "model=$MODEL   MAX_NEW_TKNS=$MAX_NEW_TKNS   SAMPLES_PER_PROMPT=$SAMPLES_PE
 ml cuda/11.8.0
 source .env/bin/activate
 export HF_HOME=~/scratch/.cache/huggingface
-export OMP_NUM_THREADS=4
+export OMP_NUM_THREADS=8
 
 # generate
 srun python generate.py \
