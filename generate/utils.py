@@ -1,6 +1,101 @@
+# std imports
+from abc import ABC, abstractmethod
+
+# tpl imports
 import torch
 from torch.utils.data import Dataset
 from transformers import StoppingCriteria
+
+
+class InferenceConfig(ABC):
+    
+    @abstractmethod
+    def get_dtype(self):
+        pass
+    
+    @abstractmethod
+    def init_padding(self, tokenizer):
+        pass
+
+    @abstractmethod
+    def get_pad_token_id(self, tokenizer) -> int:
+        pass
+
+    @abstractmethod
+    def get_eos_token_id(self, tokenizer) -> int:
+        pass
+
+    @abstractmethod
+    def format_prompt(self, prompt : str) -> str:
+        pass
+
+
+class StarCoderConfig(InferenceConfig):
+
+    def get_dtype(self):
+        return torch.float16
+
+    def init_padding(self, tokenizer):
+        tokenizer.pad_token_id = tokenizer.eos_token_id  # for batching
+        tokenizer.padding_side = "left"   # for decoder-only models
+
+    def get_pad_token_id(self, tokenizer) -> int:
+        return tokenizer.eos_token_id
+
+    def get_eos_token_id(self, tokenizer) -> int:
+        return None
+
+    def format_prompt(self, prompt : str) -> str:
+        return prompt.strip()
+
+class CodeLlamaConfig(InferenceConfig):
+
+    def get_dtype(self):
+        return torch.float16
+
+    def init_padding(self, tokenizer):
+        tokenizer.pad_token_id = tokenizer.eos_token_id  # for batching
+        tokenizer.padding_side = "left"   # for decoder-only models
+        pass
+
+    def get_pad_token_id(self, tokenizer) -> int:
+        return tokenizer.pad_token_id
+
+    def get_eos_token_id(self, tokenizer) -> int:
+        return tokenizer.eos_token_id
+
+    def format_prompt(self, prompt : str) -> str:
+        return prompt.strip()
+
+
+class PolyCoderConfig(InferenceConfig):
+
+    def get_dtype(self):
+        return torch.float16
+
+    def init_padding(self, tokenizer):
+        tokenizer.pad_token_id = tokenizer.eos_token_id  # for batching
+        tokenizer.padding_side = "left"   # for decoder-only models
+
+    def get_pad_token_id(self, tokenizer) -> int:
+        return tokenizer.eos_token_id
+
+    def get_eos_token_id(self, tokenizer) -> int:
+        return tokenizer.eos_token_id
+
+    def format_prompt(self, prompt : str) -> str:
+        return prompt.strip()
+
+
+def get_inference_config(model_name : str) -> InferenceConfig:
+    if model_name == "bigcode/starcoderbase":
+        return StarCoderConfig()
+    elif model_name.startswith("codellama/CodeLlama-") and 'Instruct' not in model_name:
+        return CodeLlamaConfig()
+    elif model_name == "NinedayWang/PolyCoder-2.7B":
+        return PolyCoderConfig()
+    else:
+        raise ValueError(f"Unknown model name: {model_name}")
 
 
 def clean_output(output : str, prompt : str) -> str:

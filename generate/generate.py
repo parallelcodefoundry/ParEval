@@ -2,14 +2,15 @@
 import argparse
 import json
 import time
+from tqdm import tqdm
+import sys
 
 # tpl imports
-from alive_progress import alive_it
 import torch
 from transformers import pipeline
 
 # local imports
-from utils import BalancedBracketsCriteria, PromptDataset, clean_output
+from utils import BalancedBracketsCriteria, PromptDataset, clean_output, get_inference_config
 
 
 """ Parse command line arguments """
@@ -29,24 +30,27 @@ args = parser.parse_args()
 with open(args.prompts, 'r') as json_file:
     prompts = json.load(json_file)
 
+""" Initialize inference config """
+inference_config = get_inference_config(args.model)
+
 # to use a torch.utils.data.DataSet with the HuggingFace pipeline, we need to flatten out the prompts
 # and repeat them for however many samples we want to generate per prompt
 prompts_repeated = [p for p in prompts for _ in range(args.num_samples_per_prompt)]
 
 """ Initialize HuggingFace pipeline for generation """
-generator = pipeline(model=args.model, torch_dtype=torch.float16, device_map="auto")
-generator.tokenizer.pad_token_id = generator.model.config.eos_token_id  # for batching
-generator.tokenizer.padding_side = "left"   # for decoder-only models
+generator = pipeline(model=args.model, torch_dtype=inference_config.get_dtype(), device_map="auto")
+inference_config.init_padding(generator.tokenizer)
 
 """ Create a prompt data set to pass to generate method """
-prompt_dataset = PromptDataset([p["prompt"] for p in prompts_repeated])
+prompt_dataset = PromptDataset([inference_config.format_prompt(p["prompt"]) for p in prompts_repeated])
 generated_outputs = generator(
     prompt_dataset,
     max_new_tokens=args.max_new_tokens,
     do_sample=args.do_sample,
     temperature=args.temperature,
     top_p=args.top_p,
-    pad_token_id=generator.tokenizer.eos_token_id,
+    pad_token_id=inference_config.get_pad_token_id(generator.tokenizer),
+    eos_token_id=inference_config.get_eos_token_id(generator.tokenizer),
     batch_size=args.batch_size,
 )
 
@@ -55,7 +59,7 @@ responses = []
 cur_prompt = None
 start_time = time.time()
 total_tokens = 0
-for idx, (prompt, output) in alive_it(enumerate(zip(prompts_repeated, generated_outputs)), total=len(prompts_repeated), title="Generating code"):
+for idx, (prompt, output) in tqdm(enumerate(zip(prompts_repeated, generated_outputs)), total=len(prompts_repeated), desc="Generating code", file=sys.stdout):
     if idx % args.num_samples_per_prompt == 0:
         cur_prompt = prompt.copy()
         cur_prompt.update({"temperature": args.temperature, "top_p": args.top_p, "do_sample": args.do_sample, "max_new_tokens": args.max_new_tokens})
@@ -68,6 +72,9 @@ for idx, (prompt, output) in alive_it(enumerate(zip(prompts_repeated, generated_
 
     if idx % args.num_samples_per_prompt == args.num_samples_per_prompt - 1:
         responses.append(cur_prompt)
+
+    if idx != 0 and idx % args.num_samples_per_prompt == 0:
+        print(f"Tokens per second: {total_tokens / (time.time() - start_time):.2f}")
 
 end_time = time.time()
 tokens_per_second = total_tokens / (end_time - start_time)
