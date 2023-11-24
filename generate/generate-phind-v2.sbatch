@@ -8,11 +8,11 @@
 #SBATCH -A m2404
 #SBATCH -C gpu&hbm80g
 #SBATCH -q regular
-#SBATCH -J generate-codellama-34b-bs8
-#SBATCH -o generate-codellama-34b-bs8-%A.out
+#SBATCH -J generate-phind-v2-bs8
+#SBATCH -o generate-phind-v2-bs8-%A.out
 
 # settings
-MODEL="codellama/CodeLlama-34b-hf"
+MODEL="Phind/Phind-CodeLlama-34B-v2"
 TEMP=0.2
 TOPP=0.95
 MAX_NEW_TKNS=1024

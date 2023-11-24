@@ -87,6 +87,25 @@ class PolyCoderConfig(InferenceConfig):
         return prompt.strip()
 
 
+class PhindConfig(InferenceConfig):
+
+    def get_dtype(self):
+        return torch.float16
+
+    def init_padding(self, tokenizer):
+        tokenizer.pad_token_id = tokenizer.eos_token_id  # for batching
+        tokenizer.padding_side = "left"   # for decoder-only models
+
+    def get_pad_token_id(self, tokenizer) -> int:
+        return tokenizer.eos_token_id
+
+    def get_eos_token_id(self, tokenizer) -> int:
+        return tokenizer.eos_token_id
+
+    def format_prompt(self, prompt : str) -> str:
+        return prompt.strip()
+
+
 def get_inference_config(model_name : str) -> InferenceConfig:
     if model_name == "bigcode/starcoderbase":
         return StarCoderConfig()
@@ -94,6 +113,8 @@ def get_inference_config(model_name : str) -> InferenceConfig:
         return CodeLlamaConfig()
     elif model_name == "NinedayWang/PolyCoder-2.7B":
         return PolyCoderConfig()
+    elif model_name == 'Phind/Phind-CodeLlama-34B-v2':
+        return PhindConfig()
     else:
         raise ValueError(f"Unknown model name: {model_name}")
 
