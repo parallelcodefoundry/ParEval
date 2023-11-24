@@ -8,6 +8,9 @@ from transformers import StoppingCriteria
 
 
 class InferenceConfig(ABC):
+
+    def __init__(self, prompted : bool = False):
+        self.prompted = prompted
     
     @abstractmethod
     def get_dtype(self):
@@ -32,6 +35,9 @@ class InferenceConfig(ABC):
 
 class StarCoderConfig(InferenceConfig):
 
+    def __init__(self, prompted : bool = False):
+        super().__init__(prompted=prompted)
+
     def get_dtype(self):
         return torch.float16
 
@@ -46,9 +52,14 @@ class StarCoderConfig(InferenceConfig):
         return None
 
     def format_prompt(self, prompt : str) -> str:
+        if self.prompted:
+            return f"<filename>solutions/solution_1.cpp\n// here is the correct implementation of the coding exercise\n\n{prompt}"
         return prompt.strip()
 
 class CodeLlamaConfig(InferenceConfig):
+
+    def __init__(self, prompted : bool = False):
+        super().__init__(prompted=prompted)
 
     def get_dtype(self):
         return torch.float16
@@ -65,11 +76,16 @@ class CodeLlamaConfig(InferenceConfig):
         return tokenizer.eos_token_id
 
     def format_prompt(self, prompt : str) -> str:
+        if self.prompted:
+            return f"// filename: solutions/solution_1.cpp\n// here is the correct implementation of the coding exercise\n\n{prompt}"
         return prompt.strip()
 
 
 class PolyCoderConfig(InferenceConfig):
 
+    def __init__(self, prompted : bool = False):
+        super().__init__(prompted=prompted)
+
     def get_dtype(self):
         return torch.float16
 
@@ -84,11 +100,16 @@ class PolyCoderConfig(InferenceConfig):
         return tokenizer.eos_token_id
 
     def format_prompt(self, prompt : str) -> str:
+        if self.prompted:
+            return f"// filename: solutions/solution_1.cpp\n// here is the correct implementation of the coding exercise\n\n{prompt}"
         return prompt.strip()
 
 
 class PhindConfig(InferenceConfig):
 
+    def __init__(self, prompted : bool = False):
+        super().__init__(prompted=prompted)
+
     def get_dtype(self):
         return torch.float16
 
@@ -103,18 +124,20 @@ class PhindConfig(InferenceConfig):
         return tokenizer.eos_token_id
 
     def format_prompt(self, prompt : str) -> str:
+        if self.prompted:
+            return f"// filename: solutions/solution_1.cpp\n// here is the correct implementation of the coding exercise\n\n{prompt}"
         return prompt.strip()
 
 
-def get_inference_config(model_name : str) -> InferenceConfig:
+def get_inference_config(model_name : str, **kwargs) -> InferenceConfig:
     if model_name == "bigcode/starcoderbase":
-        return StarCoderConfig()
+        return StarCoderConfig(**kwargs)
     elif model_name.startswith("codellama/CodeLlama-") and 'Instruct' not in model_name:
-        return CodeLlamaConfig()
+        return CodeLlamaConfig(**kwargs)
     elif model_name == "NinedayWang/PolyCoder-2.7B":
-        return PolyCoderConfig()
+        return PolyCoderConfig(**kwargs)
     elif model_name == 'Phind/Phind-CodeLlama-34B-v2':
-        return PhindConfig()
+        return PhindConfig(**kwargs)
     else:
         raise ValueError(f"Unknown model name: {model_name}")
 
@@ -123,8 +146,11 @@ def clean_output(output : str, prompt : str) -> str:
     """ Remove `prompt` from the begging of `output`.
         Also truncate at the end of the function definition (i.e. matching closing brace).
     """
-    # remove prompt
-    output = output.replace(prompt, "", 1).strip()
+    # replace up to the end of the first instance of prompt
+    prompt_loc = output.find(prompt)
+    if prompt_loc == -1:
+        raise ValueError(f"Prompt not found in output: {prompt}")
+    output = output[prompt_loc + len(prompt):].strip()
 
     # temporarily add opening brace to the beginning
     output = '{' + output

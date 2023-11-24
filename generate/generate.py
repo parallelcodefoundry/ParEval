@@ -24,6 +24,7 @@ parser.add_argument('--temperature', type=float, default=0.2, help='Temperature 
 parser.add_argument('--top_p', type=float, default=0.95, help='Top p value for nucleus sampling (default: 0.95)')
 parser.add_argument('--do_sample', action='store_true', help='Enable sampling (default: False)')
 parser.add_argument('--batch_size', type=int, default=16, help='Batch size for generation (default: 8)')
+parser.add_argument('--prompted', action='store_true', help='Use prompted generation. See StarCoder paper (default: False)')
 args = parser.parse_args()
 
 """ Load prompts """
@@ -31,7 +32,7 @@ with open(args.prompts, 'r') as json_file:
     prompts = json.load(json_file)
 
 """ Initialize inference config """
-inference_config = get_inference_config(args.model)
+inference_config = get_inference_config(args.model, prompted=args.prompted)
 
 # to use a torch.utils.data.DataSet with the HuggingFace pipeline, we need to flatten out the prompts
 # and repeat them for however many samples we want to generate per prompt
@@ -62,7 +63,7 @@ total_tokens = 0
 for idx, (prompt, output) in tqdm(enumerate(zip(prompts_repeated, generated_outputs)), total=len(prompts_repeated), desc="Generating code", file=sys.stdout):
     if idx % args.num_samples_per_prompt == 0:
         cur_prompt = prompt.copy()
-        cur_prompt.update({"temperature": args.temperature, "top_p": args.top_p, "do_sample": args.do_sample, "max_new_tokens": args.max_new_tokens})
+        cur_prompt.update({"temperature": args.temperature, "top_p": args.top_p, "do_sample": args.do_sample, "max_new_tokens": args.max_new_tokens, "prompted": args.prompted})
         cur_prompt["outputs"] = []
         prompt_str = cur_prompt["prompt"]
 
