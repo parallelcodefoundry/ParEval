@@ -2,7 +2,7 @@
 #SBATCH -n 1
 #SBATCH -c 8
 #SBATCH --mem=128000
-#SBATCH -t 01:00:00
+#SBATCH -t 18:00:00
 #SBATCH -p gpu
 #SBATCH --gpus=a100:1
 #SBATCH -J generate-starcoderbase-prompted
