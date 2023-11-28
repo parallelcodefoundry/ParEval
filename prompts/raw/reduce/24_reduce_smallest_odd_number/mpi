@@ -1,0 +1,12 @@
+/* Return the value of the smallest odd number in the vector x.
+   Use MPI to compute in parallel. Assume MPI is already initialized.
+   Every rank has a complete copy of x. Return the result on all ranks.
+   Examples:
+
+   input: [7, 9, 5, 2, 8, 16, 4, 1]
+   output: 1
+
+   input: [8, 36, 7, 2, 11]
+   output: 7
+*/
+int smallestOdd(std::vector<int> const& x) {

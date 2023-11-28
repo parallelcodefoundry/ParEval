@@ -1,0 +1,13 @@
+/* Return true if `val` is only in one of vectors x or y.
+   Return false if it is in both or neither.
+   Use MPI to search in parallel. Assume MPI has already been initialized.
+   Every rank has a complete copy of x and y. Return the result on rank 0.
+   Examples:
+
+   input: x=[1,8,4,3,2], y=[3,4,4,1,1,7], val=7
+   output: true
+
+   input: x=[1,8,4,3,2], y=[3,4,4,1,1,7], val=1
+   output: false
+*/
+bool xorContains(std::vector<int> const& x, std::vector<int> const& y, int val) {

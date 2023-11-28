@@ -1,0 +1,8 @@
+/* Compute z = alpha*x+y where x and y are vectors. Store the result in z.
+   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.
+   Example:
+   
+   input: x=[1, -5, 2, 9] y=[0, 4, 1, -1] alpha=2
+   output: z=[2, -6, 5, 17]
+*/
+__global__ void axpy(double alpha, const double *x, const double *y, double *z, size_t N) {

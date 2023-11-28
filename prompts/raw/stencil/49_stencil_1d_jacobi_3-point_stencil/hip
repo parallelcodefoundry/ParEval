@@ -1,0 +1,11 @@
+/* Compute one iteration of a 3-point 1D jacobi stencil on `input`. Store the results in `output`.
+   Each element of `input` will be averaged with its two neighbors and stored in the corresponding element of `output`.
+   i.e. output[i] = (input[i-1]+input[i]+input[i+1])/3
+   Replace with 0 when reading past the boundaries of `input`.
+   Use AMD HIP to compute in parallel. The kernel is launched with at least N threads.
+   Example:
+
+   input: [9, -6, -1, 2, 3]
+   output: [1, 2/3, -5/3, 4/3, 5/3]
+*/
+__global__ void jacobi1D(const double *input, double *output, size_t N) {

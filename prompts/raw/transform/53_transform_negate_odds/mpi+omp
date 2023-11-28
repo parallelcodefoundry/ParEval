@@ -1,0 +1,9 @@
+/* In the vector x negate the odd values and divide the even values by 2.
+   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.
+   Every rank has a complete copy of x. The final result is stored on rank 0.
+   Example:
+
+   input: [16, 11, 12, 14, 1, 0, 5]
+   output: [8, -11, 6, 7, -1, 0, -5]
+*/
+void negateOddsAndHalveEvens(std::vector<int> &x) {

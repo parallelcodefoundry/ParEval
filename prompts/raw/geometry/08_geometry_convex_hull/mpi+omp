@@ -1,0 +1,13 @@
+struct Point {
+   double x, y;
+};
+
+/* Find the set of points that defined the smallest convex polygon that contains all the points in the vector points. Store the result in `hull`.
+   Use MPI and OpenMP to compute in parallel. Assume MPI is already initialized.
+   Every rank has a complete copy of points. The final hull is returned on rank 0.
+   Example:
+
+   input: [{0, 3}, {1, 1}, {2, 2}, {4, 4}, {0, 0}, {1, 2}, {3, 1}, {3, 3}]
+   output: [{0, 3}, {4, 4}, {3, 1}, {0, 0}]
+*/
+void convexHull(std::vector<Point> const& points, std::vector<Point> &hull) {

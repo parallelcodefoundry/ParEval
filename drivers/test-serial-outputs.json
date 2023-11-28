@@ -1,0 +1,86 @@
+[
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "28_scan_sum_of_prefix_sum_array",
+        "parallelism_model": "serial",
+        "prompt": "/* Compute the prefix sum array of the vector x and return its sum.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {",
+        "outputs": [
+            "\n    std::vector<double> prefixSum(x.size());\n    std::inclusive_scan(x.begin(), x.end(), prefixSum.begin());\n    return std::accumulate(prefixSum.begin(), prefixSum.end(), 0.0);\n}",
+            " return 0; }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "53_transform_negate_odds",
+        "parallelism_model": "serial",
+        "prompt": "/* In the vector x negate the odd values and divide the even values by 2.\n   Example:\n\n   input: [16, 11, 12, 14, 1, 0, 5]\n   output: [8, -11, 6, 7, -1, 0, -5]\n*/\nvoid negateOddsAndHalveEvens(std::vector<int> &x) {",
+        "outputs": [
+            "\n    std::transform(x.begin(), x.end(), x.begin(), [](int i) {\n        if (i % 2 == 0) {\n            return i / 2;\n        } else {\n            return -i;\n        }\n    });\n}",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "56_transform_map_function",
+        "parallelism_model": "serial",
+        "prompt": "bool isPowerOfTwo(int x) {\n\treturn (x > 0) && !(x & (x - 1));\n}\n\n/* Apply the isPowerOfTwo function to every value in x and store the results in mask.\n   Example:\n\n   input: [8, 0, 9, 7, 15, 64, 3]\n   output: [true, false, false, false, false, true, false]\n*/\nvoid mapPowersOfTwo(std::vector<int> const& x, std::vector<bool> &mask) {",
+        "outputs": [
+            "\n    for (int i = 0; i < x.size(); i++) {\n        mask[i] = isPowerOfTwo(x[i]);\n    }\n}",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "55_transform_squaring",
+        "parallelism_model": "serial",
+        "prompt": "/* Replace every element of x with the square of its value.\n   Example:\n\n   input: [5, 1, 2, -4, 8]\n   output: [25, 1, 4, 16, 64]\n*/\nvoid squareEach(std::vector<int> &x) {",
+        "outputs": [
+            "\n    for (size_t i = 0; i < x.size(); i++) {\n        x[i] = x[i] * x[i];\n    }\n}",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "52_transform_relu",
+        "parallelism_model": "serial",
+        "prompt": "/* Compute the ReLU function on every element of x. Elements less than zero become zero,\n   while elements greater than zero stay the same.\n   Example:\n\n   input: [-1.8, 24.0, 1.2, 0.0, -5.1, -0.2, 4.5]\n   output: [0, 24.0, 1.2, 0, 0, 0, 4.5]\n*/\nvoid relu(std::vector<double> &x) {",
+        "outputs": [
+            "\n    std::transform(x.begin(), x.end(), x.begin(), [](double v) {\n        return std::max(0.0, v);\n    });\n}",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "54_transform_inverse_offset",
+        "parallelism_model": "serial",
+        "prompt": "/* Replace every element of the vector x with 1-1/x.\n   Example:\n\n   input: [2, 4, 1, 12, -2]\n   output: [0.5, 0.75, 0, 0.91666666, 1.5]\n*/\nvoid oneMinusInverse(std::vector<double> &x) {",
+        "outputs": [
+            "\n    std::transform(x.begin(), x.end(), x.begin(), [](double x) { return 1.0 - 1.0 / x; });\n}",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "41_sort_sort_non-zero_elements",
+        "parallelism_model": "serial",
+        "prompt": "/* Sort the vector x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place.\n   Example:\n\n\t input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(std::vector<int> &x) {",
+        "outputs": [
+            "\n    std::vector<int> nonZeroElements;\n    for (int num : x) {\n        if (num != 0) {\n            nonZeroElements.push_back(num);\n        }\n    }\n\n    std::sort(nonZeroElements.begin(), nonZeroElements.end());\n\n    size_t nonZeroIndex = 0;\n    for (int i = 0; i < x.size(); i += 1) {\n        if (x[i] != 0) {\n            x[i] = nonZeroElements[nonZeroIndex];\n            nonZeroIndex += 1;\n        }\n    }\n}",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    }
+]

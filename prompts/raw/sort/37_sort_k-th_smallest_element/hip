@@ -1,0 +1,8 @@
+/* Find the k-th smallest element of the vector x.
+   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as values in x.
+   Example:
+   
+   input: x=[1, 7, 6, 0, 2, 2, 10, 6], k=4
+   output: 6
+*/
+__global__ void findKthSmallest(const int *x, size_t N, int k, int *kthSmallest) {

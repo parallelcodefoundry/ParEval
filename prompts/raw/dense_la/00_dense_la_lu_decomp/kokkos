@@ -1,0 +1,10 @@
+/* Factorize the matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.
+   Store the results for L and U into the original matrix A. 
+   A is an NxN matrix.
+   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.
+   Example:
+
+   input: [[4, 3], [6, 3]]
+   output: [[4, 3], [1.5, -1.5]]
+*/
+void luFactorize(Kokkos::View<double**> &A, size_t N) {

@@ -1,0 +1,10 @@
+/* Return the product of the vector x with every odd indexed element inverted.
+   i.e. x_0 * 1/x_1 * x_2 * 1/x_3 * x_4 ...
+   Use MPI to compute product in parallel. Assume MPI has already been initialized.
+   Every rank has a complete copy of x. Return the product on all ranks.
+   Example:
+
+   input: [4, 2, 10, 4, 5]
+   output: 25
+*/
+double productWithInverses(std::vector<double> const& x) {

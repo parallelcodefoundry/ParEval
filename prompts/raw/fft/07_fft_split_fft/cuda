@@ -1,0 +1,8 @@
+/* Compute the fourier transform of x. Store real part of results in r and imaginary in i.
+   Use CUDA to compute in parallel. The kernel is launched with at least N threads.
+   Example:
+
+   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+   output: r: [4, 1, 0, 1, 0, 1, 0, 1] i: [0, -2.41421, 0, -0.414214, 0, 0.414214, 0, 2.41421]
+*/
+__global__ void fft(const cuDoubleComplex *x, cuDoubleComplex *r, cuDoubleComplex *i, size_t N) {

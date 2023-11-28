@@ -1,0 +1,14 @@
+struct COOElement {
+   size_t row, column;
+   double value;
+};
+
+/* Factorize the sparse matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.
+   A is a sparse NxN matrix stored in COO format with sizeA elements.
+   Use AMD HIP to compute in parallel. The kernel is launched with at least sizeA threads.
+   Example:
+
+   input: A=[{0,0,4}, {0,1,3}, {1,0,6}, {1,1,3}]
+   output: L=[{0,0,1},{1,0,1.5}, {1,1,1}] U=[{0,0,4}, {0,1,3}, {1,1,-1.5}]
+*/
+__global__ void luFactorize(const COOElement *A, size_t sizeA, COOElement *L, size_t sizeL, COOElement *U, size_t sizeU, size_t N) {

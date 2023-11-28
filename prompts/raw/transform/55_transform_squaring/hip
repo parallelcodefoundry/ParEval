@@ -1,0 +1,8 @@
+/* Replace every element of x with the square of its value.
+   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as values in x.
+   Example:
+
+   input: [5, 1, 2, -4, 8]
+   output: [25, 1, 4, 16, 64]
+*/
+__global__ void squareEach(int *x, size_t N) {

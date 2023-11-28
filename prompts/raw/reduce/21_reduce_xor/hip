@@ -1,0 +1,8 @@
+/* Compute the logical XOR reduction of the vector of bools x. Store the result in output.
+   Use AMD HIP to reduce in parallel. The kernel is launched with at least as many threads as values in x.
+   Example:
+
+   input: [false, false, false, true]
+   output: true
+*/
+__global__ void reduceLogicalXOR(const bool *x, size_t N, double *output) {

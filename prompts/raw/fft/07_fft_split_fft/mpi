@@ -1,0 +1,9 @@
+/* Compute the fourier transform of x. Store real part of results in r and imaginary in i.
+   Use MPI to compute in parallel. Assume MPI has already been initialized.
+   Every rank has a complete copy of x. The final result is stored on rank 0.
+   Example:
+
+   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+   output: r: [4, 1, 0, 1, 0, 1, 0, 1] i: [0, -2.41421, 0, -0.414214, 0, 0.414214, 0, 2.41421]
+*/
+void fft(std::vector<std::complex<double>> const& x, std::vector<double> &r, std::vector<double> &i) {

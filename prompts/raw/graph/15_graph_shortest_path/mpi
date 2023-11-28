@@ -1,0 +1,10 @@
+/* Return the length of the shortest path from source to dest in the graph defined by the adjacency matrix A.
+   A is an NxN adjacency matrix stored in row-major.
+   Use MPI to compute in parallel. Assume MPI has already been initialized.
+   Every rank has a complete copy of A. The shortest path length is returned on rank 0.
+   Example:
+
+	 input: [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]], source=0, dest=3
+   output: 2
+*/
+int shortestPathLength(std::vector<int> const& A, size_t N, int source, int dest) {

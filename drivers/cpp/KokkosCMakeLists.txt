@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.16)
+project(KokkosBenchmark)
+
+if (NOT DRIVER_PATH)
+    message(FATAL_ERROR "DRIVER_PATH not set")
+endif()
+
+if (NOT DRIVER_SRC_FILE)
+    message(FATAL_ERROR "DRIVER_SRC_FILE not set")
+endif()
+
+set(default_build_type "RelWithDebInfo")
+set(Kokkos_DIR ${DRIVER_PATH}/../tpl/kokkos/build)
+message(STATUS "Kokkos_DIR: ${Kokkos_DIR}")
+find_package(Kokkos REQUIRED)
+add_compile_definitions(USE_KOKKOS)
+
+add_executable(a.out ${DRIVER_PATH}/${DRIVER_SRC_FILE})
+target_link_libraries(a.out Kokkos::kokkos)
+target_link_libraries(a.out ${DRIVER_PATH}/cpp/models/kokkos-driver.o)
+target_include_directories(a.out PRIVATE ${DRIVER_PATH}/cpp)
+target_include_directories(a.out PRIVATE ${DRIVER_PATH}/cpp/models)
+target_include_directories(a.out PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

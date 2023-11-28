@@ -1,0 +1,13 @@
+/* For each value in the vector x compute its index in the sorted vector.
+   Store the results in `ranks`.
+   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.
+   Every process has a complete copy of x. Store the result in ranks on process 0.
+   Examples:
+
+   input: [3.1, 2.8, 9.1, 0.4, 3.14]
+   output: [2, 1, 4, 0, 3]
+ 
+   input: [100, 7.6, 16.1, 18, 7.6]
+   output: [4, 0, 1, 2, 3]
+*/
+void ranks(std::vector<float> const& x, std::vector<size_t> &ranks) {

@@ -1,8 +1,9 @@
-/** Main driver for generated MPI C++ code. This relies on five externally available
+/* Main driver for generated MPI C++ code. This relies on five externally available
 * functions:
 *
 *   - init() -- returns a pointer to a context object
-*   - benchmark(Context *ctx) -- runs the benchmark
+*   - compute(Context *ctx) -- runs the benchmark
+*   - best(Context *ctx) -- runs the best sequential code
 *   - validate(Context *ctx) -- returns true if the benchmark is valid
 *   - reset(Context *ctx) -- resets the benchmark
 *   - destroy(Context *ctx) -- frees the context object
@@ -20,12 +21,14 @@ class Context;
 extern "C++" {
     /* todo -- these could all be in a class, but I'm not sure if virtual 
        overloading would incur a noticable overhead here. */
-    Context *init();
-    void benchmark(Context *ctx);
-    bool validate(Context *ctx);
-    void reset(Context *ctx);
-    void destroy(Context *ctx);
+    Context *init();                // initialize data in context
+    void compute(Context *ctx);     // benchmark the generated code
+    void best(Context *ctx);        // benchmark the best code
+    bool validate(Context *ctx);    // validate the generated code
+    void reset(Context *ctx);       // reset data in context
+    void destroy(Context *ctx);     // free context
 }
+
 
 int main(int argc, char **argv) {
     MPI_Init(&argc, &argv);
@@ -52,7 +55,7 @@ int main(int argc, char **argv) {
     double totalTime = 0.0;
     for (int i = 0; i < NITER; i += 1) {
         double start = MPI_Wtime();
-        benchmark(ctx);
+        compute(ctx);
         totalTime += MPI_Wtime() - start;
     
         MPI_Barrier(MPI_COMM_WORLD);
@@ -66,6 +69,20 @@ int main(int argc, char **argv) {
     } else {
         MPI_Reduce(&totalTime, nullptr, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
     }
+
+    /* best case */
+    if (rank == 0) {
+        totalTime = 0.0;
+        for (int i = 0; i < NITER; i += 1) {
+            double start = MPI_Wtime();
+            best(ctx);
+            totalTime += MPI_Wtime() - start;
+
+            reset(ctx);
+        }
+        printf("BestSequential: %f\n", totalTime / NITER);
+    }
+    MPI_Barrier(MPI_COMM_WORLD);
 
     /* validate */
     const bool isValid = validate(ctx);

@@ -1,0 +1,9 @@
+/* Replace every element of x with the square of its value.
+   Use MPI to compute in parallel. Assume MPI has already been initialized.
+   Every rank has a complete copy of x. The final result is stored on rank 0.
+   Example:
+
+   input: [5, 1, 2, -4, 8]
+   output: [25, 1, 4, 16, 64]
+*/
+void squareEach(std::vector<int> &x) {

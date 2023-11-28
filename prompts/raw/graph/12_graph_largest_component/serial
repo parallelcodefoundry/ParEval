@@ -1,0 +1,8 @@
+/* Return the number of vertices in the largest component of the graph defined by the adjacency matrix A.
+   A is an NxN adjacency matrix stored in row-major.
+   Example:
+
+	 input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]
+   output: 2
+*/
+int largestComponent(std::vector<int> const& A, size_t N) {

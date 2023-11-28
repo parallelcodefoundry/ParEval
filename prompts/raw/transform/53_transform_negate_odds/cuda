@@ -1,0 +1,8 @@
+/* In the vector x negate the odd values and divide the even values by 2.
+   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.
+   Example:
+
+   input: [16, 11, 12, 14, 1, 0, 5]
+   output: [8, -11, 6, 7, -1, 0, -5]
+*/
+__global__ void negateOddsAndHalveEvens(int *x, size_t N) {

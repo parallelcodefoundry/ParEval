@@ -1,0 +1,9 @@
+/* For each letter in the alphabet, count the number of strings in the vector s that start with that letter.
+   Assume all strings are in lower case. Store the output in `bins` array.
+   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.
+   Example:
+
+   input: ["dog", "cat", "xray", "cow", "code", "type", "flower"]
+   output: [0, 0, 3, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0]
+*/
+void firstLetterCounts(Kokkos::View<const char**> const& s, Kokkos::View<size_t[26]> &bins) {

@@ -1,0 +1,12 @@
+struct Point {
+   double x, y;
+};
+
+/* Find the set of points that defined the smallest convex polygon that contains all the points in the vector points. Store the result in `hull`.
+   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as points.
+   Example:
+
+   input: [{0, 3}, {1, 1}, {2, 2}, {4, 4}, {0, 0}, {1, 2}, {3, 1}, {3, 3}]
+   output: [{0, 3}, {4, 4}, {3, 1}, {0, 0}]
+*/
+__global__ void convexHull(const Point *points, size_t numPoints, Point *hull, size_t hullSize) {

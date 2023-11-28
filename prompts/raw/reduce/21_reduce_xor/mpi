@@ -1,0 +1,9 @@
+/* Return the logical XOR reduction of the vector of bools x.
+   Use MPI to reduce in parallel. Assume MPI is already initialized.
+   Every rank has a complete copy of x. Return the result on all ranks.
+   Example:
+
+   input: [false, false, false, true]
+   output: true
+*/
+bool reduceLogicalXOR(std::vector<bool> const& x) {
