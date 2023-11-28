@@ -1,0 +1,13 @@
+bool isPowerOfTwo(int x) {
+	return (x > 0) && !(x & (x - 1));
+}
+
+/* Apply the isPowerOfTwo function to every value in x and store the results in mask.
+   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.
+   Every rank has a complete copy of x. The final result is stored in mask on rank 0.
+   Example:
+
+   input: [8, 0, 9, 7, 15, 64, 3]
+   output: [true, false, false, false, false, true, false]
+*/
+void mapPowersOfTwo(std::vector<int> const& x, std::vector<bool> &mask) {

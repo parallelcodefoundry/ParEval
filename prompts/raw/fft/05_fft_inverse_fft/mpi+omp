@@ -1,0 +1,12 @@
+/* forward declare fft. computes fourier transform in-place */
+void fft(std::vector<std::complex<double>> &x);
+
+/* Compute the inverse fourier transform of x in-place.
+   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.
+   Every rank has a complete copy of x. The final result is stored on rank 0.
+   Example:
+   
+   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+   output: [{0.5,0}, {0.125,0.301777}, {0,-0}, {0.125,0.0517767}, {0,-0}, {0.125,-0.0517767}, {0,-0}, {0.125,-0.301777}]
+*/
+void ifft(std::vector<std::complex<double>> &x) {

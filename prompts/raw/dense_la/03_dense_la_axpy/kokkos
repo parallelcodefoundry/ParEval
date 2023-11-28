@@ -1,0 +1,8 @@
+/* Compute z = alpha*x+y where x and y are vectors. Store the result in z.
+   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.
+   Example:
+   
+   input: x=[1, -5, 2, 9] y=[0, 4, 1, -1] alpha=2
+   output: z=[2, -6, 5, 17]
+*/
+void axpy(double alpha, Kokkos::View<const double*> &x, Kokkos::View<const double*> &y, Kokkos::View<double*> &z) {

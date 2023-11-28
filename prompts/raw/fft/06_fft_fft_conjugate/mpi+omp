@@ -1,0 +1,9 @@
+/* Compute the fourier transform of x in-place. Return the imaginary conjugate of each value.
+   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.
+   Every rank has a complete copy of x. The final result is stored on rank 0.
+   Example:
+
+   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+   output: [{4,0}, {1,-2.41421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]
+*/
+void fft(std::vector<std::complex<double>> &x) {

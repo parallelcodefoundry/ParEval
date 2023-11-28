@@ -2,7 +2,8 @@
 * functions:
 *
 *   - init() -- returns a pointer to a context object
-*   - benchmark(Context *ctx) -- runs the benchmark
+*   - compute(Context *ctx) -- runs the benchmark
+*   - best(Context *ctx) -- runs the best sequential code
 *   - validate(Context *ctx) -- returns true if the benchmark is valid
 *   - reset(Context *ctx) -- resets the benchmark
 *   - destroy(Context *ctx) -- frees the context object
@@ -20,7 +21,8 @@ extern "C++" {
     /* todo -- these could all be in a class, but I'm not sure if virtual 
        overloading would incur a noticable overhead here. */
     Context *init();
-    void benchmark(Context *ctx);
+    void compute(Context *ctx);
+    void best(Context *ctx);
     bool validate(Context *ctx);
     void reset(Context *ctx);
     void destroy(Context *ctx);
@@ -34,7 +36,7 @@ int main(int argc, char **argv) {
         exit(1);
     }
 
-    int NITER = 50;
+    const int NITER = 50;
     int num_threads = 1;
     if (argc > 1) {
         num_threads = std::stoi(std::string(argv[1]));
@@ -48,12 +50,23 @@ int main(int argc, char **argv) {
     double totalTime = 0.0;
     for (int i = 0; i < NITER; i += 1) {
         double start = omp_get_wtime();
-        benchmark(ctx);
+        compute(ctx);
         totalTime += omp_get_wtime() - start;
     
         reset(ctx);
     }
     printf("Time: %f\n", totalTime / NITER);
+
+    /* benchmark best */
+    totalTime = 0.0;
+    for (int i = 0; i < NITER; i += 1) {
+        double start = omp_get_wtime();
+        best(ctx);
+        totalTime += omp_get_wtime() - start;
+
+        reset(ctx);
+    }
+    printf("BestSequential: %f\n", totalTime / NITER);
 
     /* validate */
     const bool isValid = validate(ctx);

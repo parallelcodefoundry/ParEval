@@ -1,0 +1,17 @@
+struct Point {
+	double x, y;
+};
+
+double distance(Point const& p1, Point const& p2) {
+	return std::sqrt(std::pow(p2.x-p1.x, 2) + std::pow(p2.y-p1.y, 2));
+}
+
+/* Return the perimeter of the smallest convex polygon that contains all the points in the vector points.
+   Use MPI to compute in parallel. Assume MPI has already been initialized.
+   Every rank has a complete copy of points. The final result is returned on rank 0.
+   Example:
+
+   input: [{0, 3}, {1, 1}, {2, 2}, {4, 4}, {0, 0}, {1, 2}, {3, 1}, {3, 3}]
+   output: 13.4477
+*/
+double convexHullPerimeter(std::vector<Point> const& points) {

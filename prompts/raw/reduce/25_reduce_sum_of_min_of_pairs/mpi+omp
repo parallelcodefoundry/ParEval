@@ -1,0 +1,10 @@
+/* Return the sum of the minimum value at each index of vectors x and y for all indices.
+   i.e. sum = min(x_0, y_0) + min(x_1, y_1) + min(x_2, y_2) + ...
+   Use MPI and OpenMP to sum in parallel. Assume MPI has already been initialized.
+   Every rank has a complete copy of x and y. Return the sum on all ranks.
+   Example:
+
+   input: x=[3, 4, 0, 2, 3], y=[2, 5, 3, 1, 7]
+   output: 10
+*/
+double sumOfMinimumElements(std::vector<double> const& x, std::vector<double> const& y) {

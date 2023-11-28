@@ -3,11 +3,11 @@
     date: October 2023
 """
 # std imports
+import copy
 import logging
 import os
-from os import PathLike
+from os import PathLike, environ
 import shlex
-import subprocess
 import sys
 import tempfile
 from typing import List
@@ -22,6 +22,9 @@ DRIVER_MAP = {
     "serial": "serial-driver.o",
     "omp": "omp-driver.o",
     "mpi": "mpi-driver.o",
+    "mpi+omp": "mpi-omp-driver.o",
+    "kokkos": "kokkos-driver.o",
+    "cuda": "cuda-driver.o",
 }
 
 """ Compiler settings """
@@ -29,14 +32,23 @@ COMPILER_SETTINGS = {
     "serial": {"CXX": "g++", "CXXFLAGS": "-std=c++17 -O3"},
     "omp": {"CXX": "g++", "CXXFLAGS": "-std=c++17 -O3 -fopenmp"},
     "mpi": {"CXX": "mpicxx", "CXXFLAGS": "-std=c++17 -O3"},
+    "mpi+omp": {"CXX": "mpicxx", "CXXFLAGS": "-std=c++17 -O3 -fopenmp"},
+    "kokkos": {"CXX": "g++", "CXXFLAGS": "-std=c++17 -O3 -fopenmp -I../tpl/kokkos/build/include ../tpl/kokkos/build/lib64/libkokkoscore.a ../tpl/kokkos/build/lib64/libkokkoscontainers.a ../tpl/kokkos/build/lib64/libkokkossimd.a"},
+    "cuda": {"CXX": "nvcc", "CXXFLAGS": "-std=c++17 -O3"},
 }
 
-""" Imports """
-IMPORTS = {
-    "serial": '#include "serial-driver.h"',
-    "omp": '#include "omp-driver.h"',
-    "mpi": '#include "mpi-driver.h"',
-}
+def build_kokkos(driver_src: PathLike, output_root: PathLike):
+    """ Custom steps for the Kokkos programs, since they require cmake """
+    # cp cmake file into the output directory
+    cmake_path = "cpp/KokkosCMakeLists.txt"
+    cmake_dest = os.path.join(output_root, "CMakeLists.txt")
+    run_command(f"cp {cmake_path} {cmake_dest}", dry=False)
+
+    # run cmake and make
+    pwd = os.getcwd()
+    cmake_flags = f"-DKokkos_DIR=../tpl/kokkos/build -DDRIVER_PATH={pwd} -DDRIVER_SRC_FILE={driver_src}"
+    cmake_out = run_command(f"cmake -B{output_root} -S{output_root} {cmake_flags}", dry=False)
+    return run_command(f"make -C {output_root}", dry=False)
 
 class CppDriverWrapper(DriverWrapper):
 
@@ -46,10 +58,7 @@ class CppDriverWrapper(DriverWrapper):
 
     def write_source(self, content: str, fpath: PathLike) -> bool:
         """ Write the given c++ source to the given file. """
-        includes = IMPORTS[self.parallelism_model]
-
         with open(fpath, "w") as fp:
-            fp.write(includes + "\n\n")
             fp.write(content)
         return True
 
@@ -61,18 +70,24 @@ class CppDriverWrapper(DriverWrapper):
         CXXFLAGS: str = "-std=c++17 -O3"
     ) -> BuildOutput:
         """ Compile the given binaries into a single executable. """
-        binaries_str = ' '.join(binaries)
-        cmd = f"{CXX} {CXXFLAGS} -Icpp/models {binaries_str} -o {output_path}"
-
-        # let subprocess errors propagate up
-        compile_process = run_command(cmd, timeout=10, dry=self.dry)
+        if self.parallelism_model == "kokkos":
+            driver_src = [b for b in binaries if b.endswith(".cc")][0]
+            compile_process = build_kokkos(driver_src, os.path.dirname(output_path))
+        else:
+            binaries_str = ' '.join(binaries)
+            macro = f"-DUSE_{self.parallelism_model.upper()}"
+            cmd = f"{CXX} {CXXFLAGS} -Icpp -Icpp/models {macro} {binaries_str} -o {output_path}"
+            compile_process = run_command(cmd, timeout=20, dry=self.dry)
         return BuildOutput(compile_process.returncode, compile_process.stdout, compile_process.stderr)
 
     def run(self, executable: PathLike, **run_config) -> RunOutput:
         """ Run the given executable. """
         launch_format = self.launch_configs["format"]
         launch_cmd = launch_format.format(exec_path=executable, args="", **run_config).strip()
-        run_process = run_command(launch_cmd, timeout=30, dry=self.dry)
+        try:
+            run_process = run_command(launch_cmd, timeout=60, dry=self.dry)
+        except subprocess.TimeoutExpired:
+            return RunOutput(-1, "", "Timeout", config=run_config)
         return RunOutput(run_process.returncode, run_process.stdout, run_process.stderr, config=run_config)
 
     def test_single_output(self, prompt: str, output: str, test_driver_file: PathLike) -> GeneratedTextResult:
@@ -80,14 +95,16 @@ class CppDriverWrapper(DriverWrapper):
         logging.debug(f"Testing output:\n{output}")
         with tempfile.TemporaryDirectory(dir=self.scratch_dir) as tmpdir:
             # write out the prompt + output
-            src_path = os.path.join(tmpdir, "llm-output.cc")
+            src_ext = "cuh" if self.parallelism_model in ["cuda", "hip"] else "hpp"
+            src_path = os.path.join(tmpdir, f"generated-code.{src_ext}")
             write_success = self.write_source(prompt+"\n"+output, src_path)
             logging.debug(f"Wrote source to {src_path}.")
 
             # compile and run the output
             exec_path = os.path.join(tmpdir, "a.out")
-            compiler_kwargs = COMPILER_SETTINGS[self.parallelism_model]
-            build_result = self.compile(src_path, self.model_driver_file, test_driver_file, output_path=exec_path, **compiler_kwargs)
+            compiler_kwargs = copy.deepcopy(COMPILER_SETTINGS[self.parallelism_model])
+            compiler_kwargs["CXXFLAGS"] += f" -I{tmpdir}"
+            build_result = self.compile(self.model_driver_file, test_driver_file, output_path=exec_path, **compiler_kwargs)
             logging.debug(f"Build result: {build_result}")
 
             # run the code

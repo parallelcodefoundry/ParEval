@@ -1,0 +1,14 @@
+struct COOElement {
+   size_t row, column;
+   double value;
+};
+
+/* Compute the matrix multiplication Y=AX. A is a sparse MxK matrix in COO format.
+   X is a sparse KxN matrix in COO format. Y is a dense MxN matrix.
+   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.
+   Example:
+
+   input: A=[{0,0,-2}, {0,1,1}, {1,1,-1}] X=[{0,1,2}, {1,0,-1}]
+   output: Y=[{-1,-4}, {1,0}]
+*/
+void spmm(Kokkos::View<const COOElement*> &A, Kokkos::View<const COOElement*> &X, Kokkos::View<double**> &Y, size_t M, size_t K, size_t N) {

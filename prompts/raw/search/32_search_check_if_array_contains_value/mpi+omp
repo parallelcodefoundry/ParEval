@@ -1,0 +1,12 @@
+/* Return true if the vector x contains the value `target`. Return false otherwise.
+   Use MPI and OpenMP to search in parallel. Assume MPI has already been initialized.
+   Every rank has a complete copy of x. Return the result on rank 0.
+   Examples:
+
+   input: x=[1, 8, 2, 6, 4, 6], target=3
+   output: false
+   
+   input: x=[1, 8, 2, 6, 4, 6], target=8
+   output: true
+*/
+bool contains(std::vector<int> const& x, int target) {

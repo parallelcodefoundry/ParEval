@@ -1,0 +1,8 @@
+/* Return the logical XOR reduction of the vector of bools x.
+   Use OpenMP to reduce in parallel.
+   Example:
+
+   input: [false, false, false, true]
+   output: true
+*/
+bool reduceLogicalXOR(std::vector<bool> const& x) {

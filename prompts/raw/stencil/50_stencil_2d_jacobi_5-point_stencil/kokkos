@@ -1,0 +1,12 @@
+/* Compute one iteration of a 5-point 2D jacobi stencil on `input`. Store the results in `output`.
+   Each element of `input` will be averaged with its four neighbors and stored in the corresponding element of `output`.
+   i.e. output_{i,j} = (input_{i,j-1} + input_{i,j+1} + input_{i-1,j} + input_{i+1,j} + input_{i,j})/5
+   Replace with 0 when reading past the boundaries of `input`.
+   `input` and `output` are NxN grids.
+   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.
+   Example:
+
+   input: [[3, 4, 1], [0, 1, 7], [5, 3, 2]]
+   output: [[1.4, 1.8, 2.4],[1.8, 3, 2.2], [1.6, 2.2, 2.4]]
+*/
+void jacobi2D(Kokkos::View<const double**> &input, Kokkos::View<double**> &output, size_t N) {

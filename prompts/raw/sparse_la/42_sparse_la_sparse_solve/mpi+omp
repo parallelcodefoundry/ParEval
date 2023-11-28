@@ -1,0 +1,15 @@
+struct COOElement {
+   size_t row, column;
+   double value;
+};
+
+/* Solve the sparse linear system Ax=b for x.
+   A is a sparse NxN matrix in COO format. x and b are dense vectors with N elements.
+   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.
+   Every rank has a complete copy of A and b. Store the result in x on rank 0.
+   Example:
+   
+   input: A=[{0,0,1}, {0,1,1}, {1,1,-2}] b=[1,4]
+   output: x=[3,-2]
+*/
+void solveLinearSystem(std::vector<COOElement> const& A, std::vector<double> const& b, std::vector<double> &x, size_t N) {

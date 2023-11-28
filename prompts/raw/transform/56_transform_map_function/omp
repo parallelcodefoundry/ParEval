@@ -1,0 +1,12 @@
+bool isPowerOfTwo(int x) {
+	return (x > 0) && !(x & (x - 1));
+}
+
+/* Apply the isPowerOfTwo function to every value in x and store the results in mask.
+   Use OpenMP to compute in parallel.
+   Example:
+
+   input: [8, 0, 9, 7, 15, 64, 3]
+   output: [true, false, false, false, false, true, false]
+*/
+void mapPowersOfTwo(std::vector<int> const& x, std::vector<bool> &mask) {

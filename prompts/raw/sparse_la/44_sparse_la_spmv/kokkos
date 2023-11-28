@@ -1,0 +1,15 @@
+struct COOElement {
+   size_t row, column;
+   double value;
+};
+
+/* Compute y = alpha*A*x + beta*y where alpha and beta are scalars, x and y are vectors,
+   and A is a sparse matrix stored in COO format.
+   x and y are length N and A is M x N.
+   Use Kokkos to parallelize. Assume Kokkos has already been initialized.
+   Example:
+
+   input: alpha=0.5 beta=1.0 A=[{0,1,3}, {1,0,-1}] x=[-4, 2] y=[-1,1]
+   output: y=[2, 3]
+*/
+void spmv(double alpha, Kokkos::View<const COOElement*> const& A, Kokkos::View<const double*> const& x, double beta, Kokkos::View<double *> &y, size_t M, size_t N) {

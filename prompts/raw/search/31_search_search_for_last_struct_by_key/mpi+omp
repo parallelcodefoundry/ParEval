@@ -1,0 +1,14 @@
+struct Book {
+   std::string title;
+   int pages;
+};
+
+/* Return the index of the last Book item in the vector books where Book.pages is less than 100.
+   Use MPI and OpenMP to search in parallel. Assume MPI is already initialized.
+   Every rank has a complete copy of books. Return the result on rank 0.
+	 Example:
+
+   input: [{title="Green Eggs and Ham", pages=72}, {title="gulliver's travels", pages=362}, {title="Stories of Your Life", pages=54}, {title="Hamilton", pages=818}]
+   output: 2
+*/
+size_t findLastShortBook(std::vector<Book> const& books) {

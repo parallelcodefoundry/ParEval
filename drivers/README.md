@@ -80,3 +80,6 @@ of threads as the first command line argument i.e. `./a.out 4`.
 Make sure you are running in a proper environment for the tests you want to run.
 For example, have a GPU for cuda tests or multiple nodes for MPI. Do not 
 execute `run-all.py` on a login node without the `--dry` flag.
+
+MPI benchmarks require the correct result to be returned on rank 0. The initial
+data distribution varies by problem.

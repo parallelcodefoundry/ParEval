@@ -1,0 +1,15 @@
+struct Point {
+	double x, y;
+};
+
+double distance(Point const& p1, Point const& p2) {
+	return std::sqrt(std::pow(p2.x-p1.x, 2) + std::pow(p2.y-p1.y, 2));
+}
+
+/* Return the distance between the closest two points in the vector points.
+   Example: 
+
+   input: [{2, 3}, {12, 30}, {40, 50}, {5, 1}, {12, 10}, {3, 4}]
+   output: 1.41421
+*/
+double closestPair(std::vector<Point> const& points) {

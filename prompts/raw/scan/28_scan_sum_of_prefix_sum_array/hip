@@ -1,0 +1,8 @@
+/* Compute the prefix sum array of the vector x and compute its sum. Store the result in sum.
+   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as values in x.
+   Example:
+
+   input: [-7, 2, 1, 9, 4, 8]
+   output: 15
+*/
+__global__ void sumOfPrefixSum(const double *x, size_t N, double *sum) {

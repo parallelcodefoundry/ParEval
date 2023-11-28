@@ -1,0 +1,9 @@
+/* Return the product of the vector x with every odd indexed element inverted.
+   i.e. x_0 * 1/x_1 * x_2 * 1/x_3 * x_4 ...
+   Use Kokkos to compute product in parallel. Assume Kokkos has already been initialized.
+   Example:
+
+   input: [4, 2, 10, 4, 5]
+   output: 25
+*/
+double productWithInverses(Kokkos::View<const double*> const& x) {

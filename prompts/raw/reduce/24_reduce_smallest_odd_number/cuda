@@ -1,0 +1,11 @@
+/* Find the value of the smallest odd number in the vector x. Store it in smallest.
+   Use CUDA to compute in parallel. The kernel is launched with the same number of threads as elements in x.
+   Examples:
+
+   input: [7, 9, 5, 2, 8, 16, 4, 1]
+   output: 1
+
+   input: [8, 36, 7, 2, 11]
+   output: 7
+*/
+__global__ void smallestOdd(const int *x, size_t N, int *smallest) {

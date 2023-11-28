@@ -1,0 +1,12 @@
+/* Set `found` to true if `val` is only in one of vectors x or y.
+   Set it to false if it is in both or neither.
+   Use AMD HIP to search in parallel. The kernel is launched with at least N threads.
+   Examples:
+
+   input: x=[1,8,4,3,2], y=[3,4,4,1,1,7], val=7
+   output: true
+
+   input: x=[1,8,4,3,2], y=[3,4,4,1,1,7], val=1
+   output: false
+*/
+__global__ void xorContains(const int *x, const int *y, size_t N, int val, bool *found) {

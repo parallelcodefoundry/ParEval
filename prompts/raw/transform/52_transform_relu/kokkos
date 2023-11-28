@@ -1,0 +1,9 @@
+/* Compute the ReLU function on every element of x. Elements less than zero become zero,
+   while elements greater than zero stay the same.
+   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.
+   Example:
+
+   input: [-1.8, 24.0, 1.2, 0.0, -5.1, -0.2, 4.5]
+   output: [0, 24.0, 1.2, 0, 0, 0, 4.5]
+*/
+void relu(Kokkos::View<double*> &x) {

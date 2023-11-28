@@ -1,0 +1,8 @@
+/* Compute the fourier transform of x. Store real part of results in r and imaginary in i.
+   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.
+   Example:
+
+   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+   output: r: [4, 1, 0, 1, 0, 1, 0, 1] i: [0, -2.41421, 0, -0.414214, 0, 0.414214, 0, 2.41421]
+*/
+void fft(Kokkos::View<Kokkos::complex<double>*> const& x, Kokkos::View<double*> &r, Kokkos::View<double*> &i) {

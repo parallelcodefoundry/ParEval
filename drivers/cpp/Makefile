@@ -1,13 +1,23 @@
 CXX = g++
 MPICXX = mpicxx
 CXX_FLAGS = -std=c++17 -O3
+Kokkos_PATH ?= ../../tpl/kokkos/build
 
+SERIAL_DRIVERS = $(patsubst %.cc,%.o, $(wildcard */*serial-driver.cc))
 OMP_DRIVERS = $(patsubst %.cc,%.o, $(wildcard */*omp-driver.cc))
 MPI_DRIVERS = $(patsubst %.cc,%.o, $(wildcard */*mpi-driver.cc))
+MPI_OMP_DRIVERS = $(patsubst %.cc,%.o, $(wildcard */*mpi-omp-driver.cc))
+CUDA_DRIVERS = $(patsubst %.cu,%.o, $(wildcard */*cuda-driver.cu))
+KOKKOS_DRIVERS = $(patsubst %.cc,%.o, $(wildcard */*kokkos-driver.cc))
 
-all: $(OMP_DRIVERS) $(MPI_DRIVERS)
+ALL_DRIVERS = $(SERIAL_DRIVERS) $(OMP_DRIVERS) $(MPI_DRIVERS) $(MPI_OMP_DRIVERS) $(CUDA_DRIVERS) $(KOKKOS_DRIVERS)
+
+all: $(ALL_DRIVERS)
 
 %.o: %.cc
+	$(CXX) $(CXX_FLAGS) -o $@ -c $<
+
+%serial-driver.o: %serial-driver.cc
 	$(CXX) $(CXX_FLAGS) -o $@ -c $<
 
 %omp-driver.o: %omp-driver.cc
@@ -16,5 +26,14 @@ all: $(OMP_DRIVERS) $(MPI_DRIVERS)
 %mpi-driver.o: %mpi-driver.cc
 	$(MPICXX) $(CXX_FLAGS) -o $@ -c $<
 
+%mpi-omp-driver.o: %mpi-omp-driver.cc
+	$(MPICXX) $(CXX_FLAGS) -fopenmp -o $@ -c $<
+
+%cuda-driver.o: %cuda-driver.cu
+	nvcc -std=c++17 -O3 -o $@ -c $<
+
+%kokkos-driver.o: %kokkos-driver.cc
+	$(CXX) $(CXX_FLAGS) -I$(Kokkos_PATH)/include -L$(Kokkos_PATH)/lib64 -fopenmp -o $@ -c $<
+
 clean:
-	rm -f $(OMP_DRIVERS) $(MPI_DRIVERS)
+	rm -f $(ALL_DRIVERS)

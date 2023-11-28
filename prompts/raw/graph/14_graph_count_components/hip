@@ -1,0 +1,9 @@
+/* Count the number of connected components in the graph defined by the adjacency matrix A.
+   A is an NxN adjacency matrix stored in row-major.
+	 Use AMD HIP to compute in parallel. The kernel is launched on an NxN grid of threads.
+   Example:
+
+	 input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]
+   output: 2
+*/
+__global__ void componentCount(const int *A, size_t N, int *numComponents) {

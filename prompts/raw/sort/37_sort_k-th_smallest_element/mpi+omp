@@ -1,0 +1,9 @@
+/* Find the k-th smallest element of the vector x.
+   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.
+   Every rank has a complete copy of x. Return the result on rank 0.
+   Example:
+   
+   input: x=[1, 7, 6, 0, 2, 2, 10, 6], k=4
+   output: 6
+*/
+int findKthSmallest(std::vector<int> const& x, int k) {
