@@ -1,0 +1,12 @@
+double distance(double x1, double x2) {
+	return std::abs(x1 - x2);
+}
+
+/* Return the distance between the closest two elements in the vector x.
+   Use MPI and OpenMP to compute in parallel. Assume MPI is already initialized.
+   Example: 
+
+   input: [7, 3, 9, 12, 31, 1]
+   output: 2
+*/
+double closestPair(std::vector<double> const& x) {
