@@ -46,7 +46,7 @@ sample_cutoff = args.batch_size * (args.num_batches + args.warmup)
 prompts_repeated = prompts_repeated[:sample_cutoff]
 
 """ Initialize HuggingFace pipeline for generation """
-generator = pipeline(model=args.model, torch_dtype=inference_config.get_dtype(), device=0)
+generator = pipeline(model=args.model, torch_dtype=inference_config.get_dtype(), device=0, trust_remote_code=inference_config.trust_remote_code())
 inference_config.init_padding(generator.tokenizer)
 
 """ Create a prompt data set to pass to generate method """

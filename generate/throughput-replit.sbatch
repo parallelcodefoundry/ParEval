@@ -4,24 +4,24 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --gpus-per-task=1
 #SBATCH --mem=128000
-#SBATCH -t 01:00:00
+#SBATCH -t 00:30:00
 #SBATCH -A m2404
 #SBATCH -C gpu&hbm80g
 #SBATCH -q regular
-#SBATCH -J throughput-codellama-7b-bs64
-#SBATCH -o throughput-codellama-7b-bs64-%A.out
+#SBATCH -J throughput-replit-bs1
+#SBATCH -o throughput-replit-bs1-%A.out
 
 # settings
-MODEL="codellama/CodeLlama-7b-hf"
+MODEL="replit/replit-code-v1_5-3b"
 TEMP=0.2
 TOPP=0.95
 MAX_NEW_TKNS=1024
 SAMPLES_PER_PROMPT=20
-BATCH_SIZE=64
+BATCH_SIZE=1
 WARMUP=5
 NUM_BATCHES=25
 echo "model=$MODEL   MAX_NEW_TKNS=$MAX_NEW_TKNS   SAMPLES_PER_PROMPT=$SAMPLES_PER_PROMPT   BATCH_SIZE=$BATCH_SIZE"
-echo "WARMUP=$WARMUP   NUM_BATCHES=$NUM_BATCHES"
+echo "WARMUP=5   NUM_BATCHES=$NUM_BATCHES"
 
 # setup
 source .env/bin/activate

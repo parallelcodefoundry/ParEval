@@ -29,6 +29,10 @@ class InferenceConfig(ABC):
         pass
 
     @abstractmethod
+    def trust_remote_code(self) -> bool:
+        pass
+
+    @abstractmethod
     def format_prompt(self, prompt : str) -> str:
         pass
 
@@ -50,6 +54,9 @@ class StarCoderConfig(InferenceConfig):
 
     def get_eos_token_id(self, tokenizer) -> int:
         return None
+
+    def trust_remote_code(self) -> bool:
+        return False
 
     def format_prompt(self, prompt : str) -> str:
         if self.prompted:
@@ -74,6 +81,9 @@ class CodeLlamaConfig(InferenceConfig):
 
     def get_eos_token_id(self, tokenizer) -> int:
         return tokenizer.eos_token_id
+    
+    def trust_remote_code(self) -> bool:
+        return False
 
     def format_prompt(self, prompt : str) -> str:
         if self.prompted:
@@ -99,6 +109,9 @@ class PolyCoderConfig(InferenceConfig):
     def get_eos_token_id(self, tokenizer) -> int:
         return tokenizer.eos_token_id
 
+    def trust_remote_code(self) -> bool:
+        return False
+
     def format_prompt(self, prompt : str) -> str:
         if self.prompted:
             return f"// filename: solutions/solution_1.cpp\n// here is the correct implementation of the coding exercise\n\n{prompt}"
@@ -107,7 +120,7 @@ class PolyCoderConfig(InferenceConfig):
 
 class PhindConfig(InferenceConfig):
 
-    def __init__(self, prompted : bool = False):
+    def __init__(self, prompted: bool = False):
         super().__init__(prompted=prompted)
 
     def get_dtype(self):
@@ -122,6 +135,39 @@ class PhindConfig(InferenceConfig):
 
     def get_eos_token_id(self, tokenizer) -> int:
         return tokenizer.eos_token_id
+    
+    def trust_remote_code(self) -> bool:
+        return False
+
+    def format_prompt(self, prompt : str) -> str:
+        if self.prompted:
+            return f"// filename: solutions/solution_1.cpp\n// here is the correct implementation of the coding exercise\n\n{prompt}"
+        return prompt.strip()
+
+
+class ReplitConfig(InferenceConfig):
+
+    def __init__(self, prompted: bool = False):
+        super().__init__(prompted=prompted)
+
+    def get_dtype(self):
+        return torch.float16
+
+    def init_padding(self, tokenizer):
+        pass
+        #tokenizer.pad_token_id = tokenizer.eos_token_id  # for batching
+        #tokenizer.padding_side = "left"   # for decoder-only models
+
+    def get_pad_token_id(self, tokenizer) -> int:
+        return None
+        #return tokenizer.eos_token_id
+
+    def get_eos_token_id(self, tokenizer) -> int:
+        return None
+        #return tokenizer.eos_token_id
+    
+    def trust_remote_code(self) -> bool:
+        return True
 
     def format_prompt(self, prompt : str) -> str:
         if self.prompted:
@@ -138,6 +184,8 @@ def get_inference_config(model_name : str, **kwargs) -> InferenceConfig:
         return PolyCoderConfig(**kwargs)
     elif model_name == 'Phind/Phind-CodeLlama-34B-v2':
         return PhindConfig(**kwargs)
+    elif model_name == 'replit/replit-code-v1_5-3b':
+        return ReplitConfig(**kwargs)
     else:
         raise ValueError(f"Unknown model name: {model_name}")
 

@@ -8,20 +8,20 @@
 #SBATCH -A m2404
 #SBATCH -C gpu&hbm80g
 #SBATCH -q regular
-#SBATCH -J throughput-codellama-7b-bs64
-#SBATCH -o throughput-codellama-7b-bs64-%A.out
+#SBATCH -J throughput-codellama-13b-bs32
+#SBATCH -o throughput-codellama-13b-bs32-%A.out
 
 # settings
-MODEL="codellama/CodeLlama-7b-hf"
+MODEL="codellama/CodeLlama-13b-hf"
 TEMP=0.2
 TOPP=0.95
 MAX_NEW_TKNS=1024
 SAMPLES_PER_PROMPT=20
-BATCH_SIZE=64
+BATCH_SIZE=32
 WARMUP=5
 NUM_BATCHES=25
 echo "model=$MODEL   MAX_NEW_TKNS=$MAX_NEW_TKNS   SAMPLES_PER_PROMPT=$SAMPLES_PER_PROMPT   BATCH_SIZE=$BATCH_SIZE"
-echo "WARMUP=$WARMUP   NUM_BATCHES=$NUM_BATCHES"
+echo "WARMUP=5   NUM_BATCHES=$NUM_BATCHES"
 
 # setup
 source .env/bin/activate
