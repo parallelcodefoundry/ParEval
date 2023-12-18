@@ -77,7 +77,9 @@ void fillRandKokkos(Kokkos::View<DType*> &x, DType min, DType max) {
 #else
 #define IS_ROOT(rank) true
 #define BCAST(vec,dtype)
+#if !defined(USE_CUDA) && !defined(USE_HIP)
 #define SYNC()
+#endif
 #define GET_RANK(rank) rank = 0
 #endif
 

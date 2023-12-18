@@ -11,6 +11,7 @@ import shlex
 import sys
 import tempfile
 from typing import List
+import subprocess
 
 # local imports
 sys.path.append("..")
