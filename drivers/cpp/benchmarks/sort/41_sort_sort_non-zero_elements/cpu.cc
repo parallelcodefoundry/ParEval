@@ -34,11 +34,12 @@ void fillRandWithZeroes(std::vector<int> &x) {
 
 void reset(Context *ctx) {
     fillRandWithZeroes(ctx->x);
+    BCAST(ctx->x, INT);
 }
 
 Context *init() {
     Context *ctx = new Context();
-    ctx->x.resize(100000);
+    ctx->x.resize(1 << 15);
     reset(ctx);
     return ctx;
 }
@@ -57,6 +58,7 @@ bool validate(Context *ctx) {
     for (int i = 0; i < numTries; i += 1) {
         std::vector<int> input(1024);
         fillRandWithZeroes(input);
+        BCAST(input, INT);
 
         // compute correct result
         std::vector<int> correctResult = input;
@@ -65,6 +67,7 @@ bool validate(Context *ctx) {
         // compute test result
         std::vector<int> testResult = input;
         sortIgnoreZero(testResult);
+        SYNC();
         
         if (!std::equal(correctResult.begin(), correctResult.end(), testResult.begin())) {
             return false;

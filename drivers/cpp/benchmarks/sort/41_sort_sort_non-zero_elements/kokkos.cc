@@ -53,8 +53,8 @@ void reset(Context *ctx) {
 
 Context *init() {
     Context *ctx = new Context();
-    ctx->x = Kokkos::View<int*>("x", 100000);
-    ctx->cpuX.resize(100000);
+    ctx->x = Kokkos::View<int*>("x", 1 << 15);
+    ctx->cpuX.resize(1 << 15);
     reset(ctx);
     return ctx;
 }

@@ -29,8 +29,9 @@
 
 struct Context {
     int *x;
-    size_t N;
     std::vector<int> cpuScratch;
+    size_t N;
+    dim3 blockSize, gridSize;
 };
 
 void fillRandWithZeroes(std::vector<int> &x) {
@@ -50,15 +51,20 @@ void reset(Context *ctx) {
 
 Context *init() {
     Context *ctx = new Context();
-    ctx->N = 100000;
+
+    ctx->N = 1 << 15;
+    ctx->blockSize = dim3(1024);
+    ctx->gridSize = dim3((ctx->N + ctx->blockSize.x - 1) / ctx->blockSize.x); // at least enough threads
+
     ALLOC(ctx->x, ctx->N * sizeof(int));
     ctx->cpuScratch.resize(ctx->N);
+
     reset(ctx);
     return ctx;
 }
 
 void compute(Context *ctx) {
-    sortIgnoreZero<<<ctx->N,1,0>>>(ctx->x, ctx->N);
+    sortIgnoreZero<<<ctx->gridSize,ctx->blockSize>>>(ctx->x, ctx->N);
 }
 
 void best(Context *ctx) {
@@ -85,10 +91,12 @@ bool validate(Context *ctx) {
 
         std::vector<int> testResult(input.size());
         COPY_D2H(testResult.data(), testResultDevice, testResult.size() * sizeof(int));
+        FREE(testResultDevice);
         
         if (!std::equal(correctResult.begin(), correctResult.end(), testResult.begin())) {
             return false;
         }
+        
     }
 
     return true;
