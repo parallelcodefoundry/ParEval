@@ -16,6 +16,7 @@ from typing import List
 from alive_progress import alive_it
 from datasets import load_dataset
 from numba import njit, jit
+from tqdm import tqdm
 
 
 """ io helper funtions """
@@ -31,8 +32,8 @@ def read_json(fpath: str):
 """ Helper functions for checking model type """
 @njit
 def any_in(s: str, substrs: List[str]) -> bool:
-    for s in substrs:
-        if s in s:
+    for substr in substrs:
+        if substr in s:
             return True
     return False
 
@@ -111,8 +112,8 @@ def count_models(batch):
 
 """ Parse Args """
 parser = ArgumentParser(description=__doc__)
-parser.add_argument("-p", "--num-processes", type=int, help="number of processes")
-parser.add_argument("-c", "--chunk-size", type=int, help="chunk size for multiprocessing")
+parser.add_argument("-p", "--num_processes", type=int, help="number of processes")
+parser.add_argument("-c", "--chunk_size", type=int, help="chunk size for multiprocessing")
 parser.add_argument("-b", "--batch_size", type=int, default=1, help="batch size")
 parser.add_argument("--skip", type=int, help="skip first n batches")
 args = parser.parse_args()
@@ -140,12 +141,12 @@ with Pool(processes=args.num_processes) as pool:
     results = pool.imap(count_models, dataset.iter(batch_size=args.batch_size), chunksize=chunksize)
 
     #for idx, batch in alive_it(enumerate(batches), total=total_iter):
-    for idx, (c, lc) in alive_it(enumerate(results), total=total_iter):
+    for idx, (c, lc) in tqdm(enumerate(results), total=total_iter):
         #c, lc = count_models(batch)
         counts.update(c)
         language_counts.update(lc)
 
-        if idx != 0 and idx % 100 == 0:
+        if idx != 0 and idx % 150_000 == 0:
             offset = args.skip if args.skip else 0
             write_json(counts, f'model-counts-{idx + offset}.json')
             write_json(language_counts, f'language-counts-{idx + offset}.json')
