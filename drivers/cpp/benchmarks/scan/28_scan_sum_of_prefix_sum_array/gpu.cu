@@ -28,6 +28,7 @@
 struct Context {
     double *x;
     size_t N;
+    double *val;
     std::vector<double> cpuScratch;
 };
 
@@ -40,14 +41,15 @@ Context *init() {
     Context *ctx = new Context();
     ctx->N == 100000;
     ALLOC(ctx->x, ctx->N * sizeof(double));
+    ALLOC(ctx->val, sizeof(double));
     ctx->cpuScratch.resize(ctx->N);
     reset(ctx);
     return ctx;
 }
 
 void compute(Context *ctx) {
-    __device__ double val;
-    sumOfPrefixSum<<<ctx->N,1,0>>>(ctx->x, ctx->N, &val);
+    sumOfPrefixSum<<<ctx->N,1,0>>>(ctx->x, ctx->N, ctx->val);
+    (void) ctx->val;
 }
 
 void best(Context *ctx) {
@@ -67,13 +69,15 @@ bool validate(Context *ctx) {
 
         // compute test result
         double *testInputDevice;
-        __device__ double testResultDevice;
+        double *testResultDevice;
         double testResult;
         ALLOC(testInputDevice, input.size() * sizeof(double));
+        ALLOC(testResultDevice, sizeof(double));
         COPY_H2D(testInputDevice, input.data(), input.size() * sizeof(double));
         sumOfPrefixSum<<<input.size(),1>>>(testInputDevice, input.size(), &testResultDevice);
-        cudaMemcpyFromSymbol(&testResult, testResultDevice, sizeof(testResult), 0,
-                             cudaMemcpyDeviceToHost);
+        SYNC();
+
+        COPY_D2H(&testResult, testResultDevice, sizeof(double));
 
         if (std::fabs(correctResult - testResult) > 1e-5) {
             return false;
@@ -84,5 +88,7 @@ bool validate(Context *ctx) {
 }
 
 void destroy(Context *ctx) {
+    FREE(ctx->x);
+    FREE(ctx->val);
     delete ctx;
 }
