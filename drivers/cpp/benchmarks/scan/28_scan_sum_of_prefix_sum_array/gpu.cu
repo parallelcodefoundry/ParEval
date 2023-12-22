@@ -74,7 +74,7 @@ bool validate(Context *ctx) {
         ALLOC(testInputDevice, input.size() * sizeof(double));
         ALLOC(testResultDevice, sizeof(double));
         COPY_H2D(testInputDevice, input.data(), input.size() * sizeof(double));
-        sumOfPrefixSum<<<input.size(),1>>>(testInputDevice, input.size(), &testResultDevice);
+        sumOfPrefixSum<<<input.size(),1>>>(testInputDevice, input.size(), testResultDevice);
         SYNC();
 
         COPY_D2H(&testResult, testResultDevice, sizeof(double));
