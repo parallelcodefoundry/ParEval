@@ -26,28 +26,28 @@
 #endif
 
 struct Context {
-                double *x;
-                size_t N;
+    double *x;
+    size_t N;
     std::vector<double> cpuScratch;
 };
 
 void reset(Context *ctx) {
     fillRand(ctx->cpuScratch, -100.0, 100.0);
-                COPY_H2D(ctx->x, ctx->cpuScratch.data(), ctx->N * sizeof(double));
+    COPY_H2D(ctx->x, ctx->cpuScratch.data(), ctx->N * sizeof(double));
 }
 
 Context *init() {
     Context *ctx = new Context();
-                ctx->N == 100000;
-                ALLOC(ctx->x, ctx->N * sizeof(double));
+    ctx->N == 100000;
+    ALLOC(ctx->x, ctx->N * sizeof(double));
     ctx->cpuScratch.resize(ctx->N);
     reset(ctx);
     return ctx;
 }
 
 void compute(Context *ctx) {
-                __device__ double val;
-                sumOfPrefixSum<<<ctx->N,1,0>>>(ctx->x, ctx->N, &val);
+    __device__ double val;
+    sumOfPrefixSum<<<ctx->N,1,0>>>(ctx->x, ctx->N, &val);
 }
 
 void best(Context *ctx) {
