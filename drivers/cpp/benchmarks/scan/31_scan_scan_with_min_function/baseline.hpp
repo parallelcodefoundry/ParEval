@@ -13,7 +13,7 @@
    output: [5, 4, 4, 4, 3, 3, 1, 1]
 */
 void partialMinimums(std::vector<float> &x) {
-  std::inclusive_scan(x.begin(), x.end(), [] (const float &x, const float &y) {
-    return std::min(x, y);
-  }
+    std::inclusive_scan(x.begin(), x.end(), [] (const float &x, const float &y) {
+        return std::min(x, y);
+    }
 }

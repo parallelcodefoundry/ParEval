@@ -57,7 +57,7 @@ bool validate(Context *ctx) {
     const size_t numTries = 5;
     for (int trialIter = 0; trialIter < numTries; trialIter += 1) {
         // set up input
-        fillRand(ctx->x_host, -100.0, 100.0);
+        fillRand(x_host, -100.0, 100.0);
         copyVectorToView(x_host, x);
 
         // compute correct result
