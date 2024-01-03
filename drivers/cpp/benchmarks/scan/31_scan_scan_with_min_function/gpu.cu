@@ -62,6 +62,9 @@ bool validate(Context *ctx) {
         std::vector<float> correct(2048);
         fillRand(correct, -100.0, 100.0);
 
+        // compute correct result
+        correctPartialMinimums(correct);
+
         // compute test result
         float *testDevice;
         float *test = malloc(correct.size() * sizeof(float));
@@ -71,9 +74,6 @@ bool validate(Context *ctx) {
         SYNC();
 
         COPY_D2H(test, testDevice, correct.size() * sizeof(float));
-
-        // compute correct result
-        correctPartialMinimums(correct);
 
         for (int i = 0; i < correct.size(); i++) {
             if (std::fabs(correct[i] - test[i]) > 1e-5) {
