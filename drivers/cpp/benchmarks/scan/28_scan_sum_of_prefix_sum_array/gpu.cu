@@ -80,8 +80,12 @@ bool validate(Context *ctx) {
         COPY_D2H(&testResult, testResultDevice, sizeof(double));
 
         if (std::fabs(correctResult - testResult) > 1e-5) {
+            FREE(testInputDevice);
+            FREE(testResultDevice);
             return false;
         }
+        FREE(testInputDevice);
+        FREE(testResultDevice);
     }
 
     return true;

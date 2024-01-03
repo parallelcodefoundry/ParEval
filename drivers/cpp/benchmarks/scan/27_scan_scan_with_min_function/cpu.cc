@@ -1,11 +1,13 @@
-// Driver for 1_scan_sum_of_prefix_sum
-// /* Compute the prefix sum array of the vector x and return its sum.
-//    Example:
+// /* Replace the i-th element of the vector x with the minimum value from indices 0 through i.
+//    Examples:
 //
-//    input: [-7, 2, 1, 9, 4, 8]
-//    output: 15
+//    input: [8, 6, -1, 7, 3, 4, 4]
+//    output: [8, 6, -1, -1, -1, -1, -1]
+//
+//    input: [5, 4, 6, 4, 3, 6, 1, 1]
+//    output: [5, 4, 4, 4, 3, 3, 1, 1]
 // */
-// double sumOfPrefixSum(std::vector<double> const& x) {
+// void partialMinimums(std::vector<float> &x) {
 
 #include <algorithm>
 #include <numeric>
@@ -18,7 +20,7 @@
 
 
 struct Context {
-    std::vector<double> x;
+    std::vector<float> x;
 };
 
 void reset(Context *ctx) {
@@ -33,30 +35,31 @@ Context *init() {
 }
 
 void compute(Context *ctx) {
-    double val = sumOfPrefixSum(ctx->x);
-    (void) val;
+    partialMinimums(ctx->x);
 }
 
 void best(Context *ctx) {
-    double val = correctSumOfPrefixSum(ctx->x);
-    (void) val;
+    correctPartialMinimums(ctx->x);
 }
 
 bool validate(Context *ctx) {
 
     const size_t numTries = 5;
     for (int i = 0; i < numTries; i += 1) {
-        std::vector<double> input(2048);
+        std::vector<float> correct(2048);
         fillRand(input, -100.0, 100.0);
+        std::vector<float> test = correct;
 
         // compute correct result
-        double correctResult = correctSumOfPrefixSum(input);
+        correctPartialMinimums(correct);
 
         // compute test result
-        double testResult = sumOfPrefixSum(input);
+        partialMinimums(test);
 
-        if (std::fabs(correctResult - testResult) > 1e-5) {
-            return false;
+        for (int i = 0; i < test.size(); i++) {
+            if (std::fabs(correct[i] - test[i]) > 1e-5) {
+                return false;
+            }
         }
     }
 
