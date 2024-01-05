@@ -1,3 +1,4 @@
+// Driver for 30_scan_prefix_sum for Kokkos
 // /* Compute the prefix sum of the vector x into output.
 //    Use Kokkos to compute in parallel. Assume Kokkos is already initialized.
 //    Example:

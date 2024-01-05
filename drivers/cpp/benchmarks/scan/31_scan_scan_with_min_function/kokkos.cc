@@ -1,3 +1,4 @@
+// Driver for 31_scan_scan_with_min_function for Kokkos
 // /* Replace the i-th element of the array x with the minimum value from indices 0 through i.
 //    Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.
 //    Examples:

@@ -1,7 +1,7 @@
-// Driver for 28_scan_sum_of_prefix_sum
+// Driver for 32_scan_sum_of_prefix_sum for Kokkos
 // /* Compute the prefix sum array of the vector x and return its sum.
 //    Example:
-// 
+//
 //    input: [-7, 2, 1, 9, 4, 8]
 //    output: 15
 // */
@@ -60,7 +60,7 @@ bool validate(Context *ctx) {
 
         // compute test result
         double testResult = sumOfPrefixSum(inputView);
-        
+
         if (std::fabs(correctResult - testResult) > 1e-5) {
             return false;
         }
@@ -72,5 +72,3 @@ bool validate(Context *ctx) {
 void destroy(Context *ctx) {
     delete ctx;
 }
-
-
