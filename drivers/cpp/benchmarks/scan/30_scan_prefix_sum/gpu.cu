@@ -1,3 +1,4 @@
+// Driver for 30_scan_prefix_sum for CUDA and HIP
 // /* Compute the prefix sum of the vector x into output.
 //    Use CUDA to compute in parallel. The kernel is launched with at least as many threads as elements in x.
 //    Example:
@@ -29,71 +30,83 @@ struct Context {
     double *x;
     double *output;
     size_t N;
-    std::vector<double> cpuScratch;
-    std::vector<double> cpuScratchOut;
+    std::vector<double> h_x;
+    std::vector<double> h_output;
+    dim3 blockSize, gridSize;
 };
 
 void reset(Context *ctx) {
-    fillRand(ctx->cpuScratch, -100.0, 100.0);
-    COPY_H2D(ctx->x, ctx->cpuScratch.data(), ctx->N * sizeof(double));
+    fillRand(ctx->h_x, -100.0, 100.0);
+    COPY_H2D(ctx->x, ctx->h_x.data(), ctx->N * sizeof(double));
 }
 
 Context *init() {
     Context *ctx = new Context();
+
     ctx->N == 100000;
+    ctx->blockSize = dim3(1024);
+    ctx->gridSize = dim3((ctx->N + ctx->blockSize.x - 1) / ctx->blockSize.x); // at least enough threads
+
     ALLOC(ctx->x, ctx->N * sizeof(double));
     ALLOC(ctx->output, ctx->N * sizeof(double));
-    ctx->cpuScratch.resize(ctx->N);
-    ctx->cpuScratchOut.resize(ctx->N);
+
+    ctx->h_x.resize(ctx->N);
+    ctx->h_output.resize(ctx->N);
+
     reset(ctx);
     return ctx;
 }
 
 void compute(Context *ctx) {
-    prefixSum<<<ctx->N,1,0>>>(ctx->x, ctx->output, ctx->N);
+    prefixSum<<<ctx->gridSize, ctx->blockSize>>>(ctx->x, ctx->output, ctx->N);
 }
 
 void best(Context *ctx) {
-    correctPrefixSum(ctx->cpuScratch, ctx->cpuScratchOut);
+    correctPrefixSum(ctx->h_x, ctx->h_output);
 }
 
 bool validate(Context *ctx) {
+    const size_t TEST_SIZE = 1024;
+    dim3 blockSize = dim3(TEST_SIZE);
+    dim3 gridSize = dim3((TEST_SIZE + blockSize.x - 1) / blockSize.x);
+
+    std::vector<double> correct(TEST_SIZE), input(TEST_SIZE), test(TEST_SIZE);
+    double *testDevice, *inputDevice;
+
+    ALLOC(testDevice, correct.size() * sizeof(double));
+    ALLOC(inputDevice, correct.size() * sizeof(double));
 
     const size_t numTries = 5;
     for (int i = 0; i < numTries; i += 1) {
-        std::vector<double> correct(2048), input(2048);
+        // set up input
         fillRand(input, -100.0, 100.0);
+        COPY_H2D(inputDevice, input.data(), TEST_SIZE * sizeof(double));
 
         // compute correct result
         correctPrefixSum(input, correct);
 
         // compute test result
-        double *testDevice, *inputDevice;
-        double *test = malloc(correct.size() * sizeof(double));
-        ALLOC(testDevice, correct.size() * sizeof(double));
-        ALLOC(inputDevice, correct.size() * sizeof(double));
-        COPY_H2D(inputDevice, correct.data(), correct.size() * sizeof(double));
-        prefixSum<<<correct.size(), 1>>>(inputDevice, testDevice, correct.size());
+        prefixSum<<<gridSize, blockSize>>>(inputDevice, testDevice, TEST_SIZE);
         SYNC();
 
-        COPY_D2H(test, testDevice, correct.size() * sizeof(double));
-        FREE(inputDevice);
+        // copy back
+        COPY_D2H(test.data(), testDevice, TEST_SIZE * sizeof(double));
 
-        for (int i = 0; i < correct.size(); i++) {
-            if (std::fabs(correct[i] - test[i]) > 1e-5) {
-                free(test);
-                FREE(testDevice);
-                return false;
-            }
+        if (!std::equal(correct.begin(), correct.end(), test.begin())) {
+            FREE(inputDevice);
+            FREE(testDevice);
+            return false;
         }
-        free(test);
-        FREE(testDevice);
     }
+
+    FREE(inputDevice);
+    FREE(testDevice);
 
     return true;
 }
 
 void destroy(Context *ctx) {
     FREE(ctx->x);
+    FREE(ctx->output);
     delete ctx;
 }

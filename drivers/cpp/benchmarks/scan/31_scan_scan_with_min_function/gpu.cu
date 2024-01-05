@@ -1,3 +1,4 @@
+// Driver for 31_scan_scan_with_min_function for CUDA and HIP
 // /* Replace the i-th element of the vector x with the minimum value from indices 0 through i.
 //    Examples:
 //
@@ -29,62 +30,73 @@
 
 struct Context {
     float *x;
+    std::vector<float> h_x;
     size_t N;
-    std::vector<float> cpuScratch;
+    dim3 blockSize, gridSize;
 };
 
 void reset(Context *ctx) {
-    fillRand(ctx->cpuScratch, -100.0, 100.0);
-    COPY_H2D(ctx->x, ctx->cpuScratch.data(), ctx->N * sizeof(float));
+    fillRand(ctx->h_x, -100.0, 100.0);
+    COPY_H2D(ctx->x, ctx->h_x.data(), ctx->N * sizeof(float));
 }
 
 Context *init() {
     Context *ctx = new Context();
+
     ctx->N == 100000;
+    ctx->blockSize = dim3(1024);
+    ctx->gridSize = dim3((ctx->N + ctx->blockSize.x - 1) / ctx->blockSize.x); // at least enough threads
+
     ALLOC(ctx->x, ctx->N * sizeof(float));
-    ctx->cpuScratch.resize(ctx->N);
+
+    ctx->h_x.resize(ctx->N);
+
     reset(ctx);
     return ctx;
 }
 
 void compute(Context *ctx) {
-    partialMinimums<<<ctx->N,1,0>>>(ctx->x, ctx->N);
+    partialMinimums<<<ctx->gridSize, ctx->blockSize>>>(ctx->x, ctx->N);
 }
 
 void best(Context *ctx) {
-    correctPartialMinimums(ctx->cpuScratch);
+    correctPartialMinimums(ctx->h_x);
 }
 
 bool validate(Context *ctx) {
+    const size_t TEST_SIZE = 1024;
+    dim3 blockSize = dim3(1024);
+    dim3 gridSize = dim3((TEST_SIZE + blockSize.x - 1) / blockSize.x);
+
+    std::vector<float> input(TEST_SIZE), correct(TEST_SIZE), test(TEST_SIZE);
+    float *testDevice;
+    ALLOC(testDevice, TEST_SIZE * sizeof(float));
 
     const size_t numTries = 5;
     for (int i = 0; i < numTries; i += 1) {
-        std::vector<float> correct(2048);
-        fillRand(correct, -100.0, 100.0);
+        // set up input
+        fillRand(input, -100.0, 100.0);
+        correct = input;
+        COPY_H2D(testDevice, input.data(), TEST_SIZE * sizeof(float));
 
         // compute correct result
         correctPartialMinimums(correct);
 
         // compute test result
-        float *testDevice;
-        float *test = malloc(correct.size() * sizeof(float));
-        ALLOC(testDevice, correct.size() * sizeof(float));
-        COPY_H2D(testDevice, correct.data(), correct.size() * sizeof(float));
-        partialMinimums<<<correct.size(),1>>>(testDevice, correct.size());
+        partialMinimums<<<gridSize, blockSize>>>(testDevice, TEST_SIZE);
         SYNC();
 
-        COPY_D2H(test, testDevice, correct.size() * sizeof(float));
+        COPY_D2H(test.data(), testDevice, TEST_SIZE * sizeof(float));
 
-        for (int i = 0; i < correct.size(); i++) {
-            if (std::fabs(correct[i] - test[i]) > 1e-5) {
-                free(test);
-                FREE(testDevice);
-                return false;
-            }
+
+        if (!std::equal(correct.begin(), correct.end(), test.begin())) {
+            FREE(testDevice);
+            return false;
         }
-        free(test);
-        FREE(testDevice);
+
     }
+
+    FREE(testDevice);
 
     return true;
 }

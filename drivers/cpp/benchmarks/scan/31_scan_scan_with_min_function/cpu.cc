@@ -48,7 +48,7 @@ void best(Context *ctx) {
 bool validate(Context *ctx) {
     const size_t TEST_SIZE = 2048;
 
-    std::vector<float> correct(2048);
+    std::vector<float> correct(TEST_SIZE);
 
     int rank;
     GET_RANK(rank);
@@ -63,13 +63,12 @@ bool validate(Context *ctx) {
 
         // compute test result
         std::vector<float> test = correct;
+        BCAST(test, FLOAT);
         partialMinimums(test);
         SYNC();
 
-        for (int i = 0; i < test.size(); i++) {
-            if (std::fabs(correct[i] - test[i]) > 1e-5) {
-                return false;
-            }
+        if (IS_ROOT(rank) && !std::equal(correct.begin(), correct.end(), test.begin())) {
+            return false;
         }
     }
 

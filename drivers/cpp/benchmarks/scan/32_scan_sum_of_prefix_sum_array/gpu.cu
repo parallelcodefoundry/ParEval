@@ -1,11 +1,12 @@
-// Driver for 1_scan_sum_of_prefix_sum
-// /* Compute the prefix sum array of the vector x and return its sum.
+// Driver for 32_scan_sum_of_prefix_sum for CUDA and HIP
+// /* Compute the prefix sum array of the vector x and compute its sum. Store the result in sum.
+//    Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.
 //    Example:
 //
 //    input: [-7, 2, 1, 9, 4, 8]
 //    output: 15
 // */
-// double sumOfPrefixSum(const double *x, size_t N, double *sum) {
+// __global__ void sumOfPrefixSum(const double *x, size_t N, double *sum) {
 
 #include <algorithm>
 #include <numeric>
@@ -27,67 +28,78 @@
 
 struct Context {
     double *x;
-    size_t N;
     double *val;
-    std::vector<double> cpuScratch;
+    std::vector<double> h_x;
+    size_t N;
+    dim3 blockSize, gridSize;
 };
 
 void reset(Context *ctx) {
-    fillRand(ctx->cpuScratch, -100.0, 100.0);
-    COPY_H2D(ctx->x, ctx->cpuScratch.data(), ctx->N * sizeof(double));
+    fillRand(ctx->h_x, -100.0, 100.0);
+    COPY_H2D(ctx->x, ctx->h_x.data(), ctx->N * sizeof(double));
 }
 
 Context *init() {
     Context *ctx = new Context();
+
     ctx->N == 100000;
+    ctx->blockSize = dim3(1024);
+    ctx->gridSize = dim3((ctx->N + ctx->blockSize.x - 1) / ctx->blockSize.x); // at least enough threads
+
+    ctx->h_x.resize(ctx->N);
     ALLOC(ctx->x, ctx->N * sizeof(double));
     ALLOC(ctx->val, sizeof(double));
-    ctx->cpuScratch.resize(ctx->N);
+
     reset(ctx);
     return ctx;
 }
 
 void compute(Context *ctx) {
-    sumOfPrefixSum<<<ctx->N,1,0>>>(ctx->x, ctx->N, ctx->val);
-    (void) ctx->val;
+    sumOfPrefixSum<<<ctx->gridSize, ctx->blockSize>>>(ctx->x, ctx->N, ctx->val);
 }
 
 void best(Context *ctx) {
-    double val = correctSumOfPrefixSum(ctx->cpuScratch);
+    double val = correctSumOfPrefixSum(ctx->h_x);
     (void) val;
 }
 
 bool validate(Context *ctx) {
+    const size_t TEST_SIZE = 1024;
+    dim3 blockSize = dim3(TEST_SIZE);
+    dim3 gridSize = dim3((TEST_SIZE + blockSize.x - 1) / blockSize.x); // at least enough threads
+
+    std::vector<double> input(TEST_SIZE);
+    double *testInputDevice;
+    double *testResultDevice;
+    ALLOC(testInputDevice, TEST_SIZE * sizeof(double));
+    ALLOC(testResultDevice, sizeof(double));
 
     const size_t numTries = 5;
     for (int i = 0; i < numTries; i += 1) {
-        std::vector<double> input(2048);
+        // set up input
         fillRand(input, -100.0, 100.0);
+        COPY_H2D(testInputDevice, input.data(), TEST_SIZE * sizeof(double));
 
         // compute correct result
         double correctResult = correctSumOfPrefixSum(input);
 
         // compute test result
-        double *testInputDevice;
-        double *testResultDevice;
-        double testResult;
-        ALLOC(testInputDevice, input.size() * sizeof(double));
-        ALLOC(testResultDevice, sizeof(double));
-        COPY_H2D(testInputDevice, input.data(), input.size() * sizeof(double));
-        sumOfPrefixSum<<<input.size(),1>>>(testInputDevice, input.size(), testResultDevice);
+        sumOfPrefixSum<<<TEST_SIZE,1>>>(testInputDevice, TEST_SIZE, testResultDevice);
         SYNC();
 
+        // copy back
+        double testResult;
         COPY_D2H(&testResult, testResultDevice, sizeof(double));
 
-        if (std::fabs(correctResult - testResult) > 1e-5) {
+        if (test != correct) {
             FREE(testInputDevice);
             FREE(testResultDevice);
             return false;
         }
-        FREE(testInputDevice);
-        FREE(testResultDevice);
     }
 
+    FREE(testInputDevice);
+    FREE(testResultDevice);
     return true;
 }
 
