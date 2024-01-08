@@ -51,7 +51,7 @@ void compute(Context *ctx) {
 }
 
 void best(Context *ctx) {
-
+    correct
 }
 
 bool validate(Context *ctx) {
@@ -68,7 +68,7 @@ bool validate(Context *ctx) {
 
         // compute test result
         SYNC();
-        
+
         if (IS_ROOT(rank) && ) {
             return false;
         }
@@ -120,7 +120,7 @@ void compute(Context *ctx) {
 }
 
 void best(Context *ctx) {
-
+    correct
 }
 
 bool validate(Context *ctx) {
@@ -133,7 +133,7 @@ bool validate(Context *ctx) {
         // compute correct result
 
         // compute test result
-        
+
         if () {
             return false;
         }
@@ -191,11 +191,11 @@ Context *init() {
 }
 
 void compute(Context *ctx) {
-
+    <<<gridSize, blockSize>>>
 }
 
 void best(Context *ctx) {
-
+    correct
 }
 
 bool validate(Context *ctx) {
@@ -210,9 +210,11 @@ bool validate(Context *ctx) {
         // compute correct result
 
         // compute test result
-        
+
         SYNC();
-        
+
+        // copy back
+
         if () {
             return false;
         }
