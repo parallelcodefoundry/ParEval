@@ -70,9 +70,9 @@ bool validate(Context *ctx) {
 
     std::vector<double> input(TEST_SIZE);
     double *testInputDevice;
-    double *testResultDevice;
+    double *testDevice;
     ALLOC(testInputDevice, TEST_SIZE * sizeof(double));
-    ALLOC(testResultDevice, sizeof(double));
+    ALLOC(testDevice, sizeof(double));
 
     const size_t numTries = 5;
     for (int i = 0; i < numTries; i += 1) {
@@ -81,25 +81,25 @@ bool validate(Context *ctx) {
         COPY_H2D(testInputDevice, input.data(), TEST_SIZE * sizeof(double));
 
         // compute correct result
-        double correctResult = correctSumOfPrefixSum(input);
+        double correct = correctSumOfPrefixSum(input);
 
         // compute test result
-        sumOfPrefixSum<<<TEST_SIZE,1>>>(testInputDevice, TEST_SIZE, testResultDevice);
+        sumOfPrefixSum<<<TEST_SIZE,1>>>(testInputDevice, TEST_SIZE, testDevice);
         SYNC();
 
         // copy back
-        double testResult;
-        COPY_D2H(&testResult, testResultDevice, sizeof(double));
+        double test;
+        COPY_D2H(&test, testDevice, sizeof(double));
 
         if (test != correct) {
             FREE(testInputDevice);
-            FREE(testResultDevice);
+            FREE(testDevice);
             return false;
         }
     }
 
     FREE(testInputDevice);
-    FREE(testResultDevice);
+    FREE(testDevice);
     return true;
 }
 

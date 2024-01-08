@@ -80,7 +80,7 @@ bool validate(Context *ctx) {
     for (int trialIter = 0; trialIter < numTries; trialIter += 1) {
         // set up input
         fillRand(h_x, -100, 100);
-        correct.fill(0);
+	std::fill(correct.begin(), correct.end(), 0);
 
         COPY_H2D(d_x, h_x.data(), TEST_SIZE * sizeof(int));
         COPY_H2D(d_output, correct.data(), TEST_SIZE * sizeof(int));

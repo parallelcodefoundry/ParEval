@@ -40,7 +40,7 @@ struct Context {
 void reset(Context *ctx) {
     fillRand(ctx->h_x, -100, 100);
 
-    COPY_H2D(ctx->d_x, ctx->h_x, ctx->N * sizeof(int));
+    COPY_H2D(ctx->d_x, ctx->h_x.data(), ctx->N * sizeof(int));
 }
 
 Context *init() {
@@ -59,7 +59,7 @@ Context *init() {
 }
 
 void compute(Context *ctx) {
-    maximumSubarray<<<ctx->gridSize, ctx->blockSize>>>(ctx->x, ctx->N, ctx->sum);
+    maximumSubarray<<<ctx->gridSize, ctx->blockSize>>>(ctx->d_x, ctx->N, ctx->d_sum);
 }
 
 void best(Context *ctx) {
@@ -93,7 +93,7 @@ bool validate(Context *ctx) {
         correct = correctMaximumSubarray(h_x);
 
         // compute test result
-        maximumSubarray(d_x, TEST_SIZE, d_test);
+        maximumSubarray<<<gridSize, blockSize>>>(d_x, TEST_SIZE, d_test);
         SYNC();
 
         // copy back

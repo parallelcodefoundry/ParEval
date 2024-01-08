@@ -49,6 +49,8 @@ def build_kokkos(driver_src: PathLike, output_root: PathLike):
     pwd = os.getcwd()
     cmake_flags = f"-DKokkos_DIR=../tpl/kokkos/build -DDRIVER_PATH={pwd} -DDRIVER_SRC_FILE={driver_src}"
     cmake_out = run_command(f"cmake -B{output_root} -S{output_root} {cmake_flags}", dry=False)
+    print(cmake_out.stdout)
+    print(cmake_out.stderr)
     return run_command(f"make -C {output_root}", dry=False)
 
 class CppDriverWrapper(DriverWrapper):
@@ -74,11 +76,15 @@ class CppDriverWrapper(DriverWrapper):
         if self.parallelism_model == "kokkos":
             driver_src = [b for b in binaries if b.endswith(".cc")][0]
             compile_process = build_kokkos(driver_src, os.path.dirname(output_path))
+            print(compile_process.stdout)
+            print(compile_process.stderr)
         else:
             binaries_str = ' '.join(binaries)
             macro = f"-DUSE_{self.parallelism_model.upper()}"
             cmd = f"{CXX} {CXXFLAGS} -Icpp -Icpp/models {macro} {binaries_str} -o {output_path}"
             compile_process = run_command(cmd, timeout=20, dry=self.dry)
+            print(compile_process.stdout)
+            print(compile_process.stderr)
         return BuildOutput(compile_process.returncode, compile_process.stdout, compile_process.stderr)
 
     def run(self, executable: PathLike, **run_config) -> RunOutput:

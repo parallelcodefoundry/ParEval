@@ -20,6 +20,7 @@
 
 #include <Kokkos_Core.hpp>
 #include <Kokkos_Sort.hpp>
+#include <Kokkos_StdAlgorithms.hpp>
 
 #include "baseline.hpp"
 #include "utilities.hpp"
@@ -36,7 +37,7 @@ struct Context {
 
 void reset(Context *ctx) {
     fillRand(ctx->h_x, -100, 100);
-    ctx->h_output.fill(0);
+    std::fill(ctx->h_output.begin(), ctx->h_output.end(), 0);
 
     copyVectorToView(ctx->h_x, ctx->xNonConst);
     ctx->x = ctx->xNonConst;
@@ -76,7 +77,7 @@ bool validate(Context *ctx) {
     for (int trialIter = 0; trialIter < numTries; trialIter += 1) {
         // set up input
         fillRand(h_x, -100, 100);
-        correct.fill(0);
+        std::fill(correct.begin(), correct.end(), 0);
 
         copyVectorToView(h_x, xNonConst);
         x = xNonConst;

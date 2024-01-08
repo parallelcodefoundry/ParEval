@@ -12,7 +12,7 @@
    input: [3, 3, 7, 1, -2]
    output: [-2, -1, 6, 9, 12]
 */
-void reversePrefixSum(std::vector<int> const& x, std::vector<int> &output) {
+void correctReversePrefixSum(std::vector<int> const& x, std::vector<int> &output) {
     std::vector<int> reverseX;
     for (int i = x.size() - 1; i >= 0; i--) {
         reverseX.push_back(x[i]);
