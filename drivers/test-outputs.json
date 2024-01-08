@@ -79,7 +79,7 @@
     {
         "problem_type": "scan",
         "language": "cpp",
-        "name": "28_scan_sum_of_prefix_sum_array",
+        "name": "32_scan_sum_of_prefix_sum_array",
         "parallelism_model": "omp",
         "prompt": "#include <omp.h>\n\n/* Compute the prefix sum array of the vector x and return its sum.\n   Use OpenMP to compute in parallel.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {",
         "outputs": [
@@ -91,7 +91,7 @@
     {
         "problem_type": "scan",
         "language": "cpp",
-        "name": "28_scan_sum_of_prefix_sum_array",
+        "name": "32_scan_sum_of_prefix_sum_array",
         "parallelism_model": "serial",
         "prompt": "/* Compute the prefix sum array of the vector x and return its sum.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {",
         "outputs": [
@@ -103,7 +103,7 @@
     {
         "problem_type": "scan",
         "language": "cpp",
-        "name": "28_scan_sum_of_prefix_sum_array",
+        "name": "32_scan_sum_of_prefix_sum_array",
         "parallelism_model": "mpi",
         "prompt": "#include <mpi.h>\n\n/* Compute the prefix sum array of the vector x and return its sum.\n   Use MPI to compute in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {",
         "outputs": [
@@ -115,7 +115,7 @@
     {
         "problem_type": "scan",
         "language": "cpp",
-        "name": "28_scan_sum_of_prefix_sum_array",
+        "name": "32_scan_sum_of_prefix_sum_array",
         "parallelism_model": "mpi+omp",
         "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the prefix sum array of the vector x and return its sum.\n   Use MPI and OpenMP to compute in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {",
         "outputs": [
@@ -126,7 +126,7 @@
     {
         "problem_type": "scan",
         "language": "cpp",
-        "name": "28_scan_sum_of_prefix_sum_array",
+        "name": "32_scan_sum_of_prefix_sum_array",
         "parallelism_model": "cuda",
         "prompt": "/* Compute the prefix sum array of the vector x and compute its sum. Store the result in sum.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\n__global__ void sumOfPrefixSum(const double *x, size_t N, double *sum) {",
         "outputs": [
@@ -137,7 +137,7 @@
     {
         "problem_type": "scan",
         "language": "cpp",
-        "name": "28_scan_sum_of_prefix_sum_array",
+        "name": "32_scan_sum_of_prefix_sum_array",
         "parallelism_model": "kokkos",
         "prompt": "/* Compute the prefix sum array of the vector x and return its sum.\n   Use Kokkos to compute in parallel. Assume Kokkos is already initialized.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(Kokkos::View<const double*> const& x) {",
         "outputs": [
