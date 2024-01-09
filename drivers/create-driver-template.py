@@ -66,6 +66,7 @@ bool validate(Context *ctx) {
         // set up input
 
         // compute correct result
+        correct
 
         // compute test result
         SYNC();
@@ -132,6 +133,7 @@ bool validate(Context *ctx) {
         // set up input
 
         // compute correct result
+        correct
 
         // compute test result
 
@@ -192,7 +194,7 @@ Context *init() {
 }
 
 void compute(Context *ctx) {
-    <<<gridSize, blockSize>>>
+    <<<ctx->gridSize, ctx->blockSize>>>
 }
 
 void best(Context *ctx) {
@@ -209,9 +211,10 @@ bool validate(Context *ctx) {
         // set up input
 
         // compute correct result
+        correct
 
         // compute test result
-
+        <<<gridSize, blockSize>>>
         SYNC();
 
         // copy back
