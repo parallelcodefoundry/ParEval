@@ -9,7 +9,7 @@
    output: true
 */
 bool correctReduceLogicalXOR(std::vector<bool> const& x) {
-    return std::reduce(x.begin(), x.end(), false, [] (const auto &x, const auto &y) {
-        return x != y;
+    return std::reduce(x.begin(), x.end(), false, [] (const auto &a, const auto &b) {
+        return a != b;
     });
 }
