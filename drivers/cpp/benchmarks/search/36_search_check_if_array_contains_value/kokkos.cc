@@ -18,8 +18,7 @@
 #include <random>
 #include <vector>
 
-#include <Kokkos_Core.hpp>
-#include <Kokkos_Sort.hpp>
+#include "kokkos-includes.hpp"
 
 #include "baseline.hpp"
 #include "utilities.hpp"
@@ -36,22 +35,22 @@ struct Context {
 void reset(Context *ctx) {
     fillRandKokkos(ctx->nonConstX, -50, 50);
     ctx->x = ctx->nonConstX;
-    copyViewToVector(ctx->x, ctx->vecX);
+    copyViewToVector(ctx->nonConstX, ctx->vecX);
     ctx->target = (rand() % 200) - 100;
 }
 
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->nonConstX = Kokkos::View<int*>("x", 100000);
-    ctx->vecX.resize(100000);
+    ctx->nonConstX = Kokkos::View<int*>("x", 1 << 18);
+    ctx->vecX.resize(1 << 18);
 
     reset(ctx);
     return ctx;
 }
 
 void compute(Context *ctx) {
-    bool flag = contains(ctx->x, ctx->target);
+    bool flag = contains(ctx->nonConstX, ctx->target);
     (void)flag;
 }
 
@@ -65,18 +64,17 @@ bool validate(Context *ctx) {
     const size_t numTries = 5;
     for (int i = 0; i < numTries; i += 1) {
         std::vector<int> input(1024);
+        Kokkos::View<int*> inputView = Kokkos::View<int*>("input", input.size());
+
         fillRand(input, -50, 50);
         int target = (rand() % 200) - 100;
+        copyVectorToView(input, inputView);
 
         // compute correct result
-        bool correctFlag = correctContains(correctResult, target);
+        bool correctFlag = correctContains(input, target);
 
         // compute test result
-        Kokkos::View<int*> testResult("testResult", input.size());
-        copyVectorToView(input, testResult);
-        Kokkos::View<const int*> testView = testResult;
-
-        bool testFlag = contains(testView, target);
+        bool testFlag = contains(inputView, target);
         
         if (correctFlag != testFlag) {
             return false;

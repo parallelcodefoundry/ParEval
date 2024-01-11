@@ -12,7 +12,7 @@
 //    input: x=[1,8,4,3,2], y=[3,4,4,1,1,7], val=1
 //    output: false
 // */
-// bool xorContains(Kokkos::View<const int*> const& x, std::vector<const int*> const& y, int val) {
+// bool xorContains(Kokkos::View<const int*> const& x, Kokkos::View<const int*> const& y, int val) {
 
 #include <algorithm>
 #include <numeric>
@@ -47,10 +47,10 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->x_host.resize(100000);
-    ctx->y_host.resize(100000);
-    ctx->xNonConst = Kokkos::View<int*>("x", 100000);
-    ctx->yNonConst = Kokkos::View<int*>("y", 100000);
+    ctx->x_host.resize(1 << 18);
+    ctx->y_host.resize(1 << 18);
+    ctx->xNonConst = Kokkos::View<int*>("x", 1 << 18);
+    ctx->yNonConst = Kokkos::View<int*>("y", 1 << 18);
 
     reset(ctx);
     return ctx;
@@ -81,8 +81,8 @@ bool validate(Context *ctx) {
         // set up Kokkos input
         Kokkos::View<int*> xNonConst("x", TEST_SIZE);
         Kokkos::View<int*> yNonConst("y", TEST_SIZE);
-        copyVectorToView(x, xNonConst);
-        copyVectorToView(y, yNonConst);
+        copyVectorToView(x_host, xNonConst);
+        copyVectorToView(y_host, yNonConst);
         Kokkos::View<const int*> x = xNonConst;
         Kokkos::View<const int*> y = yNonConst;
 

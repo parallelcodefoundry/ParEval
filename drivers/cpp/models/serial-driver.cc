@@ -35,7 +35,7 @@ int main(int argc, char **argv) {
         exit(1);
     }
 
-    int NITER = 50;
+    int NITER = 10;
     if (argc > 1) {
         NITER = std::stoi(std::string(argv[1]));
     }

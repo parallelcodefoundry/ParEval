@@ -38,7 +38,7 @@ int main(int argc, char **argv) {
         exit(1);
     }
 
-    const int NITER = 50;
+    const int NITER = 10;
 
     /* initialize */
     Context *ctx = init();

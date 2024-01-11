@@ -10,6 +10,6 @@
    input: x=[1, 8, 2, 6, 4, 6], target=8
    output: true
 */
-bool correctContains(std::vector<int> const& x, int target) {
+bool NO_INLINE correctContains(std::vector<int> const& x, int target) {
     return std::find(x.begin(), x.end(), target) != x.end();
 }
