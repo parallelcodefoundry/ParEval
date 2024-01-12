@@ -53,10 +53,11 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->books = Kokkos::View<Book*>("books", 1 << 20);
-    ctx->booksHost.resize(1 << 20);
-    ctx->titles.resize(1 << 20);
-    ctx->pages.resize(1 << 20);
+    const size_t N = 1 << 18;
+    ctx->books = Kokkos::View<Book*>("books", 1 << 18);
+    ctx->booksHost.resize(1 << 18);
+    ctx->titles.resize(1 << 18);
+    ctx->pages.resize(1 << 18);
 
     reset(ctx);
     return ctx;

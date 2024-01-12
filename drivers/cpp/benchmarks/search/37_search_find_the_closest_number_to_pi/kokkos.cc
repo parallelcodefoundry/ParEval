@@ -35,8 +35,9 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->x_host.resize(1 << 20);
-    ctx->x = Kokkos::View<double*>("x", 1 << 20);
+    const size_t N = 1 << 18;
+    ctx->x_host.resize(N);
+    ctx->x = Kokkos::View<double*>("x", N);
 
     reset(ctx);
     return ctx;

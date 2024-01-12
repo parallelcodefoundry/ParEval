@@ -69,7 +69,12 @@ bool validate(Context *ctx) {
         // compute test result
         SYNC();
         
+        bool isCorrect = true;
         if (IS_ROOT(rank) && ) {
+            isCorrect = false;
+        }
+        BCAST_PTR(&isCorrect, 1, CXX_BOOL);
+        if (!isCorrect) {
             return false;
         }
     }
@@ -180,7 +185,7 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->N = 100000;
+    ctx->N = 1 << 18;
     ctx->blockSize = dim3(1024);
     ctx->gridSize = dim3((ctx->N + ctx->blockSize.x - 1) / ctx->blockSize.x); // at least enough threads
 
