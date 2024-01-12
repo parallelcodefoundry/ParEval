@@ -8,7 +8,8 @@
         "params": [
             {"num_threads": 1},
             {"num_threads": 2},
-            {"num_threads": 4}
+            {"num_threads": 4},
+            {"num_threads": 8}
         ]
     },
     "mpi": {
@@ -29,11 +30,12 @@
         ]
     },
     "kokkos": {
-        "format": "srun -N 1 -n 1 -c {num_threads} {exec_path} {args} --kokkos-threads={num_threads}",
+        "format": "srun -N 1 -n 1 -c {num_threads} {exec_path} {args} --kokkos-num-threads={num_threads}",
         "params": [
             {"num_threads": 1},
             {"num_threads": 2},
-            {"num_threads": 4}
+            {"num_threads": 4},
+            {"num_threads": 8}
         ]
     },
     "cuda": {

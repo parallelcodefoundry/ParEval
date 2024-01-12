@@ -2,6 +2,8 @@
 """
 # std imports
 import argparse
+from math import comb
+from typing import Union
 
 # tpl imports
 import numpy as np
@@ -32,6 +34,11 @@ def get_correctness_df(df: pd.DataFrame) -> pd.DataFrame:
 
     return agg
 
+def nCr(n: int, r: int) -> int:
+    if n < r:
+        return 1
+    return comb(n, r)
+
 def _passk(num_samples: int, num_correct: int, k: int) -> float:
     if num_samples - num_correct < k:
         return 1.0
@@ -40,11 +47,58 @@ def _passk(num_samples: int, num_correct: int, k: int) -> float:
 def passk(df: pd.DataFrame, k: int) -> pd.DataFrame:
     """ Compute the pass@k metric """
     agg = df.groupby(["name", "parallelism_model"]).agg({"is_valid": ["count", "sum"]})
+    agg.columns = ["total_runs", "valid_count"]
     agg = agg.reset_index()
-    print(agg)
-    agg["pass@k"] = agg.apply(lambda x: _passk(20, x["is_valid"], k), axis=1)
+    agg["pass@k"] = agg.apply(lambda x: _passk(x["total_runs"], x["valid_count"], k), axis=1)
     return agg.groupby(["parallelism_model"]).agg({"pass@k": "mean"})
 
+def _speedupk(runtimes: Union[pd.Series, np.ndarray], baseline_runtime: float, k: int) -> float:
+    """ Compute the speedup@k metric """
+    # create a copy of the runtimes
+    if isinstance(runtimes, pd.Series):
+        runtimes = runtimes.values.copy()
+    else:
+        runtimes = runtimes.copy()
+
+    # sort the runtimes
+    runtimes.sort()
+
+    # compute expected value
+    sum = 0.0
+    num_samples = runtimes.shape[0]
+    for j in range(1, num_samples+1):
+        num = nCr(j-1, k-1) * baseline_runtime
+        den = nCr(num_samples, k) * runtimes[j-1]
+        sum += num / den
+    return pd.Series({f"speedup@{k}": sum})
+
+def speedupk(df: pd.DataFrame, k: int, n: int) -> pd.DataFrame:
+    """ Compute the speedup@k metric """
+    # get all runs where is_valid is true
+    df = df[df["is_valid"] == True]
+
+    # choose processor count; hardcoded right now
+    df = df[(df["parallelism_model"] == "serial") |
+            (df["parallelism_model"] == "cuda") |
+            (df["parallelism_model"] == "hip") |
+            ((df["parallelism_model"] == "kokkos") & (df["num_threads"] == 32)) |
+            ((df["parallelism_model"] == "omp") & (df["num_threads"] == 64)) |
+            ((df["parallelism_model"] == "mpi") & (df["num_procs"] == 512)) |
+            ((df["parallelism_model"] == "mpi+omp") & (df["num_procs"] == 4) & (df["num_threads"] == 64))]
+    df = df.copy()
+
+    # use min best_sequential_runtime
+    df["best_sequential_runtime"] = df.groupby(["name", "parallelism_model", "output_idx"])["best_sequential_runtime"].transform("min")
+
+    # group by name, parallelism_model, and output_idx and call _speedupk
+    df = df.groupby(["name", "parallelism_model", "output_idx"]).apply(
+            lambda row: _speedupk(row["runtime"], np.min(row["best_sequential_runtime"]), k)
+        ).reset_index()
+
+    # compute the mean speedup@k
+    df = df.groupby(["parallelism_model"]).agg({f"speedup@{k}": "mean"})
+
+    return df
 
 def main():
     args = get_args()
@@ -67,7 +121,8 @@ def main():
         result = passk(df, args.k)
         print(result)
     elif args.metric == "speedup":
-        pass
+        result = speedupk(df, args.k, args.n)
+        print(result)
 
 
 if __name__ == "__main__":

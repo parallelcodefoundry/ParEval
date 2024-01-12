@@ -49,6 +49,8 @@ def build_kokkos(driver_src: PathLike, output_root: PathLike, problem_size: str 
     pwd = os.getcwd()
     cmake_flags = f"-DKokkos_DIR=../tpl/kokkos/build -DDRIVER_PATH={pwd} -DDRIVER_SRC_FILE={driver_src} -DDRIVER_PROBLEM_SIZE=\"{problem_size}\""
     cmake_out = run_command(f"cmake -B{output_root} -S{output_root} {cmake_flags}", dry=False)
+    if cmake_out.returncode != 0:
+        return cmake_out
     return run_command(f"make -C {output_root}", dry=False)
 
 class CppDriverWrapper(DriverWrapper):

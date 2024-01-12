@@ -24,7 +24,7 @@ if [ $MODEL == "serial" ] || [ $MODEL == "omp" ]; then
 elif [ $MODEL == "mpi" ] || [ $MODEL == "mpi+omp" ]; then
     ml python gcc openmpi
 elif [ $MODEL == "kokkos" ]; then
-    ml python gcc/11.3.0
+    ml python gcc/11.3.0 cmake/gcc/11.3.0
 elif [ $MODEL == "cuda" ]; then
     ml python gcc/11.3.0 cuda/12.1.1/gcc/11.3.0/
 else
