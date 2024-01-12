@@ -13,6 +13,7 @@
 */
 #include <cstdio>
 #include <string>
+#include <cfloat>
 
 #include <mpi.h>
 
@@ -65,7 +66,7 @@ int main(int argc, char **argv) {
 
     if (rank == 0) {
         MPI_Reduce(MPI_IN_PLACE, &totalTime, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
-        printf("Time: %f\n", totalTime / size / NITER);
+        printf("Time: %.*f\n", DBL_DIG-1, totalTime / size / NITER);
     } else {
         MPI_Reduce(&totalTime, nullptr, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
     }
@@ -79,7 +80,7 @@ int main(int argc, char **argv) {
 
         reset(ctx);
     }
-    printf("BestSequential: %f\n", totalTime / NITER);
+    printf("BestSequential: %.*f\n", DBL_DIG-1, totalTime / NITER);
     MPI_Barrier(MPI_COMM_WORLD);
 
     /* validate */

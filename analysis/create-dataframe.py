@@ -10,7 +10,7 @@ import pandas as pd
 def get_args():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("input_json", type=str, help="Input JSON file containing the test cases.")
-    parser.add_argument("-o", "--output", type=str, help="Output csv file containing the results.")
+    parser.add_argument("-o", "--output", type=str, required=True, help="Output csv file containing the results.")
     return parser.parse_args()
 
 def has_outputs(prompt: dict) -> bool:
@@ -48,8 +48,8 @@ def main():
     # parse out rows; each run becomes a row
     rows = []
     for prompt in input_json:
-        for output in prompt["outputs"]:
-            for run in output["runs"]:
+        for output_idx, output in enumerate(prompt["outputs"]):
+            if output["runs"] is None:
                 row = {
                     "prompt": prompt["prompt"],
                     "name": prompt["name"],
@@ -65,6 +65,29 @@ def main():
                     "did_build": output["did_build"],
                     "is_source_valid": output["is_source_valid"],
                     "best_sequential_runtime": output["best_sequential_runtime"],
+                    "output_idx": output_idx
+                }
+                rows.append(row)
+                continue
+
+            for run_idx, run in enumerate(output["runs"]):
+                row = {
+                    "prompt": prompt["prompt"],
+                    "name": prompt["name"],
+                    "problem_type": prompt["problem_type"],
+                    "language": prompt["language"],
+                    "parallelism_model": prompt["parallelism_model"],
+                    "temperature": prompt["temperature"],
+                    "top_p": prompt["top_p"],
+                    "do_sample": prompt["do_sample"],
+                    "max_new_tokens": prompt["max_new_tokens"],
+                    "prompted": prompt["prompted"],
+                    "generated_output": output["generated_output"],
+                    "did_build": output["did_build"],
+                    "is_source_valid": output["is_source_valid"],
+                    "best_sequential_runtime": output["best_sequential_runtime"],
+                    "output_idx": output_idx,
+                    "run_idx": run_idx,
                     **run
                 }
                 rows.append(row)
@@ -76,6 +99,8 @@ def main():
     check(df)
 
     # write to csv
+    df.prompt = df.prompt.apply(lambda x: x.replace("\n", "\\n"))
+    df.generated_output = df.generated_output.apply(lambda x: x.replace("\n", "\\n"))
     df.to_csv(args.output, index=False)
 
 if __name__ == "__main__":
