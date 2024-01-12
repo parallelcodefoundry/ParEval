@@ -31,6 +31,8 @@ def get_args():
     parser.add_argument("--scratch-dir", type=str, help="If provided, put scratch files here.")
     parser.add_argument("--launch-configs", type=str, default="launch-configs.json", 
         help="config for how to run samples.")
+    parser.add_argument("--problem-sizes", type=str, default="problem-sizes.json", 
+        help="config for how to run samples.")
     parser.add_argument("--yes-to-all", action="store_true", help="If provided, automatically answer yes to all prompts.")
     parser.add_argument("--dry", action="store_true", help="Dry run. Do not actually run the code snippets.")
     parser.add_argument("--overwrite", action="store_true", help="If ouputs are already in DB for a given prompt, \
@@ -52,10 +54,11 @@ def get_args():
     parser.add_argument("--log-build-errors", action="store_true", help="On build error, display the stderr of the build process.")
     return parser.parse_args()
 
-def get_driver(prompt: dict, scratch_dir: Optional[os.PathLike], launch_configs: dict, dry: bool, **kwargs) -> DriverWrapper:
+def get_driver(prompt: dict, scratch_dir: Optional[os.PathLike], launch_configs: dict, problem_sizes: dict, dry: bool, **kwargs) -> DriverWrapper:
     """ Get the language drive wrapper for this prompt """
     driver_cls = LANGUAGE_DRIVERS[prompt["language"]]
-    return driver_cls(parallelism_model=prompt["parallelism_model"], launch_configs=launch_configs, scratch_dir=scratch_dir, dry=dry, **kwargs)    
+    return driver_cls(parallelism_model=prompt["parallelism_model"], launch_configs=launch_configs, 
+        problem_sizes=problem_sizes, scratch_dir=scratch_dir, dry=dry, **kwargs)
 
 def already_has_results(prompt: dict) -> bool:
     """ Check if a prompt already has results stored in it. """
@@ -97,6 +100,10 @@ def main():
     launch_configs = load_json(args.launch_configs)
     logging.info(f"Loaded launch configs from {args.launch_configs}.")
 
+    # load problem sizes
+    problem_sizes = load_json(args.problem_sizes)
+    logging.info(f"Loaded problem sizes from {args.problem_sizes}.")
+
     # gather the list of parallelism models to test
     models_to_test = args.include_models if args.include_models else ["serial", "omp", "mpi", "mpi+omp", "kokkos", "cuda", "hip"]
     if args.exclude_models:
@@ -130,6 +137,7 @@ def main():
             prompt, 
             args.scratch_dir, 
             launch_configs, 
+            problem_sizes,
             args.dry, 
             display_build_errors=args.log_build_errors,
             early_exit_runs=args.early_exit_runs,

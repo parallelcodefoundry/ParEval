@@ -12,6 +12,10 @@
 #error "No parallel model not defined"
 #endif
 
+#if !defined(DRIVER_PROBLEM_SIZE)
+#error "DRIVER_PROBLEM_SIZE not defined"
+#endif
+
 // include the necessary libraries for the parallel model
 #if defined(USE_OMP) || defined(USE_MPI_OMP)
 #include <omp.h>

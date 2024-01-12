@@ -21,11 +21,15 @@ def get_correctness_df(df: pd.DataFrame) -> pd.DataFrame:
     """ Group by name, parallelism_model, and output_idx, and set is_valid to true only if all rows in the group have is_valid = true.
         Set it to false otherwise.
     """
+    # group all the runs for this LLM output
     agg = df.groupby(["name", "parallelism_model", "output_idx"]).agg({"is_valid": ["count", "sum"]})
     agg.columns = ["count", "sum"]
+
+    # mark as valid only if all runs are valid
     agg["is_valid"] = agg["count"] == agg["sum"]
     agg = agg.reset_index()
     agg = agg.drop(columns=["count", "sum"])
+
     return agg
 
 def _passk(num_samples: int, num_correct: int, k: int) -> float:
@@ -35,8 +39,9 @@ def _passk(num_samples: int, num_correct: int, k: int) -> float:
 
 def passk(df: pd.DataFrame, k: int) -> pd.DataFrame:
     """ Compute the pass@k metric """
-    agg = df.groupby(["name", "parallelism_model"]).agg({"is_valid": "sum"})
+    agg = df.groupby(["name", "parallelism_model"]).agg({"is_valid": ["count", "sum"]})
     agg = agg.reset_index()
+    print(agg)
     agg["pass@k"] = agg.apply(lambda x: _passk(20, x["is_valid"], k), axis=1)
     return agg.groupby(["parallelism_model"]).agg({"pass@k": "mean"})
 
@@ -51,8 +56,8 @@ def main():
     df = df[~((df["parallelism_model"] == "kokkos") & (df["num_threads"] == 64))]
 
     # filter/aggregate
-    df["did_run"] = df["did_run"].fillna(False)
-    df["is_valid"] = df["is_valid"].fillna(False)
+    df["did_run"] = df["did_run"].fillna(False)     # if it didn't build, then this will be nan; overwrite
+    df["is_valid"] = df["is_valid"].fillna(False)   # if it didn't build, then this will be nan; overwrite
 
     # compute metric
     if args.metric == "build":

@@ -40,8 +40,8 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->x.resize(1 << 20);
-    ctx->y.resize(1 << 20);
+    ctx->x.resize(DRIVER_PROBLEM_SIZE);
+    ctx->y.resize(DRIVER_PROBLEM_SIZE);
 
     reset(ctx);
     return ctx;

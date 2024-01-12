@@ -35,7 +35,7 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    const size_t N = 1 << 18;
+    const size_t N = DRIVER_PROBLEM_SIZE;
     ctx->x_host.resize(N);
     ctx->x = Kokkos::View<double*>("x", N);
 

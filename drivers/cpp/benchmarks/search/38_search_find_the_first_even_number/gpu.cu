@@ -45,7 +45,7 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->N = 1 << 18;
+    ctx->N = DRIVER_PROBLEM_SIZE;
     ctx->blockSize = dim3(1024);
     ctx->gridSize = dim3((ctx->N + ctx->blockSize.x - 1) / ctx->blockSize.x); // at least enough threads
 

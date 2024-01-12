@@ -42,7 +42,7 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    const size_t N = 1 << 18;
+    const size_t N = DRIVER_PROBLEM_SIZE;
     ctx->nonConstX = Kokkos::View<int*>("x", N);
     ctx->vecX.resize(N);
 

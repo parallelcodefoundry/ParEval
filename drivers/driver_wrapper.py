@@ -153,6 +153,7 @@ class DriverWrapper(ABC):
     validator: Validator
     scratch_dir: Optional[PathLike]
     launch_configs: dict
+    problem_sizes: dict
     build_timeout: int
     run_timeout: int
     display_build_errors: bool
@@ -163,6 +164,7 @@ class DriverWrapper(ABC):
         self, 
         parallelism_model: str = "serial", 
         launch_configs: dict = {"format": "{exec_path} {args}", "params": [{}]},
+        problem_sizes: dict = {},
         scratch_dir: Optional[PathLike] = None,
         build_timeout: int = 20,
         run_timeout: int = 180,
@@ -174,6 +176,7 @@ class DriverWrapper(ABC):
         self.validator = VALIDATORS[parallelism_model]
         self.scratch_dir = scratch_dir
         self.launch_configs = launch_configs[parallelism_model]
+        self.problem_sizes = problem_sizes
         self.build_timeout = build_timeout
         self.run_timeout = run_timeout
         self.display_build_errors = display_build_errors
@@ -214,11 +217,12 @@ class DriverWrapper(ABC):
         driver_root = f"{name}"
         driver_base = DRIVER_MAP[self.parallelism_model]
         test_driver_file = os.path.join(root, "benchmarks", type, driver_root, driver_base + ext)
+        problem_size = self.problem_sizes.get(name, {}).get(self.parallelism_model, "(1<<18)")
 
         outputs = []
         logging.info(f"Testing prompt {name} with {self}...")
         for generated_output in prompt["outputs"]:
-            results = self.test_single_output(prompt["prompt"], generated_output, test_driver_file)
+            results = self.test_single_output(prompt["prompt"], generated_output, test_driver_file, problem_size)
 
             outputs.append({
                 "generated_output": generated_output,

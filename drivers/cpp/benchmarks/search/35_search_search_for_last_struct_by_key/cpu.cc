@@ -40,9 +40,9 @@ void reset(Context *ctx) {
 
 Context *init() {
     Context *ctx = new Context();
-    ctx->books.resize(1 << 18);
-    ctx->pages.resize(1 << 18);
-    ctx->titles.resize(1 << 18);
+    ctx->books.resize(DRIVER_PROBLEM_SIZE);
+    ctx->pages.resize(DRIVER_PROBLEM_SIZE);
+    ctx->titles.resize(DRIVER_PROBLEM_SIZE);
     reset(ctx);
     return ctx;
 }

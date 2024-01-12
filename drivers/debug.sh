@@ -26,7 +26,7 @@ elif [ $MODEL == "mpi" ] || [ $MODEL == "mpi+omp" ]; then
 elif [ $MODEL == "kokkos" ]; then
     ml python gcc/11.3.0
 elif [ $MODEL == "cuda" ]; then
-    ml python gcc cuda
+    ml python gcc/11.3.0 cuda/12.1.1/gcc/11.3.0/
 else
     echo "Invalid model: $MODEL"
     exit 1

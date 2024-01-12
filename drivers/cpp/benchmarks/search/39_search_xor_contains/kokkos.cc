@@ -47,10 +47,10 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->x_host.resize(1 << 20);
-    ctx->y_host.resize(1 << 20);
-    ctx->xNonConst = Kokkos::View<int*>("x", 1 << 20);
-    ctx->yNonConst = Kokkos::View<int*>("y", 1 << 20);
+    ctx->x_host.resize(DRIVER_PROBLEM_SIZE);
+    ctx->y_host.resize(DRIVER_PROBLEM_SIZE);
+    ctx->xNonConst = Kokkos::View<int*>("x", DRIVER_PROBLEM_SIZE);
+    ctx->yNonConst = Kokkos::View<int*>("y", DRIVER_PROBLEM_SIZE);
 
     reset(ctx);
     return ctx;

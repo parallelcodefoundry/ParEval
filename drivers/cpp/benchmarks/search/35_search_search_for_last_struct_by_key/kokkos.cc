@@ -55,9 +55,9 @@ Context *init() {
 
     const size_t N = 1 << 18;
     ctx->books = Kokkos::View<Book*>("books", 1 << 18);
-    ctx->booksHost.resize(1 << 18);
-    ctx->titles.resize(1 << 18);
-    ctx->pages.resize(1 << 18);
+    ctx->booksHost.resize(DRIVER_PROBLEM_SIZE);
+    ctx->titles.resize(DRIVER_PROBLEM_SIZE);
+    ctx->pages.resize(DRIVER_PROBLEM_SIZE);
 
     reset(ctx);
     return ctx;
