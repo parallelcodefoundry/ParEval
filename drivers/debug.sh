@@ -6,6 +6,12 @@ if [ $# -ne 3 ]; then
     exit 1
 fi
 
+if [[ $(hostname) == nid* ]]; then
+    SYSTEM="perlmutter"
+else
+    SYSTEM="zaratan"
+fi
+
 OUTPUTS="../outputs/output_800a7a5d_bigcode--starcoderbase_prompted_temp0.2.json"
 PROBLEM="$1"
 MODEL="$2"
@@ -28,13 +34,20 @@ else
     LOG_ARGS="--log $LOG_LEVEL"
 fi
 
-module purge
+if [ $SYSTEM == "zaratan" ]; then
+    module purge
+fi
+
 if [ $MODEL == "serial" ] || [ $MODEL == "omp" ]; then 
     ml python gcc
 elif [ $MODEL == "mpi" ] || [ $MODEL == "mpi+omp" ]; then
     ml python gcc openmpi
 elif [ $MODEL == "kokkos" ]; then
-    ml python gcc/11.3.0 cmake/gcc/11.3.0
+    if [ $SYSTEM == "perlmutter" ]; then
+        ml python gcc/11.2.0 cmake/3.24.3
+    else
+        ml python gcc/11.3.0 cmake/gcc/11.3.0
+    fi
 elif [ $MODEL == "cuda" ]; then
     ml python gcc/11.3.0 cuda/12.1.1/gcc/11.3.0/
 else
@@ -42,10 +55,17 @@ else
     exit 1
 fi
 
+if [ $SYSTEM == "perlmutter" ]; then
+    # perlmutter
+    SCRATCH_ARGS=""
+else
+    SCRATCH_ARGS="--scratch-dir ~/scratch/.tmp"
+fi
+
 python run-all.py \
     $OUTPUTS \
     -o ./junk.json \
-    --scratch-dir ~/scratch/.tmp \
+    $SCRATCH_ARGS \
     --launch-configs test-launch-configs.json \
     --yes-to-all \
     --early-exit-runs \
