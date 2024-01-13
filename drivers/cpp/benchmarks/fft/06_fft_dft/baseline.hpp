@@ -13,7 +13,7 @@
    input: [1, 4, 9, 16]
    output: [30+0i, -8-12i, -10-0i, -8+12i]
 */
-void correctDft(std::vector<double> const& x, std::vector<std::complex<double>> &output) {
+void NO_INLINE correctDft(std::vector<double> const& x, std::vector<std::complex<double>> &output) {
    int N = x.size();
    output.resize(N, std::complex<double>(0, 0)); // Resize the output vector and initialize with 0
 

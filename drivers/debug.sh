@@ -12,6 +12,16 @@ MODEL="$2"
 LOG_LEVEL="$3"
 shift 3
 
+# check if PROBLEM is numeric only
+if [[ $PROBLEM =~ ^[0-9]+$ ]]; then
+    ml python
+    PROBLEM=$(python -c "import json; db=json.load(open(\"${OUTPUTS}\", 'r')); print([p['name'] for p in db if p['name'].startswith(\"${PROBLEM}_\")][0])")
+    if [ $? -ne 0 ]; then
+        echo "Problem $PROBLEM not found in $OUTPUTS"
+        exit 1
+    fi
+fi
+
 if [ $LOG_LEVEL == "debug" ]; then
     LOG_ARGS="--log debug --log-build-errors"
 else

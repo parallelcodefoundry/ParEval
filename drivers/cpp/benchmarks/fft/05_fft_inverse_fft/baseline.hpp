@@ -58,7 +58,7 @@ void fft(std::vector<std::complex<double>> &x) {
    input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]
    output: [{0.5,0}, {0.125,0.301777}, {0,-0}, {0.125,0.0517767}, {0,-0}, {0.125,-0.0517767}, {0,-0}, {0.125,-0.301777}]
 */
-void correctIfft(std::vector<std::complex<double>> &x) {
+void NO_INLINE correctIfft(std::vector<std::complex<double>> &x) {
    // conjugate the complex numbers
    std::transform(x.begin(), x.end(), x.begin(), std::conj<double>);
 

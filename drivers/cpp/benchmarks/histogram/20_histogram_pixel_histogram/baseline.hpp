@@ -10,7 +10,7 @@
    input: image=[2, 116, 201, 11, 92, 92, 201, 4, 2]
    output: [0, 0, 2, 0, 1, ...]
 */
-void correctPixelCounts(std::vector<int> const& image, std::array<size_t, 256> &bins) {
+void NO_INLINE correctPixelCounts(std::vector<int> const& image, std::array<size_t, 256> &bins) {
    for (int i = 0; i < image.size(); i += 1) {
       bins[image[i]] += 1;
    }

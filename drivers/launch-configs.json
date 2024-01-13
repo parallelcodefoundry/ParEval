@@ -31,7 +31,7 @@
         ]
     },
     "mpi+omp": {
-        "format": "srun -n {num_procs} -c {num_threads} {exec_path} {args} {num_threads}",
+        "format": "srun -N {num_procs} --tasks-per-node 1 -n {num_procs} -c {num_threads} {exec_path} {args} {num_threads}",
         "params": [
             {"num_procs": 1, "num_threads": 1},
             {"num_procs": 1, "num_threads": 2},

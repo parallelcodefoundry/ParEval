@@ -51,11 +51,11 @@ Context *init() {
     return ctx;
 }
 
-void compute(Context *ctx) {
+void NO_OPTIMIZE compute(Context *ctx) {
     contains<<<ctx->gridSize,ctx->blockSize>>>(ctx->x, ctx->N, ctx->target, ctx->found);
 }
 
-void best(Context *ctx) {
+void NO_OPTIMIZE best(Context *ctx) {
     correctContains(ctx->cpuX, ctx->target);
 }
 
@@ -68,8 +68,6 @@ bool validate(Context *ctx) {
     std::vector<int> input(N);
     ALLOC(d_input, N * sizeof(int));
     ALLOC(d_found, 1 * sizeof(bool));
-
-    
 
     const size_t numTries = 5;
     for (int TRIAL = 0; TRIAL < numTries; TRIAL += 1) {

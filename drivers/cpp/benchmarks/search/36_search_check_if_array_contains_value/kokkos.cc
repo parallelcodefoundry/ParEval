@@ -50,12 +50,12 @@ Context *init() {
     return ctx;
 }
 
-void compute(Context *ctx) {
+void NO_OPTIMIZE compute(Context *ctx) {
     bool flag = contains(ctx->nonConstX, ctx->target);
     (void)flag;
 }
 
-void best(Context *ctx) {
+void NO_OPTIMIZE best(Context *ctx) {
     bool flag = correctContains(ctx->vecX, ctx->target);
     (void)flag;
 }

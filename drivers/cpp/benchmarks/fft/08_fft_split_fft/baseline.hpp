@@ -9,7 +9,7 @@
    input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]
    output: r: [4, 1, 0, 1, 0, 1, 0, 1] i: [0, -2.41421, 0, -0.414214, 0, 0.414214, 0, 2.41421]
 */
-void correctFft(std::vector<std::complex<double>> const& x, std::vector<double> &r, std::vector<double> &i) {
+void NO_INLINE correctFft(std::vector<std::complex<double>> const& x, std::vector<double> &r, std::vector<double> &i) {
    // DFT
 	unsigned int N = x.size(), k = N, n;
 	double thetaT = 3.14159265358979323846264338328L / N;

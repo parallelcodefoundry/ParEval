@@ -4,7 +4,7 @@
 #include <vector>
 
 
-void correctSortIgnoreZero(std::vector<int> &x) {
+void NO_INLINE correctSortIgnoreZero(std::vector<int> &x) {
     std::vector<int> nonZeroElements;
     for (int num : x) {
         if (num != 0) {

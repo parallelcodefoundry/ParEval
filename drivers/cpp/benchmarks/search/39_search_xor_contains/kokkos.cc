@@ -53,12 +53,12 @@ Context *init() {
     return ctx;
 }
 
-void compute(Context *ctx) {
+void NO_OPTIMIZE compute(Context *ctx) {
     bool found = xorContains(ctx->x, ctx->y, ctx->val);
     (void)found;
 }
 
-void best(Context *ctx) {
+void NO_OPTIMIZE best(Context *ctx) {
     bool found = correctXorContains(ctx->x_host, ctx->y_host, ctx->val);
     (void)found;
 }

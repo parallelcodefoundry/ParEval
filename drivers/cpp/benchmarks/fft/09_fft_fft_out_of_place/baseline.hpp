@@ -13,7 +13,7 @@
    input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]
    output: [{4,0}, {1,-2.42421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]
 */
-void correctFft(std::vector<std::complex<double>> const& x, std::vector<std::complex<double>> &output) {
+void NO_INLINE correctFft(std::vector<std::complex<double>> const& x, std::vector<std::complex<double>> &output) {
    output = x;
 
    // DFT

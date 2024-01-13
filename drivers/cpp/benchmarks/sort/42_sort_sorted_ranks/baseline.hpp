@@ -13,7 +13,7 @@
    input: [100, 7.6, 16.1, 18, 7.6]
    output: [4, 0, 1, 2, 3]
 */
-void correctRanks(std::vector<float> const& x, std::vector<size_t> &ranks) {
+void NO_INLINE correctRanks(std::vector<float> const& x, std::vector<size_t> &ranks) {
    std::vector<size_t> indices(x.size());
    std::iota(indices.begin(), indices.end(), 0);
 

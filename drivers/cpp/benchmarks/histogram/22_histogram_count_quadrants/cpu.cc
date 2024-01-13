@@ -52,11 +52,11 @@ Context *init() {
     return ctx;
 }
 
-void compute(Context *ctx) {
+void NO_OPTIMIZE compute(Context *ctx) {
     countQuadrants(ctx->points, ctx->bins);
 }
 
-void best(Context *ctx) {
+void NO_OPTIMIZE best(Context *ctx) {
     correctCountQuadrants(ctx->points, ctx->bins);
 }
 

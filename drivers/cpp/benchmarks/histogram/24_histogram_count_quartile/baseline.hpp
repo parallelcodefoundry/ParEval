@@ -12,7 +12,7 @@
    input: [1.9, 0.2, 0.6, 10.1, 7.4]
    output: [2, 1, 1, 1]
 */
-void correctCountQuartiles(std::vector<double> const& x, std::array<size_t, 4> &bins) {
+void NO_INLINE correctCountQuartiles(std::vector<double> const& x, std::array<size_t, 4> &bins) {
    for (int i = 0; i < x.size(); i += 1) {
       const double val = x[i];
       const double frac = val - (int) val;

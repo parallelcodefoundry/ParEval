@@ -56,11 +56,11 @@ Context *init() {
     return ctx;
 }
 
-void compute(Context *ctx) {
+void NO_OPTIMIZE compute(Context *ctx) {
     sortByStartTime(ctx->results);
 }
 
-void best(Context *ctx) {
+void NO_OPTIMIZE best(Context *ctx) {
     correctSortByStartTime(ctx->results);
 }
 

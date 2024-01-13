@@ -10,7 +10,7 @@
    input: ["dog", "cat", "xray", "cow", "code", "type", "flower"]
    output: [0, 0, 3, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0]
 */
-void correctFirstLetterCounts(std::vector<std::string> const& s, std::array<size_t, 26> &bins) {
+void NO_INLINE correctFirstLetterCounts(std::vector<std::string> const& s, std::array<size_t, 26> &bins) {
    for (int i = 0; i < s.size(); i += 1) {
       const char c = s[i][0];
       const int index = c - 'a';

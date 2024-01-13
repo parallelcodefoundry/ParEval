@@ -84,7 +84,7 @@ def speedupk(df: pd.DataFrame, k: int, n: int) -> pd.DataFrame:
             ((df["parallelism_model"] == "kokkos") & (df["num_threads"] == 32)) |
             ((df["parallelism_model"] == "omp") & (df["num_threads"] == 64)) |
             ((df["parallelism_model"] == "mpi") & (df["num_procs"] == 512)) |
-            ((df["parallelism_model"] == "mpi+omp") & (df["num_procs"] == 4) & (df["num_threads"] == 64))]
+            ((df["parallelism_model"] == "mpi+omp") & (df["num_procs"] == 4) & (df["num_threads"] == 8))]
     df = df.copy()
 
     # use min best_sequential_runtime

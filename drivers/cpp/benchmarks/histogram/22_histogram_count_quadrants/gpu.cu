@@ -67,11 +67,11 @@ Context *init() {
     return ctx;
 }
 
-void compute(Context *ctx) {
+void NO_OPTIMIZE compute(Context *ctx) {
     countQuadrants<<<ctx->gridSize, ctx->blockSize>>>(ctx->d_points, ctx->N, ctx->d_bins);
 }
 
-void best(Context *ctx) {
+void NO_OPTIMIZE best(Context *ctx) {
     correctCountQuadrants(ctx->h_points, ctx->h_bins);
 }
 

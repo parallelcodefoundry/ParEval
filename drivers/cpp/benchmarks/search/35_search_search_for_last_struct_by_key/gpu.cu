@@ -70,7 +70,7 @@ Context *init() {
 }
 
 void NO_OPTIMIZE compute(Context *ctx) {
-    findLastShortBook<<<ctx->blockSize,ctx->gridSize>>>(ctx->books, ctx->N, ctx->outputIdx);
+    findLastShortBook<<<ctx->gridSize,ctx->blockSize>>>(ctx->books, ctx->N, ctx->outputIdx);
 }
 
 void NO_OPTIMIZE best(Context *ctx) {
@@ -98,17 +98,26 @@ bool validate(Context *ctx) {
         ALLOC(input_d, input.size() * sizeof(Book));
         COPY_H2D(input_d, input.data(), input.size() * sizeof(Book)); // copy to device
 
+        size_t *outputIdx_d;
+        size_t tmpOutputIdx = 0;
+        ALLOC(outputIdx_d, 1 * sizeof(size_t));
+        COPY_H2D(outputIdx_d, &tmpOutputIdx, 1 * sizeof(size_t)); // copy to device
+
         dim3 blockSize = dim3(1024);
         dim3 gridSize = dim3((input.size() + blockSize.x - 1) / blockSize.x); // at least enough threads
-        findLastShortBook<<<blockSize,gridSize>>>(input_d, input.size(), ctx->outputIdx);
+        findLastShortBook<<<gridSize,blockSize>>>(input_d, input.size(), outputIdx_d);
         SYNC();
 
-        size_t *testResult = new size_t[1];
-        COPY_D2H(testResult, ctx->outputIdx, 1 * sizeof(size_t));
+        size_t testResult;
+        COPY_D2H(&testResult, outputIdx_d, 1 * sizeof(size_t));
         
-        if (testResult[0] != correctIdx) {
+        if (testResult != correctIdx) {
+            FREE(input_d);
+            FREE(outputIdx_d);
             return false;
         }
+        FREE(input_d);
+        FREE(outputIdx_d);
     }
 
     return true;
