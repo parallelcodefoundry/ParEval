@@ -29,28 +29,28 @@ struct Context {
 };
 
 void reset(Context *ctx) {
-    fillRand(startTime, 0, 100);
-    fillRand(duration, 1, 10);
-    fillRand(value, -1.0, 1.0);
+    fillRand(ctx->startTime, 0, 100);
+    fillRand(ctx->duration, 1, 10);
+    fillRand(ctx->value, -1.0, 1.0);
 
-    BCAST(startTime, INT);
-    BCAST(duration, INT);
-    BCAST(value, FLOAT);
+    BCAST(ctx->startTime, INT);
+    BCAST(ctx->duration, INT);
+    BCAST(ctx->value, FLOAT);
 
     for (int i = 0; i < startTime.size(); i += 1) {
-        ctx->results[i].startTime = startTime[i];
-        ctx->results[i].duration = duration[i];
-        ctx->results[i].value = value[i];
+        ctx->results[i].startTime = ctx->startTime[i];
+        ctx->results[i].duration = ctx->duration[i];
+        ctx->results[i].value = ctx->value[i];
     }
 }
 
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->results.resize(1 << 15);
-    ctx->startTime.resize(1 << 15);
-    ctx->duration.resize(1 << 15);
-    ctx->value.resize(1 << 15);
+    ctx->results.resize(DRIVER_PROBLEM_SIZE);
+    ctx->startTime.resize(DRIVER_PROBLEM_SIZE);
+    ctx->duration.resize(DRIVER_PROBLEM_SIZE);
+    ctx->value.resize(DRIVER_PROBLEM_SIZE);
 
     reset(ctx);
     return ctx;
@@ -74,7 +74,7 @@ bool validate(Context *ctx) {
     int rank;
     GET_RANK(rank);
 
-    const size_t numTries = 5;
+    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int trialIter = 0; trialIter < numTries; trialIter += 1) {
         // set up input
         fillRand(startTime, 0, 100);
@@ -102,7 +102,12 @@ bool validate(Context *ctx) {
         sortByStartTime(test);
         SYNC();
         
+        bool isCorrect = true;
         if (IS_ROOT(rank) && !std::equal(correct.begin(), correct.end(), test.begin())) {
+            isCorrect = false;
+        }
+        BCAST_PTR(&isCorrect, 1, CXX_BOOL);
+        if (!isCorrect) {
             return false;
         }
     }

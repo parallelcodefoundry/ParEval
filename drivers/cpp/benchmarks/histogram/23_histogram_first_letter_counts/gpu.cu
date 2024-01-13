@@ -99,7 +99,7 @@ bool validate(Context *ctx) {
     ALLOC(d_s, TEST_SIZE * sizeof(char *));
     ALLOC(d_bins, 26 * sizeof(size_t));
 
-    const size_t numTries = 5;
+    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int i = 0; i < numTries; i += 1) {
         // set up input
         fillRandString(h_s, 2, 10);

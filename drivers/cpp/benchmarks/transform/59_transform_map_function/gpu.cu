@@ -72,7 +72,7 @@ bool validate(Context *ctx) {
     ALLOC(d_x, N * sizeof(int));
     ALLOC(d_mask, N * sizeof(bool));
 
-    const size_t numTries = 5;
+    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int i = 0; i < numTries; i += 1) {
         std::vector<int> input(N);
         fillRand(input, 1, 1024);

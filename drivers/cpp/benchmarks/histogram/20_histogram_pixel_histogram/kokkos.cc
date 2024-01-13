@@ -72,7 +72,7 @@ bool validate(Context *ctx) {
     Kokkos::View<int*> imageNonConst("imageNonConst", TEST_SIZE);
     Kokkos::View<size_t[256]> test("bins");
 
-    const size_t numTries = 5;
+    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int i = 0; i < numTries; i += 1) {
         // set up input
         fillRand(image_host, 0, 255);

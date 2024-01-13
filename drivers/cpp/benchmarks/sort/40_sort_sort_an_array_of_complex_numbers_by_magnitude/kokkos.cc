@@ -39,7 +39,7 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->x_host.resize(1 << 15);
+    ctx->x_host.resize(DRIVER_PROBLEM_SIZE);
     ctx->x = Kokkos::View<Kokkos::complex<double>*>("x", ctx->x_host.size());
 
     reset(ctx);
@@ -60,7 +60,7 @@ bool validate(Context *ctx) {
     std::vector<std::complex<double>> correct(TEST_SIZE);
     Kokkos::View<Kokkos::complex<double>*> test("test", TEST_SIZE);
 
-    const size_t numTries = 5;
+    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int trialIter = 0; trialIter < numTries; trialIter += 1) {
         // set up input
         for (int i = 0; i < correct.size(); i += 1) {

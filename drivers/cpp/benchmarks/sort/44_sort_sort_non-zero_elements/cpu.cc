@@ -39,7 +39,7 @@ void reset(Context *ctx) {
 
 Context *init() {
     Context *ctx = new Context();
-    ctx->x.resize(1 << 15);
+    ctx->x.resize(DRIVER_PROBLEM_SIZE);
     reset(ctx);
     return ctx;
 }
@@ -54,7 +54,10 @@ void NO_OPTIMIZE best(Context *ctx) {
 
 bool validate(Context *ctx) {
 
-    const size_t numTries = 5;
+    int rank;
+    GET_RANK(rank);
+
+    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int i = 0; i < numTries; i += 1) {
         std::vector<int> input(1024);
         fillRandWithZeroes(input);
@@ -69,7 +72,12 @@ bool validate(Context *ctx) {
         sortIgnoreZero(testResult);
         SYNC();
         
-        if (!std::equal(correctResult.begin(), correctResult.end(), testResult.begin())) {
+        bool isCorrect = true;
+        if (IS_ROOT(rank) && !std::equal(correctResult.begin(), correctResult.end(), testResult.begin())) {
+            isCorrect = false;
+        }
+        BCAST_PTR(&isCorrect, 1, CXX_BOOL);
+        if (!isCorrect) {
             return false;
         }
     }

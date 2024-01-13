@@ -13,8 +13,7 @@
 #include <random>
 #include <vector>
 
-#include <Kokkos_Core.hpp>
-#include <Kokkos_Sort.hpp>
+#include "kokkos-includes.hpp"
 
 #include "utilities.hpp"
 #include "baseline.hpp"
@@ -53,8 +52,8 @@ void reset(Context *ctx) {
 
 Context *init() {
     Context *ctx = new Context();
-    ctx->x = Kokkos::View<int*>("x", 1 << 15);
-    ctx->cpuX.resize(1 << 15);
+    ctx->x = Kokkos::View<int*>("x", DRIVER_PROBLEM_SIZE);
+    ctx->cpuX.resize(DRIVER_PROBLEM_SIZE);
     reset(ctx);
     return ctx;
 }
@@ -69,7 +68,7 @@ void NO_OPTIMIZE best(Context *ctx) {
 
 bool validate(Context *ctx) {
 
-    const size_t numTries = 5;
+    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int i = 0; i < numTries; i += 1) {
         std::vector<int> input(1024);
         fillRandWithZeroes(input);

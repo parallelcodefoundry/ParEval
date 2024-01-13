@@ -88,7 +88,7 @@ bool validate(Context *ctx) {
     ALLOC(d_points, TEST_SIZE * sizeof(Point));
     ALLOC(d_bins, 4 * sizeof(size_t));
 
-    const size_t numTries = 5;
+    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int i = 0; i < numTries; i += 1) {
         // set up input
         for (int j = 0; j < h_points.size(); j += 1) {

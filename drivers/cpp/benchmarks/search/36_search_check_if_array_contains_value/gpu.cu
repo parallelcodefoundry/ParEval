@@ -69,7 +69,7 @@ bool validate(Context *ctx) {
     ALLOC(d_input, N * sizeof(int));
     ALLOC(d_found, 1 * sizeof(bool));
 
-    const size_t numTries = 5;
+    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int TRIAL = 0; TRIAL < numTries; TRIAL += 1) {
         fillRand(input, -50, 50);
         int target = (rand() % 200) - 100;

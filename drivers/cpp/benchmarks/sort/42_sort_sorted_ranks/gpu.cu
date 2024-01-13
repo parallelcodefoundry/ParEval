@@ -47,7 +47,7 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->N = 1 << 15;
+    ctx->N = DRIVER_PROBLEM_SIZE;
     ctx->blockSize = dim3(1024);
     ctx->gridSize = dim3((ctx->N + ctx->blockSize.x - 1) / ctx->blockSize.x); // at least enough threads
 
@@ -82,7 +82,7 @@ bool validate(Context *ctx) {
     ALLOC(d_x, TEST_SIZE * sizeof(float));
     ALLOC(h_ranks, TEST_SIZE * sizeof(size_t));
 
-    const size_t numTries = 5;
+    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int trialIter = 0; trialIter < numTries; trialIter += 1) {
         // set up input
         fillRand(h_x, -100.0, 100.0);

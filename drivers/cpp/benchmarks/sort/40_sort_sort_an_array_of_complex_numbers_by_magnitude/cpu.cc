@@ -37,7 +37,7 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->x.resize(1 << 15);
+    ctx->x.resize(DRIVER_PROBLEM_SIZE);
     ctx->real.resize(ctx->x.size());
     ctx->imag.resize(ctx->x.size());
 
@@ -62,7 +62,7 @@ bool validate(Context *ctx) {
     int rank;
     GET_RANK(rank);
 
-    const size_t numTries = 5;
+    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int trialIter = 0; trialIter < numTries; trialIter += 1) {
         // set up input
         fillRand(real, -100.0, 100.0);
@@ -82,7 +82,12 @@ bool validate(Context *ctx) {
         sortComplexByMagnitude(test);
         SYNC();
         
+        bool isCorrect = true;
         if (IS_ROOT(rank) && !fequal(correct, test)) {
+            isCorrect = false;
+        }
+        BCAST_PTR(&isCorrect, 1, CXX_BOOL);
+        if (!isCorrect) {
             return false;
         }
     }

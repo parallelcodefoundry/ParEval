@@ -65,7 +65,7 @@ bool validate(Context *ctx) {
     Kokkos::View<const double*> x("x", TEST_SIZE);
     Kokkos::View<Kokkos::complex<double>*> test("test", TEST_SIZE);
 
-    const size_t numTries = 5;
+    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int i = 0; i < numTries; i += 1) {
         // set up input
         fillRand(x_host, -1.0, 1.0);

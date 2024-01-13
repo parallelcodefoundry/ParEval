@@ -38,6 +38,13 @@ if [ $SYSTEM == "zaratan" ]; then
     module purge
 fi
 
+if [ $SYSTEM == "perlmutter" ]; then
+    if [ $MODEL == "omp" ] || [ $MODEL == "mpi+omp" ]; then
+        export OMP_PROC_BIND=spread
+        export OMP_PLACES=threads
+    fi
+fi
+
 if [ $MODEL == "serial" ] || [ $MODEL == "omp" ]; then 
     ml python gcc
 elif [ $MODEL == "mpi" ] || [ $MODEL == "mpi+omp" ]; then
@@ -57,15 +64,15 @@ fi
 
 if [ $SYSTEM == "perlmutter" ]; then
     # perlmutter
-    SCRATCH_ARGS=""
+    SCRATCH_DIR="/pscratch/sd/d/dnicho/.tmp"
 else
-    SCRATCH_ARGS="--scratch-dir ~/scratch/.tmp"
+    SCRATCH_DIR="~/scratch/.tmp"
 fi
 
 python run-all.py \
     $OUTPUTS \
     -o ./junk.json \
-    $SCRATCH_ARGS \
+    --scratch-dir $SCRATCH_DIR \
     --launch-configs test-launch-configs.json \
     --yes-to-all \
     --early-exit-runs \

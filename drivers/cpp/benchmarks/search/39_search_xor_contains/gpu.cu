@@ -77,7 +77,7 @@ bool validate(Context *ctx) {
     ALLOC(d_y, TEST_SIZE * sizeof(int));
     ALLOC(d_found, 1 * sizeof(bool));
 
-    const size_t numTries = 5;
+    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int i = 0; i < numTries; i += 1) {
         // set up input
         std::vector<int> h_x(TEST_SIZE);

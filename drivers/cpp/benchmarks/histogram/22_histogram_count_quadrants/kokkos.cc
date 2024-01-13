@@ -83,7 +83,7 @@ bool validate(Context *ctx) {
     Kokkos::View<Point*> pointsNonConst("points", TEST_SIZE);
     Kokkos::View<size_t[4]> test("bins");
 
-    const size_t numTries = 5;
+    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int i = 0; i < numTries; i += 1) {
         // set up input
         for (int j = 0; j < points_host.size(); j += 1) {

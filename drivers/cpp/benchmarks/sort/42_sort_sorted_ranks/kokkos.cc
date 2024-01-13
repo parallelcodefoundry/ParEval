@@ -42,11 +42,11 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->x_host.resize(1 << 15);
-    ctx->ranks_host.resize(1 << 15);
+    ctx->x_host.resize(DRIVER_PROBLEM_SIZE);
+    ctx->ranks_host.resize(DRIVER_PROBLEM_SIZE);
 
-    ctx->x = Kokkos::View<float*>("x", 1 << 15);
-    ctx->ranks = Kokkos::View<size_t*>("ranks", 1 << 15);
+    ctx->x = Kokkos::View<float*>("x", DRIVER_PROBLEM_SIZE);
+    ctx->ranks = Kokkos::View<size_t*>("ranks", DRIVER_PROBLEM_SIZE);
 
     reset(ctx);
     return ctx;
@@ -69,7 +69,7 @@ bool validate(Context *ctx) {
     Kokkos::View<float*> x("x", TEST_SIZE);
     Kokkos::View<size_t*> ranks("ranks", TEST_SIZE);
 
-    const size_t numTries = 5;
+    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int trialIter = 0; trialIter < numTries; trialIter += 1) {
         // set up input
         fillRand(ctx->x_host, -100.0, 100.0);

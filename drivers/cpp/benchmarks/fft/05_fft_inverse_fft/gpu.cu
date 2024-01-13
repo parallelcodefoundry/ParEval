@@ -77,7 +77,7 @@ bool validate(Context *ctx) {
     dim3 blockSize = dim3(1024);
     dim3 gridSize = dim3((TEST_SIZE + blockSize.x - 1) / blockSize.x); // at least enough threads
 
-    const size_t numTries = 5;
+    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int i = 0; i < numTries; i += 1) {
         // set up input
         std::vector<double> real(TEST_SIZE), imag(TEST_SIZE);

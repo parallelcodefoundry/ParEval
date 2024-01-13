@@ -20,8 +20,7 @@
 #include <random>
 #include <vector>
 
-#include <Kokkos_Core.hpp>
-#include <Kokkos_Sort.hpp>
+#include "kokkos-includes.hpp"
 
 #include "utilities.hpp"
 #include "baseline.hpp"
@@ -47,8 +46,8 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->results_host.resize(1 << 15);
-    ctx->results = Kokkos::View<Result*>("results", 1 << 15);
+    ctx->results_host.resize(DRIVER_PROBLEM_SIZE);
+    ctx->results = Kokkos::View<Result*>("results", DRIVER_PROBLEM_SIZE);
 
     reset(ctx);
     return ctx;
@@ -68,7 +67,7 @@ bool validate(Context *ctx) {
     Kokkos::View<Result*> results("results", TEST_SIZE);
     std::vector<Result> results_host(TEST_SIZE);
 
-    const size_t numTries = 5;
+    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int trialIter = 0; trialIter < numTries; trialIter += 1) {
         // set up input
         for (int i = 0; i < results_host.size(); i += 1) {

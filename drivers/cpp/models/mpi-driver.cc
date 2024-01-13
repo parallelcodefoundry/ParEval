@@ -40,7 +40,7 @@ int main(int argc, char **argv) {
         exit(1);
     }
 
-    int NITER = 10;
+    int NITER = 5;
     if (argc > 1) {
         NITER = std::stoi(std::string(argv[1]));
     }

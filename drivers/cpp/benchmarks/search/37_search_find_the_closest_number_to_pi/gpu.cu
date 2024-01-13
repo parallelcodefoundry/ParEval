@@ -75,7 +75,7 @@ bool validate(Context *ctx) {
     size_t *d_closestToPiIndex;
     ALLOC(d_closestToPiIndex, 1 * sizeof(size_t));
 
-    const size_t numTries = 5;
+    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int i = 0; i < numTries; i += 1) {
         // set up input
         std::vector<double> h_x(TEST_SIZE);

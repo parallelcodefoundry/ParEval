@@ -81,7 +81,7 @@ bool validate(Context *ctx) {
     ALLOC(d_B, TEST_SIZE * TEST_SIZE * sizeof(double));
     ALLOC(d_C, TEST_SIZE * TEST_SIZE * sizeof(double));
 
-    const size_t numTries = 5;
+    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int trialIter = 0; trialIter < numTries; trialIter += 1) {
         // set up input
         fillRand(h_A, 0.0, 1.0);

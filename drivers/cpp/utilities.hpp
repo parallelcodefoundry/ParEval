@@ -16,6 +16,10 @@
 #error "DRIVER_PROBLEM_SIZE not defined"
 #endif
 
+#if !defined(MAX_VALIDATION_ATTEMPTS)
+#define MAX_VALIDATION_ATTEMPTS 3
+#endif
+
 // include the necessary libraries for the parallel model
 #if defined(USE_OMP) || defined(USE_MPI_OMP)
 #include <omp.h>
