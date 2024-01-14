@@ -27,3 +27,25 @@ void NO_INLINE correctDft(std::vector<double> const& x, std::vector<std::complex
       output[k] = sum;
    }
 }
+
+
+#if defined(USE_CUDA)
+// a lot of model outputs assume this is defined for some reason, so just define it
+__device__ DOUBLE_COMPLEX_T cexp(DOUBLE_COMPLEX_T arg) {
+   DOUBLE_COMPLEX_T res;
+   float s, c;
+   float e = expf(arg.x);
+   sincosf(arg.y, &s, &c);
+   res.x = c * e;
+   res.y = s * e;
+   return res;
+}
+
+__device__ DOUBLE_COMPLEX_T cuCexp(DOUBLE_COMPLEX_T arg) {
+   return cexp(arg);
+}
+
+__device__ DOUBLE_COMPLEX_T hipCexp(DOUBLE_COMPLEX_T arg) {
+   return cexp(arg);
+}
+#endif

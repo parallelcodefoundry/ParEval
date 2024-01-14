@@ -60,14 +60,35 @@ void fft(std::vector<std::complex<double>> &x) {
 */
 void NO_INLINE correctIfft(std::vector<std::complex<double>> &x) {
    // conjugate the complex numbers
-   std::transform(x.begin(), x.end(), x.begin(), std::conj<double>);
+   std::transform(x.begin(), x.end(), x.begin(), [](auto const& val) { return std::conj(val); });
 
    // forward fft
    fft( x );
 
    // conjugate the complex numbers again
-   std::transform(x.begin(), x.end(), x.begin(), std::conj<double>);
+   std::transform(x.begin(), x.end(), x.begin(), [](auto const& val) { return std::conj(val); });
 
    // scale the numbers
    std::transform(x.begin(), x.end(), x.begin(), [&](std::complex<double> c) { return c / static_cast<double>(x.size()); });
 }
+
+#if defined(USE_CUDA)
+// a lot of model outputs assume this is defined for some reason, so just define it
+__device__ DOUBLE_COMPLEX_T cexp(DOUBLE_COMPLEX_T arg) {
+   DOUBLE_COMPLEX_T res;
+   float s, c;
+   float e = expf(arg.x);
+   sincosf(arg.y, &s, &c);
+   res.x = c * e;
+   res.y = s * e;
+   return res;
+}
+
+__device__ DOUBLE_COMPLEX_T cuCexp(DOUBLE_COMPLEX_T arg) {
+   return cexp(arg);
+}
+
+__device__ DOUBLE_COMPLEX_T hipCexp(DOUBLE_COMPLEX_T arg) {
+   return cexp(arg);
+}
+#endif

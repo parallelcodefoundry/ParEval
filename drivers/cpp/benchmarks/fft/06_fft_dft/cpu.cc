@@ -31,8 +31,8 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->x.resize(1 << 18);
-    ctx->output.resize(1 << 18);
+    ctx->x.resize(DRIVER_PROBLEM_SIZE);
+    ctx->output.resize(DRIVER_PROBLEM_SIZE);
 
     reset(ctx);
     return ctx;
@@ -68,12 +68,18 @@ bool validate(Context *ctx) {
         dft(x, test);
         SYNC();
         
+        bool isCorrect = true;
         if (IS_ROOT(rank)) {
             for (int j = 0; j < x.size(); j += 1) {
                 if (std::abs(correct[j].real() - test[j].real()) > 1e-4 || std::abs(correct[j].imag() - test[j].imag()) > 1e-4) {
-                    return false;
+                    isCorrect = false;
+                    break;
                 }
             }
+        }
+        BCAST_PTR(&isCorrect, 1, CXX_BOOL);
+        if (!isCorrect) {
+            return false;
         }
     }
 

@@ -4,13 +4,13 @@
 #include <complex>
 #include <type_traits>
 
-#define NO_OPTIMIZE __attribute__((optimize("O0")))
-#define NO_INLINE __attribute__((noinline)) __attribute__((optimize("O3")))
-
 // make sure some parallel model is defined
 #if !defined(USE_SERIAL) && !defined(USE_OMP) && !defined(USE_MPI) && !defined(USE_MPI_OMP) && !defined(USE_KOKKOS) && !defined(USE_CUDA) && !defined(USE_HIP)
 #error "No parallel model not defined"
 #endif
+
+#define NO_OPTIMIZE __attribute__((optimize("O0")))
+#define NO_INLINE __attribute__((noinline)) __attribute__((optimize("O3")))
 
 #if !defined(DRIVER_PROBLEM_SIZE)
 #error "DRIVER_PROBLEM_SIZE not defined"

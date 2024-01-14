@@ -11,5 +11,5 @@
 int NO_INLINE correctFindKthSmallest(std::vector<int> const& x, int k) {
    std::vector<int> x_copy = x;
    std::sort(x_copy.begin(), x_copy.end());
-   return x_copy[k];
+   return x_copy[k-1];
 }

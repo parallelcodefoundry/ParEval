@@ -83,8 +83,13 @@ bool validate(Context *ctx) {
         SYNC();
         
         bool isCorrect = true;
-        if (IS_ROOT(rank) && !fequal(correct, test)) {
-            isCorrect = false;
+        if (IS_ROOT(rank)) {
+            for (int i = 0; i < correct.size(); i += 1) {
+                if (std::abs(correct[i] - test[i]) > 1e-6) {
+                    isCorrect = false;
+                    break;
+                }
+            }
         }
         BCAST_PTR(&isCorrect, 1, CXX_BOOL);
         if (!isCorrect) {

@@ -37,7 +37,7 @@ void reset(Context *ctx) {
     BCAST(ctx->duration, INT);
     BCAST(ctx->value, FLOAT);
 
-    for (int i = 0; i < startTime.size(); i += 1) {
+    for (int i = 0; i < ctx->startTime.size(); i += 1) {
         ctx->results[i].startTime = ctx->startTime[i];
         ctx->results[i].duration = ctx->duration[i];
         ctx->results[i].value = ctx->value[i];
@@ -103,8 +103,15 @@ bool validate(Context *ctx) {
         SYNC();
         
         bool isCorrect = true;
-        if (IS_ROOT(rank) && !std::equal(correct.begin(), correct.end(), test.begin())) {
-            isCorrect = false;
+        if (IS_ROOT(rank)) {
+            for (int i = 0; i < correct.size(); i += 1) {
+                if (correct[i].startTime != test[i].startTime ||
+                    correct[i].duration != test[i].duration ||
+                    correct[i].value != test[i].value) {
+                    isCorrect = false;
+                    break;
+                }
+            }
         }
         BCAST_PTR(&isCorrect, 1, CXX_BOOL);
         if (!isCorrect) {

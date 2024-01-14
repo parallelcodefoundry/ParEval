@@ -29,7 +29,7 @@ struct Context {
 
 void reset(Context *ctx) {
     fillRand(ctx->x_host, 0, 10000);
-    k = rand() % ctx->x_host.size();
+    ctx->k = rand() % ctx->x_host.size();
     copyVectorToView(ctx->x_host, ctx->x);
 }
 

@@ -36,10 +36,10 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->x.resize(1 << 18);
-    ctx->output.resize(1 << 18);
-    ctx->real.resize(1 << 18);
-    ctx->imag.resize(1 << 18);
+    ctx->x.resize(DRIVER_PROBLEM_SIZE);
+    ctx->output.resize(DRIVER_PROBLEM_SIZE);
+    ctx->real.resize(DRIVER_PROBLEM_SIZE);
+    ctx->imag.resize(DRIVER_PROBLEM_SIZE);
 
     reset(ctx);
     return ctx;
@@ -75,18 +75,25 @@ bool validate(Context *ctx) {
         }
 
         // compute correct result
-        correctFft(x, correct);
+        correct = x;
+        fftCooleyTookey(correct);
 
         // compute test result
         fft(x, test);
         SYNC();
         
+        bool isCorrect = true;
         if (IS_ROOT(rank)) {
             for (size_t k = 0; k < correct.size(); k += 1) {
                 if (std::abs(correct[k].real() - test[k].real()) > 1e-4 || std::abs(correct[k].imag() - test[k].imag()) > 1e-4) {
-                    return false;
+                    isCorrect = false;
+                    break;
                 }
             }
+        }
+        BCAST_PTR(&isCorrect, 1, CXX_BOOL);
+        if (!isCorrect) {
+            return false;
         }
     }
 

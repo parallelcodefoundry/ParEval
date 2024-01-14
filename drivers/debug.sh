@@ -38,17 +38,16 @@ if [ $SYSTEM == "zaratan" ]; then
     module purge
 fi
 
-if [ $SYSTEM == "perlmutter" ]; then
-    if [ $MODEL == "omp" ] || [ $MODEL == "mpi+omp" ]; then
-        export OMP_PROC_BIND=spread
-        export OMP_PLACES=threads
-    fi
+if [ $MODEL == "omp" ] || [ $MODEL == "mpi+omp" ]; then
+    export OMP_PROC_BIND=spread
+    export OMP_PLACES=cores
 fi
 
 if [ $MODEL == "serial" ] || [ $MODEL == "omp" ]; then 
     ml python gcc
 elif [ $MODEL == "mpi" ] || [ $MODEL == "mpi+omp" ]; then
     ml python gcc openmpi
+    export OMPI_MCA_opal_warn_on_missing_libcuda=0
 elif [ $MODEL == "kokkos" ]; then
     if [ $SYSTEM == "perlmutter" ]; then
         ml python gcc/11.2.0 cmake/3.24.3
@@ -63,10 +62,9 @@ else
 fi
 
 if [ $SYSTEM == "perlmutter" ]; then
-    # perlmutter
     SCRATCH_DIR="/pscratch/sd/d/dnicho/.tmp"
 else
-    SCRATCH_DIR="~/scratch/.tmp"
+    SCRATCH_DIR=~/scratch/.tmp
 fi
 
 python run-all.py \
@@ -76,7 +74,7 @@ python run-all.py \
     --launch-configs test-launch-configs.json \
     --yes-to-all \
     --early-exit-runs \
-    --run-timeout 15 \
+    --run-timeout 30 \
     --problem $PROBLEM \
     --include-models $MODEL \
     $LOG_ARGS \

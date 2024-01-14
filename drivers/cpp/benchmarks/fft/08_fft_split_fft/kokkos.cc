@@ -15,8 +15,7 @@
 #include <random>
 #include <vector>
 
-#include <Kokkos_Core.hpp>
-#include <Kokkos_Sort.hpp>
+#include "kokkos-includes.hpp"
 
 #include "utilities.hpp"
 #include "baseline.hpp"
@@ -42,12 +41,12 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->x_host.resize(1 << 18);
-    ctx->r_host.resize(1 << 18);
-    ctx->i_host.resize(1 << 18);
-    ctx->x = Kokkos::View<Kokkos::complex<double>*>("x", 1 << 18);
-    ctx->r = Kokkos::View<double*>("r", 1 << 18);
-    ctx->i = Kokkos::View<double*>("i", 1 << 18);
+    ctx->x_host.resize(DRIVER_PROBLEM_SIZE);
+    ctx->r_host.resize(DRIVER_PROBLEM_SIZE);
+    ctx->i_host.resize(DRIVER_PROBLEM_SIZE);
+    ctx->x = Kokkos::View<Kokkos::complex<double>*>("x", DRIVER_PROBLEM_SIZE);
+    ctx->r = Kokkos::View<double*>("r", DRIVER_PROBLEM_SIZE);
+    ctx->i = Kokkos::View<double*>("i", DRIVER_PROBLEM_SIZE);
 
     reset(ctx);
     return ctx;

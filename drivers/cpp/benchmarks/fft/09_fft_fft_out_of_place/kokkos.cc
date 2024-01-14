@@ -15,8 +15,7 @@
 #include <random>
 #include <vector>
 
-#include <Kokkos_Core.hpp>
-#include <Kokkos_Sort.hpp>
+#include "kokkos-includes.hpp"
 
 #include "utilities.hpp"
 #include "baseline.hpp"
@@ -43,12 +42,12 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->x_host.resize(1 << 18);
-    ctx->output_host.resize(1 << 18);
-    ctx->real.resize(1 << 18);
-    ctx->imag.resize(1 << 18);
-    ctx->xNonConst = Kokkos::View<Kokkos::complex<double>*>("x", 1 << 18);
-    ctx->output = Kokkos::View<Kokkos::complex<double>*>("output", 1 << 18);
+    ctx->x_host.resize(DRIVER_PROBLEM_SIZE);
+    ctx->output_host.resize(DRIVER_PROBLEM_SIZE);
+    ctx->real.resize(DRIVER_PROBLEM_SIZE);
+    ctx->imag.resize(DRIVER_PROBLEM_SIZE);
+    ctx->xNonConst = Kokkos::View<Kokkos::complex<double>*>("x", DRIVER_PROBLEM_SIZE);
+    ctx->output = Kokkos::View<Kokkos::complex<double>*>("output", DRIVER_PROBLEM_SIZE);
 
     reset(ctx);
     return ctx;
@@ -67,7 +66,6 @@ bool validate(Context *ctx) {
 
     std::vector<std::complex<double>> x_host(TEST_SIZE), correct(TEST_SIZE);
     std::vector<double> real(TEST_SIZE), imag(TEST_SIZE);
-    Kokkos::View<const Kokkos::complex<double>*> x("x", TEST_SIZE);
     Kokkos::View<Kokkos::complex<double>*> xNonConst("output", TEST_SIZE);
     Kokkos::View<Kokkos::complex<double>*> test("test", TEST_SIZE);
 
@@ -81,7 +79,7 @@ bool validate(Context *ctx) {
             x_host[j] = std::complex<double>(real[j], imag[j]);
             xNonConst(j) = Kokkos::complex<double>(real[j], imag[j]);
         }
-        x = xNonConst;
+        Kokkos::View<const Kokkos::complex<double>*> x = xNonConst;
 
         // compute correct result
         correctFft(x_host, correct);

@@ -33,15 +33,15 @@
 struct Context {
     float *d_x;
     size_t *d_ranks;
-    std::vector<float> *h_x;
-    std::vector<size_t> *h_ranks;
+    std::vector<float> h_x;
+    std::vector<size_t> h_ranks;
     size_t N;
     dim3 blockSize, gridSize;
 };
 
 void reset(Context *ctx) {
     fillRand(ctx->h_x, -100.0, 100.0);
-    COPY_H2D(ctx->d_x, ctx->h_x->data(), ctx->N * sizeof(float));
+    COPY_H2D(ctx->d_x, ctx->h_x.data(), ctx->N * sizeof(float));
 }
 
 Context *init() {

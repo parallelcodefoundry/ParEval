@@ -67,22 +67,22 @@ bool validate(Context *ctx) {
     std::vector<size_t> correct(TEST_SIZE), test(TEST_SIZE);
 
     Kokkos::View<float*> x("x", TEST_SIZE);
-    Kokkos::View<size_t*> ranks("ranks", TEST_SIZE);
+    Kokkos::View<size_t*> ranksView("ranks", TEST_SIZE);
 
     const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int trialIter = 0; trialIter < numTries; trialIter += 1) {
         // set up input
-        fillRand(ctx->x_host, -100.0, 100.0);
-        copyVectorToView(ctx->x_host, ctx->x);
+        fillRand(x_host, -100.0, 100.0);
+        copyVectorToView(x_host, x);
 
         // compute correct result
-        correctRanks(ctx->x_host, correct);
+        correctRanks(x_host, correct);
 
         // compute test result
-        ranks(ctx->x, ranks);
+        ranks(x, ranksView);
 
         // copy to vector
-        copyViewToVector(ranks, test);
+        copyViewToVector(ranksView, test);
         
         if (!std::equal(correct.begin(), correct.end(), test.begin())) {
             return false;

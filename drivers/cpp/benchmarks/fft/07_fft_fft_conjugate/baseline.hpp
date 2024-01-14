@@ -53,3 +53,54 @@ void NO_INLINE correctFft(std::vector<std::complex<double>> &x) {
 		x[i] = std::conj(x[i]);
 	}
 }
+
+void fftCooleyTookey(std::vector<std::complex<double>>& x) {
+    const size_t N = x.size();
+    if (N <= 1) return;
+
+    // divide
+    std::vector<std::complex<double>> even = std::vector<std::complex<double>>(N/2);
+	std::vector<std::complex<double>> odd = std::vector<std::complex<double>>(N/2);
+
+	for (size_t i = 0; i < N/2; ++i) {
+		even[i] = x[i*2];
+		odd[i] = x[i*2+1];
+	}
+
+    // conquer
+    fftCooleyTookey(even);
+    fftCooleyTookey(odd);
+
+    // combine
+    for (size_t k = 0; k < N/2; ++k) {
+        std::complex<double> t = std::polar(1.0, -2 * M_PI * k / N) * odd[k];
+        x[k    ] = even[k] + t;
+        x[k+N/2] = even[k] - t;
+    }
+
+	// conjugate
+	for (size_t i = 0; i < x.size(); i += 1) {
+		x[i] = std::conj(x[i]);
+	}
+}
+
+#if defined(USE_CUDA)
+// a lot of model outputs assume this is defined for some reason, so just define it
+__device__ DOUBLE_COMPLEX_T cexp(DOUBLE_COMPLEX_T arg) {
+   DOUBLE_COMPLEX_T res;
+   float s, c;
+   float e = expf(arg.x);
+   sincosf(arg.y, &s, &c);
+   res.x = c * e;
+   res.y = s * e;
+   return res;
+}
+
+__device__ DOUBLE_COMPLEX_T cuCexp(DOUBLE_COMPLEX_T arg) {
+   return cexp(arg);
+}
+
+__device__ DOUBLE_COMPLEX_T hipCexp(DOUBLE_COMPLEX_T arg) {
+   return cexp(arg);
+}
+#endif
