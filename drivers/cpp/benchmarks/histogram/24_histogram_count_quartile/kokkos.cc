@@ -20,8 +20,7 @@
 #include <random>
 #include <vector>
 
-#include <Kokkos_Core.hpp>
-#include <Kokkos_Sort.hpp>
+#include "kokkos-includes.hpp"
 
 #include "utilities.hpp"
 #include "baseline.hpp"
@@ -48,9 +47,9 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->x_host.resize(1 << 18);
+    ctx->x_host.resize(DRIVER_PROBLEM_SIZE);
 
-    ctx->xNonConst = Kokkos::View<double*>("x", 1 << 18);
+    ctx->xNonConst = Kokkos::View<double*>("x", DRIVER_PROBLEM_SIZE);
     ctx->bins = Kokkos::View<size_t[4]>("bins");
 
     reset(ctx);

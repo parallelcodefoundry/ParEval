@@ -17,9 +17,7 @@
 #include <random>
 #include <vector>
 
-#include <Kokkos_Core.hpp>
-#include <Kokkos_Sort.hpp>
-#include <Kokkos_StdAlgorithms.hpp>
+#include "kokkos-includes.hpp"
 
 #include "utilities.hpp"
 #include "baseline.hpp"
@@ -31,7 +29,7 @@ struct Context {
     Kokkos::View<size_t[256]> bins;
 
     std::vector<int> image_host;
-    std::vector<size_t> bins_host;
+    std::array<size_t, 256> bins_host;
 };
 
 void reset(Context *ctx) {
@@ -46,8 +44,8 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->image_host.resize(1 << 18);
-    ctx->imageNonConst = Kokkos::View<int*>("imageNonConst", 1 << 18);
+    ctx->image_host.resize(DRIVER_PROBLEM_SIZE);
+    ctx->imageNonConst = Kokkos::View<int*>("imageNonConst", DRIVER_PROBLEM_SIZE);
     ctx->bins = Kokkos::View<size_t[256]>("bins");
 
     reset(ctx);
@@ -68,7 +66,6 @@ bool validate(Context *ctx) {
     std::vector<int> image_host(TEST_SIZE);
     std::array<size_t, 256> correct;
 
-    Kokkos::View<const int*> image("image", TEST_SIZE);
     Kokkos::View<int*> imageNonConst("imageNonConst", TEST_SIZE);
     Kokkos::View<size_t[256]> test("bins");
 
@@ -79,7 +76,7 @@ bool validate(Context *ctx) {
         correct.fill(0);
 
         copyVectorToView(image_host, imageNonConst);
-        image = imageNonConst;
+        Kokkos::View<const int*> image = imageNonConst;
         Kokkos::Experimental::fill(Kokkos::DefaultExecutionSpace(), test, 0);
 
         // compute correct result

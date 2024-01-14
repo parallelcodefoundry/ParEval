@@ -33,7 +33,7 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->x.resize(1 << 18);
+    ctx->x.resize(DRIVER_PROBLEM_SIZE);
 
     reset(ctx);
     return ctx;
@@ -61,7 +61,8 @@ bool validate(Context *ctx) {
         // set up input
         fillRand(x, 0.0, 100.0);
         BCAST(x, DOUBLE);
-        bins.fill(0);
+        correct.fill(0);
+        test.fill(0);
 
         // compute correct result
         correctBinsBy10Count(x, correct);
@@ -70,7 +71,12 @@ bool validate(Context *ctx) {
         binsBy10Count(x, test);
         SYNC();
         
+        bool isCorrect = true;
         if (IS_ROOT(rank) && !std::equal(correct.begin(), correct.end(), test.begin())) {
+            isCorrect = false;
+        }
+        BCAST_PTR(&isCorrect, 1, CXX_BOOL);
+        if (!isCorrect) {
             return false;
         }
     }

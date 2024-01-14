@@ -34,7 +34,7 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->s.resize(1 << 18);
+    ctx->s.resize(DRIVER_PROBLEM_SIZE);
 
     reset(ctx);
     return ctx;
@@ -64,13 +64,14 @@ bool validate(Context *ctx) {
         for (int j = 0; j < firstLetters.size(); j += 1) {
             firstLetters[j] = rand() % 26 + 'a';
         }
-        BCAST(firstLetters.data(), CHAR);
+        BCAST(firstLetters, CHAR);
 
         fillRandString(s, 2, 10);
         for (int j = 0; j < s.size(); j += 1) {
             s[j][0] = firstLetters[j];  // ensure every rank at least has the same first letters
         }
-        bins.fill(0);
+        correct.fill(0);
+        test.fill(0);
 
         // compute correct result
         correctFirstLetterCounts(s, correct);
@@ -79,7 +80,12 @@ bool validate(Context *ctx) {
         firstLetterCounts(s, test);
         SYNC();
         
+        bool isCorrect = true;
         if (IS_ROOT(rank) && !std::equal(correct.begin(), correct.end(), test.begin())) {
+            isCorrect = false;
+        }
+        BCAST_PTR(&isCorrect, 1, CXX_BOOL);
+        if (!isCorrect) {
             return false;
         }
     }

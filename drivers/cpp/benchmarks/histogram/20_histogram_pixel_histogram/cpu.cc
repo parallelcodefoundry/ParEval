@@ -35,7 +35,7 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->image.resize(1 << 18);
+    ctx->image.resize(DRIVER_PROBLEM_SIZE);
 
     reset(ctx);
     return ctx;
@@ -63,8 +63,9 @@ bool validate(Context *ctx) {
         // set up input
         fillRand(image, 0, 255);
         BCAST(image, INT);
-        
+
         std::fill(correct.begin(), correct.end(), 0);
+        std::fill(test.begin(), test.end(), 0);
 
         // compute correct result
         correctPixelCounts(image, correct);
@@ -73,7 +74,12 @@ bool validate(Context *ctx) {
         pixelCounts(image, test);
         SYNC();
         
+        bool isCorrect = true;
         if (IS_ROOT(rank) && !std::equal(correct.begin(), correct.end(), test.begin())) {
+            isCorrect = false;
+        }
+        BCAST_PTR(&isCorrect, 1, CXX_BOOL);
+        if (!isCorrect) {
             return false;
         }
     }

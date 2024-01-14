@@ -17,3 +17,12 @@ void NO_INLINE correctFirstLetterCounts(std::vector<std::string> const& s, std::
       bins[index] += 1;
    }
 }
+
+#if defined(USE_CUDA)
+// fix the issue where atomicAdd is not defined for size_t
+static_assert(sizeof(size_t) == sizeof(unsigned long long), "size_t is not 64 bits");
+
+__device__ __forceinline__ void atomicAdd(size_t* address, size_t val) {
+   atomicAdd(reinterpret_cast<unsigned long long*>(address), val);
+}
+#endif

@@ -44,9 +44,9 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->points.resize(1 << 18);
-    ctx->x.resize(1 << 18);
-    ctx->y.resize(1 << 18);
+    ctx->points.resize(DRIVER_PROBLEM_SIZE);
+    ctx->x.resize(DRIVER_PROBLEM_SIZE);
+    ctx->y.resize(DRIVER_PROBLEM_SIZE);
 
     reset(ctx);
     return ctx;
@@ -92,7 +92,12 @@ bool validate(Context *ctx) {
         countQuadrants(points, test);
         SYNC();
         
+        bool isCorrect = true;
         if (IS_ROOT(rank) && !std::equal(correct.begin(), correct.end(), test.begin())) {
+            isCorrect = false;
+        }
+        BCAST_PTR(&isCorrect, 1, CXX_BOOL);
+        if (!isCorrect) {
             return false;
         }
     }
