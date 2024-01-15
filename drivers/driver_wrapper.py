@@ -46,6 +46,8 @@ class RunOutput:
             logging.warning(f"Runtime is 0 for run with config {self.config}. Try increasing the problem size.")
         if self.is_valid and self.best_sequential_runtime == 0:
             logging.warning(f"The best sequential runtime is 0 for run with config {self.config}. Try increasing the problem size.")
+        if self.is_valid and self.best_sequential_runtime < 0.001:
+            logging.warning(f"The best sequential runtime is very small ({self.best_sequential_runtime}) for run with config {self.config}. Try increasing the problem size.")
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}(exit_code={self.exit_code}, is_valid={self.is_valid}, runtime={self.runtime}, best_sequential_runtime={self.best_sequential_runtime}, config={self.config})"
