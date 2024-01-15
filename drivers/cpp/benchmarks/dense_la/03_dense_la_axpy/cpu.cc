@@ -23,8 +23,8 @@ struct Context {
 };
 
 void reset(Context *ctx) {
-    fillRand(ctx->x);
-    fillRand(ctx->y);
+    fillRand(ctx->x, -1.0, 1.0);
+    fillRand(ctx->y, -1.0, 1.0);
 
     BCAST(ctx->x, DOUBLE);
     BCAST(ctx->y, DOUBLE);
@@ -34,9 +34,9 @@ Context *init() {
     Context *ctx = new Context();
 
     ctx->alpha = 2.0;
-    ctx->x.resize(1 << 18);
-    ctx->y.resize(1 << 18);
-    ctx->z.resize(1 << 18);
+    ctx->x.resize(DRIVER_PROBLEM_SIZE);
+    ctx->y.resize(DRIVER_PROBLEM_SIZE);
+    ctx->z.resize(DRIVER_PROBLEM_SIZE);
 
     reset(ctx);
     return ctx;
@@ -74,7 +74,12 @@ bool validate(Context *ctx) {
         axpy(alpha, x, y, test);
         SYNC();
         
-        if (IS_ROOT(rank) && !fequal(correct, test)) {
+        bool isCorrect = true;
+        if (IS_ROOT(rank) && !fequal(correct, test, 1e-6)) {
+            isCorrect = false;
+        }
+        BCAST_PTR(&isCorrect, 1, CXX_BOOL);
+        if (!isCorrect) {
             return false;
         }
     }

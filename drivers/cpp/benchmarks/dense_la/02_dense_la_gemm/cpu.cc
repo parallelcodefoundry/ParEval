@@ -26,7 +26,6 @@ struct Context {
 void reset(Context *ctx) {
     fillRand(ctx->A, -1.0, 1.0);
     fillRand(ctx->B, -1.0, 1.0);
-
     std::fill(ctx->C.begin(), ctx->C.end(), 0.0);
 
     BCAST(ctx->A, DOUBLE);
@@ -37,9 +36,9 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->M = 1 << 10;
-    ctx->K = 1 << 9;
-    ctx->N = 1 << 10;
+    ctx->M = DRIVER_PROBLEM_SIZE;
+    ctx->K = DRIVER_PROBLEM_SIZE / 4;
+    ctx->N = DRIVER_PROBLEM_SIZE / 2;
 
     ctx->A.resize(ctx->M * ctx->K);
     ctx->B.resize(ctx->K * ctx->N);
@@ -83,7 +82,12 @@ bool validate(Context *ctx) {
         gemm(A, B, test, TEST_SIZE, TEST_SIZE, TEST_SIZE);
         SYNC();
         
+        bool isCorrect = true;
         if (IS_ROOT(rank) && !fequal(correct, test, 1e-4)) {
+            isCorrect = false;
+        }
+        BCAST_PTR(&isCorrect, 1, CXX_BOOL);
+        if (!isCorrect) {
             return false;
         }
     }

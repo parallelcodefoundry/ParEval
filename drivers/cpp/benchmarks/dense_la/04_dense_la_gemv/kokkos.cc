@@ -16,8 +16,7 @@
 #include <random>
 #include <vector>
 
-#include <Kokkos_Core.hpp>
-#include <Kokkos_Sort.hpp>
+#include "kokkos-includes.hpp"
 
 #include "utilities.hpp"
 #include "baseline.hpp"
@@ -25,7 +24,9 @@
 
 struct Context {
     Kokkos::View<double**> A;
+    Kokkos::View<const double**> Aconst;
     Kokkos::View<double*> x, y;
+    Kokkos::View<const double*> xconst;
     std::vector<double> A_host, x_host, y_host;
     size_t M, N;
 };
@@ -42,13 +43,15 @@ void reset(Context *ctx) {
             ctx->A(i, j) = ctx->A_host[i * ctx->N + j];
         }
     }
+    ctx->Aconst = ctx->A;
+    ctx->xconst = ctx->x;
 }
 
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->M = 1 << 11;
-    ctx->N = 1 << 11;
+    ctx->M = DRIVER_PROBLEM_SIZE / 2;
+    ctx->N = DRIVER_PROBLEM_SIZE;
     ctx->A_host.resize(ctx->M * ctx->N);
     ctx->x_host.resize(ctx->N);
     ctx->y_host.resize(ctx->M);
@@ -62,7 +65,7 @@ Context *init() {
 }
 
 void NO_OPTIMIZE compute(Context *ctx) {
-    gemv(ctx->A, ctx->x, ctx->y, ctx->M, ctx->N);
+    gemv(ctx->Aconst, ctx->xconst, ctx->y, ctx->M, ctx->N);
 }
 
 void NO_OPTIMIZE best(Context *ctx) {
@@ -97,7 +100,9 @@ bool validate(Context *ctx) {
         correctGemv(A, x, correct, TEST_SIZE, TEST_SIZE);
 
         // compute test result
-        gemv(A_view, x_view, y_view, TEST_SIZE, TEST_SIZE);
+        Kokkos::View<const double**> A_view_const = A_view;
+        Kokkos::View<const double*> x_view_const = x_view;
+        gemv(A_view_const, x_view_const, y_view, TEST_SIZE, TEST_SIZE);
         copyViewToVector(y_view, test);
         
         if (!fequal(correct, test, 1e-4)) {

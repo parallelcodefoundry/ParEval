@@ -25,6 +25,7 @@
 
 struct Context {
     Kokkos::View<double**> A, B, C;
+    Kokkos::View<const double**> A_const, B_const;
     size_t M, K, N;
     std::vector<double> A_host, B_host, C_host;
 };
@@ -36,19 +37,21 @@ void reset(Context *ctx) {
 
     for (size_t i = 0; i < ctx->M; i += 1) {
         for (size_t j = 0; j < ctx->K; j += 1) {
-            ctx->A_host(i, j) = ctx->A_host[i * ctx->K + j];
+            ctx->A(i, j) = ctx->A_host[i * ctx->K + j];
         }
     }
+    ctx->A_const = ctx->A;
 
     for (size_t i = 0; i < ctx->K; i += 1) {
         for (size_t j = 0; j < ctx->N; j += 1) {
-            ctx->B_host(i, j) = ctx->B_host[i * ctx->N + j];
+            ctx->B(i, j) = ctx->B_host[i * ctx->N + j];
         }
     }
+    ctx->B_const = ctx->B;
 
     for (size_t i = 0; i < ctx->M; i += 1) {
         for (size_t j = 0; j < ctx->N; j += 1) {
-            ctx->C_host(i, j) = ctx->C_host[i * ctx->N + j];
+            ctx->C(i, j) = ctx->C_host[i * ctx->N + j];
         }
     }
 }
@@ -56,9 +59,9 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->M = 1 << 10;
-    ctx->K = 1 << 9;
-    ctx->N = 1 << 10;
+    ctx->M = DRIVER_PROBLEM_SIZE;
+    ctx->K = DRIVER_PROBLEM_SIZE / 4;
+    ctx->N = DRIVER_PROBLEM_SIZE / 2;
 
     ctx->A_host.resize(ctx->M * ctx->K);
     ctx->B_host.resize(ctx->K * ctx->N);
@@ -73,7 +76,7 @@ Context *init() {
 }
 
 void NO_OPTIMIZE compute(Context *ctx) {
-    gemm(ctx->A, ctx->B, ctx->C, ctx->M, ctx->K, ctx->N);
+    gemm(ctx->A_const, ctx->B_const, ctx->C, ctx->M, ctx->K, ctx->N);
 }
 
 void NO_OPTIMIZE best(Context *ctx) {
@@ -102,12 +105,14 @@ bool validate(Context *ctx) {
                 C(i, j) = 0.0;
             }
         }
+        Kokkos::View<const double**> A_const = A;
+        Kokkos::View<const double**> B_const = B;
 
         // compute correct result
         correctGemm(A_host, B_host, correct, TEST_SIZE, TEST_SIZE, TEST_SIZE);
 
         // compute test result
-        gemm(A, B, C, TEST_SIZE, TEST_SIZE, TEST_SIZE);
+        gemm(A_const, B_const, C, TEST_SIZE, TEST_SIZE, TEST_SIZE);
 
         // copy test result back to host
         for (size_t i = 0; i < TEST_SIZE; i += 1) {

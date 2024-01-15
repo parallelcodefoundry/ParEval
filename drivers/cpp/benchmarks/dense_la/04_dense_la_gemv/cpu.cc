@@ -34,8 +34,8 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->M = 1 << 11;
-    ctx->N = 1 << 11;
+    ctx->M = DRIVER_PROBLEM_SIZE / 2;
+    ctx->N = DRIVER_PROBLEM_SIZE;
 
     ctx->A.resize(ctx->M * ctx->N);
     ctx->x.resize(ctx->N);
@@ -75,10 +75,15 @@ bool validate(Context *ctx) {
         correctGemv(A, x, correct, TEST_SIZE, TEST_SIZE);
 
         // compute test result
-        fillRand(test, -10.0, 10.0);
+        gemv(A, x, test, TEST_SIZE, TEST_SIZE);
         SYNC();
         
+        bool isCorrect = true;
         if (IS_ROOT(rank) && !fequal(correct, test, 1e-4)) {
+            isCorrect = false;
+        }
+        BCAST_PTR(&isCorrect, 1, CXX_BOOL);
+        if (!isCorrect) {
             return false;
         }
     }

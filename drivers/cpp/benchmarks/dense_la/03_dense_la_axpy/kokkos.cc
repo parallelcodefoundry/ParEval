@@ -15,8 +15,7 @@
 #include <random>
 #include <vector>
 
-#include <Kokkos_Core.hpp>
-#include <Kokkos_Sort.hpp>
+#include "kokkos-includes.hpp"
 
 #include "utilities.hpp"
 #include "baseline.hpp"
@@ -25,24 +24,27 @@
 struct Context {
     double alpha;
     Kokkos::View<double*> x, y, z;
+    Kokkos::View<const double*> x_const, y_const;
     std::vector<double> x_host, y_host, z_host;
 };
 
 void reset(Context *ctx) {
-    fillRand(ctx->x_host);
-    fillRand(ctx->y_host);
+    fillRand(ctx->x_host, -1.0, 1.0);
+    fillRand(ctx->y_host, -1.0, 1.0);
 
     copyVectorToView(ctx->x_host, ctx->x);
     copyVectorToView(ctx->y_host, ctx->y);
+    ctx->x_const = ctx->x;
+    ctx->y_const = ctx->y;
 }
 
 Context *init() {
     Context *ctx = new Context();
 
     ctx->alpha = 2.0;
-    ctx->x_host.resize(1 << 18);
-    ctx->y_host.resize(1 << 18);
-    ctx->z_host.resize(1 << 18);
+    ctx->x_host.resize(DRIVER_PROBLEM_SIZE);
+    ctx->y_host.resize(DRIVER_PROBLEM_SIZE);
+    ctx->z_host.resize(DRIVER_PROBLEM_SIZE);
 
     ctx->x = Kokkos::View<double*>("x", ctx->x_host.size());
     ctx->y = Kokkos::View<double*>("y", ctx->y_host.size());
@@ -53,7 +55,7 @@ Context *init() {
 }
 
 void NO_OPTIMIZE compute(Context *ctx) {
-    axpy(ctx->alpha, ctx->x, ctx->y, ctx->z);
+    axpy(ctx->alpha, ctx->x_const, ctx->y_const, ctx->z);
 }
 
 void NO_OPTIMIZE best(Context *ctx) {
@@ -77,15 +79,17 @@ bool validate(Context *ctx) {
         fillRand(y_host, -1.0, 1.0);
         copyVectorToView(x_host, x);
         copyVectorToView(y_host, y);
+        Kokkos::View<const double*> x_const = x;
+        Kokkos::View<const double*> y_const = y;
 
         // compute correct result
         correctAxpy(alpha, x_host, y_host, correct);
 
         // compute test result
-        axpy(alpha, x, y, z);
+        axpy(alpha, x_const, y_const, z);
         copyViewToVector(z, test);
         
-        if (!fequal(correct, test)) {
+        if (!fequal(correct, test, 1e-6)) {
             return false;
         }
     }

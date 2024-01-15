@@ -9,6 +9,16 @@
    input: [[4, 3], [6, 3]]
    output: [[4, 3], [1.5, -1.5]]
 */
-void luFactorize(std::vector<double> &A, size_t N) {
-	
+void correctLuFactorize(std::vector<double> &A, size_t N) {
+   for (size_t k = 0; k < N; ++k) {
+       for (size_t i = k + 1; i < N; ++i) {
+
+           double factor = A[i * N + k] / A[k * N + k];
+           A[i * N + k] = factor;
+           
+           for (size_t j = k + 1; j < N; ++j) {
+               A[i * N + j] -= factor * A[k * N + j];
+           }
+       }
+   }
 }
