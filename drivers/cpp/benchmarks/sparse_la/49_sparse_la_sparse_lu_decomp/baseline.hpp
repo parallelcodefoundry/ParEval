@@ -14,7 +14,7 @@
    input: A=[{0,0,4}, {0,1,3}, {1,0,6}, {1,1,3}]
    output: L=[{0,0,1},{1,0,1.5}, {1,1,1}] U=[{0,0,4}, {0,1,3}, {1,1,-1.5}]
 */
-void correctLuFactorize(std::vector<COOElement> const& A, std::vector<double> &L, std::vector<double> &U, size_t N) {
+void NO_INLINE correctLuFactorize(std::vector<COOElement> const& A, std::vector<double> &L, std::vector<double> &U, size_t N) {
    std::vector<std::vector<double>> fullA(N, std::vector<double>(N, 0));
    for (const auto& element : A) {
       fullA[element.row][element.column] = element.value;

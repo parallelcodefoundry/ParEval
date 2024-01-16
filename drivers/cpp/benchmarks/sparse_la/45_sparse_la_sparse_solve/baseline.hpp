@@ -13,7 +13,7 @@
    input: A=[{0,0,1}, {0,1,1}, {1,1,-2}] b=[1,4]
    output: x=[3,-2]
 */
-void correctSolveLinearSystem(std::vector<COOElement> const& A, std::vector<double> const& b, std::vector<double> &x, size_t N) {
+void NO_INLINE correctSolveLinearSystem(std::vector<COOElement> const& A, std::vector<double> const& b, std::vector<double> &x, size_t N) {
    std::vector<std::vector<double>> matrix(N, std::vector<double>(N, 0.0));   
    std::vector<double> b_copy = b;
 

@@ -12,7 +12,7 @@
    input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1
    output: z=[{3, 1}, {5, 10}, {7, 1}, {12, -1}]
 */
-void correctSparseAxpy(double alpha, std::vector<Element> const& x, std::vector<Element> const& y, std::vector<double> &z) {
+void NO_INLINE correctSparseAxpy(double alpha, std::vector<Element> const& x, std::vector<Element> const& y, std::vector<double> &z) {
     size_t xi = 0, yi = 0;
 
     while (xi < x.size() && yi < y.size()) {

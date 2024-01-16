@@ -14,7 +14,7 @@
    input: alpha=0.5 beta=1.0 A=[{0,1,3}, {1,0,-1}] x=[-4, 2] y=[-1,1]
    output: y=[2, 3]
 */
-void correctSpmv(double alpha, std::vector<COOElement> const& A, std::vector<double> const& x, double beta, std::vector<double> &y, size_t M, size_t N) {
+void NO_INLINE correctSpmv(double alpha, std::vector<COOElement> const& A, std::vector<double> const& x, double beta, std::vector<double> &y, size_t M, size_t N) {
    for (auto& element : y) {
       element *= beta;
    }

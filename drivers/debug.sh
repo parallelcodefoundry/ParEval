@@ -74,7 +74,7 @@ python run-all.py \
     --launch-configs test-launch-configs.json \
     --yes-to-all \
     --early-exit-runs \
-    --run-timeout 30 \
+    --run-timeout 40 \
     --problem $PROBLEM \
     --include-models $MODEL \
     $LOG_ARGS \
