@@ -20,6 +20,11 @@
 #define MAX_VALIDATION_ATTEMPTS 3
 #endif
 
+#if !defined(SPARSE_LA_SPARSITY)
+// sparsity to use for sparse linear algebra benchmarks
+#define SPARSE_LA_SPARSITY 0.1
+#endif
+
 // include the necessary libraries for the parallel model
 #if defined(USE_OMP) || defined(USE_MPI_OMP)
 #include <omp.h>
