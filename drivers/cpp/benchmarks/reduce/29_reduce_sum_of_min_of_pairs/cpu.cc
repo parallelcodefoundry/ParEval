@@ -40,7 +40,7 @@ Context *init() {
     return ctx;
 }
 
-void compute(Context *ctx) {
+void NO_OPTIMIZE compute(Context *ctx) {
     ctx->val = sumOfMinimumElements(ctx->x, ctx->y);
     (void) ctx->val;
 }

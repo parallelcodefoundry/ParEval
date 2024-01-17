@@ -58,7 +58,7 @@ Context *init() {
     return ctx;
 }
 
-void compute(Context *ctx) {
+void NO_OPTIMIZE compute(Context *ctx) {
     average<<<ctx->gridSize, ctx->blockSize>>>(ctx->d_x, ctx->N, ctx->d_output);
 }
 

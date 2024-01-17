@@ -61,7 +61,7 @@ Context *init() {
     return ctx;
 }
 
-void compute(Context *ctx) {
+void NO_OPTIMIZE compute(Context *ctx) {
     sumOfMinimumElements<<<ctx->gridSize, ctx->blockSize>>>(ctx->d_x, ctx->d_y, ctx->N, ctx->d_output);
 }
 

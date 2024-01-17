@@ -37,7 +37,7 @@ Context *init() {
     return ctx;
 }
 
-void compute(Context *ctx) {
+void NO_OPTIMIZE compute(Context *ctx) {
     ctx->val = productWithInverses(ctx->x);
     (void) ctx->val;
 }

@@ -29,8 +29,8 @@ void reset(Context *ctx) {
 
 Context *init() {
     Context *ctx = new Context();
-    ctx->x = Kokkos::View<double*>("x", 1 << 20);
-    ctx->xVec.resize(1 << 20);
+    ctx->x = Kokkos::View<double*>("x", DRIVER_PROBLEM_SIZE);
+    ctx->xVec.resize(DRIVER_PROBLEM_SIZE);
     reset(ctx);
     return ctx;
 }
