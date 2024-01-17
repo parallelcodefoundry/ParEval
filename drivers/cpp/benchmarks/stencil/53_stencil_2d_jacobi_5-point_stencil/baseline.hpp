@@ -11,7 +11,7 @@
    input: [[3, 4, 1], [0, 1, 7], [5, 3, 2]]
    output: [[1.4, 1.8, 2.4],[1.8, 3, 2.2], [1.6, 2.2, 2.4]]
 */
-void correctJacobi2D(std::vector<double> const& input, std::vector<double> &output, size_t N) {
+void NO_INLINE correctJacobi2D(std::vector<double> const& input, std::vector<double> &output, size_t N) {
     for (size_t i = 0; i < N; i++) {
         for (size_t j = 0; j < N; j++) {
             double sum = 0;

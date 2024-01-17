@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 
-const int edgeKernel[3][3] = {{-1, -1, -1}, {-1, 8, -1}, {-1, -1, -1}};
+// const int edgeKernel[3][3] = {{-1, -1, -1}, {-1, 8, -1}, {-1, -1, -1}};
 
 /* Convolve the edge kernel with a grayscale image. Each pixel will be replaced with
    the dot product of itself and its neighbors with the edge kernel.
@@ -19,16 +19,18 @@ const int edgeKernel[3][3] = {{-1, -1, -1}, {-1, 8, -1}, {-1, -1, -1}};
             [36, 0, 0, 255],
             [255, 39, 0, 255]]
 */
-void correctConvolveKernel(std::vector<int> const& imageIn, std::vector<int> &imageOut, size_t N) {
+void NO_INLINE correctConvolveKernel(std::vector<int> const& imageIn, std::vector<int> &imageOut, size_t N) {
     for (size_t i = 0; i < N; i++) {
         for (size_t j = 0; j < N; j++){
             int sum = 0;
             for (int k = -1; k < 2; k++) {
                 for (int l = -1; l < 2; l++){
-                    if (i + k < 0 || i + k >= N || j + l < 0 || j + l >= N) {
+                    int x = i + k;
+                    int y = j + l;
+                    if ((x < 0) || (x >= N) || (y < 0) || (y >= N)) {
                         sum += 0;
                     } else {
-                        sum += imageIn[(i + k) * N + (j + l)] * edgeKernel[k + 1][l + 1];
+                        sum += imageIn[x * N + y] * edgeKernel[k + 1][l + 1];
                     }
                 }
             }

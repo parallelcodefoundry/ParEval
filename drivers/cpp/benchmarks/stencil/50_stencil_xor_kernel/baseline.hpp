@@ -15,7 +15,7 @@
             [0, 0, 1, 0],
             [1, 0, 1, 0]]
 */
-void correctCellsXOR(std::vector<int> const& input, std::vector<int> &output, size_t N) {
+void NO_INLINE correctCellsXOR(std::vector<int> const& input, std::vector<int> &output, size_t N) {
     for (size_t i = 0; i < N; ++i) {
         for (size_t j = 0; j < N; ++j) {
             int count = 0;
