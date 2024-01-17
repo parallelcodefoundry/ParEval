@@ -53,6 +53,9 @@ node-local on Zaratan, so you need to pass `--scratch-dir` as some root
 directory on the _scratch_ or _home_ filesystem, since these are accessible
 from all compute nodes and on the network.
 
+To prevent _cuda library not found errors_ with MPI you should run 
+`export OMPI_MCA_opal_warn_on_missing_libcuda=0` before running the drivers.
+
 ## Organization of Drivers
 Within `drivers/` there are subdirectories for each programming language.
 In this subdirectory is a `*_driver_wrapper.py` file that handles running

@@ -1,0 +1,9 @@
+/* For each letter in the alphabet, count the number of strings in the vector s that start with that letter.
+   Assume all strings are in lower case. Store the output in `bins` array.
+   Use AMD HIP to compute in parallel. The kernel is launched with at least N threads.
+   Example:
+
+   input: ["dog", "cat", "xray", "cow", "code", "type", "flower"]
+   output: [0, 0, 3, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0]
+*/
+__global__ void firstLetterCounts(const char **s, size_t N, size_t bins[26]) {

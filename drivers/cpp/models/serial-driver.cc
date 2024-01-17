@@ -14,6 +14,7 @@
 #include <chrono>
 #include <cstdio>
 #include <string>
+#include <cfloat>
 
 class Context;
 extern "C++" {
@@ -35,7 +36,7 @@ int main(int argc, char **argv) {
         exit(1);
     }
 
-    int NITER = 50;
+    int NITER = 5;
     if (argc > 1) {
         NITER = std::stoi(std::string(argv[1]));
     }
@@ -53,7 +54,7 @@ int main(int argc, char **argv) {
     
         reset(ctx);
     }
-    printf("Time: %f\n", totalTime / NITER);
+    printf("Time: %.*f\n", DBL_DIG-1, totalTime / NITER);
 
     /* benchmark best */
     totalTime = 0.0;
@@ -65,7 +66,7 @@ int main(int argc, char **argv) {
 
         reset(ctx);
     }
-    printf("BestSequential: %f\n", totalTime / NITER);
+    printf("BestSequential: %.*f\n", DBL_DIG-1, totalTime / NITER);
 
     /* validate */
     const bool isValid = validate(ctx);

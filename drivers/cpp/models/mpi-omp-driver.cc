@@ -13,6 +13,7 @@
 */
 #include <cstdio>
 #include <string>
+#include <cfloat>
 
 #include <mpi.h>
 #include <omp.h>
@@ -40,7 +41,7 @@ int main(int argc, char **argv) {
         exit(1);
     }
 
-    const int NITER = 50;
+    const int NITER = 5;
     int num_threads = 1;
     if (argc > 1) {
         num_threads = std::stoi(std::string(argv[1]));
@@ -68,23 +69,21 @@ int main(int argc, char **argv) {
 
     if (rank == 0) {
         MPI_Reduce(MPI_IN_PLACE, &totalTime, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
-        printf("Time: %f\n", totalTime / size / NITER);
+        printf("Time: %.*f\n", DBL_DIG-1, totalTime / size / NITER);
     } else {
         MPI_Reduce(&totalTime, nullptr, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
     }
 
     /* best case */
-    if (rank == 0) {
-        totalTime = 0.0;
-        for (int i = 0; i < NITER; i += 1) {
-            double start = MPI_Wtime();
-            best(ctx);
-            totalTime += MPI_Wtime() - start;
+    totalTime = 0.0;
+    for (int i = 0; i < NITER; i += 1) {
+        double start = MPI_Wtime();
+        best(ctx);
+        totalTime += MPI_Wtime() - start;
 
-            reset(ctx);
-        }
-        printf("BestSequential: %f\n", totalTime / NITER);
+        reset(ctx);
     }
+    printf("BestSequential: %.*f\n", DBL_DIG-1, totalTime / NITER);
     MPI_Barrier(MPI_COMM_WORLD);
 
     /* validate */

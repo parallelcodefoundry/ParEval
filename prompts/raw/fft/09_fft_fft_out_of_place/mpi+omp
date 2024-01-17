@@ -1,0 +1,8 @@
+/* Compute the discrete fourier transform of x. Store the result in output.
+   Use MPI and OpenMP to compute in parallel. Assume MPI is already initialized.
+   Example:
+
+   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+   output: [{4,0}, {1,-2.42421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]
+*/
+void fft(std::vector<std::complex<double>> const& x, std::vector<std::complex<double>> &output) {

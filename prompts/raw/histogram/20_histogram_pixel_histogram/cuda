@@ -1,0 +1,10 @@
+/* Count the number of pixels in image with each grayscale intensity.
+   The vector `image` is a grayscale image with values 0-255.
+   Store the results in `bins`.
+   Use CUDA to count in parallel. The kernel is launched with at least N threads.
+   Example:
+   
+   input: image=[2, 116, 201, 11, 92, 92, 201, 4, 2]
+   output: [0, 0, 2, 0, 1, ...]
+*/
+__global__ void pixelCounts(const int *image, size_t N, size_t bins[256]) {

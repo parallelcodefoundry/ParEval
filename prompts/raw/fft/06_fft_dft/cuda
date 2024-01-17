@@ -1,0 +1,8 @@
+/* Compute the discrete fourier transform of x. Store the result in output.
+   Use CUDA to compute in parallel. The kernel is launched with at least N threads.
+   Example:
+
+   input: [1, 4, 9, 16]
+   output: [30+0i, -8-12i, -10-0i, -8+12i]
+*/
+__global__ void dft(const double *x, cuDoubleComplex *output, size_t N) {

@@ -1,0 +1,7 @@
+/* Compute the discrete fourier transform of x. Store the result in output.
+   Example:
+
+   input: [1, 4, 9, 16]
+   output: [30+0i, -8-12i, -10-0i, -8+12i]
+*/
+void dft(std::vector<double> const& x, std::vector<std::complex<double>> &output) {
