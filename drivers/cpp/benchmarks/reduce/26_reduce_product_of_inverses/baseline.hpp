@@ -9,7 +9,7 @@
    input: [4, 2, 10, 4, 5]
    output: 25
 */
-double correctProductWithInverses(std::vector<double> const& x) {
+double NO_INLINE correctProductWithInverses(std::vector<double> const& x) {
     std::vector<double> data;
     for (size_t i = 0; i < x.size(); i++)
         data.push_back(i % 2 ? 1.0 / x[i] : x[i]);

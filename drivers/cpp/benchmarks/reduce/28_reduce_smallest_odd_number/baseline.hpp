@@ -11,7 +11,7 @@
    input: [8, 36, 7, 2, 11]
    output: 7
 */
-int correctSmallestOdd(std::vector<int> const& x) {
+int NO_INLINE correctSmallestOdd(std::vector<int> const& x) {
     return std::reduce(x.begin(), x.end(), std::numeric_limits<int>::max(), [] (const auto &a, const auto &b) {
         if (a < b) {
             if (a % 2 == 1) return a;

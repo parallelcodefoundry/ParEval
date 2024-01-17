@@ -10,7 +10,7 @@
    input: x=[3, 4, 0, 2, 3], y=[2, 5, 3, 1, 7]
    output: 10
 */
-double correctSumOfMinimumElements(std::vector<double> const& x, std::vector<double> const& y) {
+double NO_INLINE correctSumOfMinimumElements(std::vector<double> const& x, std::vector<double> const& y) {
     std::vector<double> z;
     z.resize(x.size());
     std::transform(x.begin(), x.end(), y.begin(), z.begin(), [] (const auto &a, const auto &b) {
