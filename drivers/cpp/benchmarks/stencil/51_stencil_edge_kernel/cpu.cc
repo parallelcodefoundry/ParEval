@@ -63,7 +63,7 @@ void NO_OPTIMIZE best(Context *ctx) {
 bool validate(Context *ctx) {
     const size_t TEST_SIZE = 1024;
 
-    std::vector<int> input, correct, test;
+    std::vector<int> input(TEST_SIZE * TEST_SIZE), correct(TEST_SIZE * TEST_SIZE), test(TEST_SIZE * TEST_SIZE);
 
     int rank;
     GET_RANK(rank);
@@ -73,6 +73,7 @@ bool validate(Context *ctx) {
         // set up input
         fillRand(input, 0, 255);
         std::fill(test.begin(), test.end(), 0);
+        std::fill(correct.begin(), correct.end(), 0);
         BCAST(input, INT);
 
         // compute correct result
