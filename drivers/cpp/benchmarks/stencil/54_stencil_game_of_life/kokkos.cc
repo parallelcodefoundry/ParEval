@@ -1,22 +1,28 @@
-// Driver for 50_stencil_xor_kernel for Kokkos
+// Driver for 54_stencil_game_of_life for Kokkos
 // #include <Kokkos_Core.hpp>
 //
-// /* Set every cell's value to 1 if it has exactly one neighbor that's a 1. Otherwise set it to 0.
-//    Note that we only consider neighbors and not input_{i,j} when computing output_{i,j}.
-//    input and output are NxN grids of ints.
-//    Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.
+// /* Simulate one generation of Game of Life on `input`. Store the results in `output`.
+//    A cell is 1 if it is alive and 0 if it is dead.
+//    If a live cell has fewer than 2 live neighbors then it dies.
+//    If a live cell has 2 or 3 live neighbors then it lives on.
+//    If a live cell has more than 3 live neighbords then it dies.
+//    If a cell is dead and has exactly 3 live neighbors then it becomes alive.
+//    `input` and `output` are NxN grids.
+//    Use Kokkos to compute in parallel. Assume Kokkos is already initialized.
 //    Example:
 //
-//    input: [[0, 1, 1, 0],
-//            [1, 0, 0, 0],
-//            [0, 0, 0, 0],
-//            [0, 1, 0, 0]
-//    output: [[0, 0, 1, 1],
-//             [1, 0, 0, 1],
-//             [0, 0, 1, 0],
-//             [1, 0, 1, 0]]
+//    input:  [[0, 0, 0, 0, 0],
+//             [0, 1, 0, 0, 0],
+//             [0, 1, 1, 0, 0],
+//             [0, 0, 1, 1, 0],
+//             [0, 1, 0, 0, 0]]
+//    output: [[0, 0, 0, 0, 0],
+//             [0, 1, 1, 0, 0],
+//             [0, 1, 0, 1, 0],
+//             [0, 0, 0, 1, 0],
+//             [0, 0, 1, 0, 0]]
 // */
-// void cellsXOR(Kokkos::View<const int**> &input, Kokkos::View<int**> &output, size_t N) {
+// void gameOfLife(Kokkos::View<const int**> &input, Kokkos::View<int**> &output, size_t N) {
 
 #include <algorithm>
 #include <numeric>
@@ -60,11 +66,11 @@ Context *init() {
 }
 
 void NO_OPTIMIZE compute(Context *ctx) {
-    cellsXOR(ctx->input, ctx->output, ctx->N);
+    gameOfLife(ctx->input, ctx->output, ctx->N);
 }
 
 void NO_OPTIMIZE best(Context *ctx) {
-    correctCellsXOR(ctx->input_host, ctx->output_host, ctx->N);
+    correctGameOfLife(ctx->input_host, ctx->output_host, ctx->N);
 }
 
 bool validate(Context *ctx) {
@@ -85,10 +91,10 @@ bool validate(Context *ctx) {
         Kokkos::Experimental::fill(Kokkos::DefaultExecutionSpace(), test, 0);
 
         // compute correct result
-        correctCellsXOR(input_host, correct, TEST_SIZE);
+        correctGameOfLife(input_host, correct, TEST_SIZE);
 
         // compute test result
-        cellsXOR(input, test, TEST_SIZE);
+        gameOfLife(input, test, TEST_SIZE);
 
         for (int i = 0; i < correct.size(); i += 1) {
             if (correct[i] != test[i]) {
