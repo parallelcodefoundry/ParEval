@@ -68,7 +68,12 @@ bool validate(Context *ctx) {
         int test = maximumSubarray(x);
         SYNC();
 
+        bool isCorrect = true;
         if (IS_ROOT(rank) && test != correct) {
+            isCorrect = false;
+        }
+        BCAST_PTR(&isCorrect, 1, CXX_BOOL);
+        if (!isCorrect) {
             return false;
         }
     }

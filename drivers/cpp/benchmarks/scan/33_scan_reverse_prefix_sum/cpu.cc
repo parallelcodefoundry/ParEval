@@ -34,6 +34,7 @@ Context *init() {
     Context *ctx = new Context();
 
     ctx->x.resize(DRIVER_PROBLEM_SIZE);
+    ctx->output.resize(DRIVER_PROBLEM_SIZE);
 
     reset(ctx);
     return ctx;
@@ -68,7 +69,12 @@ bool validate(Context *ctx) {
         reversePrefixSum(x, test);
         SYNC();
 
+        bool isCorrect = true;
         if (IS_ROOT(rank) && !std::equal(correct.begin(), correct.end(), test.begin())) {
+            isCorrect = false;
+        }
+        BCAST_PTR(&isCorrect, 1, CXX_BOOL);
+        if (!isCorrect) {
             return false;
         }
     }

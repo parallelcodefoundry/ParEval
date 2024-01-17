@@ -17,8 +17,7 @@
 #include <random>
 #include <vector>
 
-#include <Kokkos_Core.hpp>
-#include <Kokkos_Sort.hpp>
+#include "kokkos-includes.hpp"
 
 #include "utilities.hpp"
 #include "baseline.hpp"

@@ -290,29 +290,29 @@
   "32_scan_sum_of_prefix_sum_array": {
     "serial": "(1<<22)",
     "omp": "(1<<22)",
-    "mpi": "(1<<16)",
+    "mpi": "(1<<22)",
     "mpi+omp": "(1<<22)",
-    "kokkos": "(1<<22)",
+    "kokkos": "(1<<21)",
     "cuda": "(1<<22)",
     "hip": "(1<<22)"
   },
   "33_scan_reverse_prefix_sum": {
-    "serial": "(1<<20)",
-    "omp": "(1<<20)",
-    "mpi": "(1<<20)",
-    "mpi+omp": "(1<<20)",
-    "kokkos": "(1<<20)",
-    "cuda": "(1<<20)",
-    "hip": "(1<<20)"
+    "serial": "(1<<23)",
+    "omp": "(1<<23)",
+    "mpi": "(1<<23)",
+    "mpi+omp": "(1<<23)",
+    "kokkos": "(1<<23)",
+    "cuda": "(1<<23)",
+    "hip": "(1<<23)"
   },
   "34_scan_largest_contiguous_subarray_sum": {
-    "serial": "(1<<20)",
-    "omp": "(1<<20)",
-    "mpi": "(1<<20)",
-    "mpi+omp": "(1<<20)",
-    "kokkos": "(1<<20)",
-    "cuda": "(1<<20)",
-    "hip": "(1<<20)"
+    "serial": "(1<<15)",
+    "omp": "(1<<15)",
+    "mpi": "(1<<15)",
+    "mpi+omp": "(1<<15)",
+    "kokkos": "(1<<15)",
+    "cuda": "(1<<15)",
+    "hip": "(1<<15)"
   },
   "35_search_search_for_last_struct_by_key": {
     "serial": "(1<<21)",

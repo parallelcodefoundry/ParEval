@@ -18,9 +18,7 @@
 #include <random>
 #include <vector>
 
-#include <Kokkos_Core.hpp>
-#include <Kokkos_Sort.hpp>
-#include <Kokkos_StdAlgorithms.hpp>
+#include "kokkos-includes.hpp"
 
 #include "utilities.hpp"
 #include "baseline.hpp"
@@ -48,6 +46,7 @@ Context *init() {
     Context *ctx = new Context();
 
     ctx->h_x.resize(DRIVER_PROBLEM_SIZE);
+    ctx->h_output.resize(DRIVER_PROBLEM_SIZE);
 
     ctx->xNonConst = Kokkos::View<int*>("x", DRIVER_PROBLEM_SIZE);
     ctx->output = Kokkos::View<int*>("output", DRIVER_PROBLEM_SIZE);
@@ -71,7 +70,7 @@ bool validate(Context *ctx) {
 
     Kokkos::View<int*> xNonConst("x", TEST_SIZE);
     Kokkos::View<const int*> x;
-    Kokkos::View<int*> test("test");
+    Kokkos::View<int*> test("test", TEST_SIZE);
 
     const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int trialIter = 0; trialIter < numTries; trialIter += 1) {
@@ -90,7 +89,7 @@ bool validate(Context *ctx) {
         reversePrefixSum(x, test);
 
         for (int i = 0; i < TEST_SIZE; i++) {
-            if (correct[i] != test[i]) {
+            if (correct[i] != test(i)) {
                 return false;
             }
         }
