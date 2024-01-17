@@ -28,7 +28,7 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->x.resize(1 << 20);
+    ctx->x.resize(DRIVER_PROBLEM_SIZE);
 
     reset(ctx);
     return ctx;
@@ -65,7 +65,12 @@ bool validate(Context *ctx) {
         double testResult = sumOfPrefixSum(input);
         SYNC();
 
+        bool isCorrect = true;
         if (IS_ROOT(rank) && std::fabs(correctResult - testResult) > 1e-5) {
+            isCorrect = false;
+        }
+        BCAST_PTR(&isCorrect, 1, CXX_BOOL);
+        if (!isCorrect) {
             return false;
         }
     }

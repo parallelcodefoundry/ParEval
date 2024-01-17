@@ -12,7 +12,7 @@
    input: [5, 4, 6, 4, 3, 6, 1, 1]
    output: [5, 4, 4, 4, 3, 3, 1, 1]
 */
-void correctPartialMinimums(std::vector<float> &x) {
+void NO_INLINE correctPartialMinimums(std::vector<float> &x) {
     std::inclusive_scan(x.begin(), x.end(), x.begin(), [] (const float &x, const float &y) {
                                                            return std::min(x, y);
                                                        },

@@ -100,6 +100,7 @@ class CppDriverWrapper(DriverWrapper):
         try:
             run_process = run_command(launch_cmd, timeout=self.run_timeout, dry=self.dry)
         except subprocess.TimeoutExpired as e:
+            print(str(e.stdout))
             return RunOutput(-1, str(e.stdout), f"[Timeout] {str(e.stderr)}", config=run_config)
         return RunOutput(run_process.returncode, run_process.stdout, run_process.stderr, config=run_config)
 
