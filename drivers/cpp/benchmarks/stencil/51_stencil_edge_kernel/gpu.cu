@@ -59,6 +59,7 @@ Context *init() {
     ctx->N = DRIVER_PROBLEM_SIZE;
     ctx->blockSize = dim3(1024);
     ctx->gridSize = dim3((ctx->N + ctx->blockSize.x - 1) / ctx->blockSize.x); // at least enough threads
+
     ctx->h_input.resize(ctx->N * ctx->N);
     ctx->h_output.resize(ctx->N * ctx->N);
     ALLOC(ctx->d_input, ctx->N * ctx->N * sizeof(int));
@@ -92,6 +93,7 @@ bool validate(Context *ctx) {
         // set up input
         fillRand(h_input, 0, 255);
         std::fill(test.begin(), test.end(), 0);
+        std::fill(correct.begin(), correct.end(), 0);
 
         COPY_H2D(d_input, h_input.data(), TEST_SIZE * TEST_SIZE * sizeof(int));
 

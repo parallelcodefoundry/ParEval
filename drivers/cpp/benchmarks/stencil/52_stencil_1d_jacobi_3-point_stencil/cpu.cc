@@ -1,15 +1,14 @@
-// Driver for 53_stencil_2d_jacobi_5-point_stencil for Serial, OpenMP, MPI, and MPI+OpenMP
-// /* Compute one iteration of a 5-point 2D jacobi stencil on `input`. Store the results in `output`.
-//    Each element of `input` will be averaged with its four neighbors and stored in the corresponding element of `output`.
-//    i.e. output_{i,j} = (input_{i,j-1} + input_{i,j+1} + input_{i-1,j} + input_{i+1,j} + input_{i,j})/5
+// Driver for 52_stencil_1d_jacobi_3-point_stencil for Serial, OpenMP, MPI, and MPI+OpenMP
+// /* Compute one iteration of a 3-point 1D jacobi stencil on `input`. Store the results in `output`.
+//    Each element of `input` will be averaged with its two neighbors and stored in the corresponding element of `output`.
+//    i.e. output[i] = (input[i-1]+input[i]+input[i+1])/3
 //    Replace with 0 when reading past the boundaries of `input`.
-//    `input` and `output` are NxN grids stored in row-major.
 //    Example:
-//
-//    input: [[3, 4, 1], [0, 1, 7], [5, 3, 2]]
-//    output: [[1.4, 1.8, 2.4],[1.8, 3, 2.2], [1.6, 2.2, 2.4]]
+// 
+//    input: [9, -6, -1, 2, 3]
+//    output: [1, 2/3, -5/3, 4/3, 5/3]
 // */
-// void jacobi2D(std::vector<double> const& input, std::vector<double> &output, size_t N) {
+// void jacobi1D(std::vector<double> const& input, std::vector<double> &output) {
 
 #include <algorithm>
 #include <cmath>
@@ -24,7 +23,6 @@
 struct Context {
     std::vector<double> input;
     std::vector<double> output;
-    size_t N;
 };
 
 void reset(Context *ctx) {
@@ -36,26 +34,25 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->N = DRIVER_PROBLEM_SIZE;
-    ctx->input.resize(ctx->N * ctx->N);
-    ctx->output.resize(ctx->N * ctx->N);
+    ctx->input.resize(DRIVER_PROBLEM_SIZE);
+    ctx->output.resize(DRIVER_PROBLEM_SIZE);
 
     reset(ctx);
     return ctx;
 }
 
 void NO_OPTIMIZE compute(Context *ctx) {
-    jacobi2D(ctx->input, ctx->output, ctx->N);
+    jacobi1D(ctx->input, ctx->output);
 }
 
 void NO_OPTIMIZE best(Context *ctx) {
-    correctJacobi2D(ctx->input, ctx->output, ctx->N);
+    correctJacobi1D(ctx->input, ctx->output);
 }
 
 bool validate(Context *ctx) {
     const size_t TEST_SIZE = 1024;
 
-    std::vector<double> input(TEST_SIZE * TEST_SIZE), correct(TEST_SIZE * TEST_SIZE), test(TEST_SIZE * TEST_SIZE);
+    std::vector<double> input(TEST_SIZE), correct(TEST_SIZE), test(TEST_SIZE);
 
     int rank;
     GET_RANK(rank);
@@ -69,16 +66,16 @@ bool validate(Context *ctx) {
         BCAST(input, DOUBLE);
 
         // compute correct result
-        correctJacobi2D(input, correct, ctx->N);
+        correctJacobi1D(input, correct);
 
         // compute test result
-        jacobi2D(input, test, ctx->N);
+        jacobi1D(input, test);
         SYNC();
 
         bool isCorrect = true;
         if (IS_ROOT(rank)) {
-            for (int i = 0; i < correct.size(); i++) {
-                if (std::abs(correct[i] - test[i]) > 1e-4) {
+            for (size_t i = 0; i < TEST_SIZE; i++) {
+                if (std::abs(test[i] - correct[i]) > 1e-4) {
                     isCorrect = false;
                     break;
                 }

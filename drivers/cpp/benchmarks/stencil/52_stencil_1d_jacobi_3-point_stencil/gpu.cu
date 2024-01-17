@@ -1,16 +1,15 @@
-// Driver for 53_stencil_2d_jacobi_5-point_stencil for CUDA and HIP
-// /* Compute one iteration of a 5-point 2D jacobi stencil on `input`. Store the results in `output`.
-//    Each element of `input` will be averaged with its four neighbors and stored in the corresponding element of `output`.
-//    i.e. output_{i,j} = (input_{i,j-1} + input_{i,j+1} + input_{i-1,j} + input_{i+1,j} + input_{i,j})/5
+// Driver for 52_stencil_1d_jacobi_3-point_stencil for CUDA and HIP
+// /* Compute one iteration of a 3-point 1D jacobi stencil on `input`. Store the results in `output`.
+//    Each element of `input` will be averaged with its two neighbors and stored in the corresponding element of `output`.
+//    i.e. output[i] = (input[i-1]+input[i]+input[i+1])/3
 //    Replace with 0 when reading past the boundaries of `input`.
-//    `input` and `output` are NxN grids stored in row-major.
-//    Use CUDA to compute in parallel. The kernel is launched on an NxN grid of threads.
+//    Use CUDA to compute in parallel. The kernel is launched with at least N threads.
 //    Example:
 //
-//    input: [[3, 4, 1], [0, 1, 7], [5, 3, 2]]
-//    output: [[1.4, 1.8, 2.4],[1.8, 3, 2.2], [1.6, 2.2, 2.4]]
+//    input: [9, -6, -1, 2, 3]
+//    output: [1, 2/3, -5/3, 4/3, 5/3]
 // */
-// __global__ void jacobi2D(const double *input, double *output, size_t N) {
+// __global__ void jacobi1D(const double *input, double *output, size_t N) {
 
 #include <algorithm>
 #include <numeric>
@@ -40,9 +39,9 @@ struct Context {
 
 void reset(Context *ctx) {
     fillRand(ctx->h_input, -100.0, 100.0);
-    COPY_H2D(ctx->d_input, ctx->h_input.data(), ctx->N * ctx->N);
+    COPY_H2D(ctx->d_input, ctx->h_input.data(), ctx->N);
     std::fill(ctx->h_output.begin(), ctx->h_output.end(), 0);
-    COPY_H2D(ctx->d_output, ctx->h_output.data(), ctx->N * ctx->N);
+    COPY_H2D(ctx->d_output, ctx->h_output.data(), ctx->N);
 }
 
 Context *init() {
@@ -52,21 +51,21 @@ Context *init() {
     ctx->blockSize = dim3(1024);
     ctx->gridSize = dim3((ctx->N + ctx->blockSize.x - 1) / ctx->blockSize.x); // at least enough threads
 
-    ctx->h_input.resize(ctx->N * ctx->N);
-    ctx->h_output.resize(ctx->N * ctx->N);
-    ALLOC(ctx->d_input, ctx->N * ctx->N * sizeof(double));
-    ALLOC(ctx->d_output, ctx->N * ctx->N * sizeof(double));
+    ctx->h_input.resize(ctx->N);
+    ctx->h_output.resize(ctx->N);
+    ALLOC(ctx->d_input, ctx->N * sizeof(double));
+    ALLOC(ctx->d_output, ctx->N * sizeof(double));
 
     reset(ctx);
     return ctx;
 }
 
 void NO_OPTIMIZE compute(Context *ctx) {
-    jacobi2D<<<ctx->gridSize, ctx->blockSize>>>(ctx->d_input, ctx->d_output, ctx->N);
+    jacobi1D<<<ctx->gridSize, ctx->blockSize>>>(ctx->d_input, ctx->d_output, ctx->N);
 }
 
 void NO_OPTIMIZE best(Context *ctx) {
-    correctJacobi2D(ctx->h_input, ctx->h_output, ctx->N);
+    correctJacobi1D(ctx->h_input, ctx->h_output);
 }
 
 bool validate(Context *ctx) {
@@ -74,11 +73,11 @@ bool validate(Context *ctx) {
     dim3 blockSize = dim3(1024);
     dim3 gridSize = dim3((TEST_SIZE + blockSize.x - 1) / blockSize.x); // at least enough threads
 
-    std::vector<double> h_input(TEST_SIZE * TEST_SIZE), correct(TEST_SIZE * TEST_SIZE), test(TEST_SIZE * TEST_SIZE);
+    std::vector<double> h_input(TEST_SIZE), correct(TEST_SIZE), test(TEST_SIZE);
 
     int *d_input, *d_output;
-    ALLOC(d_input, TEST_SIZE * TEST_SIZE * sizeof(double));
-    ALLOC(d_test, TEST_SIZE * TEST_SIZE * sizeof(double));
+    ALLOC(d_input, TEST_SIZE * sizeof(double));
+    ALLOC(d_test, TEST_SIZE * sizeof(double));
 
     const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int trialIter = 0; trialIter < numTries; trialIter += 1) {
@@ -87,20 +86,20 @@ bool validate(Context *ctx) {
         std::fill(test.begin(), test.end(), 0);
         std::fill(correct.begin(), correct.end(), 0);
 
-        COPY_H2D(d_input, h_input.data(), TEST_SIZE * TEST_SIZE * sizeof(double));
+        COPY_H2D(d_input, h_input.data(), TEST_SIZE * sizeof(double));
 
         // compute correct result
-        correctJacobi2D(h_input, correct, TEST_SIZE);
+        correctJacobi1D(h_input, correct);
 
         // compute test result
-        jacobi2D<<<gridSize, blockSize>>>(d_input, d_test, TEST_SIZE);
+        jacobi1D<<<gridSize, blockSize>>>(d_input, d_test, TEST_SIZE);
         SYNC();
 
         // copy back
-        COPY_D2H(test.data(), d_test, TEST_SIZE * TEST_SIZE * sizeof(double));
+        COPY_D2H(test.data(), d_test, TEST_SIZE * sizeof(double));
 
-        for (size_t i = 0; i < correct.size(); i += 1) {
-            if (std::abs(correct[i] - test[i]) > 1e-4) {
+        for (size_t i = 0; i < TEST_SIZE; i += 1) {
+            if (std::abs(test[i] - correct[i]) > 1e-4) {
                 FREE(d_input);
                 FREE(d_test);
                 return false;
