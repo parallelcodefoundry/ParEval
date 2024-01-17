@@ -5,7 +5,7 @@ struct COOElement {
 
 /* Compute y = alpha*A*x + beta*y where alpha and beta are scalars, x and y are vectors,
    and A is a sparse matrix stored in COO format.
-   x and y are length N and A is M x N.
+   A has dimensions MxN, x has N values, and y has M values.
    Use MPI to parallelize. Assume MPI has already been initialized.
    Every rank has a complete copy of A, x, and y. Store the result in y on rank 0.
    Example:

@@ -9,4 +9,4 @@
    input: x=[1,8,4,3,2], y=[3,4,4,1,1,7], val=1
    output: false
 */
-bool xorContains(Kokkos::View<const int*> const& x, std::vector<const int*> const& y, int val) {
+bool xorContains(Kokkos::View<const int*> const& x, Kokkos::View<const int*> const& y, int val) {

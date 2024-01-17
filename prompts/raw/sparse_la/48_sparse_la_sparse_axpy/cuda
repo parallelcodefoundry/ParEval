@@ -10,4 +10,4 @@ struct Element {
    input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1
    output: z=[{3, 1}, {5, 10}, {7, 1}, {12, -1}]
 */
-__global__ void sparseAxpy(double alpha, const Element *x, const Element *y, Element *z, size_t Nx, size_t Ny, size_t Nz) {
+__global__ void sparseAxpy(double alpha, const Element *x, const Element *y, double *z, size_t Nx, size_t Ny, size_t N) {
