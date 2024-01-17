@@ -28,6 +28,7 @@
 
 struct Context {
     Kokkos::View<int*> x, y;
+    Kokkos::View<const int*> const_x, const_y;
     std::vector<int> x_host, y_host;
     int val;
 };
@@ -39,6 +40,8 @@ void reset(Context *ctx) {
 
     copyVectorToView(ctx->x_host, ctx->x);
     copyVectorToView(ctx->y_host, ctx->y);
+    ctx->const_x = ctx->x;
+    ctx->const_y = ctx->y;
 }
 
 Context *init() {
@@ -54,7 +57,7 @@ Context *init() {
 }
 
 void NO_OPTIMIZE compute(Context *ctx) {
-    bool found = xorContains(ctx->x, ctx->y, ctx->val);
+    bool found = xorContains(ctx->const_x, ctx->const_y, ctx->val);
     (void)found;
 }
 
@@ -80,12 +83,14 @@ bool validate(Context *ctx) {
         Kokkos::View<int*> y("y", TEST_SIZE);
         copyVectorToView(x_host, x);
         copyVectorToView(y_host, y);
+        Kokkos::View<const int*> const_x = x;
+        Kokkos::View<const int*> const_y = y;
 
         // compute correct result
         bool correct = correctXorContains(x_host, y_host, val);
 
         // compute test result
-        bool test = xorContains(x, y, val);
+        bool test = xorContains(const_x, const_y, val);
         
         if (test != correct) {
             return false;

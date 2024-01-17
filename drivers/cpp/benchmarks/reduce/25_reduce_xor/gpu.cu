@@ -6,7 +6,7 @@
 //    input: [false, false, false, true]
 //    output: true
 // */
-// __global__ void reduceLogicalXOR(const bool *x, size_t N, double *output) {
+// __global__ void reduceLogicalXOR(const bool *x, size_t N, bool *output) {
 
 #include <algorithm>
 #include <numeric>

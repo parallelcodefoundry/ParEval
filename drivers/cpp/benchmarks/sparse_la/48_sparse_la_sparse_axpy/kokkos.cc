@@ -13,7 +13,7 @@
 //    input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1
 //    output: z=[{3, 1}, {5, 10}, {7, 1}, {12, -1}]
 // */
-// void sparseAxpy(double alpha, Kokkos::View<const Element*> &x, Kokkos::View<const Element*> &y, std::vector<double*> &z) {
+// void sparseAxpy(double alpha, Kokkos::View<const Element*> &x, Kokkos::View<const Element*> &y, Kokkos::View<double*> &z) {
 
 #include <algorithm>
 #include <numeric>
