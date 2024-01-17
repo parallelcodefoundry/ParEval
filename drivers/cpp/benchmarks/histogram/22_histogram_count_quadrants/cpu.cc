@@ -44,19 +44,19 @@ void reset(Context *ctx) {
 Context *init() {
     Context *ctx = new Context();
 
-    ctx->points.resize(1 << 18);
-    ctx->x.resize(1 << 18);
-    ctx->y.resize(1 << 18);
+    ctx->points.resize(DRIVER_PROBLEM_SIZE);
+    ctx->x.resize(DRIVER_PROBLEM_SIZE);
+    ctx->y.resize(DRIVER_PROBLEM_SIZE);
 
     reset(ctx);
     return ctx;
 }
 
-void compute(Context *ctx) {
+void NO_OPTIMIZE compute(Context *ctx) {
     countQuadrants(ctx->points, ctx->bins);
 }
 
-void best(Context *ctx) {
+void NO_OPTIMIZE best(Context *ctx) {
     correctCountQuadrants(ctx->points, ctx->bins);
 }
 
@@ -70,7 +70,7 @@ bool validate(Context *ctx) {
     int rank;
     GET_RANK(rank);
 
-    const size_t numTries = 5;
+    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int i = 0; i < numTries; i += 1) {
         // set up input
         fillRand(x, -1.0, 1.0);
@@ -92,7 +92,12 @@ bool validate(Context *ctx) {
         countQuadrants(points, test);
         SYNC();
         
+        bool isCorrect = true;
         if (IS_ROOT(rank) && !std::equal(correct.begin(), correct.end(), test.begin())) {
+            isCorrect = false;
+        }
+        BCAST_PTR(&isCorrect, 1, CXX_BOOL);
+        if (!isCorrect) {
             return false;
         }
     }

@@ -13,6 +13,7 @@
 */
 #include <chrono>
 #include <cstdio>
+#include <cfloat>
 #include <string>
 
 #include <cuda_runtime.h>
@@ -77,7 +78,7 @@ int main(int argc, char **argv) {
         exit(1);
     }
 
-    const int NITER = 50;
+    const int NITER = 5;
 
     /* initialize */
     Context *ctx = init();
@@ -95,7 +96,7 @@ int main(int argc, char **argv) {
         reset(ctx);
         cudaDeviceSynchronize();
     }
-    printf("Time: %f\n", totalTime / NITER / 1000.0);
+    printf("Time: %.*f\n", DBL_DIG-1, totalTime / NITER / 1000.0);
 
     /* benchmark best */
     totalTime = 0.0;
@@ -107,7 +108,7 @@ int main(int argc, char **argv) {
 
         reset(ctx);
     }
-    printf("BestSequential: %f\n", totalTime / NITER);
+    printf("BestSequential: %.*f\n", DBL_DIG-1, totalTime / NITER);
 
     /* validate */
     const bool isValid = validate(ctx);

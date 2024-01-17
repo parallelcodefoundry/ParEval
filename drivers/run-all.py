@@ -32,6 +32,8 @@ def get_args():
     parser.add_argument("--scratch-dir", type=str, help="If provided, put scratch files here.")
     parser.add_argument("--launch-configs", type=str, default="launch-configs.json", 
         help="config for how to run samples.")
+    parser.add_argument("--problem-sizes", type=str, default="problem-sizes.json", 
+        help="config for how to run samples.")
     parser.add_argument("--yes-to-all", action="store_true", help="If provided, automatically answer yes to all prompts.")
     parser.add_argument("--dry", action="store_true", help="Dry run. Do not actually run the code snippets.")
     parser.add_argument("--overwrite", action="store_true", help="If ouputs are already in DB for a given prompt, \
@@ -45,14 +47,19 @@ def get_args():
     model_group = parser.add_mutually_exclusive_group()
     model_group.add_argument("--problem", type=str, help="Only test this probem if provided.")
     model_group.add_argument("--problem-type", type=str, help="Only test problems of this type if provided.")
+    parser.add_argument("--early-exit-runs", action="store_true", help="If provided, stop evaluating a model output after the first run configuration fails.")
+    parser.add_argument("--build-timeout", type=int, default=20, help="Timeout in seconds for building a program.")
+    parser.add_argument("--run-timeout", type=int, default=180, help="Timeout in seconds for running a program.")
     parser.add_argument("--log", choices=["INFO", "DEBUG", "WARNING", "ERROR", "CRITICAL"], default="INFO",
         type=str.upper, help="logging level")
+    parser.add_argument("--log-build-errors", action="store_true", help="On build error, display the stderr of the build process.")
     return parser.parse_args()
 
-def get_driver(prompt: dict, scratch_dir: Optional[os.PathLike], launch_configs: dict, dry: bool) -> DriverWrapper:
+def get_driver(prompt: dict, scratch_dir: Optional[os.PathLike], launch_configs: dict, problem_sizes: dict, dry: bool, **kwargs) -> DriverWrapper:
     """ Get the language drive wrapper for this prompt """
     driver_cls = LANGUAGE_DRIVERS[prompt["language"]]
-    return driver_cls(parallelism_model=prompt["parallelism_model"], launch_configs=launch_configs, scratch_dir=scratch_dir, dry=dry)    
+    return driver_cls(parallelism_model=prompt["parallelism_model"], launch_configs=launch_configs, 
+        problem_sizes=problem_sizes, scratch_dir=scratch_dir, dry=dry, **kwargs)
 
 def already_has_results(prompt: dict) -> bool:
     """ Check if a prompt already has results stored in it. """
@@ -94,6 +101,10 @@ def main():
     launch_configs = load_json(args.launch_configs)
     logging.info(f"Loaded launch configs from {args.launch_configs}.")
 
+    # load problem sizes
+    problem_sizes = load_json(args.problem_sizes)
+    logging.info(f"Loaded problem sizes from {args.problem_sizes}.")
+
     # gather the list of parallelism models to test
     models_to_test = args.include_models if args.include_models else ["serial", "omp", "mpi", "mpi+omp", "kokkos", "cuda", "hip"]
     if args.exclude_models:
@@ -106,7 +117,7 @@ def main():
             logging.debug(f"Skipping prompt {prompt['name']} because it uses {prompt['parallelism_model']}.")
             continue
 
-        if args.problem and prompt["problem"] != args.problem:
+        if args.problem and prompt["name"] != args.problem:
             logging.debug(f"Skipping prompt {prompt['name']} because it is not {args.problem}.")
             continue
 
@@ -114,12 +125,26 @@ def main():
             logging.debug(f"Skipping prompt {prompt['name']} because it is not {args.problem_type}.")
             continue
 
-        if already_has_results(prompt) and not args.overwrite:
-            logging.debug(f"Skipping prompt {prompt['name']} because it already has results. \
-                Use --overwrite to overwrite existing results.")
-            continue
+        if already_has_results(prompt):
+            if args.overwrite:
+                logging.debug(f"Prompt {prompt['name']} already has results. Overwriting.")
+                prompt["outputs"] = [p["generated_output"] for p in prompt["outputs"]]
+            else:
+                logging.debug(f"Skipping prompt {prompt['name']} because it already has results. \
+                    Use --overwrite to overwrite existing results.")
+                continue
 
-        driver = get_driver(prompt, args.scratch_dir, launch_configs, args.dry)
+        driver = get_driver(
+            prompt, 
+            args.scratch_dir, 
+            launch_configs, 
+            problem_sizes,
+            args.dry, 
+            display_build_errors=args.log_build_errors,
+            early_exit_runs=args.early_exit_runs,
+            build_timeout=args.build_timeout,
+            run_timeout=args.run_timeout
+        )
         driver.test_all_outputs_in_prompt(prompt)
 
     # write out results

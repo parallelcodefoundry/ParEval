@@ -12,7 +12,7 @@
    input: [1.9, 0.2, 0.6, 10.1, 7.4]
    output: [2, 1, 1, 1]
 */
-void correctCountQuartiles(std::vector<double> const& x, std::array<size_t, 4> &bins) {
+void NO_INLINE correctCountQuartiles(std::vector<double> const& x, std::array<size_t, 4> &bins) {
    for (int i = 0; i < x.size(); i += 1) {
       const double val = x[i];
       const double frac = val - (int) val;
@@ -27,3 +27,12 @@ void correctCountQuartiles(std::vector<double> const& x, std::array<size_t, 4> &
       }
    }
 }
+
+#if defined(USE_CUDA)
+// fix the issue where atomicAdd is not defined for size_t
+static_assert(sizeof(size_t) == sizeof(unsigned long long), "size_t is not 64 bits");
+
+__device__ __forceinline__ void atomicAdd(size_t* address, size_t val) {
+   atomicAdd(reinterpret_cast<unsigned long long*>(address), val);
+}
+#endif

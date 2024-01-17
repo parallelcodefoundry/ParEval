@@ -42,6 +42,12 @@ class RunOutput:
         self.stderr = stderr
         self.config = config
         self.is_valid, self.runtime, self.best_sequential_runtime = self._parse_output(stdout)
+        if self.is_valid and self.runtime == 0:
+            logging.warning(f"Runtime is 0 for run with config {self.config}. Try increasing the problem size.")
+        if self.is_valid and self.best_sequential_runtime == 0:
+            logging.warning(f"The best sequential runtime is 0 for run with config {self.config}. Try increasing the problem size.")
+        if self.is_valid and self.best_sequential_runtime < 0.001:
+            logging.warning(f"The best sequential runtime is very small ({self.best_sequential_runtime}) for run with config {self.config}. Try increasing the problem size.")
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}(exit_code={self.exit_code}, is_valid={self.is_valid}, runtime={self.runtime}, best_sequential_runtime={self.best_sequential_runtime}, config={self.config})"
@@ -149,19 +155,34 @@ class DriverWrapper(ABC):
     validator: Validator
     scratch_dir: Optional[PathLike]
     launch_configs: dict
+    problem_sizes: dict
+    build_timeout: int
+    run_timeout: int
+    display_build_errors: bool
+    early_exit_runs: bool
     dry: bool
 
     def __init__(
         self, 
         parallelism_model: str = "serial", 
         launch_configs: dict = {"format": "{exec_path} {args}", "params": [{}]},
-        scratch_dir: Optional[PathLike] = None, 
+        problem_sizes: dict = {},
+        scratch_dir: Optional[PathLike] = None,
+        build_timeout: int = 20,
+        run_timeout: int = 180,
+        display_build_errors: bool = False,
+        early_exit_runs: bool = False,
         dry: bool = False
     ):
         self.parallelism_model = parallelism_model
         self.validator = VALIDATORS[parallelism_model]
         self.scratch_dir = scratch_dir
         self.launch_configs = launch_configs[parallelism_model]
+        self.problem_sizes = problem_sizes
+        self.build_timeout = build_timeout
+        self.run_timeout = run_timeout
+        self.display_build_errors = display_build_errors
+        self.early_exit_runs = early_exit_runs
         self.dry = dry
 
     def __repr__(self) -> str:
@@ -198,11 +219,12 @@ class DriverWrapper(ABC):
         driver_root = f"{name}"
         driver_base = DRIVER_MAP[self.parallelism_model]
         test_driver_file = os.path.join(root, "benchmarks", type, driver_root, driver_base + ext)
+        problem_size = self.problem_sizes.get(name, {}).get(self.parallelism_model, "(1<<18)")
 
         outputs = []
         logging.info(f"Testing prompt {name} with {self}...")
         for generated_output in prompt["outputs"]:
-            results = self.test_single_output(prompt["prompt"], generated_output, test_driver_file)
+            results = self.test_single_output(prompt["prompt"], generated_output, test_driver_file, problem_size)
 
             outputs.append({
                 "generated_output": generated_output,
@@ -231,7 +253,7 @@ class DriverWrapper(ABC):
         num_successful_builds = sum(1 for o in outputs if o["did_build"])
         num_successful_runs = sum(1 for o in outputs if o["did_all_run"])
         num_valid_outputs = sum(1 for o in outputs if o["are_all_valid"] if o["is_source_valid"])
-        #mean_runtime = mean(r["runtime"] for o in outputs if o["runs"] is not None for r in o["runs"])
+        #mean_runtime = mean(r["runtime"] for o in outputs if o["runs"] is not None for r in o["runs"] if r["runtime"] is not None)
         logging.info(f"Results for prompt {prompt['name']}:")
         logging.info(f"  {num_outputs} total outputs")
         logging.info(f"  {num_successful_writes} successful writes")

@@ -13,6 +13,7 @@
 */
 #include <chrono>
 #include <cstdio>
+#include <cfloat>
 #include <string>
 
 #include <Kokkos_Core.hpp>
@@ -38,7 +39,7 @@ int main(int argc, char **argv) {
         exit(1);
     }
 
-    const int NITER = 50;
+    const int NITER = 5;
 
     /* initialize */
     Context *ctx = init();
@@ -53,7 +54,7 @@ int main(int argc, char **argv) {
     
         reset(ctx);
     }
-    printf("Time: %f\n", totalTime / NITER);
+    printf("Time: %.*f\n", DBL_DIG-1, totalTime / NITER);
 
     /* benchmark best */
     totalTime = 0.0;
@@ -64,7 +65,7 @@ int main(int argc, char **argv) {
 
         reset(ctx);
     }
-    printf("BestSequential: %f\n", totalTime / NITER);
+    printf("BestSequential: %.*f\n", DBL_DIG-1, totalTime / NITER);
 
     /* validate */
     const bool isValid = validate(ctx);

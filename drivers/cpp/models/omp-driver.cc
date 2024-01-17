@@ -13,6 +13,7 @@
 */
 #include <cstdio>
 #include <string>
+#include <cfloat>
 
 #include <omp.h>
 
@@ -36,7 +37,7 @@ int main(int argc, char **argv) {
         exit(1);
     }
 
-    const int NITER = 50;
+    const int NITER = 5;
     int num_threads = 1;
     if (argc > 1) {
         num_threads = std::stoi(std::string(argv[1]));
@@ -55,7 +56,7 @@ int main(int argc, char **argv) {
     
         reset(ctx);
     }
-    printf("Time: %f\n", totalTime / NITER);
+    printf("Time: %.*f\n", DBL_DIG-1, totalTime / NITER);
 
     /* benchmark best */
     totalTime = 0.0;
@@ -66,7 +67,7 @@ int main(int argc, char **argv) {
 
         reset(ctx);
     }
-    printf("BestSequential: %f\n", totalTime / NITER);
+    printf("BestSequential: %.*f\n", DBL_DIG-1, totalTime / NITER);
 
     /* validate */
     const bool isValid = validate(ctx);

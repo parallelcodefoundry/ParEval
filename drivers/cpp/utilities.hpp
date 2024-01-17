@@ -9,6 +9,22 @@
 #error "No parallel model not defined"
 #endif
 
+#define NO_OPTIMIZE __attribute__((optimize("O0")))
+#define NO_INLINE __attribute__((noinline)) __attribute__((optimize("O3")))
+
+#if !defined(DRIVER_PROBLEM_SIZE)
+#error "DRIVER_PROBLEM_SIZE not defined"
+#endif
+
+#if !defined(MAX_VALIDATION_ATTEMPTS)
+#define MAX_VALIDATION_ATTEMPTS 3
+#endif
+
+#if !defined(SPARSE_LA_SPARSITY)
+// sparsity to use for sparse linear algebra benchmarks
+#define SPARSE_LA_SPARSITY 0.1
+#endif
+
 // include the necessary libraries for the parallel model
 #if defined(USE_OMP) || defined(USE_MPI_OMP)
 #include <omp.h>
@@ -85,10 +101,10 @@ void fillRandKokkos(Kokkos::View<DType*> &x, DType min, DType max) {
 #define IS_ROOT(rank) true
 #define BCAST(vec,dtype)
 #define BCAST_PTR(ptr,size,dtype)
-#if !defined(USE_CUDA) && !defined(USE_HIP)
+#define GET_RANK(rank) rank = 0
+#if !defined(SYNC)
 #define SYNC()
 #endif
-#define GET_RANK(rank) rank = 0
 #endif
 
 

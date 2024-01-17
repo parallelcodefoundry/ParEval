@@ -13,7 +13,7 @@
    input: [1, 4, 9, 16]
    output: [30+0i, -8-12i, -10-0i, -8+12i]
 */
-void correctDft(std::vector<double> const& x, std::vector<std::complex<double>> &output) {
+void NO_INLINE correctDft(std::vector<double> const& x, std::vector<std::complex<double>> &output) {
    int N = x.size();
    output.resize(N, std::complex<double>(0, 0)); // Resize the output vector and initialize with 0
 
@@ -27,3 +27,25 @@ void correctDft(std::vector<double> const& x, std::vector<std::complex<double>> 
       output[k] = sum;
    }
 }
+
+
+#if defined(USE_CUDA)
+// a lot of model outputs assume this is defined for some reason, so just define it
+__device__ DOUBLE_COMPLEX_T cexp(DOUBLE_COMPLEX_T arg) {
+   DOUBLE_COMPLEX_T res;
+   float s, c;
+   float e = expf(arg.x);
+   sincosf(arg.y, &s, &c);
+   res.x = c * e;
+   res.y = s * e;
+   return res;
+}
+
+__device__ DOUBLE_COMPLEX_T cuCexp(DOUBLE_COMPLEX_T arg) {
+   return cexp(arg);
+}
+
+__device__ DOUBLE_COMPLEX_T hipCexp(DOUBLE_COMPLEX_T arg) {
+   return cexp(arg);
+}
+#endif

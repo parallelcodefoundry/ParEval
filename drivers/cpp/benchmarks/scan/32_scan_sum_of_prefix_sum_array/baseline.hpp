@@ -9,7 +9,7 @@
    input: [-7, 2, 1, 9, 4, 8]
    output: 15
 */
-double correctSumOfPrefixSum(std::vector<double> const& x) {
+double NO_INLINE correctSumOfPrefixSum(std::vector<double> const& x) {
     std::vector<double> prefixSum(x.size());
     std::inclusive_scan(x.begin(), x.end(), prefixSum.begin());
     return std::accumulate(prefixSum.begin(), prefixSum.end(), 0.0);

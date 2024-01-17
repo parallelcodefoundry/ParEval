@@ -10,7 +10,7 @@
    input: [3, 8, 9, 9, 3, 4, 8, 6]
    output: 1
 */
-size_t correctFindFirstEven(std::vector<int> const& x) {
+size_t NO_INLINE correctFindFirstEven(std::vector<int> const& x) {
    for (size_t i = 0; i < x.size(); i += 1) {
       if (x[i] % 2 == 0) {
             return i;

@@ -13,7 +13,7 @@
    input: [{x=1.5, y=0.1}, {x=-3, y=1.1}, {x=5, y=9}, {x=1.5, y=-1}, {x=3, y=-7}, {x=0.1, y=2}]
    output: [3, 1, 0, 2]
 */
-void correctCountQuadrants(std::vector<Point> const& points, std::array<size_t, 4> &bins) {
+void NO_INLINE correctCountQuadrants(std::vector<Point> const& points, std::array<size_t, 4> &bins) {
    for (auto const& point : points) {
       if (point.x >= 0 && point.y >= 0) {
             bins[0] += 1;

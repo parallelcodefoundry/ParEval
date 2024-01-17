@@ -8,8 +8,8 @@
 #SBATCH -A m2404
 #SBATCH -C gpu&hbm80g
 #SBATCH -q regular
-#SBATCH -J generate-codellama-34b-bs8
-#SBATCH -o generate-codellama-34b-bs8-%A.out
+#SBATCH -J generate-codellama-34b-bs16
+#SBATCH -o generate-codellama-34b-bs16-%A.out
 
 # settings
 MODEL="codellama/CodeLlama-34b-hf"
@@ -17,7 +17,7 @@ TEMP=0.8
 TOPP=0.95
 MAX_NEW_TKNS=1024
 SAMPLES_PER_PROMPT=200
-BATCH_SIZE=8
+BATCH_SIZE=16
 hash=$(md5sum ../prompts/generation-prompts.json | cut -d' ' -f1)
 OUTPUT="../outputs/output_${hash:0:8}_${MODEL//\//--}_temp${TEMP}.json"
 CACHE="../outputs/cache/cache_${hash:0:8}_${MODEL//\//--}_temp${TEMP}.jsonl"
