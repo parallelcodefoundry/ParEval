@@ -1,20 +1,24 @@
-// Driver for 50_stencil_xor_kernel for CUDA and HIP
-// /* Set every cell's value to 1 if it has exactly one neighbor that's a 1. Otherwise set it to 0.
-//    Note that we only consider neighbors and not input_{i,j} when computing output_{i,j}.
-//    input and output are NxN grids of ints in row-major.
+// Driver for 51_stencil_edge_kernel for CUDA and HIP
+// __constant__ int edgeKernel[3][3] = {{-1, -1, -1}, {-1, 8, -1}, {-1, -1, -1}};
+// 
+// /* Convolve the edge kernel with a grayscale image. Each pixel will be replaced with
+//    the dot product of itself and its neighbors with the edge kernel.
+//    Use a value of 0 for pixels outside the image's boundaries and clip outputs between 0 and 255.
+//    imageIn and imageOut are NxN grayscale images stored in row-major.
+//    Store the output of the computation in imageOut.
 //    Use CUDA to compute in parallel. The kernel is launched on an NxN grid of threads.
 //    Example:
-//
-//    input: [[0, 1, 1, 0],
-//            [1, 0, 0, 0],
-//            [0, 0, 0, 0],
-//            [0, 1, 0, 0]
-//    output: [[0, 0, 1, 1],
-//             [1, 0, 0, 1],
-//             [0, 0, 1, 0],
-//             [1, 0, 1, 0]]
+// 
+//    input: [[112, 118, 141, 152],
+//            [93, 101, 119, 203],
+//            [45, 17, 16, 232],
+//            [82, 31, 49, 101]]
+//    output: [[255, 255, 255, 255],
+//             [255, 147, 0, 255],
+//             [36, 0, 0, 255],
+//             [255, 39, 0, 255]]
 // */
-// __global__ void cellsXOR(const int *input, int *output, size_t N) {
+// __global__ void convolveKernel(const int *imageIn, int *imageOut, size_t N) {
 
 #include <algorithm>
 #include <numeric>
@@ -43,7 +47,7 @@ struct Context {
 };
 
 void reset(Context *ctx) {
-    fillRand(ctx->h_input, 0, 1);
+    fillRand(ctx->h_input, 0, 255);
     COPY_H2D(ctx->d_input, ctx->h_input.data(), ctx->N * ctx->N);
     std::fill(ctx->h_output.begin(), ctx->h_output.end(), 0);
     COPY_H2D(ctx->d_output, ctx->h_output.data(), ctx->N * ctx->N);
@@ -65,11 +69,11 @@ Context *init() {
 }
 
 void NO_OPTIMIZE compute(Context *ctx) {
-    cellsXOR<<<ctx->gridSize, ctx->blockSize>>>(ctx->d_input, ctx->d_output, ctx->N);
+    convolveKernel<<<ctx->gridSize, ctx->blockSize>>>(ctx->d_input, ctx->d_output, ctx->N);
 }
 
 void NO_OPTIMIZE best(Context *ctx) {
-    correctCellsXOR(ctx->h_input, ctx->h_output, ctx->N);
+    correctConvolveKernel(ctx->h_input, ctx->h_output, ctx->N);
 }
 
 bool validate(Context *ctx) {
@@ -79,23 +83,23 @@ bool validate(Context *ctx) {
 
     std::vector<int> h_input(TEST_SIZE * TEST_SIZE), correct(TEST_SIZE * TEST_SIZE), test(TEST_SIZE * TEST_SIZE);
 
-    int *d_input, *d_test;
+    int *d_input, *d_output;
     ALLOC(d_input, TEST_SIZE * TEST_SIZE * sizeof(int));
     ALLOC(d_test, TEST_SIZE * TEST_SIZE * sizeof(int));
 
     const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int trialIter = 0; trialIter < numTries; trialIter += 1) {
         // set up input
-        fillRand(h_input, 0, 1);
+        fillRand(h_input, 0, 255);
         std::fill(test.begin(), test.end(), 0);
 
         COPY_H2D(d_input, h_input.data(), TEST_SIZE * TEST_SIZE * sizeof(int));
 
         // compute correct result
-        correctCellsXOR(h_input, correct, TEST_SIZE);
+        correctConvolveKernel(h_input, correct, TEST_SIZE);
 
         // compute test result
-        cellsXOR<<<gridSize, blockSize>>>(d_input, d_test, TEST_SIZE);
+        convolveKernel<<<gridSize, blockSize>>>(d_input, d_test, TEST_SIZE);
         SYNC();
 
         // copy back
