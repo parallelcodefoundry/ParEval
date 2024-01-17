@@ -1,0 +1,30 @@
+#this file is intended to guide the search for an output JSON. First, pick a md5sum, then a model, then a temp. Lastly, include the filename associated with md5sum.
+
+output_md5sum_(model/model_prompted)_temp(0.2/0.8)_Filename.json
+
+--- md5sum(Filename) ---
+496edbdf
+0b9646c3(sort_p1)
+19eef73c(dense)
+2c8ae08b(reduce)
+3f8f6654(geometry)
+7a0b3672(graph)
+7ba21baf(histogram)
+7d6f5a40(fft)
+a5c788a1(transform)
+a9dbcca7(sort_p2)
+b10f94f4(scan)
+c466fe9e(sparse)
+c52b6946(search)
+e8568b0b(stencil)
+
+--- model ---
+bigcode--starcoderbase_prompted
+bigcode--starcoderbase
+codellama--CodeLlama-13b-hf_prompted
+codellama--CodeLlama-13b-hf
+codellama--CodeLlama-7b-hf_prompted
+codellama--CodeLlama-7b
+
+--- temp ---
+0.2 or 0.8
