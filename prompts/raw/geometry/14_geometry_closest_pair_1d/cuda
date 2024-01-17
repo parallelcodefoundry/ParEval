@@ -1,0 +1,13 @@
+__device__ double distance(double x1, double x2) {
+	return fabs(x1 - x2);
+}
+
+/* Compute the distance between the closest two elements in the vector x.
+   Store the result in distance.
+   Use CUDA to compute in parallel. The kernel is launched with at least N threads.
+   Example:
+
+   input: [7, 3, 9, 12, 31, 1]
+   output: 2
+*/
+__global__ void closestPair(const double *x, size_t N, double *distance) {

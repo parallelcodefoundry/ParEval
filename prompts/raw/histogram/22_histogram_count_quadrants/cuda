@@ -1,0 +1,13 @@
+struct Point {
+   double x, y;
+};
+
+/* Count the number of cartesian points in each quadrant. The vector points contains a list of `Point` objects.
+   Store the counts in `bins`.
+   Use CUDA to count in parallel. The kernel is launched with at least N threads.
+   Example:
+
+   input: [{x=1.5, y=0.1}, {x=-3, y=1.1}, {x=5, y=9}, {x=1.5, y=-1}, {x=3, y=-7}, {x=0.1, y=2}]
+   output: [3, 1, 0, 2]
+*/
+__global__ void countQuadrants(const Point *points, size_t N, size_t bins[4]) {

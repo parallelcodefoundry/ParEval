@@ -1,0 +1,17 @@
+struct Point {
+	double x, y;
+};
+
+__device__ double triangleArea(Point const& A, Point const& B, Point const& C) {
+  return 0.5 * fabs( A.x*(B.y-C.y) + B.x*(C.y-A.y) + C.x*(A.y-B.y) );
+}
+
+/* Compute the area of the smallest triangle that can be formed by any 3 points.
+   Return the result in area.
+   Use CUDA to compute in parallel. The kernel is launched with at least N threads.
+   Example:
+
+   input: [{0, 10}, {5, 5}, {1,0}, {-1, 1}, {-10, 0}]
+   output: 5.5
+*/
+__global__ void smallestArea(const Point *points, size_t N, double *area) {

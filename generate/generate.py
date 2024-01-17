@@ -1,9 +1,10 @@
 # std imports
 import argparse
 import json
+import os
+import sys
 import time
 from tqdm import tqdm
-import sys
 
 # tpl imports
 import torch
@@ -18,6 +19,9 @@ parser = argparse.ArgumentParser(description='Generate code')
 parser.add_argument('--prompts', required=True, help='Path to the prompt JSON file')
 parser.add_argument('--model', required=True, help='Path to the language model')
 parser.add_argument('--output', required=True, help='Path to the output JSON file')
+parser.add_argument('--restart', action='store_true', help='Restart generation from scratch (default: False)')
+parser.add_argument('--cache', help='JSONL file to cache intermediate results in. Will be restored from if it ' +
+    'already exists and --restart is not specified')
 parser.add_argument('--max_new_tokens', type=int, default=1024, help='Maximum number of new tokens to generate (default: 1024)')
 parser.add_argument('--num_samples_per_prompt', type=int, default=50, help='Number of code samples to generate (default: 50)')
 parser.add_argument('--temperature', type=float, default=0.2, help='Temperature for controlling randomness (default: 0.2)')
@@ -30,6 +34,17 @@ args = parser.parse_args()
 """ Load prompts """
 with open(args.prompts, 'r') as json_file:
     prompts = json.load(json_file)
+
+""" Load existing responses if they exist """
+if not args.restart and os.path.exists(args.cache):
+    with open(args.cache, 'r') as jsonl_file:
+        responses = [json.loads(line) for line in jsonl_file]
+    
+    # remove prompt from prompts if it is in responses and has an 'output' value with at least 1 entry
+    original_len = len(prompts)
+    prompts = [p for p in prompts if not any(p["name"] == r["name"] and p["prompt"] == r["prompt"] and len(r["outputs"]) > 0 for r in responses)]
+    print(f"Skipping {original_len - len(prompts)} prompts that already have responses")
+
 
 """ Initialize inference config """
 inference_config = get_inference_config(args.model, prompted=args.prompted)
@@ -73,6 +88,10 @@ for idx, (prompt, output) in tqdm(enumerate(zip(prompts_repeated, generated_outp
 
     if idx % args.num_samples_per_prompt == args.num_samples_per_prompt - 1:
         responses.append(cur_prompt)
+
+        if not args.restart and args.cache is not None:
+            with open(args.cache, 'a') as jsonl_file:
+                jsonl_file.write(json.dumps(cur_prompt) + "\n")
 
     if idx != 0 and idx % args.num_samples_per_prompt == 0:
         print(f"Tokens per second: {total_tokens / (time.time() - start_time):.2f}")
