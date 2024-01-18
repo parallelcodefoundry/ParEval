@@ -57,7 +57,7 @@ if not args.restart and os.path.exists(args.cache):
     print(f"[cache] Skipping {original_len - len(prompts)} prompts that already have responses")
 
 """ Load existing responses if they exist """
-if not args.restart and os.restore_from and os.path.exists(args.restore_from):
+if not args.restart and args.restore_from and os.path.exists(args.restore_from):
     with open(args.restore_from, 'r') as json_file:
         restored_responses = json.load(json_file)
     
@@ -117,6 +117,9 @@ generated_outputs = generator(
 if not args.restart and args.cache is not None:
     with open(args.cache, 'r') as jsonl_file:
         responses = [json.loads(line) for line in jsonl_file]
+        responses = [r for r in responses if r["temperature"] == args.temperature and r["prompted"] == args.prompted
+                        and args.num_samples_per_prompt == len(r["outputs"])
+                        and any(p["name"] == r["name"] and p["prompt"] == r["prompt"] and p["parallelism_model"] == r["parallelism_model"] for p in prompts)]
 else:
     responses = []
 cur_prompt = None
