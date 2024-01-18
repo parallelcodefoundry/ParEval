@@ -1,17 +1,22 @@
 #!/bin/bash
-#SBATCH -n 1
+#SBATCH -N 1
+#SBATCH --exclusive
 #SBATCH -t 04:00:00
 #SBATCH -A bhatele-lab-aac
 #SBATCH -J serial
 #SBATCH -o serial-%A.out
 
+HASH="a8724ee8"
+MODEL="starcoderbase_prompted"
+TEMP="0.2"
+
 # settings
-GENERATED_PROMPTS=../results/a8724ee8/output_a8724ee8_bigcode--starcoderbase_prompted_temp0.2.json
+GENERATED_PROMPTS="../results/${HASH}/${MODEL}_temp${TEMP}/all.json"
+OUTPUT="../results/${HASH}/${MODEL}_temp${TEMP}/serial.json"
 SCRATCH_DIR=~/scratch/.tmp
 
 module purge
 ml python gcc
-
 
 python run-all.py \
     $GENERATED_PROMPTS \
