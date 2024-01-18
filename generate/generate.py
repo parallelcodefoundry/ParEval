@@ -57,7 +57,7 @@ if not args.restart and os.path.exists(args.cache):
     print(f"[cache] Skipping {original_len - len(prompts)} prompts that already have responses")
 
 """ Load existing responses if they exist """
-if not args.restart and os.path.exists(args.restore_from):
+if not args.restart and os.restore_from and os.path.exists(args.restore_from):
     with open(args.restore_from, 'r') as json_file:
         restored_responses = json.load(json_file)
     
