@@ -2,7 +2,7 @@
 #SBATCH -n 1
 #SBATCH -c 16
 #SBATCH --mem=128000
-#SBATCH -t 23:59:59
+#SBATCH -t 02:00:00
 #SBATCH -p gpu
 #SBATCH --gpus=a100:1
 #SBATCH -J generate-starcoderbase-prompted
@@ -32,7 +32,6 @@ srun python generate.py \
     --model $MODEL \
     --prompts ../prompts/generation-prompts.json \
     --cache $CACHE \
-    --restore_from ../outputs/zj_outputs/output_496edbdf_bigcode--starcoderbase_prompted_temp0.2.json \
     --output $OUTPUT \
     --temperature $TEMP \
     --top_p $TOPP \
