@@ -1,3 +1,4 @@
+#!/bin/python3
 """ Run all the generated code.
     author: Daniel Nichols
     date: October 2023

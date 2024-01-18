@@ -1,7 +1,7 @@
-// Driver for 1_scan_sum_of_prefix_sum
+// Driver for 32_scan_sum_of_prefix_sum for Kokkos
 // /* Compute the prefix sum array of the vector x and return its sum.
 //    Example:
-// 
+//
 //    input: [-7, 2, 1, 9, 4, 8]
 //    output: 15
 // */
@@ -18,16 +18,19 @@
 
 
 struct Context {
-    std::vector<double> x;
+    Kokkos::View<double*> x;
+    std::vector<double> xVec;
 };
 
 void reset(Context *ctx) {
-    fillRand(ctx->x, -100.0, 100.0);
+    fillRandKokkos(ctx->x, -100.0, 100.0);
+    fillRand(ctx->xVec, -100.0, 100.0);
 }
 
 Context *init() {
     Context *ctx = new Context();
-    ctx->x.resize(1 << 20);
+    ctx->x = Kokkos::View<double*>("x", DRIVER_PROBLEM_SIZE);
+    ctx->xVec.resize(DRIVER_PROBLEM_SIZE);
     reset(ctx);
     return ctx;
 }
@@ -38,7 +41,7 @@ void NO_OPTIMIZE compute(Context *ctx) {
 }
 
 void NO_OPTIMIZE best(Context *ctx) {
-    double val = correctSumOfPrefixSum(ctx->x);
+    double val = correctSumOfPrefixSum(ctx->xVec);
     (void) val;
 }
 
@@ -49,12 +52,15 @@ bool validate(Context *ctx) {
         std::vector<double> input(2048);
         fillRand(input, -100.0, 100.0);
 
+        Kokkos::View<double*> inputView("input", input.size());
+        copyVectorToView(input, inputView);
+
         // compute correct result
         double correctResult = correctSumOfPrefixSum(input);
 
         // compute test result
-        double testResult = sumOfPrefixSum(input);
-        
+        double testResult = sumOfPrefixSum(inputView);
+
         if (std::fabs(correctResult - testResult) > 1e-5) {
             return false;
         }
@@ -66,5 +72,3 @@ bool validate(Context *ctx) {
 void destroy(Context *ctx) {
     delete ctx;
 }
-
-
