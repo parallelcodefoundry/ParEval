@@ -1,14 +1,20 @@
 #!/bin/bash
 #SBATCH -N 1
 #SBATCH --exclusive
-#SBATCH -t 04:00:00
+#SBATCH -p serial
+#SBATCH -t 06:00:00
 #SBATCH -A bhatele-lab-aac
-#SBATCH -J kokkos
-#SBATCH -o kokkos-%A.out
+#SBATCH -J kokkos-codellama-7b-hf_prompted
+#SBATCH -o run-outputs/codellama-7b-hf_prompted-kokkos-%A.out
 
 # settings
-GENERATED_PROMPTS=../results/a8724ee8/output_a8724ee8_bigcode--starcoderbase_prompted_temp0.2.json
-SCRATCH_DIR=~/scratch/.tmp
+HASH="a8724ee8"
+MODEL="codellama-7b-hf_prompted"
+TEMP="0.2"
+
+GENERATED_PROMPTS="../results/${HASH}/${MODEL}_temp${TEMP}/all.json"
+OUTPUT="../results/${HASH}/${MODEL}_temp${TEMP}/kokkos.json"
+SCRATCH_DIR=/tmp
 
 module purge
 ml python gcc/11.3.0 cmake/gcc/11.3.0
@@ -17,7 +23,7 @@ export OMP_PLACES=cores
 
 python run-all.py \
     $GENERATED_PROMPTS \
-    --output $GENERATED_PROMPTS \
+    --output $OUTPUT \
     --scratch-dir $SCRATCH_DIR \
     --launch-configs launch-configs.json \
     --problem-sizes problem-sizes.json \
