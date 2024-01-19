@@ -50,7 +50,7 @@ bool validate(Context *ctx) {
     int rank;
     GET_RANK(rank);
 
-    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
+    const size_t numTries = 10;
     for (int i = 0; i < numTries; i += 1) {
         // set up input
         std::vector<double> input(TEST_SIZE);
