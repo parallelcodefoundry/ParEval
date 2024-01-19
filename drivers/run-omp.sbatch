@@ -2,8 +2,8 @@
 #SBATCH -N 1
 #SBATCH --exclusive
 #SBATCH -p serial
-#SBATCH -t 04:00:00
-#SBATCH -A bhatele-lab-aac
+#SBATCH -t 06:00:00
+#SBATCH -A bhatele-lab-cmsc
 #SBATCH -J omp-codellama-7b-hf_prompted
 #SBATCH -o run-outputs/codellama-7b-hf_prompted-omp-%A.out
 

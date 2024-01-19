@@ -2,14 +2,14 @@
 #SBATCH -N 1
 #SBATCH --exclusive
 #SBATCH -p serial
-#SBATCH -t 04:00:00
-#SBATCH -A bhatele-lab-aac
-#SBATCH -J serial-codellama-7b-hf_prompted
-#SBATCH -o run-outputs/codellama-7b-hf_prompted-serial-%A.out
+#SBATCH -t 05:00:00
+#SBATCH -A bhatele-lab-cmsc
+#SBATCH -J serial-codellama-13b-hf_prompted
+#SBATCH -o run-outputs/codellama-13b-hf_prompted-serial-%A.out
 
 # settings
 HASH="a8724ee8"
-MODEL="codellama-7b-hf_prompted"
+MODEL="codellama-13b-hf_prompted"
 TEMP="0.2"
 
 GENERATED_PROMPTS="../results/${HASH}/${MODEL}_temp${TEMP}/all.json"

@@ -2,13 +2,13 @@
 #SBATCH -N 4
 #SBATCH --exclusive
 #SBATCH -t 06:00:00
-#SBATCH -A bhatele-lab-aac
-#SBATCH -J mpi+omp-codellama-7b-hf_prompted
-#SBATCH -o run-outputs/codellama-7b-hf_prompted-mpi+omp-%A.out
+#SBATCH -A bhatele-lab-cmsc
+#SBATCH -J mpi+omp-codellama-13b-hf_prompted
+#SBATCH -o run-outputs/codellama-13b-hf_prompted-mpi+omp-%A.out
 
 # settings
 HASH="a8724ee8"
-MODEL="codellama-7b-hf_prompted"
+MODEL="codellama-13b-hf_prompted"
 TEMP="0.2"
 
 GENERATED_PROMPTS="../results/${HASH}/${MODEL}_temp${TEMP}/all.json"

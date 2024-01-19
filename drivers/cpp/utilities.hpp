@@ -1,5 +1,7 @@
 #pragma once
 #include <cassert>
+#include <cmath>
+#include <climits>
 #include <string>
 #include <complex>
 #include <type_traits>
