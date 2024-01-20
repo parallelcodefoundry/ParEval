@@ -91,6 +91,11 @@ bool validate(Context *ctx) {
         correct.resize(0);
         std::fill(test.begin(), test.end(), Point());
 
+        for (size_t i = 0; i < points.size(); i++) {
+            points[i].x = x[i];
+            points[i].y = y[i];
+        }
+
         COPY_H2D(d_points, points.data(), TEST_SIZE * sizeof(Point));
         COPY_H2D(d_hull, test.data(), TEST_SIZE * sizeof(Point));
 
