@@ -1,6 +1,6 @@
 // Driver for 10_geometry_convex_hull for CUDA and HIP
 // struct Point {
-//    double x, y;
+//     double x, y;
 // };
 //
 // /* Find the set of points that defined the smallest convex polygon that contains all the points in the vector points. Store the result in `hull`.
