@@ -25,6 +25,11 @@ double NO_INLINE correctConvexHullPerimeter(std::vector<Point> const& points) {
         return (c.x - a.x) * (b.y - a.y) - (c.y - a.y) * (b.x - a.x) > 0;
     };
 
+    auto dist = [](Point const& p1, Point const& p2) {
+        return sqrt(pow(p2.x-p1.x, 2) + pow(p2.y-p1.y, 2));
+    };
+
+
     std::vector<Point> upperHull;
     std::vector<Point> lowerHull;
     upperHull.push_back(pointsSorted[0]);
@@ -51,9 +56,9 @@ double NO_INLINE correctConvexHullPerimeter(std::vector<Point> const& points) {
 
     double perimeter = 0;
     for (size_t i = 0; i < upperHull.size() - 1; i++) {
-        perimeter += distance(upperHull[i], upperHull[i+1]);
+        perimeter += dist(upperHull[i], upperHull[i+1]);
     }
-    perimeter += distance(upperHull[0], upperHull[upperHull.size() - 1]);
+    perimeter += dist(upperHull[0], upperHull[upperHull.size() - 1]);
 
     return perimeter;
 }
