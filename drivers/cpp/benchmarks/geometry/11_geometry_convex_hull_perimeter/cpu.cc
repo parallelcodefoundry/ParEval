@@ -63,6 +63,36 @@ void NO_OPTIMIZE best(Context *ctx) {
     (void)perimeter;
 }
 
+bool validateConvexHullInput(std::vector<double> const& x, std::vector<double> const& y) {
+    // check for duplicates
+    std::vector<double> xCopy(x), yCopy(y);
+    std::sort(xCopy.begin(), xCopy.end());
+    std::sort(yCopy.begin(), yCopy.end());
+    for (size_t i = 1; i < xCopy.size(); i++) {
+        if (xCopy[i] == xCopy[i-1]) {
+            return false;
+        }
+    }
+    for (size_t i = 1; i < yCopy.size(); i++) {
+        if (yCopy[i] == yCopy[i-1]) {
+            return false;
+        }
+    }
+
+    // check for collinearity
+    for (size_t i = 0; i < x.size(); i++) {
+        for (size_t j = i+1; j < x.size(); j++) {
+            for (size_t k = j+1; k < x.size(); k++) {
+                if ((x[i] - x[j]) * (y[i] - y[k]) == (x[i] - x[k]) * (y[i] - y[j])) {
+                    return false;
+                }
+            }
+        }
+    }
+
+    return true;
+}
+
 bool validate(Context *ctx) {
     const size_t TEST_SIZE = 1024;
 
@@ -76,8 +106,12 @@ bool validate(Context *ctx) {
     const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int trialIter = 0; trialIter < numTries; trialIter += 1) {
         // set up input
-        fillRand(x, -1000.0, 1000.0);
-        fillRand(y, -1000.0, 1000.0);
+        bool inputValid = false;
+        while (!inputValid) {
+            fillRand(x, -10000.0, 10000.0);
+            fillRand(y, -10000.0, 10000.0);
+            inputValid = validateConvexHullInput(x, y);
+        }
         test = 0.0;
         correct = 0.0;
         BCAST(x, DOUBLE);
