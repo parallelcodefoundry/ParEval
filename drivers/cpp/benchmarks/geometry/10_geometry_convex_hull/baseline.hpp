@@ -2,10 +2,6 @@
 #include <vector>
 #include <algorithm>
 
-struct Point {
-    double x, y;
-};
-
 /* Find the set of points that defined the smallest convex polygon that contains all the points in the vector points. Store the result in `hull`.
    Example:
 
