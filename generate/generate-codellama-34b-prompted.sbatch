@@ -13,14 +13,14 @@
 
 # settings
 MODEL="codellama/CodeLlama-34b-hf"
-TEMP=0.8
+TEMP=0.2
 TOPP=0.95
 MAX_NEW_TKNS=1024
-SAMPLES_PER_PROMPT=200
+SAMPLES_PER_PROMPT=20
 BATCH_SIZE=8
 hash=$(md5sum ../prompts/generation-prompts.json | cut -d' ' -f1)
 OUTPUT="../outputs/output_${hash:0:8}_${MODEL//\//--}_prompted_temp${TEMP}.json"
-CACHE="../outputs/cache/cache_${hash:0:8}_${MODEL//\//--}_temp${TEMP}.jsonl"
+CACHE="../outputs/cache/cache_${hash:0:8}_${MODEL//\//--}_prompted_temp${TEMP}.jsonl"
 echo "Writing to $OUTPUT"
 echo "model=$MODEL   MAX_NEW_TKNS=$MAX_NEW_TKNS   SAMPLES_PER_PROMPT=$SAMPLES_PER_PROMPT   BATCH_SIZE=$BATCH_SIZE"
 
@@ -29,7 +29,7 @@ ml cuda/11.8.0
 source .env/bin/activate
 export HF_HOME=/pscratch/sd/d/dnicho/.cache/huggingface
 export OMP_NUM_THREADS=16
-#export SLURM_CPU_BIND="cores"
+export SLURM_CPU_BIND="cores"
 
 # generate
 srun python generate.py \

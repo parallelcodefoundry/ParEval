@@ -12,7 +12,7 @@ else
     SYSTEM="zaratan"
 fi
 
-OUTPUTS="../outputs/output_800a7a5d_bigcode--starcoderbase_prompted_temp0.2.json"
+OUTPUTS="../outputs/output_a8724ee8_gpt-3.5_temp0.2.json"
 PROBLEM="$1"
 MODEL="$2"
 LOG_LEVEL="$3"

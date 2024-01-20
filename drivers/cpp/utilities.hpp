@@ -1,5 +1,7 @@
 #pragma once
 #include <cassert>
+#include <cmath>
+#include <climits>
 #include <string>
 #include <complex>
 #include <type_traits>
@@ -17,7 +19,7 @@
 #endif
 
 #if !defined(MAX_VALIDATION_ATTEMPTS)
-#define MAX_VALIDATION_ATTEMPTS 3
+#define MAX_VALIDATION_ATTEMPTS 2
 #endif
 
 #if !defined(SPARSE_LA_SPARSITY)

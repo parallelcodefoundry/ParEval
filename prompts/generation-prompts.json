@@ -249,245 +249,245 @@
         "language": "cpp",
         "name": "16_graph_largest_component",
         "parallelism_model": "kokkos",
-        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Return the number of vertices in the largest component of the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint largestComponent(Kokkos::View<const int**> &A, size_t N) {"
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Return the number of vertices in the largest component of the undirected graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix. A is an undirected graph.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint largestComponent(Kokkos::View<const int**> &A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "16_graph_largest_component",
         "parallelism_model": "omp",
-        "prompt": "#include <omp.h>\n\n/* Return the number of vertices in the largest component of the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use OpenMP to compute in parallel.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint largestComponent(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <omp.h>\n\n/* Return the number of vertices in the largest component of the undirected graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n   Use OpenMP to compute in parallel.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint largestComponent(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "16_graph_largest_component",
         "parallelism_model": "serial",
-        "prompt": "/* Return the number of vertices in the largest component of the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint largestComponent(std::vector<int> const& A, size_t N) {"
+        "prompt": "/* Return the number of vertices in the largest component of the undirected graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint largestComponent(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "16_graph_largest_component",
         "parallelism_model": "hip",
-        "prompt": "/* Compute the number of vertices in the largest component of the graph defined by the adjacency matrix A.\n   Store the result in largestComponentSize.\n   A is an NxN adjacency matrix stored in row-major.\n   Use AMD HIP to compute in parallel. The kernel is launched on an NxN grid of threads.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\n__global__ void largestComponent(const int *A, size_t N, int *largestComponentSize) {"
+        "prompt": "/* Compute the number of vertices in the largest component of the undirected graph defined by the adjacency matrix A.\n   Store the result in largestComponentSize.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n   Use AMD HIP to compute in parallel. The kernel is launched on an NxN grid of threads.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\n__global__ void largestComponent(const int *A, size_t N, int *largestComponentSize) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "16_graph_largest_component",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Return the number of vertices in the largest component of the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The result is returned on rank 0.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint largestComponent(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <mpi.h>\n\n/* Return the number of vertices in the largest component of the undirected graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The result is returned on rank 0.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint largestComponent(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "16_graph_largest_component",
         "parallelism_model": "cuda",
-        "prompt": "/* Compute the number of vertices in the largest component of the graph defined by the adjacency matrix A.\n   Store the result in largestComponentSize.\n   A is an NxN adjacency matrix stored in row-major.\n   Use CUDA to compute in parallel. The kernel is launched on an NxN grid of threads.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\n__global__ void largestComponent(const int *A, size_t N, int *largestComponentSize) {"
+        "prompt": "/* Compute the number of vertices in the largest component of the undirected graph defined by the adjacency matrix A.\n   Store the result in largestComponentSize.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n   Use CUDA to compute in parallel. The kernel is launched on an NxN grid of threads.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\n__global__ void largestComponent(const int *A, size_t N, int *largestComponentSize) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "16_graph_largest_component",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the number of vertices in the largest component of the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The result is returned on rank 0.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint largestComponent(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the number of vertices in the largest component of the undirected graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The result is returned on rank 0.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint largestComponent(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "18_graph_count_components",
         "parallelism_model": "kokkos",
-        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Count the number of connected components in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix.\n\t Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint componentCount(Kokkos::View<const int**> &A, size_t N) {"
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Count the number of connected components in the undirected graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix. A is an undirected graph.\n\t Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint componentCount(Kokkos::View<const int**> &A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "18_graph_count_components",
         "parallelism_model": "omp",
-        "prompt": "#include <omp.h>\n\n/* Count the number of connected components in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n\t Use OpenMP to compute in parallel.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint componentCount(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <omp.h>\n\n/* Count the number of connected components in the undirected graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n\t Use OpenMP to compute in parallel.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint componentCount(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "18_graph_count_components",
         "parallelism_model": "serial",
-        "prompt": "/* Count the number of connected components in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint componentCount(std::vector<int> const& A, size_t N) {"
+        "prompt": "/* Count the number of connected components in the undirected graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint componentCount(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "18_graph_count_components",
         "parallelism_model": "hip",
-        "prompt": "/* Count the number of connected components in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n\t Use AMD HIP to compute in parallel. The kernel is launched on an NxN grid of threads.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\n__global__ void componentCount(const int *A, size_t N, int *numComponents) {"
+        "prompt": "/* Count the number of connected components in the undirected graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n\t Use AMD HIP to compute in parallel. The kernel is launched on an NxN grid of threads.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\n__global__ void componentCount(const int *A, size_t N, int *numComponents) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "18_graph_count_components",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Count the number of connected components in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n\t Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The component count is returned on rank 0.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint componentCount(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <mpi.h>\n\n/* Count the number of connected components in the undirected graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n\t Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The component count is returned on rank 0.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint componentCount(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "18_graph_count_components",
         "parallelism_model": "cuda",
-        "prompt": "/* Count the number of connected components in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n\t Use CUDA to compute in parallel. The kernel is launched on an NxN grid of threads.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\n__global__ void componentCount(const int *A, size_t N, int *numComponents) {"
+        "prompt": "/* Count the number of connected components in the undirected graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n\t Use CUDA to compute in parallel. The kernel is launched on an NxN grid of threads.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\n__global__ void componentCount(const int *A, size_t N, int *numComponents) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "18_graph_count_components",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Count the number of connected components in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n\t Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The component count is returned on rank 0.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint componentCount(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Count the number of connected components in the undirected graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n\t Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The component count is returned on rank 0.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint componentCount(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "15_graph_edge_count",
         "parallelism_model": "kokkos",
-        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Count the number of edges in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint edgeCount(Kokkos::View<const int**> &A, size_t N) {"
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Count the number of edges in the directed graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix. A represents a directed graph.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint edgeCount(Kokkos::View<const int**> &A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "15_graph_edge_count",
         "parallelism_model": "omp",
-        "prompt": "#include <omp.h>\n\n/* Count the number of edges in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use OpenMP to compute in parallel.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint edgeCount(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <omp.h>\n\n/* Count the number of edges in the directed graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A represents a directed graph.\n   Use OpenMP to compute in parallel.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint edgeCount(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "15_graph_edge_count",
         "parallelism_model": "serial",
-        "prompt": "/* Count the number of edges in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint edgeCount(std::vector<int> const& A, size_t N) {"
+        "prompt": "/* Count the number of edges in the directed graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A represents a directed graph.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint edgeCount(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "15_graph_edge_count",
         "parallelism_model": "hip",
-        "prompt": "/* Count the number of edges in the graph defined by the adjacency matrix A.\n   Store the result in numEdges.\n   A is an NxN adjacency matrix stored in row-major.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\n__global__ void edgeCount(const int *A, size_t N, int *numEdges) {"
+        "prompt": "/* Count the number of edges in the directed graph defined by the adjacency matrix A.\n   Store the result in numEdges. A represents a directed graph.\n   A is an NxN adjacency matrix stored in row-major.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\n__global__ void edgeCount(const int *A, size_t N, int *numEdges) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "15_graph_edge_count",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Count the number of edges in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The result is returned on rank 0.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint edgeCount(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <mpi.h>\n\n/* Count the number of edges in the directed graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A represents a directed graph.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The result is returned on rank 0.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint edgeCount(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "15_graph_edge_count",
         "parallelism_model": "cuda",
-        "prompt": "/* Count the number of edges in the graph defined by the adjacency matrix A.\n   Store the result in numEdges.\n   A is an NxN adjacency matrix stored in row-major.\n   Use CUDA to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\n__global__ void edgeCount(const int *A, size_t N, int *numEdges) {"
+        "prompt": "/* Count the number of edges in the directed graph defined by the adjacency matrix A.\n   Store the result in numEdges. A represents a directed graph.\n   A is an NxN adjacency matrix stored in row-major.\n   Use CUDA to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\n__global__ void edgeCount(const int *A, size_t N, int *numEdges) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "15_graph_edge_count",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Count the number of edges in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The result is returned on rank 0.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint edgeCount(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Count the number of edges in the directed graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A represents a directed graph.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The result is returned on rank 0.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint edgeCount(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "17_graph_highest_degree",
         "parallelism_model": "kokkos",
-        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Compute the highest node degree in the graph. The graph is defined in the adjacency matrix A.\n   A is an NxN adjacency matrix.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint maxDegree(Kokkos::View<const int**> &A, size_t N) {"
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Compute the highest node degree in the undirected graph. The graph is defined in the adjacency matrix A.\n   A is an NxN adjacency matrix. A is an undirected graph.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint maxDegree(Kokkos::View<const int**> &A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "17_graph_highest_degree",
         "parallelism_model": "omp",
-        "prompt": "#include <omp.h>\n\n/* Compute the highest node degree in the graph. The graph is defined in the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use OpenMP to compute in parallel.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint maxDegree(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <omp.h>\n\n/* Compute the highest node degree in the undirected graph. The graph is defined in the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n   Use OpenMP to compute in parallel.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint maxDegree(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "17_graph_highest_degree",
         "parallelism_model": "serial",
-        "prompt": "/* Compute the highest node degree in the graph. The graph is defined in the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint maxDegree(std::vector<int> const& A, size_t N) {"
+        "prompt": "/* Compute the highest node degree in the undirected graph. The graph is defined in the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint maxDegree(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "17_graph_highest_degree",
         "parallelism_model": "hip",
-        "prompt": "/* Compute the highest node degree in the graph. The graph is defined in the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. Store the result in maxDegree.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\n__global__ void maxDegree(const int *A, size_t N, int *maxDegree) {"
+        "prompt": "/* Compute the highest node degree in the undirected graph. The graph is defined in the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n   Store the result in maxDegree.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\n__global__ void maxDegree(const int *A, size_t N, int *maxDegree) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "17_graph_highest_degree",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Compute the highest node degree in the graph. The graph is defined in the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The result is returned on rank 0.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint maxDegree(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <mpi.h>\n\n/* Compute the highest node degree in the undirected graph. The graph is defined in the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The result is returned on rank 0.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint maxDegree(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "17_graph_highest_degree",
         "parallelism_model": "cuda",
-        "prompt": "/* Compute the highest node degree in the graph. The graph is defined in the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. Store the result in maxDegree.\n   Use CUDA to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\n__global__ void maxDegree(const int *A, size_t N, int *maxDegree) {"
+        "prompt": "/* Compute the highest node degree in the undirected graph. The graph is defined in the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph. \n   Store the result in maxDegree.\n   Use CUDA to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\n__global__ void maxDegree(const int *A, size_t N, int *maxDegree) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "17_graph_highest_degree",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the highest node degree in the graph. The graph is defined in the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The result is returned on rank 0.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint maxDegree(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the highest node degree in the undirected graph. The graph is defined in the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The result is returned on rank 0.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint maxDegree(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "19_graph_shortest_path",
         "parallelism_model": "kokkos",
-        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Return the length of the shortest path from source to dest in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n\t input: [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]], source=0, dest=3\n   output: 2\n*/\nint shortestPathLength(Kokkos::View<const int**> &A, size_t N, int source, int dest) {"
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Return the length of the shortest path from source to dest in the undirected graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix. A is an undirected graph.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n\t input: [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]], source=0, dest=3\n   output: 2\n*/\nint shortestPathLength(Kokkos::View<const int**> &A, size_t N, int source, int dest) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "19_graph_shortest_path",
         "parallelism_model": "omp",
-        "prompt": "#include <omp.h>\n\n/* Return the length of the shortest path from source to dest in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use OpenMP to compute in parallel.\n   Example:\n\n\t input: [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]], source=0, dest=3\n   output: 2\n*/\nint shortestPathLength(std::vector<int> const& A, size_t N, int source, int dest) {"
+        "prompt": "#include <omp.h>\n\n/* Return the length of the shortest path from source to dest in the undirected graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n   Use OpenMP to compute in parallel.\n   Example:\n\n\t input: [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]], source=0, dest=3\n   output: 2\n*/\nint shortestPathLength(std::vector<int> const& A, size_t N, int source, int dest) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "19_graph_shortest_path",
         "parallelism_model": "serial",
-        "prompt": "/* Return the length of the shortest path from source to dest in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Example:\n\n\t input: [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]], source=0, dest=3\n   output: 2\n*/\nint shortestPathLength(std::vector<int> const& A, size_t N, int source, int dest) {"
+        "prompt": "/* Return the length of the shortest path from source to dest in the undirected graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n   Example:\n\n\t input: [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]], source=0, dest=3\n   output: 2\n*/\nint shortestPathLength(std::vector<int> const& A, size_t N, int source, int dest) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "19_graph_shortest_path",
         "parallelism_model": "hip",
-        "prompt": "/* Compute the length of the shortest path from source to dest in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Store the result in pathLength.\n   Use AMD HIP to compute in parallel. The kernel is launched on an NxN grid of threads.\n   Example:\n\n\t input: [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]], source=0, dest=3\n   output: 2\n*/\n__global__ void shortestPathLength(const int *A, size_t N, int source, int dest, int *pathLength) {"
+        "prompt": "/* Compute the length of the shortest path from source to dest in the undirected graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n   Store the result in pathLength.\n   Use AMD HIP to compute in parallel. The kernel is launched on an NxN grid of threads.\n   Example:\n\n\t input: [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]], source=0, dest=3\n   output: 2\n*/\n__global__ void shortestPathLength(const int *A, size_t N, int source, int dest, int *pathLength) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "19_graph_shortest_path",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Return the length of the shortest path from source to dest in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The shortest path length is returned on rank 0.\n   Example:\n\n\t input: [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]], source=0, dest=3\n   output: 2\n*/\nint shortestPathLength(std::vector<int> const& A, size_t N, int source, int dest) {"
+        "prompt": "#include <mpi.h>\n\n/* Return the length of the shortest path from source to dest in the undirected graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The shortest path length is returned on rank 0.\n   Example:\n\n\t input: [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]], source=0, dest=3\n   output: 2\n*/\nint shortestPathLength(std::vector<int> const& A, size_t N, int source, int dest) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "19_graph_shortest_path",
         "parallelism_model": "cuda",
-        "prompt": "/* Compute the length of the shortest path from source to dest in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Store the result in pathLength.\n   Use CUDA to compute in parallel. The kernel is launched on an NxN grid of threads.\n   Example:\n\n\t input: [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]], source=0, dest=3\n   output: 2\n*/\n__global__ void shortestPathLength(const int *A, size_t N, int source, int dest, int *pathLength) {"
+        "prompt": "/* Compute the length of the shortest path from source to dest in the undirected graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n   Store the result in pathLength.\n   Use CUDA to compute in parallel. The kernel is launched on an NxN grid of threads.\n   Example:\n\n\t input: [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]], source=0, dest=3\n   output: 2\n*/\n__global__ void shortestPathLength(const int *A, size_t N, int source, int dest, int *pathLength) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "19_graph_shortest_path",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the length of the shortest path from source to dest in the graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The shortest path length is returned on rank 0.\n   Example:\n\n\t input: [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]], source=0, dest=3\n   output: 2\n*/\nint shortestPathLength(std::vector<int> const& A, size_t N, int source, int dest) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Return the length of the shortest path from source to dest in the undirected graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The shortest path length is returned on rank 0.\n   Example:\n\n\t input: [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]], source=0, dest=3\n   output: 2\n*/\nint shortestPathLength(std::vector<int> const& A, size_t N, int source, int dest) {"
     },
     {
         "problem_type": "reduce",
@@ -711,7 +711,7 @@
         "language": "cpp",
         "name": "25_reduce_xor",
         "parallelism_model": "hip",
-        "prompt": "/* Compute the logical XOR reduction of the vector of bools x. Store the result in output.\n   Use AMD HIP to reduce in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [false, false, false, true]\n   output: true\n*/\n__global__ void reduceLogicalXOR(const bool *x, size_t N, double *output) {"
+        "prompt": "/* Compute the logical XOR reduction of the vector of bools x. Store the result in output.\n   Use AMD HIP to reduce in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [false, false, false, true]\n   output: true\n*/\n__global__ void reduceLogicalXOR(const bool *x, size_t N, bool *output) {"
     },
     {
         "problem_type": "reduce",
@@ -725,7 +725,7 @@
         "language": "cpp",
         "name": "25_reduce_xor",
         "parallelism_model": "cuda",
-        "prompt": "/* Compute the logical XOR reduction of the vector of bools x. Store the result in output.\n   Use CUDA to reduce in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [false, false, false, true]\n   output: true\n*/\n__global__ void reduceLogicalXOR(const bool *x, size_t N, double *output) {"
+        "prompt": "/* Compute the logical XOR reduction of the vector of bools x. Store the result in output.\n   Use CUDA to reduce in parallel. The kernel is launched with at least as many threads as values in x.\n   Example:\n\n   input: [false, false, false, true]\n   output: true\n*/\n__global__ void reduceLogicalXOR(const bool *x, size_t N, bool *output) {"
     },
     {
         "problem_type": "reduce",
@@ -1229,49 +1229,49 @@
         "language": "cpp",
         "name": "47_sparse_la_spmv",
         "parallelism_model": "kokkos",
-        "prompt": "#include <Kokkos_Core.hpp>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute y = alpha*A*x + beta*y where alpha and beta are scalars, x and y are vectors,\n   and A is a sparse matrix stored in COO format.\n   x and y are length N and A is M x N.\n   Use Kokkos to parallelize. Assume Kokkos has already been initialized.\n   Example:\n\n   input: alpha=0.5 beta=1.0 A=[{0,1,3}, {1,0,-1}] x=[-4, 2] y=[-1,1]\n   output: y=[2, 3]\n*/\nvoid spmv(double alpha, Kokkos::View<const COOElement*> const& A, Kokkos::View<const double*> const& x, double beta, Kokkos::View<double *> &y, size_t M, size_t N) {"
+        "prompt": "#include <Kokkos_Core.hpp>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute y = alpha*A*x + beta*y where alpha and beta are scalars, x and y are vectors,\n   and A is a sparse matrix stored in COO format.\n   A has dimensions MxN, x has N values, and y has M values.\n   Use Kokkos to parallelize. Assume Kokkos has already been initialized.\n   Example:\n\n   input: alpha=0.5 beta=1.0 A=[{0,1,3}, {1,0,-1}] x=[-4, 2] y=[-1,1]\n   output: y=[2, 3]\n*/\nvoid spmv(double alpha, Kokkos::View<const COOElement*> const& A, Kokkos::View<const double*> const& x, double beta, Kokkos::View<double *> &y, size_t M, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
         "language": "cpp",
         "name": "47_sparse_la_spmv",
         "parallelism_model": "omp",
-        "prompt": "#include <omp.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute y = alpha*A*x + beta*y where alpha and beta are scalars, x and y are vectors,\n   and A is a sparse matrix stored in COO format.\n   x and y are length N and A is M x N.\n   Use OpenMP to parallelize.\n   Example:\n\n   input: alpha=0.5 beta=1.0 A=[{0,1,3}, {1,0,-1}] x=[-4, 2] y=[-1,1]\n   output: y=[2, 3]\n*/\nvoid spmv(double alpha, std::vector<COOElement> const& A, std::vector<double> const& x, double beta, std::vector<double> &y, size_t M, size_t N) {"
+        "prompt": "#include <omp.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute y = alpha*A*x + beta*y where alpha and beta are scalars, x and y are vectors,\n   and A is a sparse matrix stored in COO format.\n   A has dimensions MxN, x has N values, and y has M values.\n   Use OpenMP to parallelize.\n   Example:\n\n   input: alpha=0.5 beta=1.0 A=[{0,1,3}, {1,0,-1}] x=[-4, 2] y=[-1,1]\n   output: y=[2, 3]\n*/\nvoid spmv(double alpha, std::vector<COOElement> const& A, std::vector<double> const& x, double beta, std::vector<double> &y, size_t M, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
         "language": "cpp",
         "name": "47_sparse_la_spmv",
         "parallelism_model": "serial",
-        "prompt": "struct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute y = alpha*A*x + beta*y where alpha and beta are scalars, x and y are vectors,\n   and A is a sparse matrix stored in COO format.\n   x and y are length N and A is M x N.\n   Example:\n\n   input: alpha=0.5 beta=1.0 A=[{0,1,3}, {1,0,-1}] x=[-4, 2] y=[-1,1]\n   output: y=[2, 3]\n*/\nvoid spmv(double alpha, std::vector<COOElement> const& A, std::vector<double> const& x, double beta, std::vector<double> &y, size_t M, size_t N) {"
+        "prompt": "struct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute y = alpha*A*x + beta*y where alpha and beta are scalars, x and y are vectors,\n   and A is a sparse matrix stored in COO format.\n   A has dimensions MxN, x has N values, and y has M values.\n   Example:\n\n   input: alpha=0.5 beta=1.0 A=[{0,1,3}, {1,0,-1}] x=[-4, 2] y=[-1,1]\n   output: y=[2, 3]\n*/\nvoid spmv(double alpha, std::vector<COOElement> const& A, std::vector<double> const& x, double beta, std::vector<double> &y, size_t M, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
         "language": "cpp",
         "name": "47_sparse_la_spmv",
         "parallelism_model": "hip",
-        "prompt": "struct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute y = alpha*A*x + beta*y where alpha and beta are scalars, x and y are vectors,\n   and A is a sparse matrix stored in COO format with sizeA elements.\n   x and y are length N and A is M x N.\n   Use AMD HIP to parallelize. The kernel will be launched with at least sizeA threads.\n   Example:\n\n   input: alpha=0.5 beta=1.0 A=[{0,1,3}, {1,0,-1}] x=[-4, 2] y=[-1,1]\n   output: y=[2, 3]\n*/\n__global__ void spmv(double alpha, const COOElement *A, size_t sizeA, const double *x, double beta, double *y, size_t M, size_t N) {"
+        "prompt": "struct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute y = alpha*A*x + beta*y where alpha and beta are scalars, x and y are vectors,\n   and A is a sparse matrix stored in COO format with sizeA elements.\n   A has dimensions MxN, x has N values, and y has M values.\n   Use AMD HIP to parallelize. The kernel will be launched with at least sizeA threads.\n   Example:\n\n   input: alpha=0.5 beta=1.0 A=[{0,1,3}, {1,0,-1}] x=[-4, 2] y=[-1,1]\n   output: y=[2, 3]\n*/\n__global__ void spmv(double alpha, const COOElement *A, size_t sizeA, const double *x, double beta, double *y, size_t M, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
         "language": "cpp",
         "name": "47_sparse_la_spmv",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute y = alpha*A*x + beta*y where alpha and beta are scalars, x and y are vectors,\n   and A is a sparse matrix stored in COO format.\n   x and y are length N and A is M x N.\n   Use MPI to parallelize. Assume MPI has already been initialized.\n   Every rank has a complete copy of A, x, and y. Store the result in y on rank 0.\n   Example:\n\n   input: alpha=0.5 beta=1.0 A=[{0,1,3}, {1,0,-1}] x=[-4, 2] y=[-1,1]\n   output: y=[2, 3]\n*/\nvoid spmv(double alpha, std::vector<COOElement> const& A, std::vector<double> const& x, double beta, std::vector<double> &y, size_t M, size_t N) {"
+        "prompt": "#include <mpi.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute y = alpha*A*x + beta*y where alpha and beta are scalars, x and y are vectors,\n   and A is a sparse matrix stored in COO format.\n   A has dimensions MxN, x has N values, and y has M values.\n   Use MPI to parallelize. Assume MPI has already been initialized.\n   Every rank has a complete copy of A, x, and y. Store the result in y on rank 0.\n   Example:\n\n   input: alpha=0.5 beta=1.0 A=[{0,1,3}, {1,0,-1}] x=[-4, 2] y=[-1,1]\n   output: y=[2, 3]\n*/\nvoid spmv(double alpha, std::vector<COOElement> const& A, std::vector<double> const& x, double beta, std::vector<double> &y, size_t M, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
         "language": "cpp",
         "name": "47_sparse_la_spmv",
         "parallelism_model": "cuda",
-        "prompt": "struct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute y = alpha*A*x + beta*y where alpha and beta are scalars, x and y are vectors,\n   and A is a sparse matrix stored in COO format with sizeA elements.\n   x and y are length N and A is M x N.\n   Use CUDA to parallelize. The kernel will be launched with at least sizeA threads.\n   Example:\n\n   input: alpha=0.5 beta=1.0 A=[{0,1,3}, {1,0,-1}] x=[-4, 2] y=[-1,1]\n   output: y=[2, 3]\n*/\n__global__ void spmv(double alpha, const COOElement *A, size_t sizeA, const double *x, double beta, double *y, size_t M, size_t N) {"
+        "prompt": "struct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute y = alpha*A*x + beta*y where alpha and beta are scalars, x and y are vectors,\n   and A is a sparse matrix stored in COO format with sizeA elements.\n   A has dimensions MxN, x has N values, and y has M values.\n   Use CUDA to parallelize. The kernel will be launched with at least sizeA threads.\n   Example:\n\n   input: alpha=0.5 beta=1.0 A=[{0,1,3}, {1,0,-1}] x=[-4, 2] y=[-1,1]\n   output: y=[2, 3]\n*/\n__global__ void spmv(double alpha, const COOElement *A, size_t sizeA, const double *x, double beta, double *y, size_t M, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
         "language": "cpp",
         "name": "47_sparse_la_spmv",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute y = alpha*A*x + beta*y where alpha and beta are scalars, x and y are vectors,\n   and A is a sparse matrix stored in COO format.\n   x and y are length N and A is M x N.\n   Use MPI and OpenMP to parallelize. Assume MPI has already been initialized.\n   Every rank has a complete copy of A, x, and y. Store the result in y on rank 0.\n   Example:\n\n   input: alpha=0.5 beta=1.0 A=[{0,1,3}, {1,0,-1}] x=[-4, 2] y=[-1,1]\n   output: y=[2, 3]\n*/\nvoid spmv(double alpha, std::vector<COOElement> const& A, std::vector<double> const& x, double beta, std::vector<double> &y, size_t M, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute y = alpha*A*x + beta*y where alpha and beta are scalars, x and y are vectors,\n   and A is a sparse matrix stored in COO format.\n   A has dimensions MxN, x has N values, and y has M values.\n   Use MPI and OpenMP to parallelize. Assume MPI has already been initialized.\n   Every rank has a complete copy of A, x, and y. Store the result in y on rank 0.\n   Example:\n\n   input: alpha=0.5 beta=1.0 A=[{0,1,3}, {1,0,-1}] x=[-4, 2] y=[-1,1]\n   output: y=[2, 3]\n*/\nvoid spmv(double alpha, std::vector<COOElement> const& A, std::vector<double> const& x, double beta, std::vector<double> &y, size_t M, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
@@ -1376,98 +1376,98 @@
         "language": "cpp",
         "name": "49_sparse_la_sparse_lu_decomp",
         "parallelism_model": "kokkos",
-        "prompt": "#include <Kokkos_Core.hpp>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Factorize the sparse matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   A is a sparse NxN matrix stored in COO format.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n   input: A=[{0,0,4}, {0,1,3}, {1,0,6}, {1,1,3}]\n   output: L=[{0,0,1},{1,0,1.5}, {1,1,1}] U=[{0,0,4}, {0,1,3}, {1,1,-1.5}]\n*/\nvoid luFactorize(Kokkos::View<const COOElement*> &A, Kokkos::View<COOElement*> &L, Kokkos::View<COOElement*> &U, size_t N) {"
+        "prompt": "#include <Kokkos_Core.hpp>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Factorize the sparse matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   A is a sparse NxN matrix stored in COO format.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n   input: A=[{0,0,4}, {0,1,3}, {1,0,6}, {1,1,3}]\n   output: L=[{0,0,1},{1,0,1.5}, {1,1,1}] U=[{0,0,4}, {0,1,3}, {1,1,-1.5}]\n*/\nvoid luFactorize(Kokkos::View<const COOElement*> &A, Kokkos::View<double**> &L, Kokkos::View<double**> &U, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
         "language": "cpp",
         "name": "49_sparse_la_sparse_lu_decomp",
         "parallelism_model": "omp",
-        "prompt": "#include <omp.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Factorize the sparse matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   A is a sparse NxN matrix stored in COO format.\n   Use OpenMP to compute in parallel.\n   Example:\n\n   input: A=[{0,0,4}, {0,1,3}, {1,0,6}, {1,1,3}]\n   output: L=[{0,0,1},{1,0,1.5}, {1,1,1}] U=[{0,0,4}, {0,1,3}, {1,1,-1.5}]\n*/\nvoid luFactorize(std::vector<COOElement> const& A, std::vector<COOElement> &L, std::vector<COOElement> &U, size_t N) {"
+        "prompt": "#include <omp.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Factorize the sparse matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   A is a sparse NxN matrix stored in COO format.\n   Use OpenMP to compute in parallel.\n   Example:\n\n   input: A=[{0,0,4}, {0,1,3}, {1,0,6}, {1,1,3}]\n   output: L=[{0,0,1},{1,0,1.5}, {1,1,1}] U=[{0,0,4}, {0,1,3}, {1,1,-1.5}]\n*/\nvoid luFactorize(std::vector<COOElement> const& A, std::vector<double> &L, std::vector<double> &U, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
         "language": "cpp",
         "name": "49_sparse_la_sparse_lu_decomp",
         "parallelism_model": "serial",
-        "prompt": "struct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Factorize the sparse matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   A is a sparse NxN matrix stored in COO format.\n   Example:\n\n   input: A=[{0,0,4}, {0,1,3}, {1,0,6}, {1,1,3}]\n   output: L=[{0,0,1},{1,0,1.5}, {1,1,1}] U=[{0,0,4}, {0,1,3}, {1,1,-1.5}]\n*/\nvoid luFactorize(std::vector<COOElement> const& A, std::vector<COOElement> &L, std::vector<COOElement> &U, size_t N) {"
+        "prompt": "struct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Factorize the sparse matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   A is a sparse NxN matrix stored in COO format.\n   Example:\n\n   input: A=[{0,0,4}, {0,1,3}, {1,0,6}, {1,1,3}]\n   output: L=[{0,0,1},{1,0,1.5}, {1,1,1}] U=[{0,0,4}, {0,1,3}, {1,1,-1.5}]\n*/\nvoid luFactorize(std::vector<COOElement> const& A, std::vector<double> &L, std::vector<double> &U, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
         "language": "cpp",
         "name": "49_sparse_la_sparse_lu_decomp",
         "parallelism_model": "hip",
-        "prompt": "struct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Factorize the sparse matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   A is a sparse NxN matrix stored in COO format with sizeA elements.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least sizeA threads.\n   Example:\n\n   input: A=[{0,0,4}, {0,1,3}, {1,0,6}, {1,1,3}]\n   output: L=[{0,0,1},{1,0,1.5}, {1,1,1}] U=[{0,0,4}, {0,1,3}, {1,1,-1.5}]\n*/\n__global__ void luFactorize(const COOElement *A, size_t sizeA, COOElement *L, size_t sizeL, COOElement *U, size_t sizeU, size_t N) {"
+        "prompt": "struct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Factorize the sparse matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   A is a sparse NxN matrix stored in COO format with sizeA elements.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least sizeA threads.\n   Example:\n\n   input: A=[{0,0,4}, {0,1,3}, {1,0,6}, {1,1,3}]\n   output: L=[{0,0,1},{1,0,1.5}, {1,1,1}] U=[{0,0,4}, {0,1,3}, {1,1,-1.5}]\n*/\n__global__ void luFactorize(const COOElement *A, size_t sizeA, double *L, double *U, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
         "language": "cpp",
         "name": "49_sparse_la_sparse_lu_decomp",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Factorize the sparse matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   A is a sparse NxN matrix stored in COO format.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. Store the result in L and U on rank 0.\n   Example:\n\n   input: A=[{0,0,4}, {0,1,3}, {1,0,6}, {1,1,3}]\n   output: L=[{0,0,1},{1,0,1.5}, {1,1,1}] U=[{0,0,4}, {0,1,3}, {1,1,-1.5}]\n*/\nvoid luFactorize(std::vector<COOElement> const& A, std::vector<COOElement> &L, std::vector<COOElement> &U, size_t N) {"
+        "prompt": "#include <mpi.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Factorize the sparse matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   A is a sparse NxN matrix stored in COO format.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. Store the result in L and U on rank 0.\n   Example:\n\n   input: A=[{0,0,4}, {0,1,3}, {1,0,6}, {1,1,3}]\n   output: L=[{0,0,1},{1,0,1.5}, {1,1,1}] U=[{0,0,4}, {0,1,3}, {1,1,-1.5}]\n*/\nvoid luFactorize(std::vector<COOElement> const& A, std::vector<double> &L, std::vector<double> &U, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
         "language": "cpp",
         "name": "49_sparse_la_sparse_lu_decomp",
         "parallelism_model": "cuda",
-        "prompt": "struct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Factorize the sparse matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   A is a sparse NxN matrix stored in COO format with sizeA elements.\n   Use CUDA to compute in parallel. The kernel is launched with at least sizeA threads.\n   Example:\n\n   input: A=[{0,0,4}, {0,1,3}, {1,0,6}, {1,1,3}]\n   output: L=[{0,0,1},{1,0,1.5}, {1,1,1}] U=[{0,0,4}, {0,1,3}, {1,1,-1.5}]\n*/\n__global__ void luFactorize(const COOElement *A, size_t sizeA, COOElement *L, size_t sizeL, COOElement *U, size_t sizeU, size_t N) {"
+        "prompt": "struct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Factorize the sparse matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   A is a sparse NxN matrix stored in COO format with sizeA elements.\n   Use CUDA to compute in parallel. The kernel is launched with at least sizeA threads.\n   Example:\n\n   input: A=[{0,0,4}, {0,1,3}, {1,0,6}, {1,1,3}]\n   output: L=[{0,0,1},{1,0,1.5}, {1,1,1}] U=[{0,0,4}, {0,1,3}, {1,1,-1.5}]\n*/\n__global__ void luFactorize(const COOElement *A, size_t sizeA, double *L, double *U, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
         "language": "cpp",
         "name": "49_sparse_la_sparse_lu_decomp",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Factorize the sparse matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   A is a sparse NxN matrix stored in COO format.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. Store the result in L and U on rank 0.\n   Example:\n\n   input: A=[{0,0,4}, {0,1,3}, {1,0,6}, {1,1,3}]\n   output: L=[{0,0,1},{1,0,1.5}, {1,1,1}] U=[{0,0,4}, {0,1,3}, {1,1,-1.5}]\n*/\nvoid luFactorize(std::vector<COOElement> const& A, std::vector<COOElement> &L, std::vector<COOElement> &U, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Factorize the sparse matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   A is a sparse NxN matrix stored in COO format.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. Store the result in L and U on rank 0.\n   Example:\n\n   input: A=[{0,0,4}, {0,1,3}, {1,0,6}, {1,1,3}]\n   output: L=[{0,0,1},{1,0,1.5}, {1,1,1}] U=[{0,0,4}, {0,1,3}, {1,1,-1.5}]\n*/\nvoid luFactorize(std::vector<COOElement> const& A, std::vector<double> &L, std::vector<double> &U, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
         "language": "cpp",
         "name": "48_sparse_la_sparse_axpy",
         "parallelism_model": "kokkos",
-        "prompt": "#include <Kokkos_Core.hpp>\n\nstruct Element {\n\tsize_t index;\n  double value;\n};\n\n/* Compute z = alpha*x+y where x and y are sparse vectors. Store the result in z.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n   \n   input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1\n   output: z=[{3, 1}, {5, 10}, {7, 1}, {12, -1}]\n*/\nvoid sparseAxpy(double alpha, Kokkos::View<const Element*> &x, Kokkos::View<const Element*> &y, Kokkos::View<Element*> &z) {"
+        "prompt": "#include <Kokkos_Core.hpp>\n\nstruct Element {\n\tsize_t index;\n  double value;\n};\n\n/* Compute z = alpha*x+y where x and y are sparse vectors. Store the result in z.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n   \n   input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1\n   output: z=[{3, 1}, {5, 10}, {7, 1}, {12, -1}]\n*/\nvoid sparseAxpy(double alpha, Kokkos::View<const Element*> &x, Kokkos::View<const Element*> &y, Kokkos::View<double*> &z) {"
     },
     {
         "problem_type": "sparse_la",
         "language": "cpp",
         "name": "48_sparse_la_sparse_axpy",
         "parallelism_model": "omp",
-        "prompt": "#include <omp.h>\n\nstruct Element {\n\tsize_t index;\n  double value;\n};\n\n/* Compute z = alpha*x+y where x and y are sparse vectors. Store the result in z.\n   Use OpenMP to compute in parallel.\n   Example:\n   \n   input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1\n   output: z=[{3, 1}, {5, 10}, {7, 1}, {12, -1}]\n*/\nvoid sparseAxpy(double alpha, std::vector<Element> const& x, std::vector<Element> const& y, std::vector<Element> &z) {"
+        "prompt": "#include <omp.h>\n\nstruct Element {\n\tsize_t index;\n  double value;\n};\n\n/* Compute z = alpha*x+y where x and y are sparse vectors. Store the result in z.\n   Use OpenMP to compute in parallel.\n   Example:\n   \n   input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1\n   output: z=[{3, 1}, {5, 10}, {7, 1}, {12, -1}]\n*/\nvoid sparseAxpy(double alpha, std::vector<Element> const& x, std::vector<Element> const& y, std::vector<double> &z) {"
     },
     {
         "problem_type": "sparse_la",
         "language": "cpp",
         "name": "48_sparse_la_sparse_axpy",
         "parallelism_model": "serial",
-        "prompt": "struct Element {\n\tsize_t index;\n  double value;\n};\n\n/* Compute z = alpha*x+y where x and y are sparse vectors. Store the result in z.\n   Example:\n   \n   input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1\n   output: z=[{3, 1}, {5, 10}, {7, 1}, {12, -1}]\n*/\nvoid sparseAxpy(double alpha, std::vector<Element> const& x, std::vector<Element> const& y, std::vector<Element> &z) {"
+        "prompt": "struct Element {\n\tsize_t index;\n  double value;\n};\n\n/* Compute z = alpha*x+y where x and y are sparse vectors. Store the result in z.\n   Example:\n   \n   input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1\n   output: z=[{3, 1}, {5, 10}, {7, 1}, {12, -1}]\n*/\nvoid sparseAxpy(double alpha, std::vector<Element> const& x, std::vector<Element> const& y, std::vector<double> &z) {"
     },
     {
         "problem_type": "sparse_la",
         "language": "cpp",
         "name": "48_sparse_la_sparse_axpy",
         "parallelism_model": "hip",
-        "prompt": "struct Element {\n\tsize_t index;\n  double value;\n};\n\n/* Compute z = alpha*x+y where x and y are sparse vectors of size Nx and Ny. Store the result in z.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as values in x or y.\n   Example:\n   \n   input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1\n   output: z=[{3, 1}, {5, 10}, {7, 1}, {12, -1}]\n*/\n__global__ void sparseAxpy(double alpha, const Element *x, const Element *y, Element *z, size_t Nx, size_t Ny, size_t Nz) {"
+        "prompt": "struct Element {\n\tsize_t index;\n  double value;\n};\n\n/* Compute z = alpha*x+y where x and y are sparse vectors of size Nx and Ny. Store the result in z.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as values in x or y.\n   Example:\n   \n   input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1\n   output: z=[{3, 1}, {5, 10}, {7, 1}, {12, -1}]\n*/\n__global__ void sparseAxpy(double alpha, const Element *x, const Element *y, double *z, size_t Nx, size_t Ny, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
         "language": "cpp",
         "name": "48_sparse_la_sparse_axpy",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\nstruct Element {\n\tsize_t index;\n  double value;\n};\n\n/* Compute z = alpha*x+y where x and y are sparse vectors. Store the result in z.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x and y. Store the result in z on rank 0.\n   Example:\n   \n   input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1\n   output: z=[{3, 1}, {5, 10}, {7, 1}, {12, -1}]\n*/\nvoid sparseAxpy(double alpha, std::vector<Element> const& x, std::vector<Element> const& y, std::vector<Element> &z) {"
+        "prompt": "#include <mpi.h>\n\nstruct Element {\n\tsize_t index;\n  double value;\n};\n\n/* Compute z = alpha*x+y where x and y are sparse vectors. Store the result in z.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x and y. Store the result in z on rank 0.\n   Example:\n   \n   input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1\n   output: z=[{3, 1}, {5, 10}, {7, 1}, {12, -1}]\n*/\nvoid sparseAxpy(double alpha, std::vector<Element> const& x, std::vector<Element> const& y, std::vector<double> &z) {"
     },
     {
         "problem_type": "sparse_la",
         "language": "cpp",
         "name": "48_sparse_la_sparse_axpy",
         "parallelism_model": "cuda",
-        "prompt": "struct Element {\n\tsize_t index;\n  double value;\n};\n\n/* Compute z = alpha*x+y where x and y are sparse vectors of size Nx and Ny. Store the result in z.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x or y.\n   Example:\n   \n   input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1\n   output: z=[{3, 1}, {5, 10}, {7, 1}, {12, -1}]\n*/\n__global__ void sparseAxpy(double alpha, const Element *x, const Element *y, Element *z, size_t Nx, size_t Ny, size_t Nz) {"
+        "prompt": "struct Element {\n\tsize_t index;\n  double value;\n};\n\n/* Compute z = alpha*x+y where x and y are sparse vectors of size Nx and Ny. Store the result in z.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x or y.\n   Example:\n   \n   input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1\n   output: z=[{3, 1}, {5, 10}, {7, 1}, {12, -1}]\n*/\n__global__ void sparseAxpy(double alpha, const Element *x, const Element *y, double *z, size_t Nx, size_t Ny, size_t N) {"
     },
     {
         "problem_type": "sparse_la",
         "language": "cpp",
         "name": "48_sparse_la_sparse_axpy",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct Element {\n\tsize_t index;\n  double value;\n};\n\n/* Compute z = alpha*x+y where x and y are sparse vectors. Store the result in z.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x and y. Store the result in z on rank 0.\n   Example:\n   \n   input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1\n   output: z=[{3, 1}, {5, 10}, {7, 1}, {12, -1}]\n*/\nvoid sparseAxpy(double alpha, std::vector<Element> const& x, std::vector<Element> const& y, std::vector<Element> &z) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\nstruct Element {\n\tsize_t index;\n  double value;\n};\n\n/* Compute z = alpha*x+y where x and y are sparse vectors. Store the result in z.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x and y. Store the result in z on rank 0.\n   Example:\n   \n   input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1\n   output: z=[{3, 1}, {5, 10}, {7, 1}, {12, -1}]\n*/\nvoid sparseAxpy(double alpha, std::vector<Element> const& x, std::vector<Element> const& y, std::vector<double> &z) {"
     },
     {
         "problem_type": "histogram",
@@ -1817,7 +1817,7 @@
         "language": "cpp",
         "name": "39_search_xor_contains",
         "parallelism_model": "kokkos",
-        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Return true if `val` is only in one of vectors x or y.\n   Return false if it is in both or neither.\n   Use Kokkos to search in parallel. Assume Kokkos has already been initialized.\n   Examples:\n\n   input: x=[1,8,4,3,2], y=[3,4,4,1,1,7], val=7\n   output: true\n\n   input: x=[1,8,4,3,2], y=[3,4,4,1,1,7], val=1\n   output: false\n*/\nbool xorContains(Kokkos::View<const int*> const& x, std::vector<const int*> const& y, int val) {"
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Return true if `val` is only in one of vectors x or y.\n   Return false if it is in both or neither.\n   Use Kokkos to search in parallel. Assume Kokkos has already been initialized.\n   Examples:\n\n   input: x=[1,8,4,3,2], y=[3,4,4,1,1,7], val=7\n   output: true\n\n   input: x=[1,8,4,3,2], y=[3,4,4,1,1,7], val=1\n   output: false\n*/\nbool xorContains(Kokkos::View<const int*> const& x, Kokkos::View<const int*> const& y, int val) {"
     },
     {
         "problem_type": "search",
@@ -1887,7 +1887,7 @@
         "language": "cpp",
         "name": "35_search_search_for_last_struct_by_key",
         "parallelism_model": "hip",
-        "prompt": "struct Book {\n   char* title;\n   int pages;\n};\n\n/* Return the index of the last Book item in the vector books where Book.pages is less than 100.\n   Store the result in lastShortBookIndex.\n   Use AMD HIP to search in parallel. The kernel is launched with one thread for every book element.\n\t Example:\n\n   input: [{title=\"Green Eggs and Ham\", pages=72}, {title=\"gulliver's travels\", pages=362}, {title=\"Stories of Your Life\", pages=54}, {title=\"Hamilton\", pages=818}]\n   output: 2\n*/\n__global__ void findLastShortBook(const Book *books, size_t N, size_t *lastShortBookIndex) {"
+        "prompt": "struct Book {\n   const char* title;\n   int pages;\n};\n\n/* Return the index of the last Book item in the vector books where Book.pages is less than 100.\n   Store the result in lastShortBookIndex.\n   Use AMD HIP to search in parallel. The kernel is launched with one thread for every book element.\n\t Example:\n\n   input: [{title=\"Green Eggs and Ham\", pages=72}, {title=\"gulliver's travels\", pages=362}, {title=\"Stories of Your Life\", pages=54}, {title=\"Hamilton\", pages=818}]\n   output: 2\n*/\n__global__ void findLastShortBook(const Book *books, size_t N, size_t *lastShortBookIndex) {"
     },
     {
         "problem_type": "search",
@@ -1901,7 +1901,7 @@
         "language": "cpp",
         "name": "35_search_search_for_last_struct_by_key",
         "parallelism_model": "cuda",
-        "prompt": "struct Book {\n   char* title;\n   int pages;\n};\n\n/* Find the index of the last Book item in the vector books where Book.pages is less than 100.\n   Store the result in lastShortBookIndex.\n   Use CUDA to search in parallel. The kernel is launched with one thread for every book element.\n\t Example:\n\n   input: [{title=\"Green Eggs and Ham\", pages=72}, {title=\"gulliver's travels\", pages=362}, {title=\"Stories of Your Life\", pages=54}, {title=\"Hamilton\", pages=818}]\n   output: 2\n*/\n__global__ void findLastShortBook(const Book *books, size_t N, size_t *lastShortBookIndex) {"
+        "prompt": "struct Book {\n   const char* title;\n   int pages;\n};\n\n/* Find the index of the last Book item in the vector books where Book.pages is less than 100.\n   Store the result in lastShortBookIndex.\n   Use CUDA to search in parallel. The kernel is launched with one thread for every book element.\n\t Example:\n\n   input: [{title=\"Green Eggs and Ham\", pages=72}, {title=\"gulliver's travels\", pages=362}, {title=\"Stories of Your Life\", pages=54}, {title=\"Hamilton\", pages=818}]\n   output: 2\n*/\n__global__ void findLastShortBook(const Book *books, size_t N, size_t *lastShortBookIndex) {"
     },
     {
         "problem_type": "search",
@@ -1985,7 +1985,7 @@
         "language": "cpp",
         "name": "08_fft_split_fft",
         "parallelism_model": "hip",
-        "prompt": "/* Compute the fourier transform of x. Store real part of results in r and imaginary in i.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: r: [4, 1, 0, 1, 0, 1, 0, 1] i: [0, -2.41421, 0, -0.414214, 0, 0.414214, 0, 2.41421]\n*/\n__global__ void fft(const hipDoubleComplex *x, hipDoubleComplex *r, hipDoubleComplex *i, size_t N) {"
+        "prompt": "/* Compute the fourier transform of x. Store real part of results in r and imaginary in i.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: r: [4, 1, 0, 1, 0, 1, 0, 1] i: [0, -2.41421, 0, -0.414214, 0, 0.414214, 0, 2.41421]\n*/\n__global__ void fft(const hipDoubleComplex *x, double *r, double *i, size_t N) {"
     },
     {
         "problem_type": "fft",
@@ -1999,7 +1999,7 @@
         "language": "cpp",
         "name": "08_fft_split_fft",
         "parallelism_model": "cuda",
-        "prompt": "/* Compute the fourier transform of x. Store real part of results in r and imaginary in i.\n   Use CUDA to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: r: [4, 1, 0, 1, 0, 1, 0, 1] i: [0, -2.41421, 0, -0.414214, 0, 0.414214, 0, 2.41421]\n*/\n__global__ void fft(const cuDoubleComplex *x, cuDoubleComplex *r, cuDoubleComplex *i, size_t N) {"
+        "prompt": "/* Compute the fourier transform of x. Store real part of results in r and imaginary in i.\n   Use CUDA to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: r: [4, 1, 0, 1, 0, 1, 0, 1] i: [0, -2.41421, 0, -0.414214, 0, 0.414214, 0, 2.41421]\n*/\n__global__ void fft(const cuDoubleComplex *x, double *r, double *i, size_t N) {"
     },
     {
         "problem_type": "fft",
@@ -2013,49 +2013,49 @@
         "language": "cpp",
         "name": "07_fft_fft_conjugate",
         "parallelism_model": "kokkos",
-        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Compute the fourier transform of x in-place. Return the imaginary conjugate of each value.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.41421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fft(Kokkos::View<Kokkos::complex<double>*> &x) {"
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Compute the fourier transform of x in-place. Return the imaginary conjugate of each value.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.41421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fftConjugate(Kokkos::View<Kokkos::complex<double>*> &x) {"
     },
     {
         "problem_type": "fft",
         "language": "cpp",
         "name": "07_fft_fft_conjugate",
         "parallelism_model": "omp",
-        "prompt": "#include <omp.h>\n\n/* Compute the fourier transform of x in-place. Return the imaginary conjugate of each value.\n   Use OpenMP to compute in parallel.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.41421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fft(std::vector<std::complex<double>> &x) {"
+        "prompt": "#include <omp.h>\n\n/* Compute the fourier transform of x in-place. Return the imaginary conjugate of each value.\n   Use OpenMP to compute in parallel.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.41421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fftConjugate(std::vector<std::complex<double>> &x) {"
     },
     {
         "problem_type": "fft",
         "language": "cpp",
         "name": "07_fft_fft_conjugate",
         "parallelism_model": "serial",
-        "prompt": "/* Compute the fourier transform of x in-place. Return the imaginary conjugate of each value.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.41421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fft(std::vector<std::complex<double>> &x) {"
+        "prompt": "/* Compute the fourier transform of x in-place. Return the imaginary conjugate of each value.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.41421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fftConjugate(std::vector<std::complex<double>> &x) {"
     },
     {
         "problem_type": "fft",
         "language": "cpp",
         "name": "07_fft_fft_conjugate",
         "parallelism_model": "hip",
-        "prompt": "/* Compute the fourier transform of x in-place. Return the imaginary conjugate of each value.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.41421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\n__global__ void fft(hipDoubleComplex *x, size_t N) {"
+        "prompt": "/* Compute the fourier transform of x in-place. Return the imaginary conjugate of each value.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.41421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\n__global__ void fftConjugate(hipDoubleComplex *x, size_t N) {"
     },
     {
         "problem_type": "fft",
         "language": "cpp",
         "name": "07_fft_fft_conjugate",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Compute the fourier transform of x in-place. Return the imaginary conjugate of each value.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. The final result is stored on rank 0.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.41421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fft(std::vector<std::complex<double>> &x) {"
+        "prompt": "#include <mpi.h>\n\n/* Compute the fourier transform of x in-place. Return the imaginary conjugate of each value.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. The final result is stored on rank 0.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.41421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fftConjugate(std::vector<std::complex<double>> &x) {"
     },
     {
         "problem_type": "fft",
         "language": "cpp",
         "name": "07_fft_fft_conjugate",
         "parallelism_model": "cuda",
-        "prompt": "/* Compute the fourier transform of x in-place. Return the imaginary conjugate of each value.\n   Use CUDA to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.41421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\n__global__ void fft(cuDoubleComplex *x, size_t N) {"
+        "prompt": "/* Compute the fourier transform of x in-place. Return the imaginary conjugate of each value.\n   Use CUDA to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.41421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\n__global__ void fftConjugate(cuDoubleComplex *x, size_t N) {"
     },
     {
         "problem_type": "fft",
         "language": "cpp",
         "name": "07_fft_fft_conjugate",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the fourier transform of x in-place. Return the imaginary conjugate of each value.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. The final result is stored on rank 0.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.41421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fft(std::vector<std::complex<double>> &x) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Compute the fourier transform of x in-place. Return the imaginary conjugate of each value.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of x. The final result is stored on rank 0.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.41421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fftConjugate(std::vector<std::complex<double>> &x) {"
     },
     {
         "problem_type": "fft",
@@ -2160,42 +2160,42 @@
         "language": "cpp",
         "name": "09_fft_fft_out_of_place",
         "parallelism_model": "kokkos",
-        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Compute the discrete fourier transform of x. Store the result in output.\n   Use Kokkos to compute in parallel. Assume Kokkos is already initialized.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.42421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fft(Kokkos::View<const Kokkos::complex<double>*> &x, Kokkos::View<Kokkos::complex<double>*> &output) {"
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Compute the fourier transform of x. Store the result in output.\n   Use Kokkos to compute in parallel. Assume Kokkos is already initialized.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.42421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fft(Kokkos::View<const Kokkos::complex<double>*> &x, Kokkos::View<Kokkos::complex<double>*> &output) {"
     },
     {
         "problem_type": "fft",
         "language": "cpp",
         "name": "09_fft_fft_out_of_place",
         "parallelism_model": "omp",
-        "prompt": "#include <omp.h>\n\n/* Compute the discrete fourier transform of x. Store the result in output.\n   Use OpenMP to compute in parallel.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.42421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fft(std::vector<std::complex<double>> const& x, std::vector<std::complex<double>> &output) {"
+        "prompt": "#include <omp.h>\n\n/* Compute the fourier transform of x. Store the result in output.\n   Use OpenMP to compute in parallel.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.42421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fft(std::vector<std::complex<double>> const& x, std::vector<std::complex<double>> &output) {"
     },
     {
         "problem_type": "fft",
         "language": "cpp",
         "name": "09_fft_fft_out_of_place",
         "parallelism_model": "serial",
-        "prompt": "/* Compute the discrete fourier transform of x. Store the result in output.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.42421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fft(std::vector<std::complex<double>> const& x, std::vector<std::complex<double>> &output) {"
+        "prompt": "/* Compute the fourier transform of x. Store the result in output.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.42421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fft(std::vector<std::complex<double>> const& x, std::vector<std::complex<double>> &output) {"
     },
     {
         "problem_type": "fft",
         "language": "cpp",
         "name": "09_fft_fft_out_of_place",
         "parallelism_model": "hip",
-        "prompt": "/* Compute the discrete fourier transform of x. Store the result in output.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.42421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\n__global__ void fft(const hipDoubleComplex *x, hipDoubleComplex *output, size_t N) {"
+        "prompt": "/* Compute the fourier transform of x. Store the result in output.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.42421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\n__global__ void fft(const hipDoubleComplex *x, hipDoubleComplex *output, size_t N) {"
     },
     {
         "problem_type": "fft",
         "language": "cpp",
         "name": "09_fft_fft_out_of_place",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Compute the discrete fourier transform of x. Store the result in output.\n   Use MPI to compute in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.42421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fft(std::vector<std::complex<double>> const& x, std::vector<std::complex<double>> &output) {"
+        "prompt": "#include <mpi.h>\n\n/* Compute the fourier transform of x. Store the result in output.\n   Use MPI to compute in parallel. Assume MPI is already initialized.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.42421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fft(std::vector<std::complex<double>> const& x, std::vector<std::complex<double>> &output) {"
     },
     {
         "problem_type": "fft",
         "language": "cpp",
         "name": "09_fft_fft_out_of_place",
         "parallelism_model": "cuda",
-        "prompt": "/* Compute the discrete fourier transform of x. Store the result in output.\n   Use CUDA to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.42421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\n__global__ void fft(const cuDoubleComplex *x, cuDoubleComplex *output, size_t N) {"
+        "prompt": "/* Compute the fourier transform of x. Store the result in output.\n   Use CUDA to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.42421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\n__global__ void fft(const cuDoubleComplex *x, cuDoubleComplex *output, size_t N) {"
     },
     {
         "problem_type": "fft",

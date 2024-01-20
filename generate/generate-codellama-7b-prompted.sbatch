@@ -14,9 +14,10 @@ TEMP=0.2
 TOPP=0.95
 MAX_NEW_TKNS=1024
 SAMPLES_PER_PROMPT=20
-BATCH_SIZE=8
+BATCH_SIZE=4
 hash=$(md5sum ../prompts/generation-prompts.json | cut -d' ' -f1)
 OUTPUT="../outputs/output_${hash:0:8}_${MODEL//\//--}_prompted_temp${TEMP}.json"
+CACHE="../outputs/cache/cache_${hash:0:8}_${MODEL//\//--}_prompted_temp${TEMP}.jsonl"
 echo "Writing to $OUTPUT"
 echo "model=$MODEL   MAX_NEW_TKNS=$MAX_NEW_TKNS   SAMPLES_PER_PROMPT=$SAMPLES_PER_PROMPT   BATCH_SIZE=$BATCH_SIZE"
 
@@ -31,6 +32,8 @@ srun python generate.py \
     --model $MODEL \
     --prompts ../prompts/generation-prompts.json \
     --output $OUTPUT \
+    --cache $CACHE \
+    --restore_from ../outputs/zj_outputs/output_496edbdf_codellama--CodeLlama-7b-hf_prompted_temp0.2.json \
     --temperature $TEMP \
     --top_p $TOPP \
     --do_sample \

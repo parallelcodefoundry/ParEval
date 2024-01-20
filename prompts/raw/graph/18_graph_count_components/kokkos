@@ -1,5 +1,5 @@
-/* Count the number of connected components in the graph defined by the adjacency matrix A.
-   A is an NxN adjacency matrix.
+/* Count the number of connected components in the undirected graph defined by the adjacency matrix A.
+   A is an NxN adjacency matrix. A is an undirected graph.
 	 Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.
    Example:
 

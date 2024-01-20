@@ -1,4 +1,4 @@
-/* Compute the discrete fourier transform of x. Store the result in output.
+/* Compute the fourier transform of x. Store the result in output.
    Use OpenMP to compute in parallel.
    Example:
 

@@ -56,7 +56,7 @@ void NO_OPTIMIZE best(Context *ctx) {
 bool validate(Context *ctx) {
     const size_t TEST_SIZE = 1024;
 
-    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
+    const size_t numTries = 10;
     for (int i = 0; i < numTries; i += 1) {
         // set up input
         std::vector<double> input(TEST_SIZE);

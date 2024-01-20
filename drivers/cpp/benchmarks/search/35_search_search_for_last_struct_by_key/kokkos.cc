@@ -74,7 +74,7 @@ void NO_OPTIMIZE best(Context *ctx) {
 
 bool validate(Context *ctx) {
 
-    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
+    const size_t numTries = 5;
     for (int i = 0; i < numTries; i += 1) {
         std::vector<int> pages(1024);
         std::vector<Book> input(1024);

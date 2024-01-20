@@ -5,8 +5,8 @@
 #SBATCH -t 23:59:59
 #SBATCH -p gpu
 #SBATCH --gpus=a100:1
-#SBATCH -J generate-codellama-7b-bs8
-#SBATCH -o generate-codellama-7b-bs8-%A.out
+#SBATCH -J generate-codellama-7b
+#SBATCH -o generate-codellama-7b-%A.out
 
 # settings
 MODEL="codellama/CodeLlama-7b-hf"
@@ -17,6 +17,7 @@ SAMPLES_PER_PROMPT=20
 BATCH_SIZE=8
 hash=$(md5sum ../prompts/generation-prompts.json | cut -d' ' -f1)
 OUTPUT="../outputs/output_${hash:0:8}_${MODEL//\//--}_temp${TEMP}.json"
+CACHE="../outputs/cache/cache_${hash:0:8}_${MODEL//\//--}_temp${TEMP}.jsonl"
 echo "Writing to $OUTPUT"
 echo "model=$MODEL   MAX_NEW_TKNS=$MAX_NEW_TKNS   SAMPLES_PER_PROMPT=$SAMPLES_PER_PROMPT   BATCH_SIZE=$BATCH_SIZE"
 
@@ -30,6 +31,8 @@ export OMP_NUM_THREADS=4
 srun python generate.py \
     --model $MODEL \
     --prompts ../prompts/generation-prompts.json \
+    --cache $CACHE \
+    --restore_from ../outputs/zj_outputs/output_496edbdf_codellama--CodeLlama-7b-hf_temp0.2.json \
     --output $OUTPUT \
     --temperature $TEMP \
     --top_p $TOPP \

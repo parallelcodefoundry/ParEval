@@ -90,7 +90,10 @@ class CppDriverWrapper(DriverWrapper):
             binaries_str = ' '.join(binaries)
             macro = f"-DUSE_{self.parallelism_model.upper()}"
             cmd = f"{CXX} {CXXFLAGS} -Icpp -Icpp/models {macro} {binaries_str} -o {output_path}"
-            compile_process = run_command(cmd, timeout=self.build_timeout, dry=self.dry)
+            try:
+                compile_process = run_command(cmd, timeout=self.build_timeout, dry=self.dry)
+            except subprocess.TimeoutExpired as e:
+                return BuildOutput(-1, str(e.stdout), f"[Timeout] {str(e.stderr)}")
         return BuildOutput(compile_process.returncode, compile_process.stdout, compile_process.stderr)
 
     def run(self, executable: PathLike, **run_config) -> RunOutput:
@@ -100,7 +103,6 @@ class CppDriverWrapper(DriverWrapper):
         try:
             run_process = run_command(launch_cmd, timeout=self.run_timeout, dry=self.dry)
         except subprocess.TimeoutExpired as e:
-            print(str(e.stdout))
             return RunOutput(-1, str(e.stdout), f"[Timeout] {str(e.stderr)}", config=run_config)
         return RunOutput(run_process.returncode, run_process.stdout, run_process.stderr, config=run_config)
 

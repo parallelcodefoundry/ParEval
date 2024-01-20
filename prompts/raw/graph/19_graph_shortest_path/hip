@@ -1,5 +1,5 @@
-/* Compute the length of the shortest path from source to dest in the graph defined by the adjacency matrix A.
-   A is an NxN adjacency matrix stored in row-major.
+/* Compute the length of the shortest path from source to dest in the undirected graph defined by the adjacency matrix A.
+   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.
    Store the result in pathLength.
    Use AMD HIP to compute in parallel. The kernel is launched on an NxN grid of threads.
    Example:
