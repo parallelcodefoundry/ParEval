@@ -1,6 +1,6 @@
-/* Compute the number of vertices in the largest component of the graph defined by the adjacency matrix A.
+/* Compute the number of vertices in the largest component of the undirected graph defined by the adjacency matrix A.
    Store the result in largestComponentSize.
-   A is an NxN adjacency matrix stored in row-major.
+   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.
    Use CUDA to compute in parallel. The kernel is launched on an NxN grid of threads.
    Example:
 

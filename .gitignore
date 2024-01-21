@@ -11,3 +11,6 @@ __pycache__
 *.exe
 a.out
 *.o
+
+# editor buffers
+*~

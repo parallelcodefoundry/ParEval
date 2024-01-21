@@ -5,7 +5,7 @@
 //    input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]
 //    output: [{4,0}, {1,-2.41421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]
 // */
-// void fft(std::vector<std::complex<double>> &x) {
+// void fftConjugate(std::vector<std::complex<double>> &x) {
 
 #include <algorithm>
 #include <cmath>
@@ -45,7 +45,7 @@ Context *init() {
 }
 
 void NO_OPTIMIZE compute(Context *ctx) {
-    fft(ctx->x);
+    fftConjugate(ctx->x);
 }
 
 void NO_OPTIMIZE best(Context *ctx) {
@@ -79,7 +79,7 @@ bool validate(Context *ctx) {
 
         // compute test result
         std::vector<std::complex<double>> test = x;
-        fft(test);
+        fftConjugate(test);
         SYNC();
         
         bool isCorrect = true;

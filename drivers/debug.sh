@@ -8,11 +8,13 @@ fi
 
 if [[ $(hostname) == nid* ]]; then
     SYSTEM="perlmutter"
+elif [[ $(hostname) == corona* ]]; then
+    SYSTEM="corona"
 else
     SYSTEM="zaratan"
 fi
 
-OUTPUTS="../outputs/output_800a7a5d_bigcode--starcoderbase_prompted_temp0.2.json"
+OUTPUTS="../outputs/output_a8724ee8_gpt-4_temp0.2.json"
 PROBLEM="$1"
 MODEL="$2"
 LOG_LEVEL="$3"
@@ -56,6 +58,8 @@ elif [ $MODEL == "kokkos" ]; then
     fi
 elif [ $MODEL == "cuda" ]; then
     ml python gcc/11.3.0 cuda/12.1.1/gcc/11.3.0/
+elif [ $MODEL == "hip" ]; then
+    ml python rocm/5.7.0 flux_wrappers/0.1
 else
     echo "Invalid model: $MODEL"
     exit 1
@@ -63,6 +67,8 @@ fi
 
 if [ $SYSTEM == "perlmutter" ]; then
     SCRATCH_DIR="/pscratch/sd/d/dnicho/.tmp"
+elif [ $SYSTEM == "corona" ]; then
+    SCRATCH_DIR="/tmp"
 else
     SCRATCH_DIR=~/scratch/.tmp
 fi
@@ -74,7 +80,7 @@ python run-all.py \
     --launch-configs test-launch-configs.json \
     --yes-to-all \
     --early-exit-runs \
-    --run-timeout 40 \
+    --run-timeout 30 \
     --problem $PROBLEM \
     --include-models $MODEL \
     $LOG_ARGS \

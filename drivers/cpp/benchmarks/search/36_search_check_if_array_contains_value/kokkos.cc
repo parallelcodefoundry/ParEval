@@ -62,13 +62,18 @@ void NO_OPTIMIZE best(Context *ctx) {
 
 bool validate(Context *ctx) {
 
-    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
+    const size_t numTries = 20;
     for (int i = 0; i < numTries; i += 1) {
         std::vector<int> input(1024);
         Kokkos::View<int*> inputView = Kokkos::View<int*>("input", input.size());
 
         fillRand(input, -50, 50);
-        int target = (rand() % 200) - 100;
+        int target;
+        if (i == 1) {
+            target = input[rand() % input.size()];
+        } else {
+            target = (rand() % 200) - 100;
+        }
         copyVectorToView(input, inputView);
 
         // compute correct result

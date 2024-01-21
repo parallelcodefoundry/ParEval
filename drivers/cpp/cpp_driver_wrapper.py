@@ -26,6 +26,7 @@ DRIVER_MAP = {
     "mpi+omp": "mpi-omp-driver.o",
     "kokkos": "kokkos-driver.o",
     "cuda": "cuda-driver.o",
+    "hip": "hip-driver.o",
 }
 
 """ Compiler settings """
@@ -35,7 +36,8 @@ COMPILER_SETTINGS = {
     "mpi": {"CXX": "mpicxx", "CXXFLAGS": "-std=c++17 -O3"},
     "mpi+omp": {"CXX": "mpicxx", "CXXFLAGS": "-std=c++17 -O3 -fopenmp"},
     "kokkos": {"CXX": "g++", "CXXFLAGS": "-std=c++17 -O3 -fopenmp -I../tpl/kokkos/build/include ../tpl/kokkos/build/lib64/libkokkoscore.a ../tpl/kokkos/build/lib64/libkokkoscontainers.a ../tpl/kokkos/build/lib64/libkokkossimd.a"},
-    "cuda": {"CXX": "nvcc", "CXXFLAGS": "-std=c++17 -O3 -Xcompiler \"-std=c++17 -O3\""},
+    "cuda": {"CXX": "nvcc", "CXXFLAGS": "-std=c++17 --generate-code arch=compute_80,code=sm_80 -O3 -Xcompiler \"-std=c++17 -O3\""},
+    "hip": {"CXX": "hipcc", "CXXFLAGS": "-std=c++17 -O3 -Xcompiler \"-std=c++17\" -Xcompiler \"-O3\" -Wno-unused-result"}
 }
 
 def build_kokkos(driver_src: PathLike, output_root: PathLike, problem_size: str = "(1<<20)"):
@@ -90,7 +92,10 @@ class CppDriverWrapper(DriverWrapper):
             binaries_str = ' '.join(binaries)
             macro = f"-DUSE_{self.parallelism_model.upper()}"
             cmd = f"{CXX} {CXXFLAGS} -Icpp -Icpp/models {macro} {binaries_str} -o {output_path}"
-            compile_process = run_command(cmd, timeout=self.build_timeout, dry=self.dry)
+            try:
+                compile_process = run_command(cmd, timeout=self.build_timeout, dry=self.dry)
+            except subprocess.TimeoutExpired as e:
+                return BuildOutput(-1, str(e.stdout), f"[Timeout] {str(e.stderr)}")
         return BuildOutput(compile_process.returncode, compile_process.stdout, compile_process.stderr)
 
     def run(self, executable: PathLike, **run_config) -> RunOutput:

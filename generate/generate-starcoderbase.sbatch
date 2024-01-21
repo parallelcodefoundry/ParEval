@@ -10,10 +10,10 @@
 
 # settings
 MODEL="bigcode/starcoderbase"
-TEMP=0.8
+TEMP=0.2
 TOPP=0.95
 MAX_NEW_TKNS=1024
-SAMPLES_PER_PROMPT=200
+SAMPLES_PER_PROMPT=20
 BATCH_SIZE=16
 hash=$(md5sum ../prompts/generation-prompts.json | cut -d' ' -f1)
 OUTPUT="../outputs/output_${hash:0:8}_${MODEL//\//--}_temp${TEMP}.json"
@@ -32,6 +32,7 @@ srun python generate.py \
     --model $MODEL \
     --prompts ../prompts/generation-prompts.json \
     --cache $CACHE \
+    --restore_from ../outputs/zj_outputs/output_496edbdf_bigcode--starcoderbase_temp0.2.json \
     --output $OUTPUT \
     --temperature $TEMP \
     --top_p $TOPP \
