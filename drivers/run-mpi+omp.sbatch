@@ -3,12 +3,12 @@
 #SBATCH --exclusive
 #SBATCH -t 06:00:00
 #SBATCH -A bhatele-lab-cmsc
-#SBATCH -J mpi+omp-codellama-13b-hf_prompted
-#SBATCH -o run-outputs/codellama-13b-hf_prompted-mpi+omp-%A.out
+#SBATCH -J mpi+omp-gpt-3.5
+#SBATCH -o run-outputs/gpt-3.5-mpi+omp-%A.out
 
 # settings
 HASH="a8724ee8"
-MODEL="codellama-13b-hf_prompted"
+MODEL="gpt-3.5"
 TEMP="0.2"
 
 GENERATED_PROMPTS="../results/${HASH}/${MODEL}_temp${TEMP}/all.json"
@@ -22,7 +22,7 @@ export OMP_PLACES=cores
 export OMPI_MCA_opal_warn_on_missing_libcuda=0
 
 python run-all.py \
-    $GENERATED_PROMPTS \
+    $OUTPUT \
     --output $OUTPUT \
     --scratch-dir $SCRATCH_DIR \
     --launch-configs launch-configs.json \

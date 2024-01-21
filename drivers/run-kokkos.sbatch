@@ -2,14 +2,14 @@
 #SBATCH -N 1
 #SBATCH --exclusive
 #SBATCH -p serial
-#SBATCH -t 06:00:00
+#SBATCH -t 08:00:00
 #SBATCH -A bhatele-lab-cmsc
-#SBATCH -J kokkos-codellama-13b-hf_prompted
-#SBATCH -o run-outputs/codellama-13b-hf_prompted-kokkos-%A.out
+#SBATCH -J kokkos-gpt-3.5
+#SBATCH -o run-outputs/gpt-3.5-kokkos-%A.out
 
 # settings
 HASH="a8724ee8"
-MODEL="codellama-13b-hf_prompted"
+MODEL="gpt-3.5"
 TEMP="0.2"
 
 GENERATED_PROMPTS="../results/${HASH}/${MODEL}_temp${TEMP}/all.json"
@@ -22,7 +22,7 @@ export OMP_PROC_BIND=spread
 export OMP_PLACES=cores
 
 python run-all.py \
-    $GENERATED_PROMPTS \
+    $OUTPUT \
     --output $OUTPUT \
     --scratch-dir $SCRATCH_DIR \
     --launch-configs launch-configs.json \
