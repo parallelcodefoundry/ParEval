@@ -2,6 +2,7 @@
 #include <cassert>
 #include <cmath>
 #include <climits>
+#include <cfloat>
 #include <string>
 #include <complex>
 #include <type_traits>
