@@ -90,22 +90,22 @@
     "hip": "(1<<18)"
   },
   "10_geometry_convex_hull": {
-    "serial": "(1<<20)",
-    "omp": "(1<<20)",
-    "mpi": "(1<<20)",
-    "mpi+omp": "(1<<20)",
-    "kokkos": "(1<<20)",
-    "cuda": "(1<<20)",
-    "hip": "(1<<20)"
+    "serial": "(1<<16)",
+    "omp": "(1<<16)",
+    "mpi": "(1<<16)",
+    "mpi+omp": "(1<<16)",
+    "kokkos": "(1<<16)",
+    "cuda": "(1<<16)",
+    "hip": "(1<<16)"
   },
   "11_geometry_convex_hull_perimeter": {
-    "serial": "(1<<20)",
-    "omp": "(1<<20)",
-    "mpi": "(1<<20)",
-    "mpi+omp": "(1<<20)",
-    "kokkos": "(1<<20)",
-    "cuda": "(1<<20)",
-    "hip": "(1<<20)"
+    "serial": "(1<<16)",
+    "omp": "(1<<16)",
+    "mpi": "(1<<16)",
+    "mpi+omp": "(1<<16)",
+    "kokkos": "(1<<16)",
+    "cuda": "(1<<16)",
+    "hip": "(1<<16)"
   },
   "12_geometry_smallest_triangle": {
     "serial": "(1<<20)",
