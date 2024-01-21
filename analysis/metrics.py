@@ -14,10 +14,10 @@ import pandas as pd
 def get_args():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("input_csv", type=str, help="Input CSV file containing the test cases.")
-    parser.add_argument("-k", "--k", type=int, nargs='+', default=[1,5,10], help="K value for pass@k, build@k, and speedup@k.")
+    parser.add_argument("-k", "--k", type=int, nargs='+', default=[1,5,10,20], help="K value for pass@k, build@k, and speedup@k.")
     parser.add_argument("-n", "--n", type=int, default=1, help="N value for speedup@k.")
     parser.add_argument("-o", "--output", type=str, help="Output csv file containing the results.")
-    parser.add_argument("--problem-sizes", type=str, required=True, help="Json with problem sizes. Used for calculating GPU efficiency.")
+    parser.add_argument("--problem-sizes", type=str, default='../drivers/problem-sizes.json', help="Json with problem sizes. Used for calculating GPU efficiency.")
     parser.add_argument("--model-name", type=str, help="Add model name column with this value")
     return parser.parse_args()
 
