@@ -35,7 +35,7 @@ COMPILER_SETTINGS = {
     "mpi": {"CXX": "mpicxx", "CXXFLAGS": "-std=c++17 -O3"},
     "mpi+omp": {"CXX": "mpicxx", "CXXFLAGS": "-std=c++17 -O3 -fopenmp"},
     "kokkos": {"CXX": "g++", "CXXFLAGS": "-std=c++17 -O3 -fopenmp -I../tpl/kokkos/build/include ../tpl/kokkos/build/lib64/libkokkoscore.a ../tpl/kokkos/build/lib64/libkokkoscontainers.a ../tpl/kokkos/build/lib64/libkokkossimd.a"},
-    "cuda": {"CXX": "nvcc", "CXXFLAGS": "-std=c++17 -O3 -Xcompiler \"-std=c++17 -O3\""},
+    "cuda": {"CXX": "nvcc", "CXXFLAGS": "-std=c++17 --generate-code arch=compute_80,code=sm_80 -O3 -Xcompiler \"-std=c++17 -O3\""},
 }
 
 def build_kokkos(driver_src: PathLike, output_root: PathLike, problem_size: str = "(1<<20)"):
