@@ -37,6 +37,8 @@
 #include <Kokkos_Core.hpp>
 #elif defined(USE_CUDA)
 #include <cuda_runtime.h>
+#elif defined(USE_HIP)
+#include <hip/hip_runtime.h>
 #endif
 
 // some helper macros to unify CUDA and HIP interfaces
