@@ -72,7 +72,8 @@ void NO_OPTIMIZE compute(Context *ctx) {
 }
 
 void NO_OPTIMIZE best(Context *ctx) {
-    correctConvexHullPerimeter(ctx->h_points);
+    double perimeter = correctConvexHullPerimeter(ctx->h_points);
+    (void)perimeter;
 }
 
 bool validate(Context *ctx) {
