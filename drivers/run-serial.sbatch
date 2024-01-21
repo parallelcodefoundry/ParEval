@@ -20,7 +20,7 @@ module purge
 ml python gcc
 
 python run-all.py \
-    $GENERATED_PROMPTS \
+    $OUTPUT \
     --output $OUTPUT \
     --scratch-dir $SCRATCH_DIR \
     --launch-configs launch-configs.json \
@@ -28,4 +28,6 @@ python run-all.py \
     --yes-to-all \
     --include-models serial \
     --early-exit-runs \
+    --problem-type geometry \
+    --overwrite \
     --log info
