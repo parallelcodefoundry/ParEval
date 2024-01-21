@@ -40,11 +40,6 @@ def main():
     if args.check:
         with open(args.check, 'r') as fp:
             prompts = json.load(fp)
-
-        # TODO -- add hip results
-        # filter out hip results for now
-        prompts = [p for p in prompts if p['parallelism_model'] != 'hip']
-        results = [p for p in results if p['parallelism_model'] != 'hip']
         
         # must have same length
         assert len(prompts) == len(results), f"Number of prompts in {args.check} ({len(prompts)}) does not match number of prompts in output file ({len(results)})."
