@@ -30,4 +30,6 @@ python run-all.py \
     --yes-to-all \
     --include-models kokkos \
     --early-exit-runs \
+    --problem-type geometry \
+    --overwrite \
     --log info

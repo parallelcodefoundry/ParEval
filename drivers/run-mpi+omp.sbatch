@@ -30,5 +30,7 @@ python run-all.py \
     --yes-to-all \
     --include-models mpi+omp \
     --early-exit-runs \
+    --problem-type geometry \
+    --overwrite \
     --run-timeout 60 \
     --log info
