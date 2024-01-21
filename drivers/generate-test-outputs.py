@@ -23,7 +23,7 @@ outputs = []
 
 for p in prompts:
     new_entry = p
-    new_entry["outputs"] = []
+    new_entry["outputs"] = ["undefinedFunctionCall(); }"]
 
     last_line = "".join(p["prompt"].splitlines()[-1:]).split(" ")
     ret_type = last_line[0]
