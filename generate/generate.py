@@ -22,6 +22,10 @@ parser.add_argument('--output', required=True, help='Path to the output JSON fil
 parser.add_argument('--restart', action='store_true', help='Restart generation from scratch (default: False)')
 parser.add_argument('--cache', help='JSONL file to cache intermediate results in. Will be restored from if it ' +
     'already exists and --restart is not specified')
+parser.add_argument('--restore_from', help='JSON file to restore old results from. Will be restored from ' +
+    'if it already exists and --restart is not specified. Is different from --cache in that it is a JSON file, not a ' +
+    'JSONL file, and it is only used to restore old results where the prompt is equivalent. Cached results are ' +
+    'prioritized over restored results.')
 parser.add_argument('--max_new_tokens', type=int, default=1024, help='Maximum number of new tokens to generate (default: 1024)')
 parser.add_argument('--num_samples_per_prompt', type=int, default=50, help='Number of code samples to generate (default: 50)')
 parser.add_argument('--temperature', type=float, default=0.2, help='Temperature for controlling randomness (default: 0.2)')
@@ -42,8 +46,47 @@ if not args.restart and os.path.exists(args.cache):
     
     # remove prompt from prompts if it is in responses and has an 'output' value with at least 1 entry
     original_len = len(prompts)
-    prompts = [p for p in prompts if not any(p["name"] == r["name"] and p["prompt"] == r["prompt"] and len(r["outputs"]) > 0 for r in responses)]
-    print(f"Skipping {original_len - len(prompts)} prompts that already have responses")
+    prompts = [p for p in prompts if 
+                not any(p["name"] == r["name"] and 
+                        p["parallelism_model"] == r["parallelism_model"] and
+                        p["prompt"] == r["prompt"] and 
+                        args.temperature == r["temperature"] and 
+                        args.prompted == r["prompted"] and
+                        args.num_samples_per_prompt == len(r["outputs"])
+                        for r in responses)]
+    print(f"[cache] Skipping {original_len - len(prompts)} prompts that already have responses")
+
+""" Load existing responses if they exist """
+if not args.restart and args.restore_from and os.path.exists(args.restore_from):
+    with open(args.restore_from, 'r') as json_file:
+        restored_responses = json.load(json_file)
+    
+    # remove prompt from prompts if it is in responses and has an 'output' value with at least 1 entry
+    original_len = len(prompts)
+    responses_to_keep = []
+    prompts_without_existing_responses = []
+    for p in prompts:
+        for r in restored_responses:
+            if p["name"] == r["name"] and \
+                p["parallelism_model"] == r["parallelism_model"] and \
+                p["prompt"] == r["prompt"] and \
+                args.temperature == r["temperature"] and \
+                args.prompted == r["prompted"] and \
+                args.num_samples_per_prompt == len(r["outputs"]):
+                responses_to_keep.append(r)
+                break
+        else:
+            prompts_without_existing_responses.append(p)
+    prompts = prompts_without_existing_responses
+    print(f"[restore_from] Skipping {original_len - len(prompts)} prompts that already have responses. " +
+        f"{len(prompts)} prompts left.")
+
+    # write restored responses to cache
+    if args.cache is not None:
+        with open(args.cache, 'a') as jsonl_file:
+            for response in responses_to_keep:
+                jsonl_file.write(json.dumps(response) + "\n")
+            print(f"[restore_from] Wrote {len(responses_to_keep)} restored responses to cache")
 
 
 """ Initialize inference config """
@@ -54,7 +97,7 @@ inference_config = get_inference_config(args.model, prompted=args.prompted)
 prompts_repeated = [p for p in prompts for _ in range(args.num_samples_per_prompt)]
 
 """ Initialize HuggingFace pipeline for generation """
-generator = pipeline(model=args.model, torch_dtype=inference_config.get_dtype(), device_map="auto")
+generator = pipeline(model=args.model, torch_dtype=inference_config.get_dtype(), device=0)
 inference_config.init_padding(generator.tokenizer)
 
 """ Create a prompt data set to pass to generate method """
@@ -71,7 +114,14 @@ generated_outputs = generator(
 )
 
 """ Iterate over prompts and generate code """
-responses = []
+if not args.restart and args.cache is not None:
+    with open(args.cache, 'r') as jsonl_file:
+        responses = [json.loads(line) for line in jsonl_file]
+        responses = [r for r in responses if r["temperature"] == args.temperature and r["prompted"] == args.prompted
+                        and args.num_samples_per_prompt == len(r["outputs"])
+                        and any(p["name"] == r["name"] and p["prompt"] == r["prompt"] and p["parallelism_model"] == r["parallelism_model"] for p in prompts)]
+else:
+    responses = []
 cur_prompt = None
 start_time = time.time()
 total_tokens = 0

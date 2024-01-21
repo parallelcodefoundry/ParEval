@@ -1,3 +1,4 @@
+#!/bin/python3
 """ Helper script to create template files for implementing a new driver.
     author: Daniel Nichols
     date: November 2023
@@ -51,7 +52,7 @@ void NO_OPTIMIZE compute(Context *ctx) {
 }
 
 void NO_OPTIMIZE best(Context *ctx) {
-
+    correct
 }
 
 bool validate(Context *ctx) {
@@ -65,10 +66,11 @@ bool validate(Context *ctx) {
         // set up input
 
         // compute correct result
+        correct
 
         // compute test result
         SYNC();
-        
+
         bool isCorrect = true;
         if (IS_ROOT(rank) && ) {
             isCorrect = false;
@@ -123,7 +125,7 @@ void NO_OPTIMIZE compute(Context *ctx) {
 }
 
 void NO_OPTIMIZE best(Context *ctx) {
-
+    correct
 }
 
 bool validate(Context *ctx) {
@@ -134,9 +136,10 @@ bool validate(Context *ctx) {
         // set up input
 
         // compute correct result
+        correct
 
         // compute test result
-        
+
         if () {
             return false;
         }
@@ -194,11 +197,11 @@ Context *init() {
 }
 
 void NO_OPTIMIZE compute(Context *ctx) {
-
+    <<<ctx->gridSize, ctx->blockSize>>>
 }
 
 void NO_OPTIMIZE best(Context *ctx) {
-
+    correct
 }
 
 bool validate(Context *ctx) {
@@ -211,13 +214,14 @@ bool validate(Context *ctx) {
         // set up input
 
         // compute correct result
+        correct
 
         // compute test result
-        
+        <<<gridSize, blockSize>>>
         SYNC();
 
         // copy back
-        
+
         if () {
             return false;
         }

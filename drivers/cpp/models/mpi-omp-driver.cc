@@ -83,7 +83,9 @@ int main(int argc, char **argv) {
 
         reset(ctx);
     }
-    printf("BestSequential: %.*f\n", DBL_DIG-1, totalTime / NITER);
+    if (rank == 0) {
+        printf("BestSequential: %.*f\n", DBL_DIG-1, totalTime / NITER);
+    }
     MPI_Barrier(MPI_COMM_WORLD);
 
     /* validate */

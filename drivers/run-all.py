@@ -1,3 +1,4 @@
+#!/bin/python3
 """ Run all the generated code.
     author: Daniel Nichols
     date: October 2023
@@ -47,8 +48,8 @@ def get_args():
     model_group.add_argument("--problem", type=str, help="Only test this probem if provided.")
     model_group.add_argument("--problem-type", type=str, help="Only test problems of this type if provided.")
     parser.add_argument("--early-exit-runs", action="store_true", help="If provided, stop evaluating a model output after the first run configuration fails.")
-    parser.add_argument("--build-timeout", type=int, default=20, help="Timeout in seconds for building a program.")
-    parser.add_argument("--run-timeout", type=int, default=180, help="Timeout in seconds for running a program.")
+    parser.add_argument("--build-timeout", type=int, default=30, help="Timeout in seconds for building a program.")
+    parser.add_argument("--run-timeout", type=int, default=120, help="Timeout in seconds for running a program.")
     parser.add_argument("--log", choices=["INFO", "DEBUG", "WARNING", "ERROR", "CRITICAL"], default="INFO",
         type=str.upper, help="logging level")
     parser.add_argument("--log-build-errors", action="store_true", help="On build error, display the stderr of the build process.")
@@ -145,6 +146,12 @@ def main():
             run_timeout=args.run_timeout
         )
         driver.test_all_outputs_in_prompt(prompt)
+
+        # go ahead and write out outputs now
+        if args.output and args.output != '-':
+            with open(args.output, "w") as fp:
+                json.dump(data, fp, indent=4)
+            logging.debug(f"Wrote intermediate results to {args.output}.")
 
     # write out results
     if args.output and args.output != '-':

@@ -11,4 +11,4 @@ struct COOElement {
    input: A=[{0,0,4}, {0,1,3}, {1,0,6}, {1,1,3}]
    output: L=[{0,0,1},{1,0,1.5}, {1,1,1}] U=[{0,0,4}, {0,1,3}, {1,1,-1.5}]
 */
-__global__ void luFactorize(const COOElement *A, size_t sizeA, COOElement *L, size_t sizeL, COOElement *U, size_t sizeU, size_t N) {
+__global__ void luFactorize(const COOElement *A, size_t sizeA, double *L, double *U, size_t N) {

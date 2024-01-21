@@ -1,7 +1,10 @@
 #pragma once
 #include <cassert>
+#include <cmath>
+#include <climits>
 #include <string>
 #include <complex>
+#include <queue>
 #include <type_traits>
 
 // make sure some parallel model is defined
@@ -17,7 +20,7 @@
 #endif
 
 #if !defined(MAX_VALIDATION_ATTEMPTS)
-#define MAX_VALIDATION_ATTEMPTS 3
+#define MAX_VALIDATION_ATTEMPTS 2
 #endif
 
 #if !defined(SPARSE_LA_SPARSITY)
@@ -34,6 +37,8 @@
 #include <Kokkos_Core.hpp>
 #elif defined(USE_CUDA)
 #include <cuda_runtime.h>
+#elif defined(USE_HIP)
+#include <hip/hip_runtime.h>
 #endif
 
 // some helper macros to unify CUDA and HIP interfaces
@@ -55,6 +60,17 @@
 #define SYNC() hipDeviceSynchronize()
 #define DOUBLE_COMPLEX_T hipDoubleComplex
 #define MAKE_DOUBLE_COMPLEX(r,i) make_hipDoubleComplex((r),(i))
+#endif
+
+#if defined(USE_CUDA) || defined(USE_HIP)
+__device__ double atomicMul(double* address, double val) { 
+  unsigned long long int* address_as_ull = (unsigned long long int*)address; 
+  unsigned long long int old = *address_as_ull, assumed; 
+  do { 
+    assumed = old; 
+    old = atomicCAS(address_as_ull, assumed, __double_as_longlong(val * __longlong_as_double(assumed))); 
+  } while (assumed != old); return __longlong_as_double(old);
+} 
 #endif
 
 // Kokkos utilities

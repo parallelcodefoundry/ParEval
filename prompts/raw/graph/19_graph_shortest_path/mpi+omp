@@ -1,5 +1,5 @@
-/* Return the length of the shortest path from source to dest in the graph defined by the adjacency matrix A.
-   A is an NxN adjacency matrix stored in row-major.
+/* Return the length of the shortest path from source to dest in the undirected graph defined by the adjacency matrix A.
+   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.
    Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.
    Every rank has a complete copy of A. The shortest path length is returned on rank 0.
    Example:

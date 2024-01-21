@@ -1,5 +1,5 @@
-/* Count the number of edges in the graph defined by the adjacency matrix A.
-   A is an NxN adjacency matrix stored in row-major.
+/* Count the number of edges in the directed graph defined by the adjacency matrix A.
+   A is an NxN adjacency matrix stored in row-major. A represents a directed graph.
    Example:
 
 	 input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]

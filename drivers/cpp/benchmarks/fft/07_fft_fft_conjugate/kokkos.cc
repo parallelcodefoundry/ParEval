@@ -50,7 +50,7 @@ Context *init() {
 }
 
 void NO_OPTIMIZE compute(Context *ctx) {
-    fft(ctx->x);
+    fftConjugate(ctx->x);
 }
 
 void NO_OPTIMIZE best(Context *ctx) {
@@ -79,7 +79,7 @@ bool validate(Context *ctx) {
         correctFft(x_host);
 
         // compute test result
-        fft(x);
+        fftConjugate(x);
         
         for (size_t j = 0; j < x_host.size(); j += 1) {
             if (std::abs(x_host[j].real() - x(j).real()) > 1e-4 || std::abs(x_host[j].imag() - x(j).imag()) > 1e-4) {

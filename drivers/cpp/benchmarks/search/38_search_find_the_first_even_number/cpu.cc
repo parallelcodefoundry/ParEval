@@ -62,11 +62,16 @@ bool validate(Context *ctx) {
     int rank;
     GET_RANK(rank);
 
-    const size_t numTries = MAX_VALIDATION_ATTEMPTS;
+    const size_t numTries = 10;
     for (int i = 0; i < numTries; i += 1) {
         // set up input
         std::vector<int> x(TEST_SIZE);
         fillRand(x, 1, 100);
+        if (i == 1) {
+            for (size_t j = 0; j < 20; j += 1) {
+                x[j] = 2 * (rand() % 50) + 1;
+            }
+        }
         BCAST(x, INT);
 
         // compute correct result

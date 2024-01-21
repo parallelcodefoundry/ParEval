@@ -1,5 +1,5 @@
-/* Compute the highest node degree in the graph. The graph is defined in the adjacency matrix A.
-   A is an NxN adjacency matrix stored in row-major.
+/* Compute the highest node degree in the undirected graph. The graph is defined in the adjacency matrix A.
+   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.
    Use OpenMP to compute in parallel.
    Example:
 
