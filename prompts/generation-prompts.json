@@ -74,7 +74,7 @@
         "language": "cpp",
         "name": "14_geometry_closest_pair_1d",
         "parallelism_model": "hip",
-        "prompt": "__device__ double distance(double x1, double x2) {\n\treturn fabs(x1 - x2);\n}\n\n/* Compute the distance between the closest two elements in the vector x.\n   Store the result in distance.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n   input: [7, 3, 9, 12, 31, 1]\n   output: 2\n*/\n__global__ void closestPair(const double *x, size_t N, double *distance) {"
+        "prompt": "__device__ double distanceBetweenPoints(double x1, double x2) {\n\treturn fabs(x1 - x2);\n}\n\n/* Compute the distance between the closest two elements in the vector x.\n   Store the result in distance.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n   input: [7, 3, 9, 12, 31, 1]\n   output: 2\n*/\n__global__ void closestPair(const double *x, size_t N, double *distance) {"
     },
     {
         "problem_type": "geometry",
@@ -88,7 +88,7 @@
         "language": "cpp",
         "name": "14_geometry_closest_pair_1d",
         "parallelism_model": "cuda",
-        "prompt": "__device__ double distance(double x1, double x2) {\n\treturn fabs(x1 - x2);\n}\n\n/* Compute the distance between the closest two elements in the vector x.\n   Store the result in distance.\n   Use CUDA to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n   input: [7, 3, 9, 12, 31, 1]\n   output: 2\n*/\n__global__ void closestPair(const double *x, size_t N, double *distance) {"
+        "prompt": "__device__ double distanceBetweenPoints(double x1, double x2) {\n\treturn fabs(x1 - x2);\n}\n\n/* Compute the distance between the closest two elements in the vector x.\n   Store the result in distance.\n   Use CUDA to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n   input: [7, 3, 9, 12, 31, 1]\n   output: 2\n*/\n__global__ void closestPair(const double *x, size_t N, double *distance) {"
     },
     {
         "problem_type": "geometry",
@@ -123,7 +123,7 @@
         "language": "cpp",
         "name": "13_geometry_closest_pair_2d",
         "parallelism_model": "hip",
-        "prompt": "struct Point {\n\tdouble x, y;\n};\n\n__device__ double distance(Point const& p1, Point const& p2) {\n\treturn sqrt(pow(p2.x-p1.x, 2) + pow(p2.y-p1.y, 2));\n}\n\n/* Compute the distance between the closest two points in the vector points.\n   Store the result in distance.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as points.\n   Example: \n\n   input: [{2, 3}, {12, 30}, {40, 50}, {5, 1}, {12, 10}, {3, 4}]\n   output: 1.41421\n*/\n__global__ void closestPair(const Point *points, size_t numPoints, double *distance) {"
+        "prompt": "struct Point {\n\tdouble x, y;\n};\n\n__device__ double distanceBetweenPoints(Point const& p1, Point const& p2) {\n\treturn sqrt(pow(p2.x-p1.x, 2) + pow(p2.y-p1.y, 2));\n}\n\n/* Compute the distance between the closest two points in the vector points.\n   Store the result in distance.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least as many threads as points.\n   Example: \n\n   input: [{2, 3}, {12, 30}, {40, 50}, {5, 1}, {12, 10}, {3, 4}]\n   output: 1.41421\n*/\n__global__ void closestPair(const Point *points, size_t numPoints, double *distance) {"
     },
     {
         "problem_type": "geometry",
@@ -137,7 +137,7 @@
         "language": "cpp",
         "name": "13_geometry_closest_pair_2d",
         "parallelism_model": "cuda",
-        "prompt": "struct Point {\n\tdouble x, y;\n};\n\n__device__ double distance(Point const& p1, Point const& p2) {\n\treturn sqrt(pow(p2.x-p1.x, 2) + pow(p2.y-p1.y, 2));\n}\n\n/* Compute the distance between the closest two points in the vector points.\n   Store the result in distance.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as points.\n   Example: \n\n   input: [{2, 3}, {12, 30}, {40, 50}, {5, 1}, {12, 10}, {3, 4}]\n   output: 1.41421\n*/\n__global__ void closestPair(const Point *points, size_t numPoints, double *distance) {"
+        "prompt": "struct Point {\n\tdouble x, y;\n};\n\n__device__ double distanceBetweenPoints(Point const& p1, Point const& p2) {\n\treturn sqrt(pow(p2.x-p1.x, 2) + pow(p2.y-p1.y, 2));\n}\n\n/* Compute the distance between the closest two points in the vector points.\n   Store the result in distance.\n   Use CUDA to compute in parallel. The kernel is launched with at least as many threads as points.\n   Example: \n\n   input: [{2, 3}, {12, 30}, {40, 50}, {5, 1}, {12, 10}, {3, 4}]\n   output: 1.41421\n*/\n__global__ void closestPair(const Point *points, size_t numPoints, double *distance) {"
     },
     {
         "problem_type": "geometry",

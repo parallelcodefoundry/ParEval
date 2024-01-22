@@ -136,7 +136,10 @@ class CppDriverWrapper(DriverWrapper):
                 for c in configs:
                     run_result = self.run(exec_path, **c)
                     run_results.append(run_result)
-                    if self.early_exit_runs and (run_result.exit_code != 0 or not run_result.is_valid): 
+                    if self.display_runs:
+                        logging.debug(run_result.stderr)
+                        logging.debug(run_result.stdout)
+                    if self.early_exit_runs and (run_result.exit_code != 0 or not run_result.is_valid):
                         break
             else:
                 run_results = None
