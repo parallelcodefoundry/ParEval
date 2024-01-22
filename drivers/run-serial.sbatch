@@ -4,12 +4,12 @@
 #SBATCH -p serial
 #SBATCH -t 05:00:00
 #SBATCH -A bhatele-lab-cmsc
-#SBATCH -J serial-gpt-3.5
-#SBATCH -o run-outputs/gpt-3.5-serial-%A.out
+#SBATCH -J serial-phind-v2_prompted
+#SBATCH -o run-outputs/phind-v2_prompted-serial-%A.out
 
 # settings
 HASH="a8724ee8"
-MODEL="gpt-3.5"
+MODEL="phind-v2_prompted"
 TEMP="0.2"
 
 GENERATED_PROMPTS="../results/${HASH}/${MODEL}_temp${TEMP}/all.json"
@@ -20,7 +20,7 @@ module purge
 ml python gcc
 
 python run-all.py \
-    $OUTPUT \
+    $GENERATED_PROMPTS \
     --output $OUTPUT \
     --scratch-dir $SCRATCH_DIR \
     --launch-configs launch-configs.json \
@@ -28,6 +28,4 @@ python run-all.py \
     --yes-to-all \
     --include-models serial \
     --early-exit-runs \
-    --problem-type geometry \
-    --overwrite \
     --log info
