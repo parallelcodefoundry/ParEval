@@ -1,12 +1,12 @@
 #!/bin/bash
 #SBATCH -N 1
 #SBATCH -t 05:00:00
-#SBATCH -J hip-gpt-3.5
-#SBATCH -o run-outputs/gpt-3.5-hip-{{id}}.out
+#SBATCH -J hip-codellama-34b-hf_prompted
+#SBATCH -o run-outputs/codellama-34b-hf_prompted-hip-{{id}}.out
 
 # settings
 HASH="a8724ee8"
-MODEL="gpt-3.5"
+MODEL="codellama-34b-hf_prompted"
 TEMP="0.2"
 
 GENERATED_PROMPTS="../results/${HASH}/${MODEL}_temp${TEMP}/all.json"
