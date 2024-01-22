@@ -48,242 +48,910 @@
             {
                 "generated_output": "double smallest = std::numeric_limits<double>::max();\n  #pragma omp parallel for\n  for (int i = 0; i < points.size(); ++i) {\n    for (int j = i + 1; j < points.size(); ++j) {\n      for (int k = j + 1; k < points.size(); ++k) {\n        double area = triangleArea(points[i], points[j], points[k]);\n        #pragma omp critical\n        if (area < smallest) {\n          smallest = area;\n        }\n      }\n    }\n  }\n  return smallest;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.00353461857885,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.03476143153384,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.04384995922446,
+                        "num_threads": 2
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.08919356251135,
+                        "num_threads": 4
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.16396771036088,
+                        "num_threads": 8
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.23300530640408,
+                        "num_threads": 16
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.29023161903024,
+                        "num_threads": 32
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.45633473861963,
+                        "num_threads": 64
+                    }
+                ]
             },
             {
                 "generated_output": "double minArea = std::numeric_limits<double>::max();\n\t#pragma omp parallel for\n\tfor (int i = 0; i < points.size(); ++i) {\n\t\tfor (int j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (int k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < minArea) {\n\t\t\t\t\t#pragma omp critical\n\t\t\t\t\tminArea = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn minArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.00354914404452,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00481013823301,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00417972225696,
+                        "num_threads": 2
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0027804822661,
+                        "num_threads": 4
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00160997984931,
+                        "num_threads": 8
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00118038291112,
+                        "num_threads": 16
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00136812152341,
+                        "num_threads": 32
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00243382714689,
+                        "num_threads": 64
+                    }
+                ]
             },
             {
                 "generated_output": "double smallest = std::numeric_limits<double>::max();\n\n\t#pragma omp parallel for\n\tfor (int i = 0; i < points.size(); ++i) {\n\t\tfor (int j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (int k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < smallest) {\n\t\t\t\t\t#pragma omp critical\n\t\t\t\t\tsmallest = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\treturn smallest;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00352048818022,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00479701347649,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00417617764324,
+                        "num_threads": 2
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00276070097461,
+                        "num_threads": 4
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00164072960615,
+                        "num_threads": 8
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00108464276418,
+                        "num_threads": 16
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00141059905291,
+                        "num_threads": 32
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 0.00248457826674,
+                        "num_threads": 64
+                    }
+                ]
             },
             {
                 "generated_output": "double smallestArea = std::numeric_limits<double>::max();\n\n  #pragma omp parallel for\n  for (int i = 0; i < points.size(); ++i) {\n    for (int j = i + 1; j < points.size(); ++j) {\n      for (int k = j + 1; k < points.size(); ++k) {\n        double area = triangleArea(points[i], points[j], points[k]);\n        if (area < smallestArea) {\n          #pragma omp critical\n          {\n            if (area < smallestArea) {\n              smallestArea = area;\n            }\n          }\n        }\n      }\n    }\n  }\n\n  return smallestArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.00356270708144,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00535578280687,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00466664265841,
+                        "num_threads": 2
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00309495497495,
+                        "num_threads": 4
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00179454609752,
+                        "num_threads": 8
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00102810868993,
+                        "num_threads": 16
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00067958654836,
+                        "num_threads": 32
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00067111831158,
+                        "num_threads": 64
+                    }
+                ]
             },
             {
                 "generated_output": "double smallestArea = std::numeric_limits<double>::max();\n\n\t#pragma omp parallel for\n\tfor (int i = 0; i < points.size(); ++i) {\n\t\tfor (int j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (int k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < smallestArea) {\n\t\t\t\t\t#pragma omp critical\n\t\t\t\t\tsmallestArea = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\treturn smallestArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.00354637876153,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00471792332828,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00419716285542,
+                        "num_threads": 2
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00277949413285,
+                        "num_threads": 4
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00165708046407,
+                        "num_threads": 8
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0010895662941,
+                        "num_threads": 16
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00137094072998,
+                        "num_threads": 32
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00266418382525,
+                        "num_threads": 64
+                    }
+                ]
             },
             {
                 "generated_output": "double smallest = std::numeric_limits<double>::max();\n  #pragma omp parallel for\n  for (int i = 0; i < points.size(); ++i) {\n    for (int j = i + 1; j < points.size(); ++j) {\n      for (int k = j + 1; k < points.size(); ++k) {\n        double area = triangleArea(points[i], points[j], points[k]);\n        if (area < smallest) {\n          smallest = area;\n        }\n      }\n    }\n  }\n  return smallest;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00364341074601,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00370627511293,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 0.00322064673528,
+                        "num_threads": 2
+                    }
+                ]
             },
             {
                 "generated_output": "double smallestArea = std::numeric_limits<double>::max();\n\n\t// TODO: implement this function using OpenMP\n\n\treturn smallestArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00363830337301,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 9.834766e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00361255481839,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 9.015203e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "double smallestArea = std::numeric_limits<double>::max();\n\t#pragma omp parallel for\n\tfor (int i = 0; i < points.size(); ++i) {\n\t\tfor (int j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (int k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < smallestArea) {\n\t\t\t\t\t#pragma omp critical\n\t\t\t\t\tsmallestArea = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn smallestArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00353728542104,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00481215994805,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00421334942803,
+                        "num_threads": 2
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00278267832473,
+                        "num_threads": 4
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00166273480281,
+                        "num_threads": 8
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00111872116104,
+                        "num_threads": 16
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00134172206745,
+                        "num_threads": 32
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 0.00249280650169,
+                        "num_threads": 64
+                    }
+                ]
             },
             {
                 "generated_output": "double area = std::numeric_limits<double>::max();\n  #pragma omp parallel for\n  for (int i = 0; i < points.size(); ++i) {\n    for (int j = i + 1; j < points.size(); ++j) {\n      for (int k = j + 1; k < points.size(); ++k) {\n        double a = triangleArea(points[i], points[j], points[k]);\n        #pragma omp critical\n        if (a < area) {\n          area = a;\n        }\n      }\n    }\n  }\n  return area;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.00355024188757,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.03491647113115,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.04413249818608,
+                        "num_threads": 2
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.08963778261095,
+                        "num_threads": 4
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.16284273564816,
+                        "num_threads": 8
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.23444314291701,
+                        "num_threads": 16
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.28953319517896,
+                        "num_threads": 32
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.45463754255325,
+                        "num_threads": 64
+                    }
+                ]
             },
             {
                 "generated_output": "double smallestArea = std::numeric_limits<double>::max();\n\n\t#pragma omp parallel for\n\tfor (int i = 0; i < points.size(); ++i) {\n\t\tfor (int j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (int k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\t#pragma omp critical\n\t\t\t\tif (area < smallestArea) {\n\t\t\t\t\tsmallestArea = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\treturn smallestArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.00355529347435,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.03491412019357,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.04388510528952,
+                        "num_threads": 2
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.08988845655695,
+                        "num_threads": 4
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.16387411402538,
+                        "num_threads": 8
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.23194498447701,
+                        "num_threads": 16
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.28953791288659,
+                        "num_threads": 32
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.47321337750182,
+                        "num_threads": 64
+                    }
+                ]
             },
             {
                 "generated_output": "double minArea = std::numeric_limits<double>::max();\n  #pragma omp parallel for\n  for (int i = 0; i < points.size(); ++i) {\n    for (int j = i + 1; j < points.size(); ++j) {\n      for (int k = j + 1; k < points.size(); ++k) {\n        double area = triangleArea(points[i], points[j], points[k]);\n        if (area < minArea) {\n          #pragma omp critical\n          if (area < minArea) {\n            minArea = area;\n          }\n        }\n      }\n    }\n  }\n  return minArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.00357345528901,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00535700339824,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00465962374583,
+                        "num_threads": 2
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00310556292534,
+                        "num_threads": 4
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00178949879482,
+                        "num_threads": 8
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0010553361848,
+                        "num_threads": 16
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00067249909043,
+                        "num_threads": 32
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00064648641273,
+                        "num_threads": 64
+                    }
+                ]
             },
             {
                 "generated_output": "double smallest = std::numeric_limits<double>::max();\n\t#pragma omp parallel for\n\tfor (int i = 0; i < points.size(); ++i) {\n\t\tfor (int j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (int k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < smallest) {\n\t\t\t\t\tsmallest = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn smallest;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0036192192696,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00369017869234,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 0.00319323744625,
+                        "num_threads": 2
+                    }
+                ]
             },
             {
                 "generated_output": "double smallestArea = std::numeric_limits<double>::max();\n\n  #pragma omp parallel for\n  for (int i = 0; i < points.size(); ++i) {\n    for (int j = i + 1; j < points.size(); ++j) {\n      for (int k = j + 1; k < points.size(); ++k) {\n        double area = triangleArea(points[i], points[j], points[k]);\n        if (area < smallestArea) {\n          smallestArea = area;\n        }\n      }\n    }\n  }\n\n  return smallestArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00359116271138,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0036640195176,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 0.00318823223934,
+                        "num_threads": 2
+                    }
+                ]
             },
             {
                 "generated_output": "double smallestArea = std::numeric_limits<double>::max();\n\n\t#pragma omp parallel for\n\tfor (int i = 0; i < points.size(); ++i) {\n\t\tfor (int j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (int k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < smallestArea) {\n\t\t\t\t\t#pragma omp critical\n\t\t\t\t\tsmallestArea = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\treturn smallestArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00354274781421,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00479352911934,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00418383777142,
+                        "num_threads": 2
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00279314219952,
+                        "num_threads": 4
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00165638914332,
+                        "num_threads": 8
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00108534451574,
+                        "num_threads": 16
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00181094147265,
+                        "num_threads": 32
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 0.00322876768187,
+                        "num_threads": 64
+                    }
+                ]
             },
             {
                 "generated_output": "double smallestArea = std::numeric_limits<double>::max();\n  #pragma omp parallel for\n  for (int i = 0; i < points.size(); ++i) {\n    for (int j = i + 1; j < points.size(); ++j) {\n      for (int k = j + 1; k < points.size(); ++k) {\n        double area = triangleArea(points[i], points[j], points[k]);\n        if (area < smallestArea) {\n          #pragma omp critical\n          smallestArea = area;\n        }\n      }\n    }\n  }\n  return smallestArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00356013448909,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00479534007609,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00415395377204,
+                        "num_threads": 2
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0027821294032,
+                        "num_threads": 4
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0016411726363,
+                        "num_threads": 8
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0011024706997,
+                        "num_threads": 16
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00176260648295,
+                        "num_threads": 32
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 0.00277709392831,
+                        "num_threads": 64
+                    }
+                ]
             },
             {
                 "generated_output": "double minArea = std::numeric_limits<double>::max();\n\t#pragma omp parallel for\n\tfor (int i = 0; i < points.size(); ++i) {\n\t\tfor (int j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (int k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < minArea) {\n\t\t\t\t\t#pragma omp critical\n\t\t\t\t\tminArea = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn minArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.00351346461102,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00474280174822,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00417002793401,
+                        "num_threads": 2
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00278116948903,
+                        "num_threads": 4
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00164227224886,
+                        "num_threads": 8
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00107895266265,
+                        "num_threads": 16
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00133924568072,
+                        "num_threads": 32
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00806160727516,
+                        "num_threads": 64
+                    }
+                ]
             },
             {
                 "generated_output": "double area = 1e100;\n\t#pragma omp parallel for\n\tfor (int i = 0; i < points.size(); ++i) {\n\t\tfor (int j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (int k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble a = triangleArea(points[i], points[j], points[k]);\n\t\t\t\t#pragma omp critical\n\t\t\t\tarea = std::min(area, a);\n\t\t\t}\n\t\t}\n\t}\n\treturn area;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.00352730685845,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.03485730383545,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.04546638121828,
+                        "num_threads": 2
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.08874746793881,
+                        "num_threads": 4
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.16274149883538,
+                        "num_threads": 8
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.23382292110473,
+                        "num_threads": 16
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.29141030777246,
+                        "num_threads": 32
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.46899453569204,
+                        "num_threads": 64
+                    }
+                ]
             },
             {
                 "generated_output": "double area = 1e10;\n  #pragma omp parallel for\n  for (int i = 0; i < points.size(); ++i) {\n    for (int j = i + 1; j < points.size(); ++j) {\n      for (int k = j + 1; k < points.size(); ++k) {\n        double t = triangleArea(points[i], points[j], points[k]);\n        #pragma omp critical\n        area = std::min(area, t);\n      }\n    }\n  }\n  return area;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.00357964495197,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.03488220041618,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.04553911406547,
+                        "num_threads": 2
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.08953427001834,
+                        "num_threads": 4
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.16312882052734,
+                        "num_threads": 8
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.23268678970635,
+                        "num_threads": 16
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.29192819772288,
+                        "num_threads": 32
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.45680056810379,
+                        "num_threads": 64
+                    }
+                ]
             },
             {
                 "generated_output": "double smallestArea = std::numeric_limits<double>::max();\n\t#pragma omp parallel for\n\tfor (int i = 0; i < points.size(); ++i) {\n\t\tfor (int j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (int k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < smallestArea) {\n\t\t\t\t\tsmallestArea = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn smallestArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00356072168797,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00361820310354,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 0.00322905238718,
+                        "num_threads": 2
+                    }
+                ]
             }
         ]
     },
@@ -506,242 +1174,598 @@
             {
                 "generated_output": "double minDistance = std::numeric_limits<double>::max();\n\t#pragma omp parallel for\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble d = distance(x[i], x[j]);\n\t\t\tif (d < minDistance) {\n\t\t\t\t#pragma omp critical\n\t\t\t\tminDistance = d;\n\t\t\t}\n\t\t}\n\t}\n\treturn minDistance;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.08211978496984,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0825519124046,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.061949923262,
+                        "num_threads": 2
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.03599404012784,
+                        "num_threads": 4
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.01936110518873,
+                        "num_threads": 8
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 0.01003133822232,
+                        "num_threads": 16
+                    }
+                ]
             },
             {
                 "generated_output": "double min_dist = std::numeric_limits<double>::max();\n\t#pragma omp parallel for\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\t#pragma omp critical\n\t\t\tif (dist < min_dist) {\n\t\t\t\tmin_dist = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_dist;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
+                "did_any_run": true,
                 "did_all_run": false,
-                "are_any_valid": false,
+                "are_any_valid": true,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.08252384765074,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 1.59702660739422,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 2.51497797425836,
+                        "num_threads": 2
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 8.65045320764184,
+                        "num_threads": 4
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 13.31748404661193,
+                        "num_threads": 8
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 17.15732205091044,
+                        "num_threads": 16
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 19.0210125262849,
+                        "num_threads": 32
+                    },
+                    {
+                        "did_run": false,
+                        "is_valid": null,
+                        "runtime": null,
+                        "num_threads": 64
+                    }
+                ]
             },
             {
                 "generated_output": "double min_dist = std::numeric_limits<double>::max();\n\t#pragma omp parallel for\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < min_dist) {\n\t\t\t\t#pragma omp critical\n\t\t\t\tmin_dist = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_dist;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.08272094121203,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.08316507730633,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.06236462956294,
+                        "num_threads": 2
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.03643544865772,
+                        "num_threads": 4
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.01941015049815,
+                        "num_threads": 8
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 0.01012110132724,
+                        "num_threads": 16
+                    }
+                ]
             },
             {
                 "generated_output": "double min_dist = std::numeric_limits<double>::max();\n\t#pragma omp parallel\n\t{\n\t\tdouble local_min_dist = std::numeric_limits<double>::max();\n\t\t#pragma omp for\n\t\tfor (int i = 0; i < x.size(); ++i) {\n\t\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\t\tif (dist < local_min_dist) {\n\t\t\t\t\tlocal_min_dist = dist;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\t#pragma omp critical\n\t\t{\n\t\t\tif (local_min_dist < min_dist) {\n\t\t\t\tmin_dist = local_min_dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_dist;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.05772198457271,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.08275923701003,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.06200600611046,
+                        "num_threads": 2
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.03609065273777,
+                        "num_threads": 4
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.01944057168439,
+                        "num_threads": 8
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00993115063757,
+                        "num_threads": 16
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00517050661147,
+                        "num_threads": 32
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.00297090550885,
+                        "num_threads": 64
+                    }
+                ]
             },
             {
                 "generated_output": "double min_dist = std::numeric_limits<double>::max();\n\t#pragma omp parallel for\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < min_dist) {\n\t\t\t\t#pragma omp critical\n\t\t\t\tmin_dist = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_dist;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.08250605585054,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.08271041922271,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.06206969181076,
+                        "num_threads": 2
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.03622398721054,
+                        "num_threads": 4
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.01944346101955,
+                        "num_threads": 8
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 0.01009941650555,
+                        "num_threads": 16
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.08262162879109,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.1427328e-07,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.08261782163754,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.232892e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.08295471630991,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.214265e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "double minDistance = std::numeric_limits<double>::max();\n\t#pragma omp parallel for\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < minDistance) {\n\t\t\t\t#pragma omp critical\n\t\t\t\tminDistance = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn minDistance;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.08249831926078,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0829846445471,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.06223323456943,
+                        "num_threads": 2
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0363587888889,
+                        "num_threads": 4
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.01947425510734,
+                        "num_threads": 8
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 0.01020288523287,
+                        "num_threads": 16
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.08298338614404,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.596107e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.08293071091175,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.810312e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0830656289123,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.2824312e-07,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.08315424295142,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.990748e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "double min_dist = std::numeric_limits<double>::max();\n\t#pragma omp parallel for\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < min_dist) {\n\t\t\t\t#pragma omp critical\n\t\t\t\tmin_dist = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_dist;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.08292164616287,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.08322775289416,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.06244796616957,
+                        "num_threads": 2
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.03637567805126,
+                        "num_threads": 4
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.01953085353598,
+                        "num_threads": 8
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 0.01005244292319,
+                        "num_threads": 16
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0830022893846,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 5.597249e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "double min_distance = std::numeric_limits<double>::max();\n\n\t#pragma omp parallel for\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < min_distance) {\n\t\t\t\t#pragma omp critical\n\t\t\t\tmin_distance = dist;\n\t\t\t}\n\t\t}\n\t}\n\n\treturn min_distance;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.08271465534344,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.08312129490077,
+                        "num_threads": 1
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.06245602751151,
+                        "num_threads": 2
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.03634499264881,
+                        "num_threads": 4
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.01937914863229,
+                        "num_threads": 8
+                    },
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 0.0101331340149,
+                        "num_threads": 16
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.08324271086603,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.800998e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.08286760626361,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.614734e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.08295412706211,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.833564e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.08318792833015,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.419156e-08,
+                        "num_threads": 1
+                    }
+                ]
             }
         ]
     },
@@ -964,242 +1988,382 @@
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37211300209165,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.624047e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37220168486238,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.195639e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37251291722059,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.614734e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37101744646206,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.223578e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37184747746214,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 9.005889e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37255108430982,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.800998e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37232786202803,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.221235e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37295599700883,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.409843e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37166679222137,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 5.80214e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37301176991314,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.428469e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37262269882485,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.409843e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37222975911573,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.419156e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37218251433223,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.990748e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37253644522279,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 9.424984e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37234439663589,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.428469e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37155316658318,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.826594e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37260765088722,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.0235235e-07,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37253921041265,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.596107e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37144416980445,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 5.410984e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37247566878796,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.428469e-08,
+                        "num_threads": 1
+                    }
+                ]
             }
         ]
     },
@@ -1422,242 +2586,382 @@
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00171992406249,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 9.005889e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00170252751559,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.391216e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00168167436495,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.40053e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00170075409114,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.183711e-07,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00167767284438,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.409843e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00174981830642,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 5.438924e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00168425496668,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.028001e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00169212399051,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.627532e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00169693883508,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 5.606562e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00169794056565,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.251518e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00172092411667,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 5.615875e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00171287693083,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.214265e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00173015519977,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.990748e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00169836990535,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.409843e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00167215615511,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.204952e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017086529173,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.63336e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00174102969468,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.03497e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00171435326338,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.009374e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00172119839117,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 5.19678e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00170936398208,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.232892e-08,
+                        "num_threads": 1
+                    }
+                ]
             }
         ]
     },
@@ -1880,242 +3184,382 @@
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
                 "did_any_run": false,
                 "did_all_run": false,
                 "are_any_valid": false,
                 "are_all_valid": false,
                 "best_sequential_runtime": null,
-                "runs": null
+                "runs": [
+                    {
+                        "did_run": false,
+                        "is_valid": null,
+                        "runtime": null,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00167371109128,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 9.424984e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017058474943,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.804483e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00175013663247,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.419156e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00173430517316,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.437783e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00168746327981,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.186325e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00169779043645,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 9.648502e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00168952690437,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.782372e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00170965278521,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.605421e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
                 "did_any_run": false,
                 "did_all_run": false,
                 "are_any_valid": false,
                 "are_all_valid": false,
                 "best_sequential_runtime": null,
-                "runs": null
+                "runs": [
+                    {
+                        "did_run": false,
+                        "is_valid": null,
+                        "runtime": null,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00173913845792,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.242205e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00170546481386,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.437783e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00170342102647,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.851049e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00170030929148,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.813796e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.001680094935,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.1986122e-07,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016877274029,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.614734e-08,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
                 "did_any_run": false,
                 "did_all_run": false,
                 "are_any_valid": false,
                 "are_all_valid": false,
                 "best_sequential_runtime": null,
-                "runs": null
+                "runs": [
+                    {
+                        "did_run": false,
+                        "is_valid": null,
+                        "runtime": null,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
                 "did_any_run": false,
                 "did_all_run": false,
                 "are_any_valid": false,
                 "are_all_valid": false,
                 "best_sequential_runtime": null,
-                "runs": null
+                "runs": [
+                    {
+                        "did_run": false,
+                        "is_valid": null,
+                        "runtime": null,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00167445652187,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.0859221e-07,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00167298596352,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.40053e-08,
+                        "num_threads": 1
+                    }
+                ]
             }
         ]
     },

@@ -218,242 +218,402 @@
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.002954919,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.42e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n  return 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0029722136,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.6e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0029570454,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.42e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0029594158,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.262e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n  return 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00296388,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.2e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0029698068,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n  return 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0029546868,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.64e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n  return 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.002962445,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.02e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0029578508,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.66e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n  return 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.002971869,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.62e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.002957628,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.18e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n  return 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0029675788,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.002959015,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0029741454,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.78e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n  return 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.002967683,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.038e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n  return 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.002962842,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.5e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.002962828,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.82e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0029648096,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.82e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0029632586,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.8e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0029633346,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.002e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             }
         ]
     },
@@ -676,134 +836,222 @@
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0616835674,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n\treturn 0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0617847012,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.02e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0616691938,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.061695524,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.6e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n\treturn 0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.061672689,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.62e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0616727674,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.8e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0617262736,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.138e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0620685718,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "int n = x.size();\n\tint n_threads = omp_get_max_threads();\n\tint n_processes;\n\tMPI_Comm_size(MPI_COMM_WORLD, &n_processes);\n\tint n_per_process = (n + n_processes - 1) / n_processes;\n\tint n_local = std::min(n_per_process, n - n_processes * (n_per_process - 1));\n\tint n_local_start = n_processes * (n_per_process - 1) + std::min(n_processes, n % n_processes);\n\tint n_local_end = n_local_start + n_local;\n\tdouble local_min = std::numeric_limits<double>::max();\n\t#pragma omp parallel num_threads(n_threads)\n\t{\n\t\tint thread_id = omp_get_thread_num();\n\t\tint n_threads_in_process = omp_get_num_threads();\n\t\tint n_per_thread = (n_local + n_threads_in_process - 1) / n_threads_in_process;\n\t\tint n_thread_start = n_threads_in_process * (n_per_thread - 1) + std::min(n_threads_in_process, n_local % n_threads_in_process);\n\t\tint n_thread_end = n_thread_start + n_per_thread;\n\t\tdouble thread_min = std::numeric_limits<double>::max();\n\t\tfor (int i = n_thread_start; i < n_thread_end; ++i) {\n\t\t\tfor (int j = i + 1; j < n_local_end; ++j) {\n\t\t\t\tdouble d = distance(x[i], x[j]);\n\t\t\t\tif (d < thread_min) {\n\t\t\t\t\tthread_min = d;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\t#pragma omp critical\n\t\t{\n\t\t\tif (thread_min < local_min) {\n\t\t\t\tlocal_min = thread_min;\n\t\t\t}\n\t\t}\n\t}\n\tdouble global_min = local_min;\n\tMPI_Allreduce(&local_min, &global_min, 1, MPI_DOUBLE, MPI_MIN, MPI_COMM_WORLD);\n\treturn global_min;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0831219026,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.10506e-05,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0617751134,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.84e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "int n = x.size();\n\tint rank, size;\n\tMPI_Comm_rank(MPI_COMM_WORLD, &rank);\n\tMPI_Comm_size(MPI_COMM_WORLD, &size);\n\n\t// TODO: implement\n\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.083133753,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.82e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "int n = x.size();\n\tint rank, size;\n\tMPI_Comm_rank(MPI_COMM_WORLD, &rank);\n\tMPI_Comm_size(MPI_COMM_WORLD, &size);\n\n\t// TODO: compute the distance between the closest two elements in x\n\t//       using MPI and OpenMP\n\t//       you may use the distance function above\n\t//       you may use the MPI_Allreduce function\n\t//       you may use the omp_get_num_threads and omp_get_thread_num functions\n\t//       you may use the omp_set_num_threads function\n\t//       you may use the omp_get_wtime function\n\t//       you may use the omp_get_max_threads function\n\t//       you may use the omp_get_thread_limit function\n\t//       you may use the omp_set_num_threads function\n\t//       you may use the omp_get_num_procs function\n\t//       you may use the omp_get_max_active_levels function\n\t//       you may use the omp_get_level function\n\t//       you may use the omp_get_ancestor_thread_num function\n\t//       you may use the omp_get_team_size function\n\t//       you may use the omp_get_active_level function\n\t//       you may use the omp_in_parallel function\n\t//       you may use the omp_get_cancellation function\n\t//       you may use the omp_get_proc_bind function\n\t//       you may use the omp_get_num_places function\n\t//       you may use the omp_get_place_num_procs function\n\t//       you may use the omp_get_place_proc_ids function\n\t//       you may use the omp_get_place_num function\n\t//       you may use the omp_get_partition_num_places function\n\t//       you may use the omp_get_partition_place_nums function\n\t//       you may use the omp_get_default_device function\n\t//       you may use the omp_get_num_devices function\n\t//       you may use the omp_get_num_teams function\n\t//       you may use the omp_get_team_num function\n\t//       you may use the omp_is_initial_device function\n\t//       you may use the omp_get_initial_device function\n\t//       you may use the omp_get_max_task_priority function\n\t//       you may use the omp_get_num_places function\n\t//       you may use the omp_get_place_num_procs function\n\t//       you may use the omp_get_place_proc_ids function\n\t//       you may use the omp_get_place_num function\n\t//       you may use the omp_get_partition_num_places function\n\t//       you may use the omp_get_partition_place_nums function\n\t//       you may use the omp_get_default_device function\n\t//       you may use the omp_get_num_devices function\n\t//       you may use the omp_get_num_teams function\n\t//       you may use the omp_get_team_num function\n\t//       you may use the omp_is_initial_device function\n\t//       you may use the omp_get_initial_device function\n\t//       you may use the omp_get_max_task_priority function\n\t//       you may use the omp_get_default_device function\n\t//       you may use the omp_get_num_devices function\n\t//       you may use the omp_get_num_teams function\n\t//       you may use the omp_get_team_num function\n\t//       you may use the omp_is_initial_device function\n\t//       you may use the omp_get_initial_device function\n\t//       you may use the omp_get_max_task_priority function\n\t//       you may use the omp_get_default_device function\n\t//       you may use the omp_get_num_devices function\n\t//       you may use the omp_get_num",
@@ -820,98 +1068,162 @@
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0617193946,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.02e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.061724258,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.02e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0616801812,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.44e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
                 "did_any_run": false,
                 "did_all_run": false,
                 "are_any_valid": false,
                 "are_all_valid": false,
                 "best_sequential_runtime": null,
-                "runs": null
+                "runs": [
+                    {
+                        "did_run": false,
+                        "is_valid": null,
+                        "runtime": null,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0616726008,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.024e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0616636604,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.2e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.061723374,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.22e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.061674711,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.64e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             }
         ]
     },
@@ -1134,242 +1446,402 @@
             {
                 "generated_output": "// TODO: implement\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.372240628,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.8e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3723842494,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.98e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.372490487,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.6e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
                 "did_any_run": false,
                 "did_all_run": false,
                 "are_any_valid": false,
                 "are_all_valid": false,
                 "best_sequential_runtime": null,
-                "runs": null
+                "runs": [
+                    {
+                        "did_run": false,
+                        "is_valid": null,
+                        "runtime": null,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "int rank, size;\n\tMPI_Comm_rank(MPI_COMM_WORLD, &rank);\n\tMPI_Comm_size(MPI_COMM_WORLD, &size);\n\n\t// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3726165678,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.082e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37227475,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.42e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3723582748,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.8e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3724038128,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.2e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37221078,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.16e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3723683438,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 9.4e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.372354093,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.022e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3742942852,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.564e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3724403968,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.102e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
                 "did_any_run": false,
                 "did_all_run": false,
                 "are_any_valid": false,
                 "are_all_valid": false,
                 "best_sequential_runtime": null,
-                "runs": null
+                "runs": [
+                    {
+                        "did_run": false,
+                        "is_valid": null,
+                        "runtime": null,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3723608878,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.98e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3725627386,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.64e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3724583666,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 9.2e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3724121862,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.222e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3724576894,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 9.24e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3734036272,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.42e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             }
         ]
     },
@@ -1592,242 +2064,402 @@
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017162258,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.02e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017192736,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.22e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017185142,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.6e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017287114,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.42e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00172906,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.26e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017395694,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.62e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017314606,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.42e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.001724708,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.4e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017198902,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.62e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017215716,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.22e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017378366,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.8e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017244952,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.2e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017189708,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.02e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017246818,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.4e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017145542,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.42e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017317812,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.08e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.001723045,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.62e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017287014,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.8e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017192074,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.02e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017386118,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.8e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             }
         ]
     },
@@ -2050,242 +2682,402 @@
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017049224,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.042e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017171794,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 9.62e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
                 "did_any_run": false,
                 "did_all_run": false,
                 "are_any_valid": false,
                 "are_all_valid": false,
                 "best_sequential_runtime": null,
-                "runs": null
+                "runs": [
+                    {
+                        "did_run": false,
+                        "is_valid": null,
+                        "runtime": null,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017170816,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 9.82e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017166046,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.4e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017209166,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.12e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017101642,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.182e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017150198,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.1e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.001724423,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.122e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017177186,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.484e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
                 "did_any_run": false,
                 "did_all_run": false,
                 "are_any_valid": false,
                 "are_all_valid": false,
                 "best_sequential_runtime": null,
-                "runs": null
+                "runs": [
+                    {
+                        "did_run": false,
+                        "is_valid": null,
+                        "runtime": null,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017169908,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.02e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.001719113,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 9.04e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017218004,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.14e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
                 "did_any_run": false,
                 "did_all_run": false,
                 "are_any_valid": false,
                 "are_all_valid": false,
                 "best_sequential_runtime": null,
-                "runs": null
+                "runs": [
+                    {
+                        "did_run": false,
+                        "is_valid": null,
+                        "runtime": null,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.001720959,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.166e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
                 "did_any_run": false,
                 "did_all_run": false,
                 "are_any_valid": false,
                 "are_all_valid": false,
                 "best_sequential_runtime": null,
-                "runs": null
+                "runs": [
+                    {
+                        "did_run": false,
+                        "is_valid": null,
+                        "runtime": null,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017137814,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 8.58e-08,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017172982,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.04e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": false,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017188524,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.08e-07,
+                        "num_procs": 1,
+                        "num_threads": 1
+                    }
+                ]
             }
         ]
     },

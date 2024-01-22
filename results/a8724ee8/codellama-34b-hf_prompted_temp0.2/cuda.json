@@ -184,242 +184,362 @@
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.1849948956,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.669759983e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.184408495,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.76959997e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.1843937548,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.759999981e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.1845375862,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.701119989e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.1851088882,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.606399976e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.1843689746,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.670400044e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.1851792586,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.779840039e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.1845465728,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.677440023e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.1843907512,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.703039976e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.1844934788,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.557120029e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.1843882606,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.576959994e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.1846609706,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.758079948e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.1844289876,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.689600023e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.1847877492,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.60831999e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.1845406098,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.716479948e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.1845471656,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.733119944e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.1843500228,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.747840019e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.1848502374,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.646080008e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.1844354634,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.570559973e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.1845507146,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.780480072e-05
+                    }
+                ]
             }
         ]
     },
@@ -642,242 +762,362 @@
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0619627544,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.806720039e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0617521112,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.780480016e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0618256,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.128639938e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0618924114,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.122879941e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0619953278,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.279039966e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0618417744,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.341760052e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0618556824,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.151679983e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0618087802,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.005119957e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.061946203,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.979520014e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n\t// Hint: use the distance function defined above\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0618865082,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.286079964e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0617802062,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.378880074e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0620342872,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.314240029e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0618588184,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.407679968e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0618574458,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.495359965e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0619270732,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.329600016e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0618473906,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.487039994e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.061867833,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.448639991e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0619396246,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.41919999e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.061924913,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.449280033e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0617919944,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.292480022e-05
+                    }
+                ]
             }
         ]
     },
@@ -1100,242 +1340,362 @@
             {
                 "generated_output": "// TODO: implement\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.373885711,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.903359983e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.37390848,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.880319947e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3738975852,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.973760063e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3738532278,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.103680018e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3741113302,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.886079973e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3738582738,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.900800047e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.374011909,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.977600073e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3738188634,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.531839972e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.373969401,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.195200045e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3737872754,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.135039959e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.374138371,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.866880003e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3738976358,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.843200056e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3739350222,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.967360051e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3738786898,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.907839952e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3740921522,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.04735999e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3740138784,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.985919988e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.373869338,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.492159968e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3740475022,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.254719948e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3741969496,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.900799973e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3740394848,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.843199963e-05
+                    }
+                ]
             }
         ]
     },
@@ -1558,242 +1918,362 @@
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016825318,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.962880064e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016818286,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.782399938e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016823336,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.261760058e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016878596,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.807999937e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016807464,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.373120049e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016758214,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.464639992e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016810412,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.966719944e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016798328,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.009599963e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016793702,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.841279939e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016792412,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.897599949e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016803218,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.850880012e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017666786,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.894399943e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016847022,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.284800056e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.001681975,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.872640047e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.001684413,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.256640056e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016829466,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.968639931e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016828046,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.39616001e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016950092,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.485760041e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the algorithm\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016830268,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.883519972e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016853832,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.257280052e-05
+                    }
+                ]
             }
         ]
     },
@@ -2016,242 +2496,362 @@
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.001675166,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.128639966e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016746672,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.488319939e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016668848,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.902720034e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016644078,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.22848e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016792272,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.233599965e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016800754,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.946239928e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016727512,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.196479961e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016728378,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.047999958e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016683396,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.300159959e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016753524,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.000000048e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016759214,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.991680032e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016827124,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.10943995e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016747268,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.105600052e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016729138,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.865599928e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016784624,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.437120052e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.001681079,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.146559944e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016794898,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.280959971e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016685536,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.923200004e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016749538,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 2.220799988e-05
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement the kernel\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.001675653,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.960319979e-05
+                    }
+                ]
             }
         ]
     },
