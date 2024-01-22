@@ -1,4 +1,4 @@
-__device__ double distance(double x1, double x2) {
+__device__ double distanceBetweenPoints(double x1, double x2) {
 	return fabs(x1 - x2);
 }
 

@@ -82,242 +82,362 @@
             {
                 "generated_output": "double smallestArea = std::numeric_limits<double>::max();\n\tfor (size_t i = 0; i < points.size(); ++i) {\n\t\tfor (size_t j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (size_t k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < smallestArea) {\n\t\t\t\t\tsmallestArea = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn smallestArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.003633047,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0033285494
+                    }
+                ]
             },
             {
                 "generated_output": "double smallestArea = std::numeric_limits<double>::max();\n\tfor (auto const& A : points) {\n\t\tfor (auto const& B : points) {\n\t\t\tfor (auto const& C : points) {\n\t\t\t\tdouble area = triangleArea(A, B, C);\n\t\t\t\tif (area < smallestArea) {\n\t\t\t\t\tsmallestArea = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn smallestArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0035581264,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 0.0209783786
+                    }
+                ]
             },
             {
                 "generated_output": "double smallestArea = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < points.size(); ++i) {\n\t\tfor (int j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (int k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < smallestArea) {\n\t\t\t\t\tsmallestArea = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn smallestArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0035235412,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0037495974
+                    }
+                ]
             },
             {
                 "generated_output": "double smallestArea = std::numeric_limits<double>::max();\n\tfor (auto i = 0; i < points.size(); ++i) {\n\t\tfor (auto j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (auto k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < smallestArea) {\n\t\t\t\t\tsmallestArea = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn smallestArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.003568165,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0037276062
+                    }
+                ]
             },
             {
                 "generated_output": "double smallestArea = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < points.size(); ++i) {\n\t\tfor (int j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (int k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < smallestArea) {\n\t\t\t\t\tsmallestArea = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn smallestArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0035772146,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0038324608
+                    }
+                ]
             },
             {
                 "generated_output": "double smallest = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < points.size(); ++i) {\n\t\tfor (int j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (int k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < smallest) {\n\t\t\t\t\tsmallest = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn smallest;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0035173762,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0037451512
+                    }
+                ]
             },
             {
                 "generated_output": "double minArea = std::numeric_limits<double>::max();\n\n\tfor (auto i = 0; i < points.size(); ++i) {\n\t\tfor (auto j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (auto k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < minArea) {\n\t\t\t\t\tminArea = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\treturn minArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0035737638,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0037695628
+                    }
+                ]
             },
             {
                 "generated_output": "double smallest = std::numeric_limits<double>::max();\n\tfor (auto i = 0; i < points.size(); ++i) {\n\t\tfor (auto j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (auto k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < smallest) {\n\t\t\t\t\tsmallest = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn smallest;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0035869664,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.003855388
+                    }
+                ]
             },
             {
                 "generated_output": "double smallestArea = std::numeric_limits<double>::max();\n\tfor (auto const& A : points) {\n\t\tfor (auto const& B : points) {\n\t\t\tfor (auto const& C : points) {\n\t\t\t\tdouble area = triangleArea(A, B, C);\n\t\t\t\tif (area < smallestArea) {\n\t\t\t\t\tsmallestArea = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn smallestArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0035673816,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 0.0208286656
+                    }
+                ]
             },
             {
                 "generated_output": "double smallest = std::numeric_limits<double>::max();\n\tfor (size_t i = 0; i < points.size(); ++i) {\n\t\tfor (size_t j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (size_t k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < smallest) {\n\t\t\t\t\tsmallest = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn smallest;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.003541002,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.003306087
+                    }
+                ]
             },
             {
                 "generated_output": "double smallest = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < points.size(); ++i) {\n\t\tfor (int j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (int k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < smallest) {\n\t\t\t\t\tsmallest = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn smallest;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.003551512,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0037382642
+                    }
+                ]
             },
             {
                 "generated_output": "double smallestArea = std::numeric_limits<double>::max();\n\n\tfor (auto i = 0; i < points.size(); ++i) {\n\t\tfor (auto j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (auto k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < smallestArea) {\n\t\t\t\t\tsmallestArea = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\treturn smallestArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0035428198,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0038014426
+                    }
+                ]
             },
             {
                 "generated_output": "double minArea = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < points.size(); ++i) {\n\t\tfor (int j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (int k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < minArea) {\n\t\t\t\t\tminArea = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn minArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0035453022,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0037663424
+                    }
+                ]
             },
             {
                 "generated_output": "double minArea = std::numeric_limits<double>::max();\n\tfor (auto it1 = points.begin(); it1!= points.end(); ++it1) {\n\t\tfor (auto it2 = it1 + 1; it2!= points.end(); ++it2) {\n\t\t\tfor (auto it3 = it2 + 1; it3!= points.end(); ++it3) {\n\t\t\t\tdouble area = triangleArea(*it1, *it2, *it3);\n\t\t\t\tif (area < minArea) {\n\t\t\t\t\tminArea = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn minArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0035715332,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0032008216
+                    }
+                ]
             },
             {
                 "generated_output": "double smallestArea = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < points.size(); ++i) {\n\t\tfor (int j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (int k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < smallestArea) {\n\t\t\t\t\tsmallestArea = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn smallestArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0035637386,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0037751732
+                    }
+                ]
             },
             {
                 "generated_output": "double smallest = std::numeric_limits<double>::max();\n\n\tfor (auto const& A : points) {\n\t\tfor (auto const& B : points) {\n\t\t\tfor (auto const& C : points) {\n\t\t\t\tdouble area = triangleArea(A, B, C);\n\t\t\t\tif (area < smallest) {\n\t\t\t\t\tsmallest = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\treturn smallest;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.003568694,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 0.0210409558
+                    }
+                ]
             },
             {
                 "generated_output": "double smallestArea = std::numeric_limits<double>::max();\n\tfor (size_t i = 0; i < points.size(); ++i) {\n\t\tfor (size_t j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (size_t k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < smallestArea) {\n\t\t\t\t\tsmallestArea = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn smallestArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0035327368,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0033330754
+                    }
+                ]
             },
             {
                 "generated_output": "double smallestArea = std::numeric_limits<double>::max();\n\tfor (size_t i = 0; i < points.size(); ++i) {\n\t\tfor (size_t j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (size_t k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < smallestArea) {\n\t\t\t\t\tsmallestArea = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn smallestArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0035635022,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0034131622
+                    }
+                ]
             },
             {
                 "generated_output": "double minArea = std::numeric_limits<double>::max();\n\n\tfor (auto const& A : points) {\n\t\tfor (auto const& B : points) {\n\t\t\tfor (auto const& C : points) {\n\t\t\t\tdouble area = triangleArea(A, B, C);\n\t\t\t\tif (area < minArea) {\n\t\t\t\t\tminArea = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\treturn minArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.003528124,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 0.0207098002
+                    }
+                ]
             },
             {
                 "generated_output": "double smallestArea = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < points.size(); ++i) {\n\t\tfor (int j = i + 1; j < points.size(); ++j) {\n\t\t\tfor (int k = j + 1; k < points.size(); ++k) {\n\t\t\t\tdouble area = triangleArea(points[i], points[j], points[k]);\n\t\t\t\tif (area < smallestArea) {\n\t\t\t\t\tsmallestArea = area;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn smallestArea;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.003546232,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.003750473
+                    }
+                ]
             }
         ]
     },
@@ -540,242 +660,362 @@
             {
                 "generated_output": "double min_distance = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < x.size() - 1; ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < min_distance) {\n\t\t\t\tmin_distance = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_distance;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0826315456,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0579708362
+                    }
+                ]
             },
             {
                 "generated_output": "double min_distance = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < min_distance) {\n\t\t\t\tmin_distance = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_distance;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0827405586,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0579118498
+                    }
+                ]
             },
             {
                 "generated_output": "double min_distance = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble current_distance = distance(x[i], x[j]);\n\t\t\tif (current_distance < min_distance) {\n\t\t\t\tmin_distance = current_distance;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_distance;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0823467756,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0578522696
+                    }
+                ]
             },
             {
                 "generated_output": "double min_dist = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < min_dist) {\n\t\t\t\tmin_dist = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_dist;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0823681834,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0574815242
+                    }
+                ]
             },
             {
                 "generated_output": "double min_dist = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < min_dist) {\n\t\t\t\tmin_dist = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_dist;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.081743528,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0575737932
+                    }
+                ]
             },
             {
                 "generated_output": "double min_distance = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < min_distance) {\n\t\t\t\tmin_distance = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_distance;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0820834332,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0573985888
+                    }
+                ]
             },
             {
                 "generated_output": "double min_distance = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < min_distance) {\n\t\t\t\tmin_distance = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_distance;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.082343654,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0575949846
+                    }
+                ]
             },
             {
                 "generated_output": "double min_dist = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < min_dist) {\n\t\t\t\tmin_dist = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_dist;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0818958698,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0573020614
+                    }
+                ]
             },
             {
                 "generated_output": "double min_distance = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < min_distance) {\n\t\t\t\tmin_distance = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_distance;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0820929614,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0576944898
+                    }
+                ]
             },
             {
                 "generated_output": "double minDistance = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < minDistance) {\n\t\t\t\tminDistance = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn minDistance;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0821310426,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.057610322
+                    }
+                ]
             },
             {
                 "generated_output": "double min_distance = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < min_distance) {\n\t\t\t\tmin_distance = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_distance;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0828520416,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0578976608
+                    }
+                ]
             },
             {
                 "generated_output": "double min_distance = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < min_distance) {\n\t\t\t\tmin_distance = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_distance;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0827311128,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0580242706
+                    }
+                ]
             },
             {
                 "generated_output": "double min_dist = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < min_dist) {\n\t\t\t\tmin_dist = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_dist;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.082348573,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0575508562
+                    }
+                ]
             },
             {
                 "generated_output": "double min_distance = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < min_distance) {\n\t\t\t\tmin_distance = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_distance;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0818108898,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0572841358
+                    }
+                ]
             },
             {
                 "generated_output": "double min_distance = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble current_distance = distance(x[i], x[j]);\n\t\t\tif (current_distance < min_distance) {\n\t\t\t\tmin_distance = current_distance;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_distance;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.082803953,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0577867368
+                    }
+                ]
             },
             {
                 "generated_output": "double min_distance = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < min_distance) {\n\t\t\t\tmin_distance = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_distance;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0826759834,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.057969151
+                    }
+                ]
             },
             {
                 "generated_output": "double min_dist = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < min_dist) {\n\t\t\t\tmin_dist = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_dist;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0822528134,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0571880498
+                    }
+                ]
             },
             {
                 "generated_output": "double min_dist = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < min_dist) {\n\t\t\t\tmin_dist = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_dist;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0824531412,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0576007356
+                    }
+                ]
             },
             {
                 "generated_output": "double min_distance = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < x.size() - 1; ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < min_distance) {\n\t\t\t\tmin_distance = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_distance;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0826725846,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.0577229936
+                    }
+                ]
             },
             {
                 "generated_output": "double min_dist = std::numeric_limits<double>::max();\n\tfor (int i = 0; i < x.size(); ++i) {\n\t\tfor (int j = i + 1; j < x.size(); ++j) {\n\t\t\tdouble dist = distance(x[i], x[j]);\n\t\t\tif (dist < min_dist) {\n\t\t\t\tmin_dist = dist;\n\t\t\t}\n\t\t}\n\t}\n\treturn min_dist;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
-                "are_any_valid": false,
-                "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "did_any_run": true,
+                "did_all_run": true,
+                "are_any_valid": true,
+                "are_all_valid": true,
+                "best_sequential_runtime": 0.0823667952,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": true,
+                        "runtime": 0.057627574
+                    }
+                ]
             }
         ]
     },
@@ -998,242 +1238,362 @@
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3721301364,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.222e-07
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.370184716,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.370753313,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.84e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3679923904,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 5e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3705727122,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.8e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3704949786,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 5e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3713321894,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.6e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3712000992,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.4e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3704588242,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.62e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3680501468,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.42e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3700948836,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.62e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3694824964,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 5e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3689493382,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.62e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3684860206,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.62e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3708116424,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.62e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3708606684,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.42e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3702202788,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.62e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3703997994,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.6e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3703423822,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 5e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.3673910444,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 5.02e-08
+                    }
+                ]
             }
         ]
     },
@@ -1456,242 +1816,362 @@
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016502324,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 5e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016657376,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.82e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016629382,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.02e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017218626,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.2e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016839336,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.2e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00167135,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 5.02e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016832744,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 3.6e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016901208,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.6e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016887226,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 5.2e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.001673446,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 5.6e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016846974,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.6e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016580952,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.6e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016698572,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.4e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016952452,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 5.22e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016720954,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.2e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016979398,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 5.24e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016792346,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.2e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016669456,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.42e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.001716669,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.2e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016680376,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 4.8e-08
+                    }
+                ]
             }
         ]
     },
@@ -1914,242 +2394,362 @@
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.00166616,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.82e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016800744,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.8e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.001670955,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.001684018,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.4e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016876686,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
                 "did_any_run": false,
                 "did_all_run": false,
                 "are_any_valid": false,
                 "are_all_valid": false,
                 "best_sequential_runtime": null,
-                "runs": null
+                "runs": [
+                    {
+                        "did_run": false,
+                        "is_valid": null,
+                        "runtime": null
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016832804,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.24e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016887708,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.62e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016817374,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.6e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016678276,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.02e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016943892,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 1.122e-07
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.001689392,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.62e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017183542,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.4e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0017105234,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.82e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.001679213,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.22e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016638294,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.6e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016866626,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 6.4e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016868994,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.4e-08
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
                 "did_any_run": false,
                 "did_all_run": false,
                 "are_any_valid": false,
                 "are_all_valid": false,
                 "best_sequential_runtime": null,
-                "runs": null
+                "runs": [
+                    {
+                        "did_run": false,
+                        "is_valid": null,
+                        "runtime": null
+                    }
+                ]
             },
             {
                 "generated_output": "// TODO: implement this function\n\treturn 0.0;\n}",
                 "source_write_success": true,
-                "did_build": false,
+                "did_build": true,
                 "is_source_valid": true,
-                "did_any_run": false,
-                "did_all_run": false,
+                "did_any_run": true,
+                "did_all_run": true,
                 "are_any_valid": false,
                 "are_all_valid": false,
-                "best_sequential_runtime": null,
-                "runs": null
+                "best_sequential_runtime": 0.0016589122,
+                "runs": [
+                    {
+                        "did_run": true,
+                        "is_valid": false,
+                        "runtime": 7.22e-08
+                    }
+                ]
             }
         ]
     },

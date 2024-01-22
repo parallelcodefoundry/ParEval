@@ -159,6 +159,7 @@ class DriverWrapper(ABC):
     build_timeout: int
     run_timeout: int
     display_build_errors: bool
+    display_runs: bool
     early_exit_runs: bool
     dry: bool
 
@@ -171,6 +172,7 @@ class DriverWrapper(ABC):
         build_timeout: int = 20,
         run_timeout: int = 180,
         display_build_errors: bool = False,
+        display_runs: bool = False,
         early_exit_runs: bool = False,
         dry: bool = False
     ):
@@ -182,6 +184,7 @@ class DriverWrapper(ABC):
         self.build_timeout = build_timeout
         self.run_timeout = run_timeout
         self.display_build_errors = display_build_errors
+        self.display_runs = display_runs
         self.early_exit_runs = early_exit_runs
         self.dry = dry
 

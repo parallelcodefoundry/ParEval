@@ -4,12 +4,12 @@
 #SBATCH -p serial
 #SBATCH -t 08:00:00
 #SBATCH -A bhatele-lab-cmsc
-#SBATCH -J omp-gpt-3.5
-#SBATCH -o run-outputs/gpt-3.5-omp-%A.out
+#SBATCH -J omp-phind-v2_prompted
+#SBATCH -o run-outputs/phind-v2_prompted-omp-%A.out
 
 # settings
 HASH="a8724ee8"
-MODEL="gpt-3.5"
+MODEL="phind-v2_prompted"
 TEMP="0.2"
 
 GENERATED_PROMPTS="../results/${HASH}/${MODEL}_temp${TEMP}/all.json"
@@ -22,7 +22,7 @@ export OMP_PROC_BIND=spread
 export OMP_PLACES=cores
 
 python run-all.py \
-    $GENERATED_PROMPTS \
+    $OUTPUT \
     --output $OUTPUT \
     --scratch-dir $SCRATCH_DIR \
     --launch-configs launch-configs.json \
@@ -30,4 +30,6 @@ python run-all.py \
     --yes-to-all \
     --include-models omp \
     --early-exit-runs \
-    --log info
+    --problem-type geometry \
+    --overwrite \
+    --log debug

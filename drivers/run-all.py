@@ -53,6 +53,7 @@ def get_args():
     parser.add_argument("--log", choices=["INFO", "DEBUG", "WARNING", "ERROR", "CRITICAL"], default="INFO",
         type=str.upper, help="logging level")
     parser.add_argument("--log-build-errors", action="store_true", help="On build error, display the stderr of the build process.")
+    parser.add_argument("--log-runs", action="store_true", help="Display the stderr and stdout of runs.")
     return parser.parse_args()
 
 def get_driver(prompt: dict, scratch_dir: Optional[os.PathLike], launch_configs: dict, problem_sizes: dict, dry: bool, **kwargs) -> DriverWrapper:
@@ -141,6 +142,7 @@ def main():
             problem_sizes,
             args.dry, 
             display_build_errors=args.log_build_errors,
+            display_runs=args.log_runs,
             early_exit_runs=args.early_exit_runs,
             build_timeout=args.build_timeout,
             run_timeout=args.run_timeout
