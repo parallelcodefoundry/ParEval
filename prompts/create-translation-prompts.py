@@ -103,7 +103,7 @@ def main():
         generation_prompts_for_src_model = list(filter(lambda x: x['parallelism_model'] == src_model, generation_prompts))
         generation_prompts_for_dst_model = list(filter(lambda x: x['parallelism_model'] == dst_model, generation_prompts))
 
-        for generation_prompt in alive_it(generation_prompts_for_src_model, title=f"{src_model} -> {dst_model}"):
+        for generation_prompt in alive_it(generation_prompts_for_dst_model, title=f"{src_model} -> {dst_model}"):
             correct_impl = find_correct_implementation(generation_prompt, results, src_model)
 
             if correct_impl is None:
@@ -112,13 +112,14 @@ def main():
 
             src_model_clean_name = EXECUTION_MODEL_CLEAN_NAME_MAP[src_model]
             dst_model_clean_name = EXECUTION_MODEL_CLEAN_NAME_MAP[dst_model]
-            src_model_prompt = generation_prompt['prompt']
-            function_name = get_function_name(src_model_prompt, src_model)
-            src_model_example = prepend_to_every_line(src_model_prompt + "\n" + correct_impl, "// ")
+            dst_model_prompt = generation_prompt['prompt']
+            function_name = get_function_name(dst_model_prompt, dst_model)
+            
 
-            dst_model_prompts = list(filter(lambda x: x['name'] == generation_prompt['name'], generation_prompts_for_dst_model))
-            assert len(dst_model_prompts) == 1, f"There should only be one prompt with the name {generation_prompt['name']}. Found: {len(dst_model_prompts)}"
-            dst_model_prompt = dst_model_prompts[0]['prompt']
+            src_model_prompts = list(filter(lambda x: x['name'] == generation_prompt['name'], generation_prompts_for_src_model))
+            assert len(src_model_prompts) == 1, f"There should only be one prompt with the name {generation_prompt['name']}. Found: {len(src_model_prompts)}"
+            src_model_prompt = src_model_prompts[0]['prompt']
+            src_model_example = prepend_to_every_line(src_model_prompt + "\n" + correct_impl, "// ")
         
             prompt = TRANSLATION_PROMPT_FORMAT.format(
                 src_model=src_model_clean_name,
