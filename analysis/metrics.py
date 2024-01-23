@@ -98,7 +98,7 @@ def speedupk(df: pd.DataFrame, k: int, n: int) -> pd.DataFrame:
             (df["parallelism_model"] == "cuda") |
             (df["parallelism_model"] == "hip") |
             ((df["parallelism_model"] == "kokkos") & (df["num_threads"] == 32)) |
-            ((df["parallelism_model"] == "omp") & (df["num_threads"] == 64)) |
+            ((df["parallelism_model"] == "omp") & (df["num_threads"] == 32)) |
             ((df["parallelism_model"] == "mpi") & (df["num_procs"] == 512)) |
             ((df["parallelism_model"] == "mpi+omp") & (df["num_procs"] == 4) & (df["num_threads"] == 64))]
     df = df.copy()
@@ -153,17 +153,17 @@ def efficiencyk(df: pd.DataFrame, k: int, n: int) -> pd.DataFrame:
             (df["parallelism_model"] == "cuda") |
             (df["parallelism_model"] == "hip") |
             ((df["parallelism_model"] == "kokkos") & (df["num_threads"] == 32)) |
-            ((df["parallelism_model"] == "omp") & (df["num_threads"] == 64)) |
+            ((df["parallelism_model"] == "omp") & (df["num_threads"] == 32)) |
             ((df["parallelism_model"] == "mpi") & (df["num_procs"] == 512)) |
             ((df["parallelism_model"] == "mpi+omp") & (df["num_procs"] == 4) & (df["num_threads"] == 64))]
 
-    # set n_resources column to 1 for serial; 32 for kokkos; 64 for omp; 512 for mpi; 4*64 for mpi+omp;
+    # set n_resources column to 1 for serial; 32 for kokkos; 32 for omp; 512 for mpi; 4*64 for mpi+omp;
     # set it to problem_size for cuda and hip
     df["n_resources"] = 1
     df.loc[df["parallelism_model"] == "cuda", "n_resources"] = df["problem_size"]
     df.loc[df["parallelism_model"] == "hip", "n_resources"] = df["problem_size"]
     df.loc[df["parallelism_model"] == "kokkos", "n_resources"] = 32
-    df.loc[df["parallelism_model"] == "omp", "n_resources"] = 64
+    df.loc[df["parallelism_model"] == "omp", "n_resources"] = 32
     df.loc[df["parallelism_model"] == "mpi", "n_resources"] = 512
     df.loc[df["parallelism_model"] == "mpi+omp", "n_resources"] = 4*64
 
