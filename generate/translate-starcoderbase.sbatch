@@ -4,7 +4,7 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --gpus-per-task=1
 #SBATCH --mem=128000
-#SBATCH -t 23:59:59
+#SBATCH -t 04:00:00
 #SBATCH -A m2404
 #SBATCH -C gpu&hbm80g
 #SBATCH -q regular
@@ -17,7 +17,7 @@ TEMP=0.2
 TOPP=0.95
 MAX_NEW_TKNS=1024
 SAMPLES_PER_PROMPT=20
-BATCH_SIZE=63
+BATCH_SIZE=32
 hash=$(md5sum ../prompts/translation-prompts.json | cut -d' ' -f1)
 OUTPUT="../outputs/output_translate_${hash:0:8}_${MODEL//\//--}_temp${TEMP}.json"
 CACHE="../outputs/cache/cache_translate_${hash:0:8}_${MODEL//\//--}_temp${TEMP}.jsonl"
