@@ -1,13 +1,13 @@
 #!/bin/bash
 #SBATCH -n 512
-#SBATCH -t 08:00:00
+#SBATCH -t 04:00:00
 #SBATCH -A bhatele-lab-cmsc
-#SBATCH -J mpi-codellama-34b-hf_prompted
-#SBATCH -o run-outputs/codellama-34b-hf_prompted-mpi-%A.out
+#SBATCH -J mpi-gemini-pro
+#SBATCH -o run-outputs/gemini-pro-mpi-%A.out
 
 # settings
-HASH="a8724ee8"
-MODEL="codellama-34b-hf_prompted"
+HASH="015cff6f"
+MODEL="gemini-pro"
 TEMP="0.2"
 
 GENERATED_PROMPTS="../results/${HASH}/${MODEL}_temp${TEMP}/all.json"
@@ -19,7 +19,7 @@ ml python gcc openmpi
 export OMPI_MCA_opal_warn_on_missing_libcuda=0
 
 python run-all.py \
-    $OUTPUT \
+    $GENERATED_PROMPTS \
     --output $OUTPUT \
     --scratch-dir $SCRATCH_DIR \
     --launch-configs launch-configs.json \
@@ -27,7 +27,5 @@ python run-all.py \
     --yes-to-all \
     --include-models mpi \
     --early-exit-runs \
-    --problem-type geometry \
-    --overwrite \
     --run-timeout 60 \
     --log info
