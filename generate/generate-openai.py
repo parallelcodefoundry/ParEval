@@ -100,7 +100,7 @@ def get_max_requests_per_day(model: str) -> Optional[int]:
 def postprocess(prompt: str, output: str) -> str:
     """ Postprocess the output. """
     # remove leading ```, ```cpp, and trailing ```
-    output = output.lstrip("```cpp").lstrip("```").rstrip("```")
+    output = output.strip().lstrip("```cpp").lstrip("```").rstrip("```")
 
     # remove prompt if it included it
     if output.startswith(prompt):
