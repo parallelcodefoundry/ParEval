@@ -11,7 +11,7 @@ import time
 from typing import Optional
 
 # tpl imports
-from tqdm import tqdm
+from alive_progress import alive_bar
 import google.generativeai as genai
 
 """ Prompt template: """
@@ -91,7 +91,7 @@ def get_max_requests_per_day(model: str) -> Optional[int]:
 def postprocess(prompt: str, output: str) -> str:
     """ Postprocess the output. """
     # remove leading ```, ```cpp, and trailing ```
-    output = output.strip().lstrip("```cpp").lstrip("```").rstrip("```")
+    output = output.strip().removeprefix("```cpp").removeprefix("```").removesuffix("```")
 
     # remove prompt if it included it
     if output.startswith(prompt):
@@ -134,12 +134,34 @@ def main():
 
     # create the client
     config = genai.types.GenerationConfig(
-        candidate_count=args.num_samples_per_prompt,
+        candidate_count=1,
         max_output_tokens=args.max_new_tokens,
         temperature=args.temperature,
         top_p=args.top_p
     )
-    model = genai.GenerativeModel(args.model, config=config)
+    safety_settings = [
+        {
+            "category": "HARM_CATEGORY_DANGEROUS",
+            "threshold": "BLOCK_NONE",
+        },
+        {
+            "category": "HARM_CATEGORY_HARASSMENT",
+            "threshold": "BLOCK_NONE",
+        },
+        {
+            "category": "HARM_CATEGORY_HATE_SPEECH",
+            "threshold": "BLOCK_NONE",
+        },
+        {
+            "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+            "threshold": "BLOCK_NONE",
+        },
+        {
+            "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+            "threshold": "BLOCK_NONE",
+        },
+    ]
+    model = genai.GenerativeModel(args.model, generation_config=config, safety_settings=safety_settings)
 
     # generation metadata
     MAX_TOKENS_PER_SECOND = args.max_tokens_per_second or get_max_tokens_per_second(args.model)
@@ -149,76 +171,71 @@ def main():
     # generate outputs
     request_counter = 0
     request_rate_counter = 0
-    token_counter = 0
-    token_rate_counter = 0
-    token_timer = time.time()
     request_timer = time.time()
-    for prompt in tqdm(prompts, desc="Generating outputs"):
-        # see if we can skip this
-        if not args.overwrite and "outputs" in prompt:
-            continue
+    with alive_bar(len(prompts), title="Generating outputs", dual_line=True) as bar:
+        for prompt in prompts:
+            # see if we can skip this
+            if not args.overwrite and "outputs" in prompt:
+                bar(skipped=True)
+                continue
 
-        # get the prompt
-        original_prompt = prompt["prompt"]
-        function_name = get_function_name(original_prompt, prompt["parallelism_model"])
-        prompt_text = PROMPT_TEMPLATE.format(prompt=original_prompt, function_name=function_name)
+            # get the prompt
+            original_prompt = prompt["prompt"]
+            function_name = get_function_name(original_prompt, prompt["parallelism_model"])
+            prompt_text = PROMPT_TEMPLATE.format(prompt=original_prompt, function_name=function_name)
 
-        # generate the outputs
-        if args.dry:
-            print("system", SYSTEM_TEMPLATE)
-            print("prompt", prompt_text)
-            continue
+            # generate the outputs
+            if args.dry:
+                print("system", SYSTEM_TEMPLATE)
+                print("prompt", prompt_text)
+                continue
 
-        # set metadata
-        prompt["temperature"] = args.temperature
-        prompt["top_p"] = args.top_p
-        prompt["do_sample"] = True
-        prompt["max_new_tokens"] = args.max_new_tokens
+            # set metadata
+            prompt["temperature"] = args.temperature
+            prompt["top_p"] = args.top_p
+            prompt["do_sample"] = True
+            prompt["max_new_tokens"] = args.max_new_tokens
 
-        # generate the outputs
-        completion = model.generate_content(SYSTEM_TEMPLATE + "\n" + prompt_text)
-        print(completion)
-        exit(0)
+            # generate the outputs
+            completions = []
+            while len(completions) < args.num_samples_per_prompt:
+                completion = model.generate_content(SYSTEM_TEMPLATE + "\n" + prompt_text)
+                if completion.candidates[0].finish_reason == 1: # STOP
+                    completions.append(completion)
+                    bar.text(f"~> Received output {len(completions)} of {args.num_samples_per_prompt}.")
+                else:
+                    print(f"Got a completion with finish_reason={completion.candidates[0].finish_reason}.")
+                    time.sleep(5)
 
-        outputs = [c.message.content for c in completion.choices]
-        outputs = [postprocess(original_prompt, o) for o in outputs]
-        prompt["outputs"] = outputs
+            outputs = [c.text for c in completions]
+            outputs = [postprocess(original_prompt, o) for o in outputs]
+            prompt["outputs"] = outputs
+            bar()
 
-        # update counters
-        request_counter += 1
-        request_rate_counter += 1
-        token_counter += completion.usage.total_tokens
-        token_rate_counter += completion.usage.total_tokens
+            # update counters
+            request_counter += 1
+            request_rate_counter += 1
 
-        # check if we should stop
-        if MAX_REQUESTS is not None and request_counter >= MAX_REQUESTS:
-            print(f"Stopping after {request_counter} requests.")
-            break
-    
-        # check if we should sleep
-        tokens_per_second = token_rate_counter / (time.time() - token_timer)
-        if MAX_TOKENS_PER_SECOND is not None and tokens_per_second > (MAX_TOKENS_PER_SECOND*0.9):
-            sleep_time = 10
-            print(f"Sleeping for {sleep_time} seconds.")
-            time.sleep(sleep_time)
-            token_timer = time.time()
-            token_rate_counter = 0
+            # check if we should stop
+            if MAX_REQUESTS is not None and request_counter >= MAX_REQUESTS:
+                print(f"Stopping after {request_counter} requests.")
+                break
         
-        requests_per_second = request_rate_counter / (time.time() - request_timer)
-        if MAX_REQUESTS_PER_SECOND is not None and requests_per_second > (MAX_REQUESTS_PER_SECOND*0.95):
-            sleep_time = 5
-            print(f"Sleeping for {sleep_time} seconds.")
-            time.sleep(sleep_time)
-            request_timer = time.time()
-            request_rate_counter = 0
+            # check if we should sleep
+            requests_per_second = request_rate_counter / (time.time() - request_timer)
+            if MAX_REQUESTS_PER_SECOND is not None and requests_per_second > (MAX_REQUESTS_PER_SECOND*0.95):
+                sleep_time = 5
+                print(f"Sleeping for {sleep_time} seconds.")
+                time.sleep(sleep_time)
+                request_timer = time.time()
+                request_rate_counter = 0
 
-        # write intermediate outputs
-        with open(args.output, 'w') as output_json:
-            json.dump(prompts, output_json, indent=2)
+            # write intermediate outputs
+            with open(args.output, 'w') as output_json:
+                json.dump(prompts, output_json, indent=2)
 
     # summary stats
     print(f"Submitted {request_counter} requests.")
-    print(f"Used {token_counter} tokens.")
 
     # write outputs
     with open(args.output, 'w') as output_json:
