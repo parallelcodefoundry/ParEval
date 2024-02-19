@@ -16,16 +16,30 @@ from openai import OpenAI
 
 """ Prompt template: """
 SYSTEM_TEMPLATE = """You are a helpful coding assistant.
-You are helping a programmer write a C++ function. Write the body of the function and put it in a markdown code block.
+You are helping a programmer translate {src_model} code to {dst_model} code. Write only the body of the function and put it in a markdown code block.
 Do not write any other code or explanations.
 """
 
-PROMPT_TEMPLATE = """Complete the C++ function {function_name}. Only write the body of the function {function_name}.
-
+PROMPT_TEMPLATE = """Here is an implementation of the {function_name} function in {src_model}.
 ```cpp
-{prompt}
+{src_example}
+```
+
+Rewrite {function_name} to use {dst_model} for parallelism. Write the function body in a markdown code block and nothing else.
+```cpp
+{dst_prompt}
 ```
 """
+
+EXECUTION_MODEL_CLEAN_NAME_MAP = {
+    "serial": "Serial",
+    "omp": "OpenMP",
+    "mpi": "MPI",
+    "mpi+omp": "MPI+OpenMP",
+    "kokkos": "Kokkos",
+    "cuda": "CUDA",
+    "hip": "HIP"
+}
 
 
 def get_args():
@@ -125,6 +139,9 @@ def main():
         for prompt in prompts:
             for o in outputs:
                 if o["prompt"] == prompt["prompt"] and \
+                   o["translation_prompt"] == prompt["translation_prompt"] and \
+                   o["translation_src_model"] == prompt["translation_src_model"] and \
+                   o["translation_dst_model"] == prompt["translation_dst_model"] and \
                    o["name"] == prompt["name"] and \
                    o["parallelism_model"] == prompt["parallelism_model"] and \
                    "outputs" in o and \
@@ -163,13 +180,25 @@ def main():
 
         # get the prompt
         original_prompt = prompt["prompt"]
-        function_name = get_function_name(original_prompt, prompt["parallelism_model"])
-        prompt_text = PROMPT_TEMPLATE.format(prompt=original_prompt, function_name=function_name)
+        function_name = prompt["translation_function_name"]
+        src_model = prompt["translation_src_model"]
+        src_model_clean_name = EXECUTION_MODEL_CLEAN_NAME_MAP[src_model]
+        dst_model = prompt["translation_dst_model"]
+        dst_model_clean_name = EXECUTION_MODEL_CLEAN_NAME_MAP[dst_model]
+
+        system_text = SYSTEM_TEMPLATE.format(src_model=src_model_clean_name, dst_model=dst_model_clean_name)
+        prompt_text = PROMPT_TEMPLATE.format(
+            src_model=src_model_clean_name,
+            src_example=prompt["translation_src_example"],
+            dst_model=dst_model_clean_name,
+            function_name=function_name,
+            dst_prompt=original_prompt
+        )
 
         # generate the outputs
         if args.dry:
-            print("system", SYSTEM_TEMPLATE)
-            print("prompt", prompt_text)
+            print("system", system_text)
+            print("prompt", prompt_text, "\n")
             continue
 
         # set metadata
@@ -182,7 +211,7 @@ def main():
         completion = client.chat.completions.create(
             model=args.model,
             messages=[
-                {"role": "system", "content": SYSTEM_TEMPLATE},
+                {"role": "system", "content": system_text},
                 {"role": "user", "content": prompt_text}
             ],
             max_tokens=args.max_new_tokens,
