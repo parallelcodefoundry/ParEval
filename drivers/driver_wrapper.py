@@ -113,7 +113,7 @@ class GeneratedTextResult:
     def best_sequential_runtime(self) -> Optional[float]:
         """ Return the min value for sequential runtime. """
         if self.did_build() and self.did_any_run():
-            return min(r.best_sequential_runtime for r in self.run_outputs if r.best_sequential_runtime is not None)
+            return min((r.best_sequential_runtime for r in self.run_outputs if r.best_sequential_runtime is not None), default=None)
         else:
             return None
 

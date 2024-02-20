@@ -52,6 +52,18 @@ int main(int argc, char **argv) {
     /* initialize */
     Context *ctx = init();
 
+    /* validate */
+    const bool isValid = validate(ctx);
+    if (rank == 0) {
+        printf("Validation: %s\n", isValid ? "PASS" : "FAIL");
+
+        if (!isValid) {
+            destroy(ctx);
+            MPI_Abort(MPI_COMM_WORLD, 0);
+            return 0;
+        }
+    }
+
     /* benchmark */
     double totalTime = 0.0;
     for (int i = 0; i < NITER; i += 1) {
@@ -84,12 +96,6 @@ int main(int argc, char **argv) {
         printf("BestSequential: %.*f\n", DBL_DIG-1, totalTime / NITER);
     }
     MPI_Barrier(MPI_COMM_WORLD);
-
-    /* validate */
-    const bool isValid = validate(ctx);
-    if (rank == 0) {
-        printf("Validation: %s\n", isValid ? "PASS" : "FAIL");
-    }
 
     /* cleanup */
     destroy(ctx);
