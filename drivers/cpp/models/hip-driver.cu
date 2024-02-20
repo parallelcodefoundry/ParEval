@@ -83,6 +83,14 @@ int main(int argc, char **argv) {
     /* initialize */
     Context *ctx = init();
 
+    /* validate */
+    const bool isValid = validate(ctx);
+    printf("Validation: %s\n", isValid ? "PASS" : "FAIL");
+    if (!isValid) {
+        destroy(ctx);
+        return 0;
+    }
+
     /* benchmark */
     double totalTime = 0.0;
     HipTimer timer;
@@ -109,10 +117,6 @@ int main(int argc, char **argv) {
         reset(ctx);
     }
     printf("BestSequential: %.*f\n", DBL_DIG-1, totalTime / NITER);
-
-    /* validate */
-    const bool isValid = validate(ctx);
-    printf("Validation: %s\n", isValid ? "PASS" : "FAIL");
 
     /* cleanup */
     destroy(ctx);
