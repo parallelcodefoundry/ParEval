@@ -2,14 +2,14 @@
 #SBATCH -N 1
 #SBATCH --exclusive
 #SBATCH -p serial
-#SBATCH -t 05:00:00
+#SBATCH -t 04:00:00
 #SBATCH -A bhatele-lab-cmsc
-#SBATCH -J serial-phind-v2_prompted
-#SBATCH -o run-outputs/phind-v2_prompted-serial-%A.out
+#SBATCH -J serial-gemini-pro
+#SBATCH -o run-outputs/gemini-pro-serial-%A.out
 
 # settings
-HASH="a8724ee8"
-MODEL="phind-v2_prompted"
+HASH="015cff6f"
+MODEL="gemini-pro"
 TEMP="0.2"
 
 GENERATED_PROMPTS="../results/${HASH}/${MODEL}_temp${TEMP}/all.json"
