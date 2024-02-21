@@ -1,9 +1,13 @@
 # PCGBench
 
 This repo contains the Parallel Code Generation Benchmark (PCGBench) for
-evaluating LLMs at writing parallel code. See the [PCGBench
-Leaderboard](https://pssg.cs.umd.edu/blog/2024/pareval/) for up-to-date results
-on different LLMs. The organization of the repo is as follows.
+evaluating the ability of Large Language Models to write parallel code. See the
+[PCGBench Leaderboard](https://pssg.cs.umd.edu/blog/2024/pareval/) for
+up-to-date results on different LLMs. 
+
+## Overview
+
+The organization of the repo is as follows.
 
 - `prompts/` -- the prompts in PCGBench alongside some utility scripts
 - `generate/` -- scripts for generating LLM outputs
