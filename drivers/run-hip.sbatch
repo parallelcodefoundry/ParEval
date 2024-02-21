@@ -18,7 +18,6 @@ ml python rocm/5.7.0 flux_wrappers/0.1
 
 python run-all.py \
     $GENERATED_PROMPTS \
-    $GENERATED_PROMPTS \
     --output $OUTPUT \
     --scratch-dir $SCRATCH_DIR \
     --launch-configs launch-configs.json \

@@ -24,7 +24,6 @@ export OMP_PLACES=cores
 
 python run-all.py \
     $GENERATED_PROMPTS \
-    $GENERATED_PROMPTS \
     --output $OUTPUT \
     --scratch-dir $SCRATCH_DIR \
     --launch-configs launch-configs.json \
@@ -32,5 +31,4 @@ python run-all.py \
     --yes-to-all \
     --include-models omp \
     --early-exit-runs \
-    --log info
     --log info

@@ -21,7 +21,6 @@ ml python gcc/11.3.0 cuda/12.1.1/gcc/11.3.0/
 
 python run-all.py \
     $GENERATED_PROMPTS \
-    $GENERATED_PROMPTS \
     --output $OUTPUT \
     --scratch-dir $SCRATCH_DIR \
     --launch-configs launch-configs.json \
