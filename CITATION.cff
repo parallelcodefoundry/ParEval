@@ -1,0 +1,74 @@
+cff-version: 1.2.0
+title: "Can Large Language Models Write Parallel Code?"
+message: "If you use this library and love it, cite the software and the paper \U0001F917"
+authors:
+  - given-names: Daniel
+    family-names: Nichols
+    email: dnicho@umd.edu
+    affiliation: University of Maryland, College Park
+  - given-names: Josh
+    family-names: Davis
+    email: jhdavis@umd.edu
+    affiliation: University of Maryland, College Park
+  - given-names: Zhaojun
+    family-names: Xie
+    email: zxie12@umd.edu
+    affiliation: University of Maryland, College Park
+  - given-names: Arjun
+    family-names: Rajaram
+    email: arajara1@umd.edu
+    affiliation: University of Maryland, College Park
+  - given-names: Abhinav
+    family-names: Bhatele
+    email: bhatele@cs.umd.edu
+    affiliation: University of Maryland, College Park
+version: 1.0.0
+doi: https://doi.org/10.48550/arXiv.2401.12554
+date-released: 2024-01-23
+references:
+  - type: article
+    authors:
+      - given-names: Daniel
+        family-names: Nichols
+        email: dnicho@umd.edu
+        affiliation: University of Maryland, College Park
+      - given-names: Josh
+        family-names: Davis
+        email: jhdavis@umd.edu
+        affiliation: University of Maryland, College Park
+      - given-names: Zhaojun
+        family-names: Xie
+        email: zxie12@umd.edu
+        affiliation: University of Maryland, College Park
+      - given-names: Arjun
+        family-names: Rajaram
+        email: arajara1@umd.edu
+        affiliation: University of Maryland, College Park
+      - given-names: Abhinav
+        family-names: Bhatele
+        email: bhatele@cs.umd.edu
+        affiliation: University of Maryland, College Park
+    title: "Can Large Language Models Write Parallel Code?"
+    year: 2024
+    journal: ArXiv
+    doi: https://doi.org/10.48550/arXiv.2401.12554
+    url: https://arxiv.org/abs/2401.12554
+
+abstract: >-
+  Large Language Models are becoming an increasingly popular tool for software
+  development. Their ability to model and generate source code has been
+  demonstrated in a variety of contexts, including code completion,
+  summarization, translation, and lookup. However, they often struggle to
+  generate code for more complex tasks. In this paper, we explore the ability of
+  state-of-the-art language models to generate parallel code. We propose a
+  benchmark, PCGBench, consisting of a set of 420 tasks for evaluating the
+  ability of language models to generate parallel code, and we evaluate the
+  performance of several state-of-the-art open- and closed-source language
+  models on these tasks. We introduce novel metrics for comparing parallel code
+  generation performance and use them to explore how well each LLM performs on
+  various parallel programming models and computational problem types.
+keywords:
+  - Large Language Models
+  - High Performance Computing
+  - Parallel Computing
+license: Apache-2.0
