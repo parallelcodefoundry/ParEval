@@ -22,7 +22,7 @@ export OMP_PROC_BIND=spread
 export OMP_PLACES=cores
 
 python run-all.py \
-    $GENERATED_PROMPTS \
+    $OUTPUT \
     --output $OUTPUT \
     --scratch-dir $SCRATCH_DIR \
     --launch-configs launch-configs.json \

@@ -22,7 +22,7 @@ export OMP_PLACES=cores
 export OMPI_MCA_opal_warn_on_missing_libcuda=0
 
 python run-all.py \
-    $GENERATED_PROMPTS \
+    $OUTPUT \
     --output $OUTPUT \
     --scratch-dir $SCRATCH_DIR \
     --launch-configs launch-configs.json \
