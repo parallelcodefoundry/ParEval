@@ -106,6 +106,9 @@ class CppDriverWrapper(DriverWrapper):
             run_process = run_command(launch_cmd, timeout=self.run_timeout, dry=self.dry)
         except subprocess.TimeoutExpired as e:
             return RunOutput(-1, str(e.stdout), f"[Timeout] {str(e.stderr)}", config=run_config)
+        except UnicodeDecodeError as e:
+            logging.warning(f"UnicodeDecodeError: {str(e)}\nRunnning command: {launch_cmd}")
+            return RunOutput(-1, "", f"UnicodeDecodeError: {str(e)}", config=run_config)
         return RunOutput(run_process.returncode, run_process.stdout, run_process.stderr, config=run_config)
 
     def test_single_output(self, prompt: str, output: str, test_driver_file: PathLike, problem_size: str) -> GeneratedTextResult:

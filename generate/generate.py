@@ -114,7 +114,7 @@ generated_outputs = generator(
 )
 
 """ Iterate over prompts and generate code """
-if not args.restart and args.cache is not None:
+if not args.restart and args.cache is not None and os.path.exists(args.cache):
     with open(args.cache, 'r') as jsonl_file:
         responses = [json.loads(line) for line in jsonl_file]
         responses = [r for r in responses if r["temperature"] == args.temperature and r["prompted"] == args.prompted
@@ -133,7 +133,7 @@ for idx, (prompt, output) in tqdm(enumerate(zip(prompts_repeated, generated_outp
         prompt_str = cur_prompt["prompt"]
 
     total_tokens += len(generator.tokenizer.encode(output[0]["generated_text"]))
-    cleaned_output = clean_output(output[0]["generated_text"], prompt_str)
+    cleaned_output = inference_config.clean_output(output[0]["generated_text"], prompt_str)
     cur_prompt["outputs"].append(cleaned_output)
 
     if idx % args.num_samples_per_prompt == args.num_samples_per_prompt - 1:

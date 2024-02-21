@@ -1,193 +1,11 @@
 # std imports
 from abc import ABC, abstractmethod
+import re
 
 # tpl imports
 import torch
 from torch.utils.data import Dataset
 from transformers import StoppingCriteria
-
-
-class InferenceConfig(ABC):
-
-    def __init__(self, prompted : bool = False):
-        self.prompted = prompted
-    
-    @abstractmethod
-    def get_dtype(self):
-        pass
-    
-    @abstractmethod
-    def init_padding(self, tokenizer):
-        pass
-
-    @abstractmethod
-    def get_pad_token_id(self, tokenizer) -> int:
-        pass
-
-    @abstractmethod
-    def get_eos_token_id(self, tokenizer) -> int:
-        pass
-
-    @abstractmethod
-    def trust_remote_code(self) -> bool:
-        pass
-
-    @abstractmethod
-    def format_prompt(self, prompt : str) -> str:
-        pass
-
-
-class StarCoderConfig(InferenceConfig):
-
-    def __init__(self, prompted : bool = False):
-        super().__init__(prompted=prompted)
-
-    def get_dtype(self):
-        return torch.float16
-
-    def init_padding(self, tokenizer):
-        tokenizer.pad_token_id = tokenizer.eos_token_id  # for batching
-        tokenizer.padding_side = "left"   # for decoder-only models
-
-    def get_pad_token_id(self, tokenizer) -> int:
-        return tokenizer.eos_token_id
-
-    def get_eos_token_id(self, tokenizer) -> int:
-        return None
-
-    def trust_remote_code(self) -> bool:
-        return False
-
-    def format_prompt(self, prompt : str) -> str:
-        if self.prompted:
-            return f"<filename>solutions/solution_1.cpp\n// here is the correct implementation of the coding exercise\n\n{prompt}"
-        return prompt.strip()
-
-class CodeLlamaConfig(InferenceConfig):
-
-    def __init__(self, prompted : bool = False):
-        super().__init__(prompted=prompted)
-
-    def get_dtype(self):
-        return torch.float16
-
-    def init_padding(self, tokenizer):
-        tokenizer.pad_token_id = tokenizer.eos_token_id  # for batching
-        tokenizer.padding_side = "left"   # for decoder-only models
-        pass
-
-    def get_pad_token_id(self, tokenizer) -> int:
-        return tokenizer.pad_token_id
-
-    def get_eos_token_id(self, tokenizer) -> int:
-        return tokenizer.eos_token_id
-    
-    def trust_remote_code(self) -> bool:
-        return False
-
-    def format_prompt(self, prompt : str) -> str:
-        if self.prompted:
-            return f"// filename: solutions/solution_1.cpp\n// here is the correct implementation of the coding exercise\n\n{prompt}"
-        return prompt.strip()
-
-
-class PolyCoderConfig(InferenceConfig):
-
-    def __init__(self, prompted : bool = False):
-        super().__init__(prompted=prompted)
-
-    def get_dtype(self):
-        return torch.float16
-
-    def init_padding(self, tokenizer):
-        tokenizer.pad_token_id = tokenizer.eos_token_id  # for batching
-        tokenizer.padding_side = "left"   # for decoder-only models
-
-    def get_pad_token_id(self, tokenizer) -> int:
-        return tokenizer.eos_token_id
-
-    def get_eos_token_id(self, tokenizer) -> int:
-        return tokenizer.eos_token_id
-
-    def trust_remote_code(self) -> bool:
-        return False
-
-    def format_prompt(self, prompt : str) -> str:
-        if self.prompted:
-            return f"// filename: solutions/solution_1.cpp\n// here is the correct implementation of the coding exercise\n\n{prompt}"
-        return prompt.strip()
-
-
-class PhindConfig(InferenceConfig):
-
-    def __init__(self, prompted: bool = False):
-        super().__init__(prompted=prompted)
-
-    def get_dtype(self):
-        return torch.float16
-
-    def init_padding(self, tokenizer):
-        tokenizer.pad_token_id = tokenizer.eos_token_id  # for batching
-        tokenizer.padding_side = "left"   # for decoder-only models
-
-    def get_pad_token_id(self, tokenizer) -> int:
-        return tokenizer.eos_token_id
-
-    def get_eos_token_id(self, tokenizer) -> int:
-        return tokenizer.eos_token_id
-    
-    def trust_remote_code(self) -> bool:
-        return False
-
-    def format_prompt(self, prompt : str) -> str:
-        if self.prompted:
-            return f"// filename: solutions/solution_1.cpp\n// here is the correct implementation of the coding exercise\n\n{prompt}"
-        return prompt.strip()
-
-
-class ReplitConfig(InferenceConfig):
-
-    def __init__(self, prompted: bool = False):
-        super().__init__(prompted=prompted)
-
-    def get_dtype(self):
-        return torch.float16
-
-    def init_padding(self, tokenizer):
-        pass
-        #tokenizer.pad_token_id = tokenizer.eos_token_id  # for batching
-        #tokenizer.padding_side = "left"   # for decoder-only models
-
-    def get_pad_token_id(self, tokenizer) -> int:
-        return None
-        #return tokenizer.eos_token_id
-
-    def get_eos_token_id(self, tokenizer) -> int:
-        return None
-        #return tokenizer.eos_token_id
-    
-    def trust_remote_code(self) -> bool:
-        return True
-
-    def format_prompt(self, prompt : str) -> str:
-        if self.prompted:
-            return f"// filename: solutions/solution_1.cpp\n// here is the correct implementation of the coding exercise\n\n{prompt}"
-        return prompt.strip()
-
-
-def get_inference_config(model_name : str, **kwargs) -> InferenceConfig:
-    if model_name == "bigcode/starcoderbase":
-        return StarCoderConfig(**kwargs)
-    elif model_name.startswith("codellama/CodeLlama-") and 'Instruct' not in model_name:
-        return CodeLlamaConfig(**kwargs)
-    elif model_name == "NinedayWang/PolyCoder-2.7B":
-        return PolyCoderConfig(**kwargs)
-    elif model_name == 'Phind/Phind-CodeLlama-34B-v2':
-        return PhindConfig(**kwargs)
-    elif model_name == 'replit/replit-code-v1_5-3b':
-        return ReplitConfig(**kwargs)
-    else:
-        raise ValueError(f"Unknown model name: {model_name}")
 
 
 def clean_output(output : str, prompt : str) -> str:
@@ -220,6 +38,319 @@ def clean_output(output : str, prompt : str) -> str:
     # truncate at the matching brace
     output = output[1:index+1]
     return output
+
+GPU_FUNCTION_NAME_PATTERN = re.compile(r"__global__ void ([a-zA-Z0-9_]+)\(")
+CPU_FUNCTION_NAME_PATTERN = re.compile(r"\s*[a-zA-Z_]+ ([a-zA-Z0-9_]+)\(")
+def get_function_name(prompt: str, execution_model: str) -> str:
+    if execution_model in ['cuda', 'hip']:
+        match = GPU_FUNCTION_NAME_PATTERN.match(prompt.splitlines()[-1])
+    else:
+        match = CPU_FUNCTION_NAME_PATTERN.match(prompt.splitlines()[-1])
+    if match is None:
+        raise ValueError(f"Could not find function name in prompt: {prompt}")
+    return match.group(1)
+
+
+def find_matching_brace_index(code: str, open_brace_index: int) -> int:
+    """Finds the index of the closing brace that matches the opening brace at the given index."""
+
+    brace_count = 1
+    for i in range(open_brace_index + 1, len(code)):
+        if code[i] == "{":
+            brace_count += 1
+        elif code[i] == "}":
+            brace_count -= 1
+            if brace_count == 0:
+                return i
+
+    raise ValueError("Unmatched opening brace")
+
+
+class InferenceConfig(ABC):
+
+    def __init__(self, prompted : bool = False):
+        self.prompted = prompted
+    
+    @abstractmethod
+    def get_dtype(self):
+        pass
+    
+    @abstractmethod
+    def init_padding(self, tokenizer):
+        pass
+
+    @abstractmethod
+    def get_pad_token_id(self, tokenizer) -> int:
+        pass
+
+    @abstractmethod
+    def get_eos_token_id(self, tokenizer) -> int:
+        pass
+
+    @abstractmethod
+    def trust_remote_code(self) -> bool:
+        pass
+
+    @abstractmethod
+    def format_prompt(self, prompt : str) -> str:
+        pass
+
+    @abstractmethod
+    def clean_output(self, output: str, prompt: str) -> str:
+        pass
+
+
+class StarCoderConfig(InferenceConfig):
+
+    def __init__(self, prompted : bool = False):
+        super().__init__(prompted=prompted)
+
+    def get_dtype(self):
+        return torch.float16
+
+    def init_padding(self, tokenizer):
+        tokenizer.pad_token_id = tokenizer.eos_token_id  # for batching
+        tokenizer.padding_side = "left"   # for decoder-only models
+
+    def get_pad_token_id(self, tokenizer) -> int:
+        return tokenizer.eos_token_id
+
+    def get_eos_token_id(self, tokenizer) -> int:
+        return None
+
+    def trust_remote_code(self) -> bool:
+        return False
+
+    def format_prompt(self, prompt : str) -> str:
+        if self.prompted:
+            return f"<filename>solutions/solution_1.cpp\n// here is the correct implementation of the coding exercise\n\n{prompt}"
+        return prompt.strip()
+
+    def clean_output(self, output: str, prompt: str) -> str:
+        return clean_output(output, prompt)
+
+class CodeLlamaConfig(InferenceConfig):
+
+    def __init__(self, prompted : bool = False):
+        super().__init__(prompted=prompted)
+
+    def get_dtype(self):
+        return torch.float16
+
+    def init_padding(self, tokenizer):
+        tokenizer.pad_token_id = tokenizer.eos_token_id  # for batching
+        tokenizer.padding_side = "left"   # for decoder-only models
+        pass
+
+    def get_pad_token_id(self, tokenizer) -> int:
+        return tokenizer.pad_token_id
+
+    def get_eos_token_id(self, tokenizer) -> int:
+        return tokenizer.eos_token_id
+    
+    def trust_remote_code(self) -> bool:
+        return False
+
+    def format_prompt(self, prompt : str) -> str:
+        if self.prompted:
+            return f"// filename: solutions/solution_1.cpp\n// here is the correct implementation of the coding exercise\n\n{prompt}"
+        return prompt.strip()
+
+    def clean_output(self, output: str, prompt: str) -> str:
+        return clean_output(output, prompt)
+
+class PolyCoderConfig(InferenceConfig):
+
+    def __init__(self, prompted : bool = False):
+        super().__init__(prompted=prompted)
+
+    def get_dtype(self):
+        return torch.float16
+
+    def init_padding(self, tokenizer):
+        tokenizer.pad_token_id = tokenizer.eos_token_id  # for batching
+        tokenizer.padding_side = "left"   # for decoder-only models
+
+    def get_pad_token_id(self, tokenizer) -> int:
+        return tokenizer.eos_token_id
+
+    def get_eos_token_id(self, tokenizer) -> int:
+        return tokenizer.eos_token_id
+
+    def trust_remote_code(self) -> bool:
+        return False
+
+    def format_prompt(self, prompt : str) -> str:
+        if self.prompted:
+            return f"// filename: solutions/solution_1.cpp\n// here is the correct implementation of the coding exercise\n\n{prompt}"
+        return prompt.strip()
+    
+    def clean_output(self, output: str, prompt: str) -> str:
+        return clean_output(output, prompt)
+
+
+class PhindConfig(InferenceConfig):
+
+    def __init__(self, prompted: bool = False):
+        super().__init__(prompted=prompted)
+
+    def get_dtype(self):
+        return torch.float16
+
+    def init_padding(self, tokenizer):
+        tokenizer.pad_token_id = tokenizer.eos_token_id  # for batching
+        tokenizer.padding_side = "left"   # for decoder-only models
+
+    def get_pad_token_id(self, tokenizer) -> int:
+        return tokenizer.eos_token_id
+
+    def get_eos_token_id(self, tokenizer) -> int:
+        return tokenizer.eos_token_id
+    
+    def trust_remote_code(self) -> bool:
+        return False
+
+    def format_prompt(self, prompt : str) -> str:
+        if self.prompted:
+            return f"// filename: solutions/solution_1.cpp\n// here is the correct implementation of the coding exercise\n\n{prompt}"
+        return prompt.strip()
+
+    def clean_output(self, output: str, prompt: str) -> str:
+        return clean_output(output, prompt)
+
+
+class ReplitConfig(InferenceConfig):
+
+    def __init__(self, prompted: bool = False):
+        super().__init__(prompted=prompted)
+
+    def get_dtype(self):
+        return torch.float16
+
+    def init_padding(self, tokenizer):
+        pass
+        #tokenizer.pad_token_id = tokenizer.eos_token_id  # for batching
+        #tokenizer.padding_side = "left"   # for decoder-only models
+
+    def get_pad_token_id(self, tokenizer) -> int:
+        return None
+        #return tokenizer.eos_token_id
+
+    def get_eos_token_id(self, tokenizer) -> int:
+        return None
+        #return tokenizer.eos_token_id
+    
+    def trust_remote_code(self) -> bool:
+        return True
+
+    def format_prompt(self, prompt : str) -> str:
+        if self.prompted:
+            return f"// filename: solutions/solution_1.cpp\n// here is the correct implementation of the coding exercise\n\n{prompt}"
+        return prompt.strip()
+
+    def clean_output(self, output: str, prompt: str) -> str:
+        return clean_output(output, prompt)
+
+
+class MagicoderConfig(InferenceConfig):
+
+    PROMPT_TEMPLATE = """You are an exceptionally intelligent coding assistant that consistently delivers accurate and reliable responses to user instructions.
+
+@@ Instruction
+{instruction}
+
+@@ Response
+"""
+
+    def __init__(self, prompted : bool = False):
+        super().__init__(prompted=prompted)
+
+    def get_dtype(self):
+        return torch.bfloat16
+
+    def init_padding(self, tokenizer):
+        tokenizer.pad_token_id = tokenizer.eos_token_id  # for batching
+        tokenizer.padding_side = "left"   # for decoder-only models
+        pass
+
+    def get_pad_token_id(self, tokenizer) -> int:
+        return tokenizer.pad_token_id
+
+    def get_eos_token_id(self, tokenizer) -> int:
+        return tokenizer.eos_token_id
+    
+    def trust_remote_code(self) -> bool:
+        return False
+
+    def format_prompt(self, prompt : str) -> str:
+        if self.prompted:
+            function_name = get_function_name(prompt, "cuda" if "__global__" in prompt else "serial")
+            prompt = f"Complete the following c++ function.\n```c++{prompt.strip()}```\nWrite only the function {function_name} and no other code. Enclose your solution in ```c++ and ```."
+            return self.PROMPT_TEMPLATE.format(instruction=prompt)
+        return prompt.strip()
+
+    def clean_output(self, output: str, prompt: str) -> str:
+        """ Clean LLM output to find code solution. The output should be in a ```c++ ``` code block. If there are
+            multiple, then it tries to find the block with the function definition (as contained in the prompt).
+            The code block itself may include the function definition and body OR just the body. This will try
+            to parse both.
+        """
+        # 0. replace up to the end of the first instance of prompt
+        prompt_loc = output.find("@@ Response")
+        if prompt_loc == -1:
+            raise ValueError(f"Prompt not found in output: {prompt}")
+        output = output[prompt_loc + len("@@ Response"):].strip()
+
+        # 1. Find all code blocks enclosed in triple backticks with "c++" language tag
+        code_blocks = re.findall(r"```c\+\+\n(.*?)\n```", output, flags=re.DOTALL)
+        code_blocks = [block.lstrip('```c++').rstrip('```') for block in code_blocks]
+
+        # 2. Prioritize code blocks containing the function definition from the prompt
+        sub_prompt = prompt.rstrip().removesuffix("@@ Response").rstrip().removesuffix("```").split("```")[-1]
+        function_name = get_function_name(sub_prompt, "cuda" if "__global__" in sub_prompt else "serial")
+        prioritized_blocks = [block for block in code_blocks if function_name in block]
+
+        # 3. Choose the first block if multiple match, or any block if none match
+        if len(code_blocks) > 0:
+            selected_block = prioritized_blocks[0] if prioritized_blocks else code_blocks[0]
+        else:
+            if '```c++' in output: # starts with ```c++ but it didn't finish
+                code_idx = output.find('```c++')
+                selected_block = output[code_idx:].removeprefix('```c++')
+            else:
+                selected_block = output
+
+        # 4. Handle cases where the block contains only the function body
+        if function_name not in selected_block:
+            return selected_block
+        else:
+            function_start_index = selected_block.index(function_name)
+            open_brace_index = selected_block.find("{", function_start_index)
+            try:
+                close_brace_index = find_matching_brace_index(selected_block, open_brace_index)
+            except ValueError:
+                close_brace_index = len(selected_block)
+
+            function_body = selected_block[open_brace_index + 1 : close_brace_index]
+            return function_body + "}"
+
+
+def get_inference_config(model_name : str, **kwargs) -> InferenceConfig:
+    if model_name == "bigcode/starcoderbase":
+        return StarCoderConfig(**kwargs)
+    elif model_name.startswith("codellama/CodeLlama-") and 'Instruct' not in model_name:
+        return CodeLlamaConfig(**kwargs)
+    elif model_name == "NinedayWang/PolyCoder-2.7B":
+        return PolyCoderConfig(**kwargs)
+    elif model_name == 'Phind/Phind-CodeLlama-34B-v2':
+        return PhindConfig(**kwargs)
+    elif model_name == 'replit/replit-code-v1_5-3b':
+        return ReplitConfig(**kwargs)
+    elif model_name.startswith('ise-uiuc/Magicoder'):
+        return MagicoderConfig(**kwargs)
+    else:
+        raise ValueError(f"Unknown model name: {model_name}")
+
 
 class PromptDataset(Dataset):
     ''' PyTorch dataset that simply wraps a list of strings. They do not have to have the same length.
