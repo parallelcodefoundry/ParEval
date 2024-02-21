@@ -2,13 +2,14 @@
 #SBATCH -N 4
 #SBATCH --exclusive
 #SBATCH -t 05:00:00
+#SBATCH -t 05:00:00
 #SBATCH -A bhatele-lab-cmsc
-#SBATCH -J mpi+omp-gemini-pro
-#SBATCH -o run-outputs/gemini-pro-mpi+omp-%A.out
+#SBATCH -J mpi+omp-magicoder-s-ds-6.7b
+#SBATCH -o run-outputs/magicoder-s-ds-6.7b-mpi+omp-%A.out
 
 # settings
 HASH="015cff6f"
-MODEL="gemini-pro"
+MODEL="magicoder-s-ds-6.7b"
 TEMP="0.2"
 
 GENERATED_PROMPTS="../results/${HASH}/${MODEL}_temp${TEMP}/all.json"
