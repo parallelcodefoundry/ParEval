@@ -3,6 +3,7 @@
 #SBATCH --exclusive
 #SBATCH -p serial
 #SBATCH -t 05:00:00
+#SBATCH -t 05:00:00
 #SBATCH -A bhatele-lab-cmsc
 #SBATCH -J omp-magicoder-s-ds-6.7b
 #SBATCH -o run-outputs/magicoder-s-ds-6.7b-omp-%A.out
@@ -23,6 +24,7 @@ export OMP_PLACES=cores
 
 python run-all.py \
     $GENERATED_PROMPTS \
+    $GENERATED_PROMPTS \
     --output $OUTPUT \
     --scratch-dir $SCRATCH_DIR \
     --launch-configs launch-configs.json \
@@ -30,4 +32,5 @@ python run-all.py \
     --yes-to-all \
     --include-models omp \
     --early-exit-runs \
+    --log info
     --log info

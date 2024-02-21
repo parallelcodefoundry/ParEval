@@ -1,0 +1,11 @@
+datasets==2.16.1
+google-generativeai==0.1.0rc1
+huggingface-hub==0.20.2
+multiprocess==0.70.15
+numpy==1.24.4
+pandas==2.0.3
+torch==2.1.2
+torchaudio==2.1.2
+torchvision==0.16.2
+tqdm==4.66.1
+transformers==4.36.2

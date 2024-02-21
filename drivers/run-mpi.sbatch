@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH -n 512
-#SBATCH -t 08:00:00
+#SBATCH -t 04:00:00
 #SBATCH -A bhatele-lab-cmsc
 #SBATCH -J mpi-magicoder-s-ds-6.7b
 #SBATCH -o run-outputs/magicoder-s-ds-6.7b-mpi-%A.out

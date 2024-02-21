@@ -3,6 +3,7 @@
 #SBATCH --exclusive
 #SBATCH -p serial
 #SBATCH -t 04:00:00
+#SBATCH -t 04:00:00
 #SBATCH -A bhatele-lab-cmsc
 #SBATCH -J serial-magicoder-s-ds-6.7b
 #SBATCH -o run-outputs/magicoder-s-ds-6.7b-serial-%A.out
