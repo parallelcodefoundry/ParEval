@@ -90,6 +90,18 @@ def explode_by_sentence(context):
         exploded_context[section] = [sentence for sentence in exploded_context[section] if len(sentence) > sentence_min]
     return exploded_context
 
+'''
+Take a context as a dictionary with section titles as keys and
+text as values, and format it as a list of dictionaries with
+"section_title" and "text" keys. This is the format expected by
+HuggingFace datasets.
+'''
+def huggingface_format(context):
+    hf_context = []
+    for section, text in context.items():
+        for chunk in text:
+            hf_context.append({"section_title": section, "text": chunk})
+    return hf_context
 
 # --- Main ---
 
@@ -112,10 +124,15 @@ context = explode_by_chunk(context)
 # Drop the Index, not too useful
 del context["Index"]
 
+context = huggingface_format(context)
+
 # Write the context to a file
 print(f"Writing context to file")
 with open(output_path, 'w') as f:
-    json.dump(context, f, indent=4)
+    for row in context:
+        f.write(json.dumps(row))
+        f.write('\n')
+    #json.dump(context, f, indent=4)
 
 print(f"Context written to {output_path}")
 
