@@ -49,7 +49,7 @@ def split_by_section(pdf, toc):
                     else:
                         searching_for = None
                 else:
-                    buffer += line + ' '
+                    buffer += line + ' \n'
     context[current_section] = buffer
     return context
 
@@ -63,6 +63,7 @@ def explode_by_chunk(context):
     for section, text in context.items():
         exploded_context[section] = []
         sentences = re.split(r'(?<=[.]) +', text)
+        #sentences = re.split(r' +\\n', text)
         chunk = ''
         for i in range(len(sentences)):
             sentence = sentences[i]
@@ -94,13 +95,14 @@ def explode_by_sentence(context):
 Take a context as a dictionary with section titles as keys and
 text as values, and format it as a list of dictionaries with
 "section_title" and "text" keys. This is the format expected by
-HuggingFace datasets.
+HuggingFace datasets. Also removes line numbers from the text.
 '''
 def huggingface_format(context):
     hf_context = []
     for section, text in context.items():
         for chunk in text:
-            hf_context.append({"section_title": section, "text": chunk})
+            chunk_text = re.sub(r'\n[\d]+', '\n', chunk)
+            hf_context.append({"section_title": section, "chunk": chunk_text})
     return hf_context
 
 # --- Main ---
@@ -121,6 +123,11 @@ toc = list(pdf.get_toc())
 context = split_by_section(pdf, toc)
 context = explode_by_chunk(context)
 
+# Check for unmatched headings
+for heading in toc:
+    if heading.title not in context:
+        print(f"WARNING! Unmatched heading: {heading.title}")
+
 # Drop the Index, not too useful
 del context["Index"]
 
@@ -135,8 +142,6 @@ with open(output_path, 'w') as f:
     #json.dump(context, f, indent=4)
 
 print(f"Context written to {output_path}")
-
-
 
 # Below: some code to get the text from a specific page
 # for testing regexes
