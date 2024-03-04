@@ -338,6 +338,8 @@ class MagicoderConfig(InferenceConfig):
 def get_inference_config(model_name : str, **kwargs) -> InferenceConfig:
     if model_name == "bigcode/starcoderbase":
         return StarCoderConfig(**kwargs)
+    elif model_name in ["bigcode/starcoder2-3b", "bigcode/starcoder2-7b", "bigcode/starcoder2-15b"]:
+        return StarCoderConfig(**kwargs)
     elif model_name.startswith("codellama/CodeLlama-") and 'Instruct' not in model_name:
         return CodeLlamaConfig(**kwargs)
     elif model_name == "NinedayWang/PolyCoder-2.7B":
