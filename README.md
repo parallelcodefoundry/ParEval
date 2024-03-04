@@ -1,24 +1,26 @@
-# PCGBench
+# ParEval
 
-This repo contains the Parallel Code Generation Benchmark (PCGBench) for
+This repo contains the Parallel Code Evaluation (ParEval) Benchmark for
 evaluating the ability of Large Language Models to write parallel code. See the
-[PCGBench Leaderboard](https://pssg.cs.umd.edu/blog/2024/pareval/) for
-up-to-date results on different LLMs. 
+[ParEval Leaderboard](https://pssg.cs.umd.edu/blog/2024/pareval/) for
+up-to-date results on different LLMs. For more detailed information see our
+paper on ParEval 
+[![arXiv](https://img.shields.io/badge/arXiv-2401.12554-b31b1b.svg)](https://arxiv.org/abs/2401.12554)
 
 ## Overview
 
 The organization of the repo is as follows.
 
-- `prompts/` -- the prompts in PCGBench alongside some utility scripts
+- `prompts/` -- the prompts in ParEval alongside some utility scripts
 - `generate/` -- scripts for generating LLM outputs
 - `drivers/` -- scripts to evaluate LLM outputs
 - `analysis/` -- scripts to analyze driver results and compute metrics
 - `tpl/` -- git submodule dependencies
 
 Each subdirectory has further documentation on its contents. The general
-workflow is to use `generate/generate.py` to get LLM outputs, run
+workflow is to use `generate/generate.py` to generate LLM outputs, run
 `drivers/run-all.py` to evaluate outputs, and `analysis/metrics.py` to
-postprocess the results.
+post-process the results.
 
 ## Setup and Installation
 
@@ -30,7 +32,7 @@ and AMD GPUs alongside their respective software stacks.
 First, clone the repo.
 
 ```sh
-git clone --recurse-submodules https://github.com/pssg-int/llms-for-hpc.git
+git clone --recurse-submodules https://github.com/parallelcodefoundry/ParEval.git
 ```
 
 Next, you need to build Kokkos (if you want to include it in testing).
@@ -56,7 +58,7 @@ outputs.
 pip install -r requirements.txt
 ```
 
-## Citing PCGBench
+## Citing ParEval
 
 ```
 @misc{nichols2024large,
@@ -69,3 +71,7 @@ pip install -r requirements.txt
       primaryClass={cs.DC}
 }
 ```
+
+## License
+
+ParEval is distributed under the terms of the [MIT license](/LICENSE).

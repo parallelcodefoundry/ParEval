@@ -1,6 +1,6 @@
 # Generate
 
-This subdirectory contains scripts for generating the LLM outputs for PCGBench.
+This subdirectory contains scripts for generating the LLM outputs for ParEval.
 The main script is `generate.py`. It can be run as follows.
 
 ```sh

@@ -1,6 +1,6 @@
 # Prompts
 
-This directory contains the PCGBench prompts.
+This directory contains the ParEval prompts.
 The prompts for the generation task are contained in `generation-prompts.json`
 and the prompts for the translation task are in `translation-prompts.json`.
 
