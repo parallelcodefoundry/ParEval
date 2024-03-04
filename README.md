@@ -1,11 +1,13 @@
 # ParEval
 
+[![arXiv](https://img.shields.io/badge/arXiv-2401.12554-b31b1b.svg)](https://arxiv.org/abs/2401.12554)&nbsp;[![GitHub license](https://badgen.net/github/license/parallelcodefoundry/ParEval)](https://github.com/parallelcodefoundry/ParEval/blob/develop/LICENSE)
+
+
 This repo contains the Parallel Code Evaluation (ParEval) Benchmark for
 evaluating the ability of Large Language Models to write parallel code. See the
 [ParEval Leaderboard](https://pssg.cs.umd.edu/blog/2024/pareval/) for
-up-to-date results on different LLMs. For more detailed information see our
-paper on ParEval 
-[![arXiv](https://img.shields.io/badge/arXiv-2401.12554-b31b1b.svg)](https://arxiv.org/abs/2401.12554)
+up-to-date results on different LLMs.
+
 
 ## Overview
 
