@@ -68,9 +68,10 @@ pip install -r requirements.txt
       author={Daniel Nichols and Joshua H. Davis and Zhaojun Xie and 
               Arjun Rajaram and Abhinav Bhatele},
       year={2024},
-      eprint={2401.12554},
-      archivePrefix={arXiv},
-      primaryClass={cs.DC}
+      publisher = {Association for Computing Machinery},
+      address = {New York, NY, USA},
+      booktitle = {Proceedings of the 33rd International Symposium on High-Performance Parallel and Distributed Computing},
+      series = {HPDC '24}
 }
 ```
 
