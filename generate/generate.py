@@ -130,11 +130,13 @@ for idx, (prompt, output) in tqdm(enumerate(zip(prompts_repeated, generated_outp
         cur_prompt = prompt.copy()
         cur_prompt.update({"temperature": args.temperature, "top_p": args.top_p, "do_sample": args.do_sample, "max_new_tokens": args.max_new_tokens, "prompted": args.prompted})
         cur_prompt["outputs"] = []
+        cur_prompt["raw_outputs"] = []
         prompt_str = cur_prompt["prompt"]
 
     total_tokens += len(generator.tokenizer.encode(output[0]["generated_text"]))
     cleaned_output = inference_config.clean_output(output[0]["generated_text"], prompt_str)
     cur_prompt["outputs"].append(cleaned_output)
+    cur_prompt["raw_outputs"].append(output[0]["generated_text"])
 
     if idx % args.num_samples_per_prompt == args.num_samples_per_prompt - 1:
         responses.append(cur_prompt)
