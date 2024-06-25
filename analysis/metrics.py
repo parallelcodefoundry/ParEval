@@ -66,7 +66,7 @@ def passk(df: pd.DataFrame, k: int) -> pd.DataFrame:
     agg[f"pass@{k}"] = agg.apply(lambda x: _passk(x["total_runs"], x["valid_count"], k), axis=1)
     return agg.groupby(["parallelism_model", "problem_type"]).agg({f"pass@{k}": "mean"})
 
-def _speedupk(runtimes: Union[pd.Series, np.ndarray], baseline_runtime: float, k: int) -> float:
+def _speedupk(runtimes: Union[pd.Series, np.ndarray], baseline_runtime: float, k: int, col_name: str = 'speedup@{}') -> float:
     """ Compute the speedup@k metric """
     # create a copy of the runtimes
     if isinstance(runtimes, pd.Series):
@@ -84,7 +84,7 @@ def _speedupk(runtimes: Union[pd.Series, np.ndarray], baseline_runtime: float, k
         num = nCr(j-1, k-1) * baseline_runtime
         den = nCr(num_samples, k) * max(runtimes[j-1], 1e-8)
         sum += num / den
-    return pd.Series({f"speedup@{k}": sum})
+    return pd.Series({col_name.format(k): sum})
 
 def speedupk(df: pd.DataFrame, k: int, n: int) -> pd.DataFrame:
     """ Compute the speedup@k metric """
@@ -116,7 +116,41 @@ def speedupk(df: pd.DataFrame, k: int, n: int) -> pd.DataFrame:
 
     return df
 
-def _efficiencyk(runtimes: Union[pd.Series, np.ndarray], baseline_runtime: float, k: int, n_resources: Union[pd.Series, np.ndarray]) -> float:
+
+
+def speedupk_max(df: pd.DataFrame, k: int) -> pd.DataFrame:
+    """ Compute the speedup_max@k. Same as speedup_n@k, but instead of a fixed n
+        we use the n that gives the max speedup
+    """
+    df = df.copy()
+    df.drop(columns=['prompt'], inplace=True)
+
+    # get all the runs where the submission is valid
+    df = df[df["is_valid"] == True]
+
+    # choose the min across processor counts
+    df["runtime"] = df.groupby(["name", "parallelism_model", "output_idx"])["runtime"].transform("min")
+
+    # use the min best_sequential_runtime
+    df["best_sequential_runtime"] = df.groupby(["name", "parallelism_model", "output_idx"])["best_sequential_runtime"].transform("min")
+
+    # select only run_idx 0
+    df["run_idx"] = df["run_idx"].astype(int)
+    df = df[df["run_idx"] == 0]
+
+    # group by name, parallelism_model, and output_idx and call _speedupk
+    df = df.groupby(["name", "parallelism_model", "problem_type"]).apply(
+            lambda row: _speedupk(row["runtime"], np.min(row["best_sequential_runtime"]), k, col_name="speedup_max@{}")
+        ).reset_index()
+
+    # compute the mean speedup_max@k
+    df = df.groupby(["parallelism_model", "problem_type"]).agg({f"speedup_max@{k}": "mean"})
+
+    return df
+
+
+
+def _efficiencyk(runtimes: Union[pd.Series, np.ndarray], baseline_runtime: float, k: int, n_resources: Union[pd.Series, np.ndarray], col_name: str = 'efficiency@{}') -> float:
     """ Compute the efficiency@k metric """
     # create a copy of the runtimes
     if isinstance(runtimes, pd.Series):
@@ -139,7 +173,7 @@ def _efficiencyk(runtimes: Union[pd.Series, np.ndarray], baseline_runtime: float
         num = nCr(j-1, k-1) * baseline_runtime
         den = nCr(num_samples, k) * max(runtimes[j-1], 1e-8) * n_resources[j-1]
         sum += num / den
-    return pd.Series({f"efficiency@{k}": sum})
+    return pd.Series({col_name.format(k): sum})
 
 def efficiencyk(df: pd.DataFrame, k: int, n: int) -> pd.DataFrame:
     """ Compute the efficiency@k metric """
@@ -150,7 +184,7 @@ def efficiencyk(df: pd.DataFrame, k: int, n: int) -> pd.DataFrame:
 
     # choose processor count; hardcoded right now
     df = df[(df["parallelism_model"] == "serial") |
-            (df["parallelism_model"] == "cuda") |
+           (df["parallelism_model"] == "cuda") |
             (df["parallelism_model"] == "hip") |
             ((df["parallelism_model"] == "kokkos") & (df["num_threads"] == 32)) |
             ((df["parallelism_model"] == "omp") & (df["num_threads"] == 32)) |
@@ -163,7 +197,7 @@ def efficiencyk(df: pd.DataFrame, k: int, n: int) -> pd.DataFrame:
     df.loc[df["parallelism_model"] == "cuda", "n_resources"] = df["problem_size"]
     df.loc[df["parallelism_model"] == "hip", "n_resources"] = df["problem_size"]
     df.loc[df["parallelism_model"] == "kokkos", "n_resources"] = 32
-    df.loc[df["parallelism_model"] == "omp", "n_resources"] = 32
+    df.loc[df["parallelism_model"] == "omp", "n_resources"] = 8
     df.loc[df["parallelism_model"] == "mpi", "n_resources"] = 512
     df.loc[df["parallelism_model"] == "mpi+omp", "n_resources"] = 4*64
 
@@ -179,6 +213,41 @@ def efficiencyk(df: pd.DataFrame, k: int, n: int) -> pd.DataFrame:
     
     # compute the mean efficiency@k
     df = df.groupby(["parallelism_model", "problem_type"]).agg({f"efficiency@{k}": "mean"})
+
+    return df
+
+
+def efficiencyk_max(df: pd.DataFrame, k: int) -> pd.DataFrame:
+    """ Compute the efficiency_max@k metric """
+    df = df.copy()
+
+    # get all runs where is_valid is true
+    df = df[df["is_valid"] == True]
+
+    # set n_resources column
+    df["n_resources"] = 1
+    df.loc[df["parallelism_model"] == "cuda", "n_resources"] = df["problem_size"]
+    df.loc[df["parallelism_model"] == "hip", "n_resources"] = df["problem_size"]
+    df.loc[df["parallelism_model"] == "kokkos", "n_resources"] = df["num_threads"]
+    df.loc[df["parallelism_model"] == "omp", "n_resources"] = df["num_threads"]
+    df.loc[df["parallelism_model"] == "mpi", "n_resources"] = df["num_procs"]
+    df.loc[df["parallelism_model"] == "mpi+omp", "n_resources"] = df["num_procs"] * df["num_threads"]
+
+    # choose the row with min num_resources * runtime
+    df = df.groupby(["name", "parallelism_model", "output_idx"]).apply(
+            lambda row: row.iloc[np.argmin(row["runtime"] * row["n_resources"])]
+        ).reset_index(drop=True)
+
+    # use the min best_sequential_runtime
+    df["best_sequential_runtime"] = df.groupby(["name", "parallelism_model", "output_idx"])["best_sequential_runtime"].transform("min")
+
+    # group by name, parallelism_model, and output_idx and call _efficiencyk
+    df = df.groupby(["name", "parallelism_model", "problem_type"]).apply(
+            lambda row: _efficiencyk(row["runtime"], np.min(row["best_sequential_runtime"]), k, row["n_resources"], col_name='efficiency_max@{}')
+        ).reset_index()
+
+    # compute the mean efficiency_max@k
+    df = df.groupby(["parallelism_model", "problem_type"]).agg({f"efficiency_max@{k}": "mean"})
 
     return df
 
@@ -216,8 +285,10 @@ def main():
         build_values = buildk(df, k)
         pass_values = passk(valid_runs, k)
         speedup_values = speedupk(df, k, args.n)
+        speedup_max_values = speedupk_max(df, k)
         efficiency_values = efficiencyk(df, k, args.n)
-        all_results.extend([build_values, pass_values, speedup_values, efficiency_values])
+        efficiency_max_values = efficiencyk_max(df, k)
+        all_results.extend([build_values, pass_values, speedup_values, speedup_max_values, efficiency_values, efficiency_max_values])
     
     # merge all_results; each df has one column and the same index
     # build a new df with all the columns and the same index
@@ -227,7 +298,9 @@ def main():
     # replace NaN speedup@k values with 0.0
     for k in args.k:
         merged_df[f"speedup@{k}"] = merged_df[f"speedup@{k}"].fillna(0.0)
+        merged_df[f"speedup_max@{k}"] = merged_df[f"speedup_max@{k}"].fillna(0.0)
         merged_df[f"efficiency@{k}"] = merged_df[f"efficiency@{k}"].fillna(0.0)
+        merged_df[f"efficiency_max@{k}"] = merged_df[f"efficiency_max@{k}"].fillna(0.0)
 
     # add model name column
     if args.model_name:
