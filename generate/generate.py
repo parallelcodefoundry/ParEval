@@ -33,6 +33,7 @@ parser.add_argument('--top_p', type=float, default=0.95, help='Top p value for n
 parser.add_argument('--do_sample', action='store_true', help='Enable sampling (default: False)')
 parser.add_argument('--batch_size', type=int, default=16, help='Batch size for generation (default: 8)')
 parser.add_argument('--prompted', action='store_true', help='Use prompted generation. See StarCoder paper (default: False)')
+parser.add_argument('--hf_token', type=str, help='HuggingFace API token for loading models')
 args = parser.parse_args()
 
 """ Load prompts """
@@ -97,7 +98,7 @@ inference_config = get_inference_config(args.model, prompted=args.prompted)
 prompts_repeated = [p for p in prompts for _ in range(args.num_samples_per_prompt)]
 
 """ Initialize HuggingFace pipeline for generation """
-generator = pipeline(model=args.model, torch_dtype=inference_config.get_dtype(), device=0)
+generator = pipeline(model=args.model, torch_dtype=inference_config.get_dtype(), device=0, token=args.hf_token)
 inference_config.init_padding(generator.tokenizer)
 
 """ Create a prompt data set to pass to generate method """
