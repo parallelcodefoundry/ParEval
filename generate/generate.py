@@ -98,7 +98,7 @@ inference_config = get_inference_config(args.model, prompted=args.prompted)
 prompts_repeated = [p for p in prompts for _ in range(args.num_samples_per_prompt)]
 
 """ Initialize HuggingFace pipeline for generation """
-generator = pipeline(model=args.model, torch_dtype=inference_config.get_dtype(), device=0, token=args.hf_token)
+generator = pipeline(task="text-generation", model=args.model, torch_dtype=inference_config.get_dtype(), device=0, token=args.hf_token)
 inference_config.init_padding(generator.tokenizer)
 
 """ Create a prompt data set to pass to generate method """
