@@ -50,6 +50,16 @@ cmake .. -DCMAKE_INSTALL_PREFIX=. -DKokkos_ENABLE_THREADS=ON
 make install -j4
 ```
 
+You will need to build the main C++ drivers before running ParEval. The makefile
+will skip CUDA, HIP, and/or Kokkos if their respective libraries cannot be
+found.
+
+```sh
+# from the repository root, step into the cpp drivers directory and run make
+cd drivers/cpp
+make
+```
+
 Finally, you need to install the Python dependencies. `requirements.txt` has
 the set of dependencies pinned at the version they were tested with. Other
 versions may also work. Note that some of these are only required for parts of
