@@ -90,7 +90,10 @@ class CppDriverWrapper(DriverWrapper):
             compile_process = build_kokkos(driver_src, os.path.dirname(output_path), problem_size=problem_size)
         else:
             binaries_str = ' '.join(binaries)
-            macro = f"-DUSE_{self.parallelism_model.upper()}"
+            if self.parallelism_model == "mpi+omp":
+                macro = "-DUSE_MPI_OMP"
+            else:
+                macro = f"-DUSE_{self.parallelism_model.upper()}"
             cmd = f"{CXX} {CXXFLAGS} -Icpp -Icpp/models {macro} {binaries_str} -o {output_path}"
             try:
                 compile_process = run_command(cmd, timeout=self.build_timeout, dry=self.dry)
