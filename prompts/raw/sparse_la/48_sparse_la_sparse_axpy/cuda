@@ -3,7 +3,7 @@ struct Element {
   double value;
 };
 
-/* Compute z = alpha*x+y where x and y are sparse vectors of size Nx and Ny. Store the result in z.
+/* Compute z = alpha*x+y where x and y are sparse vectors of size Nx and Ny. Store the result in the dense vector z.
    Use CUDA to compute in parallel. The kernel is launched with at least as many threads as values in x or y.
    Example:
    

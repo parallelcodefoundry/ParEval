@@ -3,7 +3,7 @@ struct Element {
   double value;
 };
 
-/* Compute z = alpha*x+y where x and y are sparse vectors. Store the result in z.
+/* Compute z = alpha*x+y where x and y are sparse vectors. Store the result in the dense vector z.
    Example:
    
    input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1

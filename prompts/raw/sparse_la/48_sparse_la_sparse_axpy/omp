@@ -3,7 +3,7 @@ struct Element {
   double value;
 };
 
-/* Compute z = alpha*x+y where x and y are sparse vectors. Store the result in z.
+/* Compute z = alpha*x+y where x and y are sparse vectors. Store the result in the dense vector z.
    Use OpenMP to compute in parallel.
    Example:
    
