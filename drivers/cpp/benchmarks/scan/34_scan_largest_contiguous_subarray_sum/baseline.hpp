@@ -12,8 +12,8 @@
 */
 int NO_INLINE correctMaximumSubarray(std::vector<int> const& x) {
     int largestSum = std::numeric_limits<int>::lowest();
-    int currSum = 0;
     for (int i = 0; i < x.size(); i++) {
+        int currSum = 0;
         for (int j = i; j < x.size(); j++) {
             currSum += x[j];
             if (currSum > largestSum) largestSum = currSum;
