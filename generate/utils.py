@@ -422,6 +422,12 @@ def get_inference_config(model_name : str, **kwargs) -> InferenceConfig:
         return InstructConfig(instruction_tag='Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:', response_tag='### Response:', **kwargs)
     elif model_name.startswith('hpcgroup/rlpf'):
         return InstructConfig(instruction_tag='### Instruction', response_tag='### Response', **kwargs)
+    elif model_name.startswith('Qwen/Qwen2.5') and 'Instruct' in model_name:
+        return ChatMLConfig(**kwargs)
+    elif model_name.startswith('Qwen/Qwen3'):
+        return ChatMLConfig(**kwargs)
+    elif model_name.startswith('Qwen/Qwen2.5'):
+        return QwenConfig(**kwargs)
     else:
         raise ValueError(f"Unknown model name: {model_name}")
 
