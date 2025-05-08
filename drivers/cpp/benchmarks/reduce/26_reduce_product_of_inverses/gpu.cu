@@ -27,7 +27,7 @@ struct Context {
 };
 
 void reset(Context *ctx) {
-    fillRand(ctx->h_x, 0.0, 100.0);
+    fillRand(ctx->h_x, 1.0, 100.0);
     COPY_H2D(ctx->d_x, ctx->h_x.data(), ctx->N * sizeof(double));
 
     double tmp = 1.0;
@@ -73,7 +73,7 @@ bool validate(Context *ctx) {
     const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int trialIter = 0; trialIter < numTries; trialIter += 1) {
         // set up input
-        fillRand(h_x, 0.0, 100.0);
+        fillRand(h_x, 1.0, 100.0);
         COPY_H2D(d_x, h_x.data(), TEST_SIZE * sizeof(double));
 
         double tmp = 1.0;

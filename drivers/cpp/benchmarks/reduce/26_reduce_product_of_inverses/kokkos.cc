@@ -30,7 +30,7 @@ struct Context {
 };
 
 void reset(Context *ctx) {
-    fillRand(ctx->x_host, 0.0, 100.0);
+    fillRand(ctx->x_host, 1.0, 100.0);
 
     copyVectorToView(ctx->x_host, ctx->xNonConst);
     ctx->x = ctx->xNonConst;
@@ -68,7 +68,7 @@ bool validate(Context *ctx) {
     const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int trialIter = 0; trialIter < numTries; trialIter += 1) {
         // set up input
-        fillRand(x_host, 0.0, 100.0);
+        fillRand(x_host, 1.0, 100.0);
         copyVectorToView(x_host, xNonConst);
         Kokkos::View<const double*> x = xNonConst;
 

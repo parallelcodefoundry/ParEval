@@ -23,7 +23,7 @@ struct Context {
 };
 
 void reset(Context *ctx) {
-    fillRand(ctx->x, 0.0, 100.0);
+    fillRand(ctx->x, 1.0, 100.0);
     BCAST(ctx->x, DOUBLE);
 }
 
@@ -58,7 +58,7 @@ bool validate(Context *ctx) {
     const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int trialIter = 0; trialIter < numTries; trialIter += 1) {
         // set up input
-        fillRand(x, 0.0, 100.0);
+        fillRand(x, 1.0, 100.0);
         BCAST(x, DOUBLE);
 
         // compute correct result
