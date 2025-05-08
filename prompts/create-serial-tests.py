@@ -24,7 +24,7 @@ def get_return_type(code: str) -> str:
     # then return the type
     lines = code.split('\n')
     for line in lines:
-        if line.strip().endswith(') {'):
+        if "NO_INLINE correct" in line and line.strip().endswith(') {'):
             return line.split()[0]
 
 def main():
@@ -45,7 +45,8 @@ def main():
             continue
 
         baseline = get_file_contents(baseline_fpath)
-        impl = get_substr_after_first_of(baseline, ') {')
+        func_start = get_substr_after_first_of(baseline, 'NO_INLINE correct')
+        impl = get_substr_after_first_of(func_start, ') {')
         return_type = get_return_type(baseline)
         prompt['outputs'] = [
             impl, 
