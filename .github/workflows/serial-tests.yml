@@ -30,3 +30,11 @@ jobs:
 
       - name: Run CPU test for ${{ matrix.problem }}
         run: bash test/test-serial.bash "${{ matrix.problem }}"
+
+  all-serial-tests:
+    name: All Tests Summary
+    needs: serial-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print final message
+        run: echo "All tests passed"
