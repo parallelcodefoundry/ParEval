@@ -29,4 +29,4 @@ jobs:
           pip install tqdm
 
       - name: Run CPU test for ${{ matrix.problem }}
-        run: bash test/test-cpu.bash "${{ matrix.problem }}"
+        run: bash test/test-serial.bash "${{ matrix.problem }}"
