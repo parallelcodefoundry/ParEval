@@ -2846,49 +2846,49 @@
         "language": "cpp",
         "name": "15_graph_edge_count",
         "parallelism_model": "omp",
-        "prompt": "#include <omp.h>\n\n/* Count the number of edges in the directed graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A represents a directed graph.\n   Use OpenMP to compute in parallel.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint edgeCount(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <omp.h>\n\n/* Count the number of edges in the directed graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A represents a directed graph.\n   Use OpenMP to compute in parallel.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 6\n*/\nint edgeCount(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "15_graph_edge_count",
         "parallelism_model": "hip",
-        "prompt": "/* Count the number of edges in the directed graph defined by the adjacency matrix A.\n   Store the result in numEdges. A represents a directed graph.\n   A is an NxN adjacency matrix stored in row-major.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\n__global__ void edgeCount(const int *A, size_t N, int *numEdges) {"
+        "prompt": "/* Count the number of edges in the directed graph defined by the adjacency matrix A.\n   Store the result in numEdges. A represents a directed graph.\n   A is an NxN adjacency matrix stored in row-major.\n   Use AMD HIP to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 6\n*/\n__global__ void edgeCount(const int *A, size_t N, int *numEdges) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "15_graph_edge_count",
         "parallelism_model": "mpi+omp",
-        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Count the number of edges in the directed graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A represents a directed graph.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The result is returned on rank 0.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint edgeCount(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <mpi.h>\n#include <omp.h>\n\n/* Count the number of edges in the directed graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A represents a directed graph.\n   Use MPI and OpenMP to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The result is returned on rank 0.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 6\n*/\nint edgeCount(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "15_graph_edge_count",
         "parallelism_model": "kokkos",
-        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Count the number of edges in the directed graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix. A represents a directed graph.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint edgeCount(Kokkos::View<const int**> &A, size_t N) {"
+        "prompt": "#include <Kokkos_Core.hpp>\n\n/* Count the number of edges in the directed graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix. A represents a directed graph.\n   Use Kokkos to compute in parallel. Assume Kokkos has already been initialized.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 6\n*/\nint edgeCount(Kokkos::View<const int**> &A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "15_graph_edge_count",
         "parallelism_model": "cuda",
-        "prompt": "/* Count the number of edges in the directed graph defined by the adjacency matrix A.\n   Store the result in numEdges. A represents a directed graph.\n   A is an NxN adjacency matrix stored in row-major.\n   Use CUDA to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\n__global__ void edgeCount(const int *A, size_t N, int *numEdges) {"
+        "prompt": "/* Count the number of edges in the directed graph defined by the adjacency matrix A.\n   Store the result in numEdges. A represents a directed graph.\n   A is an NxN adjacency matrix stored in row-major.\n   Use CUDA to compute in parallel. The kernel is launched with at least N threads.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 6\n*/\n__global__ void edgeCount(const int *A, size_t N, int *numEdges) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "15_graph_edge_count",
         "parallelism_model": "mpi",
-        "prompt": "#include <mpi.h>\n\n/* Count the number of edges in the directed graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A represents a directed graph.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The result is returned on rank 0.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint edgeCount(std::vector<int> const& A, size_t N) {"
+        "prompt": "#include <mpi.h>\n\n/* Count the number of edges in the directed graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A represents a directed graph.\n   Use MPI to compute in parallel. Assume MPI has already been initialized.\n   Every rank has a complete copy of A. The result is returned on rank 0.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 6\n*/\nint edgeCount(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",
         "language": "cpp",
         "name": "15_graph_edge_count",
         "parallelism_model": "serial",
-        "prompt": "/* Count the number of edges in the directed graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A represents a directed graph.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint edgeCount(std::vector<int> const& A, size_t N) {"
+        "prompt": "/* Count the number of edges in the directed graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A represents a directed graph.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 6\n*/\nint edgeCount(std::vector<int> const& A, size_t N) {"
     },
     {
         "problem_type": "graph",

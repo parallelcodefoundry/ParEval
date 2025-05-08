@@ -3,6 +3,6 @@
    Example:
 
 	 input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]
-   output: 3
+   output: 6
 */
 int edgeCount(std::vector<int> const& A, size_t N) {

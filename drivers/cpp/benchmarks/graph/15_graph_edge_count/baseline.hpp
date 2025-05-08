@@ -10,7 +10,7 @@
    Example:
 
 	 input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]
-   output: 3
+   output: 6
 */
 int NO_INLINE correctEdgeCount(std::vector<int> const& A, size_t N) {
    int count = 0;
