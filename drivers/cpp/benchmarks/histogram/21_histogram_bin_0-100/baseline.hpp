@@ -11,7 +11,8 @@
 */
 void NO_INLINE correctBinsBy10Count(std::vector<double> const& x, std::array<size_t, 10> &bins) {
    for (size_t i = 0; i < x.size(); i += 1) {
-      const size_t bin = x[i] / 10;
+      size_t bin = static_cast<size_t>(x[i] / 10);
+      bin = std::min(bin, bins.size() - 1);
       bins[bin] += 1;
    }
 }
