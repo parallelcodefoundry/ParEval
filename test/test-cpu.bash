@@ -10,7 +10,7 @@ else
 fi
 
 # First, use the baseline implementations to mimic LLM outputs.
-python prompts/create-serial-tests.py drivers/cpp/benchmarks prompts/generation-prompts.json serial-generations.json
+python3.11 prompts/create-serial-tests.py drivers/cpp/benchmarks prompts/generation-prompts.json serial-generations.json
 
 # make sure the model drivers are built
 cd drivers
@@ -19,7 +19,7 @@ make
 cd ..
 
 # Run the drivers using these generations
-python run-all.py \
+python3.11 run-all.py \
     ../serial-generations.json \
     --output results.json \
     --launch-configs launch-configs.json \
@@ -30,3 +30,15 @@ python run-all.py \
     --build-timeout 60 \
     --run-timeout 120 \
     --log info
+
+
+# check results
+cd ..
+python3.11 test/validate-test-results.py \
+    --results drivers/results.json \
+    --problem $1 \
+    --expected-write 3 \
+    --expected-source-valid 3 \
+    --expected-build 2 \
+    --expected-run 2 \
+    --expected-correct 1
