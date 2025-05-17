@@ -5,7 +5,7 @@
 #
 # Commands:
 #   generate - Generate LLM outputs for ParEval. See generate/generate.py for full argument list.
-#   evaluate - Evaluate LLM outputs for ParEval. See evaluate/evaluate.py for full argument list.
+#   evaluate - Evaluate LLM outputs for ParEval. See drivers/run-all.py for full argument list.
 #   help | -h | --help - Show a help message.
 #   version | -v | --version - Show the version of ParEval.
 
@@ -15,6 +15,11 @@ if [[ "$#" -eq 0 ]]; then
     echo "No command provided. Use 'pareval help' for usage information."
     exit 1
 fi
+
+if [[ -z "$PAREVAL_ROOT" ]]; then
+    PAREVAL_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+fi
+
 
 command="$1"
 shift
@@ -33,7 +38,7 @@ case "$command" in
         echo ""
         echo "Commands:"
         echo "  generate   Generate LLM outputs for ParEval. See generate/generate.py for full argument list."
-        echo "  evaluate   Evaluate LLM outputs for ParEval. See evaluate/evaluate.py for full argument list."
+        echo "  evaluate   Evaluate LLM outputs for ParEval. See drivers/run-all.py for full argument list."
         echo "  help       Show this help message."
         echo "  -h, --help Show this help message."
         echo "  version    Show the version of ParEval."
@@ -80,5 +85,5 @@ if [[ "$MODE" == "evaluate" ]]; then
         exit 1
     fi
 
-    python3 drivers/run-all.py "$@"
+    python drivers/run-all.py "$@"
 fi
