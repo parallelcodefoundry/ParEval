@@ -69,21 +69,21 @@ fi
 # generate mode
 if [[ "$MODE" == "generate" ]]; then
     # Check if the generate script exists
-    if [[ ! -f "generate/generate.py" ]]; then
-        echo "Error: generate script not found. Please ensure you are in the correct directory."
+    if [[ ! -f "${PAREVAL_ROOT}/generate/generate.py" ]]; then
+        echo "Error: generate script not found in '${PAREVAL_ROOT}'. Please ensure you are in the correct directory."
         exit 1
     fi
 
-    python generate/generate.py "$@"
+    python ${PAREVAL_ROOT}/generate/generate.py "$@"
 fi
 
 # evaluate mode
 if [[ "$MODE" == "evaluate" ]]; then
     # Check if the evaluate script exists
-    if [[ ! -f "drivers/run-all.py" ]]; then
-        echo "Error: evaluate script not found. Please ensure you are in the correct directory."
+    if [[ ! -f "${PAREVAL_ROOT}/drivers/run-all.py" ]]; then
+        echo "Error: evaluate script not found '${PAREVAL_ROOT}'. Please ensure you are in the correct directory."
         exit 1
     fi
 
-    python drivers/run-all.py "$@"
+    python ${PAREVAL_ROOT}/drivers/run-all.py "$@"
 fi
