@@ -1,0 +1,84 @@
+#!/bin/bash
+# Wrapper script to run the components of ParEval.
+# It can be run as:
+#   pareval <command> [options]
+#
+# Commands:
+#   generate - Generate LLM outputs for ParEval. See generate/generate.py for full argument list.
+#   evaluate - Evaluate LLM outputs for ParEval. See evaluate/evaluate.py for full argument list.
+#   help | -h | --help - Show a help message.
+#   version | -v | --version - Show the version of ParEval.
+
+VERSION="v1.1"
+
+if [[ "$#" -eq 0 ]]; then
+    echo "No command provided. Use 'pareval help' for usage information."
+    exit 1
+fi
+
+command="$1"
+shift
+
+MODE=""
+case "$command" in
+    generate)
+        MODE="generate"
+        ;;
+    evaluate)
+        MODE="evaluate"
+        ;;
+    help | -h | --help)
+        echo "ParEval - A framework for evaluating LLMs on parallel code generation tasks."
+        echo "Usage: pareval <command> [options]"
+        echo ""
+        echo "Commands:"
+        echo "  generate   Generate LLM outputs for ParEval. See generate/generate.py for full argument list."
+        echo "  evaluate   Evaluate LLM outputs for ParEval. See evaluate/evaluate.py for full argument list."
+        echo "  help       Show this help message."
+        echo "  -h, --help Show this help message."
+        echo "  version    Show the version of ParEval."
+        echo "  -v, --version Show the version of ParEval."
+        echo ""
+        echo "For detailed usage of each command, run 'pareval <command> --help'."
+        echo ""
+        echo "For more information, visit the ParEval GitHub repository: https://github.com/parallelcodefoundry/ParEval"
+        echo ""
+        exit 0
+        ;;
+    version | -v | --version)
+        echo "ParEval version: $VERSION"
+        exit 0
+        ;;
+    *)
+        echo "Unknown command: $command. Use 'pareval help' for usage information."
+        exit 1
+        ;;
+esac
+
+# check that mode is valid
+if [[ "$MODE" != "generate" && "$MODE" != "evaluate" ]]; then
+    echo "Invalid mode: $MODE. Use 'pareval help' for usage information."
+    exit 1
+fi
+
+# generate mode
+if [[ "$MODE" == "generate" ]]; then
+    # Check if the generate script exists
+    if [[ ! -f "generate/generate.py" ]]; then
+        echo "Error: generate script not found. Please ensure you are in the correct directory."
+        exit 1
+    fi
+
+    python generate/generate.py "$@"
+fi
+
+# evaluate mode
+if [[ "$MODE" == "evaluate" ]]; then
+    # Check if the evaluate script exists
+    if [[ ! -f "drivers/run-all.py" ]]; then
+        echo "Error: evaluate script not found. Please ensure you are in the correct directory."
+        exit 1
+    fi
+
+    python3 drivers/run-all.py "$@"
+fi
