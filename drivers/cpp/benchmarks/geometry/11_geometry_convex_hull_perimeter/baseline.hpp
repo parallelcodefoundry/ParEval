@@ -34,6 +34,8 @@ double NO_INLINE correctConvexHullPerimeter(std::vector<Point> const& points) {
     std::vector<Point> lowerHull;
     upperHull.push_back(pointsSorted[0]);
     upperHull.push_back(pointsSorted[1]);
+    lowerHull.push_back(pointsSorted[pointsSorted.size() - 1]);
+    lowerHull.push_back(pointsSorted[pointsSorted.size() - 2]);
 
     for (size_t i = 2; i < pointsSorted.size(); i++) {
         while (upperHull.size() > 1
@@ -52,7 +54,7 @@ double NO_INLINE correctConvexHullPerimeter(std::vector<Point> const& points) {
         }
         lowerHull.push_back(pointsSorted[pointsSorted.size() - i - 1]);
     }
-    upperHull.insert(upperHull.end(), lowerHull.begin(), lowerHull.end());
+    upperHull.insert(upperHull.end(), lowerHull.begin()+1, lowerHull.end()-1);
 
     double perimeter = 0;
     for (size_t i = 0; i < upperHull.size() - 1; i++) {

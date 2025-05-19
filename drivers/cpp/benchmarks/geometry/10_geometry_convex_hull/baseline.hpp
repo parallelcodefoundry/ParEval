@@ -29,6 +29,8 @@ void NO_INLINE correctConvexHull(std::vector<Point> const& points, std::vector<P
     std::vector<Point> lowerHull;
     upperHull.push_back(pointsSorted[0]);
     upperHull.push_back(pointsSorted[1]);
+    lowerHull.push_back(pointsSorted[pointsSorted.size() - 1]);
+    lowerHull.push_back(pointsSorted[pointsSorted.size() - 2]);
 
     for (size_t i = 2; i < pointsSorted.size(); i++) {
         while (upperHull.size() > 1
@@ -47,7 +49,7 @@ void NO_INLINE correctConvexHull(std::vector<Point> const& points, std::vector<P
         }
         lowerHull.push_back(pointsSorted[pointsSorted.size() - i - 1]);
     }
-    upperHull.insert(upperHull.end(), lowerHull.begin(), lowerHull.end());
+    upperHull.insert(upperHull.end(), lowerHull.begin()+1, lowerHull.end()-1);
 
     hull = upperHull;
     return;
