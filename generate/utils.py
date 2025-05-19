@@ -75,7 +75,7 @@ def clean_instruct_output(output: str, prompt: str, response_tag: str) -> str:
     # 0. replace up to the end of the first instance of prompt
     prompt_loc = output.find(response_tag)
     if prompt_loc == -1:
-        raise ValueError(f"Prompt not found in output: {prompt}")
+        raise ValueError(f"Response tag {response_tag} not found in output: {prompt}")
     output = output[prompt_loc + len(response_tag):].strip()
 
     # 1. Find all code blocks enclosed in triple backticks with "c++" language tag
