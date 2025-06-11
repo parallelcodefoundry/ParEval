@@ -1,24 +1,60 @@
 [
     {
-        "problem_type": "scan",
+        "problem_type": "geometry",
         "language": "cpp",
-        "name": "28_scan_sum_of_prefix_sum_array",
+        "name": "13_geometry_closest_pair_2d",
         "parallelism_model": "serial",
-        "prompt": "/* Compute the prefix sum array of the vector x and return its sum.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {",
+        "prompt": "struct Point {\n\tdouble x, y;\n};\n\ndouble distance(Point const& p1, Point const& p2) {\n\treturn std::sqrt(std::pow(p2.x-p1.x, 2) + std::pow(p2.y-p1.y, 2));\n}\n\n/* Return the distance between the closest two points in the vector points.\n   Example: \n\n   input: [{2, 3}, {12, 30}, {40, 50}, {5, 1}, {12, 10}, {3, 4}]\n   output: 1.41421\n*/\ndouble closestPair(std::vector<Point> const& points) {",
         "outputs": [
-            "\n    std::vector<double> prefixSum(x.size());\n    std::inclusive_scan(x.begin(), x.end(), prefixSum.begin());\n    return std::accumulate(prefixSum.begin(), prefixSum.end(), 0.0);\n}",
+            "\n    // The polygon needs to have at least two points\n    if (points.size() < 2)   {\n        return 0;\n    }\n\n    auto getDist = [](Point const& a, Point const& b) {\n        return std::sqrt(std::pow(b.x-a.x, 2) + std::pow(b.y-a.y, 2));\n    };\n\n    double minDist = std::numeric_limits<double>::max();\n    for (size_t i = 0; i < points.size() - 1; i++) {\n        for (size_t j = i + 1; j < points.size(); j++) {\n            const double dist = getDist(points[i], points[j]);\n            if (dist < minDist) {\n                minDist = dist;\n            }\n        }\n    }\n\n    return minDist;\n}\n",
             " return 0; }",
             " undefinedFunction(); }"
         ]
     },
     {
-        "problem_type": "transform",
+        "problem_type": "geometry",
         "language": "cpp",
-        "name": "53_transform_negate_odds",
+        "name": "11_geometry_convex_hull_perimeter",
         "parallelism_model": "serial",
-        "prompt": "/* In the vector x negate the odd values and divide the even values by 2.\n   Example:\n\n   input: [16, 11, 12, 14, 1, 0, 5]\n   output: [8, -11, 6, 7, -1, 0, -5]\n*/\nvoid negateOddsAndHalveEvens(std::vector<int> &x) {",
+        "prompt": "struct Point {\n\tdouble x, y;\n};\n\ndouble distance(Point const& p1, Point const& p2) {\n\treturn std::sqrt(std::pow(p2.x-p1.x, 2) + std::pow(p2.y-p1.y, 2));\n}\n\n/* Return the perimeter of the smallest convex polygon that contains all the points in the vector points.\n   Example:\n\n   input: [{0, 3}, {1, 1}, {2, 2}, {4, 4}, {0, 0}, {1, 2}, {3, 1}, {3, 3}]\n   output: 13.4477\n*/\ndouble convexHullPerimeter(std::vector<Point> const& points) {",
         "outputs": [
-            "\n    std::transform(x.begin(), x.end(), x.begin(), [](int i) {\n        if (i % 2 == 0) {\n            return i / 2;\n        } else {\n            return -i;\n        }\n    });\n}",
+            "\n    // The polygon needs to have at least three points\n    if (points.size() < 3)   {\n        return 0;\n    }\n\n    std::vector<Point> pointsSorted = points;\n\n    std::sort(pointsSorted.begin(), pointsSorted.end(), [](Point const& a, Point const& b) {\n        return a.x < b.x || (a.x == b.x && a.y < b.y);\n    });\n\n    auto CrossProduct = [](Point const& a, Point const& b, Point const& c) {\n        return (c.x - a.x) * (b.y - a.y) - (c.y - a.y) * (b.x - a.x) > 0;\n    };\n\n    auto dist = [](Point const& p1, Point const& p2) {\n        return sqrt(pow(p2.x-p1.x, 2) + pow(p2.y-p1.y, 2));\n    };\n\n\n    std::vector<Point> upperHull;\n    std::vector<Point> lowerHull;\n    upperHull.push_back(pointsSorted[0]);\n    upperHull.push_back(pointsSorted[1]);\n    lowerHull.push_back(pointsSorted[pointsSorted.size() - 1]);\n    lowerHull.push_back(pointsSorted[pointsSorted.size() - 2]);\n\n    for (size_t i = 2; i < pointsSorted.size(); i++) {\n        while (upperHull.size() > 1\n               && !CrossProduct(upperHull[upperHull.size() - 2],\n                                upperHull[upperHull.size() - 1],\n                                pointsSorted[i])) {\n            upperHull.pop_back();\n        }\n        upperHull.push_back(pointsSorted[i]);\n\n        while (lowerHull.size() > 1\n               && !CrossProduct(lowerHull[lowerHull.size() - 2],\n                                lowerHull[lowerHull.size() - 1],\n                                pointsSorted[pointsSorted.size() - i - 1])) {\n            lowerHull.pop_back();\n        }\n        lowerHull.push_back(pointsSorted[pointsSorted.size() - i - 1]);\n    }\n    upperHull.insert(upperHull.end(), lowerHull.begin()+1, lowerHull.end()-1);\n\n    double perimeter = 0;\n    for (size_t i = 0; i < upperHull.size() - 1; i++) {\n        perimeter += dist(upperHull[i], upperHull[i+1]);\n    }\n    perimeter += dist(upperHull[0], upperHull[upperHull.size() - 1]);\n\n    return perimeter;\n}\n",
+            " return 0; }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "geometry",
+        "language": "cpp",
+        "name": "12_geometry_smallest_triangle",
+        "parallelism_model": "serial",
+        "prompt": "struct Point {\n\tdouble x, y;\n};\n\ndouble triangleArea(Point const& A, Point const& B, Point const& C) {\n  return 0.5 * std::abs( A.x*(B.y-C.y) + B.x*(C.y-A.y) + C.x*(A.y-B.y) );\n}\n\n/* Return the area of the smallest triangle that can be formed by any 3 points.\n   Example:\n\n   input: [{0, 10}, {5, 5}, {1,0}, {-1, 1}, {-10, 0}]\n   output: 5.5\n*/\ndouble smallestArea(std::vector<Point> const& points) {",
+        "outputs": [
+            "\n    // The polygon needs to have at least three points\n    if (points.size() < 3)   {\n        return 0;\n    }\n\n    auto triArea = [](Point const& a, Point const& b, Point const& c) {\n        return 0.5 * std::abs((a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y)));\n    };\n\n    double minArea = std::numeric_limits<double>::max();\n    for (size_t i = 0; i < points.size() - 2; i++) {\n        for (size_t j = i + 1; j < points.size() - 1; j++) {\n            for (size_t k = j + 1; k < points.size(); k++) {\n                const double area = triArea(points[i], points[j], points[k]);\n                if (area < minArea) {\n                    minArea = area;\n                }\n            }\n        }\n    }\n\n    return minArea;\n}\n",
+            " return 0; }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "geometry",
+        "language": "cpp",
+        "name": "14_geometry_closest_pair_1d",
+        "parallelism_model": "serial",
+        "prompt": "double distance(double x1, double x2) {\n\treturn std::abs(x1 - x2);\n}\n\n/* Return the distance between the closest two elements in the vector x.\n   Example: \n\n   input: [7, 3, 9, 12, 31, 1]\n   output: 2\n*/\ndouble closestPair(std::vector<double> const& x) {",
+        "outputs": [
+            "\n    // The vector needs to have at least two elements\n    if (x.size() < 2)   {\n        return 0;\n    }\n\n    auto getDist = [](double const& a, double const& b) {\n        return std::abs(b-a);\n    };\n\n    double minDist = std::numeric_limits<double>::max();\n    for (size_t i = 0; i < x.size() - 1; i++) {\n        for (size_t j = i + 1; j < x.size(); j++) {\n            const double dist = getDist(x[i], x[j]);\n            if (dist < minDist) {\n                minDist = dist;\n            }\n        }\n    }\n\n    return minDist;\n}\n",
+            " return 0; }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "geometry",
+        "language": "cpp",
+        "name": "10_geometry_convex_hull",
+        "parallelism_model": "serial",
+        "prompt": "struct Point {\n   double x, y;\n};\n\n/* Find the set of points that defined the smallest convex polygon that contains all the points in the vector points. Store the result in `hull`.\n   Example:\n\n   input: [{0, 3}, {1, 1}, {2, 2}, {4, 4}, {0, 0}, {1, 2}, {3, 1}, {3, 3}]\n   output: [{0, 3}, {4, 4}, {3, 1}, {0, 0}]\n*/\nvoid convexHull(std::vector<Point> const& points, std::vector<Point> &hull) {",
+        "outputs": [
+            "\n    // The polygon needs to have at least three points\n    if (points.size() < 3)   {\n        hull = points;\n        return;\n    }\n\n    std::vector<Point> pointsSorted = points;\n\n    std::sort(pointsSorted.begin(), pointsSorted.end(), [](Point const& a, Point const& b) {\n        return a.x < b.x || (a.x == b.x && a.y < b.y);\n    });\n\n    auto CrossProduct = [](Point const& a, Point const& b, Point const& c) {\n        return (c.x - a.x) * (b.y - a.y) - (c.y - a.y) * (b.x - a.x) > 0;\n    };\n\n    std::vector<Point> upperHull;\n    std::vector<Point> lowerHull;\n    upperHull.push_back(pointsSorted[0]);\n    upperHull.push_back(pointsSorted[1]);\n    lowerHull.push_back(pointsSorted[pointsSorted.size() - 1]);\n    lowerHull.push_back(pointsSorted[pointsSorted.size() - 2]);\n\n    for (size_t i = 2; i < pointsSorted.size(); i++) {\n        while (upperHull.size() > 1\n               && !CrossProduct(upperHull[upperHull.size() - 2],\n                                upperHull[upperHull.size() - 1],\n                                pointsSorted[i])) {\n            upperHull.pop_back();\n        }\n        upperHull.push_back(pointsSorted[i]);\n\n        while (lowerHull.size() > 1\n               && !CrossProduct(lowerHull[lowerHull.size() - 2],\n                                lowerHull[lowerHull.size() - 1],\n                                pointsSorted[pointsSorted.size() - i - 1])) {\n            lowerHull.pop_back();\n        }\n        lowerHull.push_back(pointsSorted[pointsSorted.size() - i - 1]);\n    }\n    upperHull.insert(upperHull.end(), lowerHull.begin()+1, lowerHull.end()-1);\n\n    hull = upperHull;\n    return;\n}\n",
             " }",
             " undefinedFunction(); }"
         ]
@@ -26,11 +62,11 @@
     {
         "problem_type": "transform",
         "language": "cpp",
-        "name": "56_transform_map_function",
+        "name": "59_transform_map_function",
         "parallelism_model": "serial",
         "prompt": "bool isPowerOfTwo(int x) {\n\treturn (x > 0) && !(x & (x - 1));\n}\n\n/* Apply the isPowerOfTwo function to every value in x and store the results in mask.\n   Example:\n\n   input: [8, 0, 9, 7, 15, 64, 3]\n   output: [true, false, false, false, false, true, false]\n*/\nvoid mapPowersOfTwo(std::vector<int> const& x, std::vector<bool> &mask) {",
         "outputs": [
-            "\n    for (int i = 0; i < x.size(); i++) {\n        mask[i] = isPowerOfTwo(x[i]);\n    }\n}",
+            "\n    for (int i = 0; i < x.size(); i++) {\n        #if defined(USE_CUDA) || defined(USE_HIP)\n        mask[i] = isPowerOfTwoHOST(x[i]);\n        #else\n        mask[i] = isPowerOfTwo(x[i]);\n        #endif\n    }\n}",
             " }",
             " undefinedFunction(); }"
         ]
@@ -38,11 +74,11 @@
     {
         "problem_type": "transform",
         "language": "cpp",
-        "name": "55_transform_squaring",
+        "name": "57_transform_inverse_offset",
         "parallelism_model": "serial",
-        "prompt": "/* Replace every element of x with the square of its value.\n   Example:\n\n   input: [5, 1, 2, -4, 8]\n   output: [25, 1, 4, 16, 64]\n*/\nvoid squareEach(std::vector<int> &x) {",
+        "prompt": "/* Replace every element of the vector x with 1-1/x.\n   Example:\n\n   input: [2, 4, 1, 12, -2]\n   output: [0.5, 0.75, 0, 0.91666666, 1.5]\n*/\nvoid oneMinusInverse(std::vector<double> &x) {",
         "outputs": [
-            "\n    for (size_t i = 0; i < x.size(); i++) {\n        x[i] = x[i] * x[i];\n    }\n}",
+            "\n    std::transform(x.begin(), x.end(), x.begin(), [](double x) { return 1.0 - 1.0 / x; });\n}",
             " }",
             " undefinedFunction(); }"
         ]
@@ -50,7 +86,7 @@
     {
         "problem_type": "transform",
         "language": "cpp",
-        "name": "52_transform_relu",
+        "name": "55_transform_relu",
         "parallelism_model": "serial",
         "prompt": "/* Compute the ReLU function on every element of x. Elements less than zero become zero,\n   while elements greater than zero stay the same.\n   Example:\n\n   input: [-1.8, 24.0, 1.2, 0.0, -5.1, -0.2, 4.5]\n   output: [0, 24.0, 1.2, 0, 0, 0, 4.5]\n*/\nvoid relu(std::vector<double> &x) {",
         "outputs": [
@@ -62,11 +98,143 @@
     {
         "problem_type": "transform",
         "language": "cpp",
-        "name": "54_transform_inverse_offset",
+        "name": "56_transform_negate_odds",
         "parallelism_model": "serial",
-        "prompt": "/* Replace every element of the vector x with 1-1/x.\n   Example:\n\n   input: [2, 4, 1, 12, -2]\n   output: [0.5, 0.75, 0, 0.91666666, 1.5]\n*/\nvoid oneMinusInverse(std::vector<double> &x) {",
+        "prompt": "/* In the vector x negate the odd values and divide the even values by 2.\n   Example:\n\n   input: [16, 11, 12, 14, 1, 0, 5]\n   output: [8, -11, 6, 7, -1, 0, -5]\n*/\nvoid negateOddsAndHalveEvens(std::vector<int> &x) {",
         "outputs": [
-            "\n    std::transform(x.begin(), x.end(), x.begin(), [](double x) { return 1.0 - 1.0 / x; });\n}",
+            "\n    std::transform(x.begin(), x.end(), x.begin(), [](int i) {\n        if (i % 2 == 0) {\n            return i / 2;\n        } else {\n            return -i;\n        }\n    });\n}",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "transform",
+        "language": "cpp",
+        "name": "58_transform_squaring",
+        "parallelism_model": "serial",
+        "prompt": "/* Replace every element of x with the square of its value.\n   Example:\n\n   input: [5, 1, 2, -4, 8]\n   output: [25, 1, 4, 16, 64]\n*/\nvoid squareEach(std::vector<int> &x) {",
+        "outputs": [
+            "\n    for (size_t i = 0; i < x.size(); i++) {\n        x[i] = x[i] * x[i];\n    }\n}",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "reduce",
+        "language": "cpp",
+        "name": "26_reduce_product_of_inverses",
+        "parallelism_model": "serial",
+        "prompt": "/* Return the product of the vector x with every odd indexed element inverted.\n   i.e. x_0 * 1/x_1 * x_2 * 1/x_3 * x_4 ...\n   Example:\n\n   input: [4, 2, 10, 4, 5]\n   output: 25\n*/\ndouble productWithInverses(std::vector<double> const& x) {",
+        "outputs": [
+            "\n    std::vector<double> data;\n    for (size_t i = 0; i < x.size(); i++)\n        data.push_back(i % 2 ? 1.0 / x[i] : x[i]);\n    return std::reduce(data.begin(), data.end(), 1.0, std::multiplies());\n}\n",
+            " return 0; }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "reduce",
+        "language": "cpp",
+        "name": "27_reduce_average",
+        "parallelism_model": "serial",
+        "prompt": "/* Return the average of the vector x.\n   Examples:\n\t\t\n\t input: [1, 8, 4, 5, 1]\n   output: 3.8\n\n   input: [2, 2, 2, 3]\n   output: 2.25\n*/\ndouble average(std::vector<double> const& x) {",
+        "outputs": [
+            "\n    return std::reduce(x.begin(), x.end(), 0.0) / (double) x.size();\n}\n",
+            " return 0; }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "reduce",
+        "language": "cpp",
+        "name": "28_reduce_smallest_odd_number",
+        "parallelism_model": "serial",
+        "prompt": "/* Return the value of the smallest odd number in the vector x.\n   Examples:\n\n   input: [7, 9, 5, 2, 8, 16, 4, 1]\n   output: 1\n\n   input: [8, 36, 7, 2, 11]\n   output: 7\n*/\nint smallestOdd(std::vector<int> const& x) {",
+        "outputs": [
+            "\n    return std::reduce(x.begin(), x.end(), std::numeric_limits<int>::max(), [] (const auto &a, const auto &b) {\n        if (a < b) {\n            if (a % 2 == 1) return a;\n            else if (b % 2 == 1) return b;\n            else return std::numeric_limits<int>::max();\n        } else {\n            if (b % 2 == 1) return b;\n            else if (a % 2 == 1) return a;\n            else return std::numeric_limits<int>::max();\n        }\n    });\n}\n",
+            " return 0; }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "reduce",
+        "language": "cpp",
+        "name": "25_reduce_xor",
+        "parallelism_model": "serial",
+        "prompt": "/* Return the logical XOR reduction of the vector of bools x.\n   Example:\n\n   input: [false, false, false, true]\n   output: true\n*/\nbool reduceLogicalXOR(std::vector<bool> const& x) {",
+        "outputs": [
+            "\n    return std::reduce(x.begin(), x.end(), false, [] (const auto &a, const auto &b) {\n        return a != b;\n    });\n}\n",
+            " return 0; }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "reduce",
+        "language": "cpp",
+        "name": "29_reduce_sum_of_min_of_pairs",
+        "parallelism_model": "serial",
+        "prompt": "/* Return the sum of the minimum value at each index of vectors x and y for all indices.\n   i.e. sum = min(x_0, y_0) + min(x_1, y_1) + min(x_2, y_2) + ...\n   Example:\n\n   input: x=[3, 4, 0, 2, 3], y=[2, 5, 3, 1, 7]\n   output: 10\n*/\ndouble sumOfMinimumElements(std::vector<double> const& x, std::vector<double> const& y) {",
+        "outputs": [
+            "\n    std::vector<double> z;\n    z.resize(x.size());\n    std::transform(x.begin(), x.end(), y.begin(), z.begin(), [] (const auto &a, const auto &b) {\n        return std::min(a, b);\n    });\n    return std::reduce(z.begin(), z.end());\n}\n",
+            " return 0; }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "dense_la",
+        "language": "cpp",
+        "name": "00_dense_la_lu_decomp",
+        "parallelism_model": "serial",
+        "prompt": "/* Factorize the matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   Store the results for L and U into the original matrix A. \n   A is an NxN matrix stored in row-major.\n   Example:\n\n   input: [[4, 3], [6, 3]]\n   output: [[4, 3], [1.5, -1.5]]\n*/\nvoid luFactorize(std::vector<double> &A, size_t N) {",
+        "outputs": [
+            "\n   for (size_t k = 0; k < N; ++k) {\n       for (size_t i = k + 1; i < N; ++i) {\n\n           double factor = A[i * N + k] / A[k * N + k];\n           A[i * N + k] = factor;\n           \n           for (size_t j = k + 1; j < N; ++j) {\n               A[i * N + j] -= factor * A[k * N + j];\n           }\n       }\n   }\n}",
+            " return 0; }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "dense_la",
+        "language": "cpp",
+        "name": "04_dense_la_gemv",
+        "parallelism_model": "serial",
+        "prompt": "/* Multiply the matrix A by the vector x. Store the results in the vector y.\n   A is an MxN matrix stored in row-major, x has N elements, and y has M elements.\n   Example:\n\n   input: A=[[1, -1, 2], [0, -3, 1]] x=[2, 1, 0]\n   output: y=[1, -3]\n*/\nvoid gemv(std::vector<double> const& A, std::vector<double> const& x, std::vector<double> &y, size_t M, size_t N) {",
+        "outputs": [
+            "\n   for (size_t i = 0; i < M; i++) {\n      y[i] = 0;\n      for (size_t j = 0; j < N; j++) {\n         y[i] += A[i * N + j] * x[j];\n      }\n   }\n}",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "dense_la",
+        "language": "cpp",
+        "name": "02_dense_la_gemm",
+        "parallelism_model": "serial",
+        "prompt": "/* Multiply the matrix A by the matrix B. Store the results in the matrix C.\n   A is an MxK matrix, B is a KxN matrix, and C is a MxN matrix. The matrices are stored in row-major.\n   Example:\n\n   input: A=[[1, -1, 2], [0, -2, 1]] B=[[4, 1], [-1, 0], [2, 2]]\n   output: C=[[9, 5], [4, 2]]\n*/\nvoid gemm(std::vector<double> const& A, std::vector<double> const& B, std::vector<double> &C, size_t M, size_t K, size_t N) {",
+        "outputs": [
+            "\n   for (size_t i = 0; i < M; i += 1) {\n      for (size_t k = 0; k < K; k += 1) {\n         for (size_t j = 0; j < N; j += 1) {\n            C[i*N + j] += A[i*K + k] * B[k*N + j];\n         }\n      }\n   }\n}",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "dense_la",
+        "language": "cpp",
+        "name": "01_dense_la_solve",
+        "parallelism_model": "serial",
+        "prompt": "/* Solve the linear system Ax=b for x.\n   A is an NxN matrix in row-major. x and b have N elements.\n   Example:\n   \n   input: A=[[1,4,2], [1,2,3], [2,1,3]] b=[11, 11, 13]\n   output: x=[3, 1, 2]\n*/\nvoid solveLinearSystem(std::vector<double> const& A, std::vector<double> const& b, std::vector<double> &x, size_t N) {",
+        "outputs": [
+            "\n   // Create a copy of A to perform Gaussian elimination\n   std::vector<double> A_copy = A;\n   std::vector<double> b_copy = b;\n\n   // Gaussian elimination\n   for (size_t i = 0; i < N - 1; i++) {\n      // Find the pivot element\n      double pivot = A_copy[i * N + i];\n\n      // Check if the pivot is zero\n      if (pivot == 0) {\n         return;\n      }\n\n      // Eliminate the elements below the pivot\n      for (size_t j = i + 1; j < N; j++) {\n         double factor = A_copy[j * N + i] / pivot;\n         for (size_t k = i; k < N; k++) {\n            A_copy[j * N + k] -= factor * A_copy[i * N + k];\n         }\n         b_copy[j] -= factor * b_copy[i];\n      }\n   }\n\n   // Back substitution\n   for (int i = N - 1; i >= 0; i--) {\n      double sum = 0;\n      for (size_t j = i + 1; j < N; j++) {\n         sum += A_copy[i * N + j] * x[j];\n      }\n      x[i] = (b_copy[i] - sum) / A_copy[i * N + i];\n   }\n}",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "dense_la",
+        "language": "cpp",
+        "name": "03_dense_la_axpy",
+        "parallelism_model": "serial",
+        "prompt": "/* Compute z = alpha*x+y where x and y are vectors. Store the result in z.\n   Example:\n   \n   input: x=[1, -5, 2, 9] y=[0, 4, 1, -1] alpha=2\n   output: z=[2, -6, 5, 17]\n*/\nvoid axpy(double alpha, std::vector<double> const& x, std::vector<double> const& y, std::vector<double> &z) {",
+        "outputs": [
+            "\n   for (size_t i = 0; i < x.size(); i += 1) {\n      z[i] = alpha*x[i] + y[i];\n   }\n}",
             " }",
             " undefinedFunction(); }"
         ]
@@ -74,12 +242,480 @@
     {
         "problem_type": "sort",
         "language": "cpp",
-        "name": "41_sort_sort_non-zero_elements",
+        "name": "41_sort_k-th_smallest_element",
+        "parallelism_model": "serial",
+        "prompt": "/* Find the k-th smallest element of the vector x.\n   Example:\n   \n   input: x=[1, 7, 6, 0, 2, 2, 10, 6], k=4\n   output: 6\n*/\nint findKthSmallest(std::vector<int> const& x, int k) {",
+        "outputs": [
+            "\n   std::vector<int> x_copy = x;\n   std::sort(x_copy.begin(), x_copy.end());\n   return x_copy[k-1];\n}",
+            " return 0; }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "43_sort_sort_an_array_of_structs_by_key",
+        "parallelism_model": "serial",
+        "prompt": "struct Result {\n   int startTime, duration;\n   float value;\n};\n\n/* Sort vector of Result structs by start time in ascending order.\n   Example:\n   \n   input: [{startTime=8, duration=4, value=-1.22}, {startTime=2, duration=10, value=1.0}, {startTime=10, duration=3, value=0.0}]\n   output: [{startTime=2, duration=10, value=1.0}, {startTime=8, duration=4, value=-1.22}, {startTime=10, duration=3, value=0.0}]\n*/\nvoid sortByStartTime(std::vector<Result> &results) {",
+        "outputs": [
+            "\n   std::sort(results.begin(), results.end(), [](Result const& a, Result const& b) {\n      return a.startTime < b.startTime;\n   });\n}",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "44_sort_sort_non-zero_elements",
         "parallelism_model": "serial",
         "prompt": "/* Sort the vector x in ascending order ignoring elements with value 0.\n   Leave zero valued elements in-place.\n   Example:\n\n\t input: [8, 4, 0, 9, 8, 0, 1, -1, 7]\n   output: [-1, 1, 0, 4, 7, 0, 8, 8, 9]\n*/\nvoid sortIgnoreZero(std::vector<int> &x) {",
         "outputs": [
             "\n    std::vector<int> nonZeroElements;\n    for (int num : x) {\n        if (num != 0) {\n            nonZeroElements.push_back(num);\n        }\n    }\n\n    std::sort(nonZeroElements.begin(), nonZeroElements.end());\n\n    size_t nonZeroIndex = 0;\n    for (int i = 0; i < x.size(); i += 1) {\n        if (x[i] != 0) {\n            x[i] = nonZeroElements[nonZeroIndex];\n            nonZeroIndex += 1;\n        }\n    }\n}",
             " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "40_sort_sort_an_array_of_complex_numbers_by_magnitude",
+        "parallelism_model": "serial",
+        "prompt": "/* Sort the vector x of complex numbers by their magnitude in ascending order.\n   Example:\n   \n   input: [3.0-1.0i, 4.5+2.1i, 0.0-1.0i, 1.0-0.0i, 0.5+0.5i]\n   output: [0.5+0.5i, 0.0-1.0i, 1.0-0.0i, 3.0-1.0i, 4.5+2.1i]\n*/\nvoid sortComplexByMagnitude(std::vector<std::complex<double>> &x) {",
+        "outputs": [
+            "\n   std::sort(x.begin(), x.end(), [](const std::complex<double> &a, const std::complex<double> &b) {\n      return std::abs(a) < std::abs(b);\n   });\n}",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "sort",
+        "language": "cpp",
+        "name": "42_sort_sorted_ranks",
+        "parallelism_model": "serial",
+        "prompt": "/* For each value in the vector x compute its index in the sorted vector.\n   Store the results in `ranks`.\n   Examples:\n\n   input: [3.1, 2.8, 9.1, 0.4, 3.14]\n   output: [2, 1, 4, 0, 3]\n \n   input: [100, 7.6, 16.1, 18, 7.6]\n   output: [4, 0, 1, 2, 3]\n*/\nvoid ranks(std::vector<float> const& x, std::vector<size_t> &ranks) {",
+        "outputs": [
+            "\n   std::vector<size_t> indices(x.size());\n   std::iota(indices.begin(), indices.end(), 0);\n\n   std::sort(indices.begin(), indices.end(), [&x](size_t i1, size_t i2) {\n      return x[i1] < x[i2];\n   });\n\n   for (int i = 0; i < indices.size(); i += 1) {\n      ranks[indices[i]] = i;\n   }\n}",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "sparse_la",
+        "language": "cpp",
+        "name": "46_sparse_la_spmm",
+        "parallelism_model": "serial",
+        "prompt": "struct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute the matrix multiplication Y=AX. A is a sparse MxK matrix in COO format.\n   X is a sparse KxN matrix in COO format. Y is a dense MxN matrix in row-major.\n   Example:\n\n   input: A=[{0,0,-2}, {0,1,1}, {1,1,-1}] X=[{0,1,2}, {1,0,-1}]\n   output: Y=[{-1,-4}, {1,0}]\n*/\nvoid spmm(std::vector<COOElement> const& A, std::vector<COOElement> const& X, std::vector<double> &Y, size_t M, size_t K, size_t N) {",
+        "outputs": [
+            "\n   Y.assign(M * N, 0);\n\n   for (const auto& a : A) {\n      for (const auto& x : X) {\n         if (a.column == x.row) {\n            Y[a.row * N + x.column] += a.value * x.value;\n         }\n      }\n   }\n}",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "sparse_la",
+        "language": "cpp",
+        "name": "47_sparse_la_spmv",
+        "parallelism_model": "serial",
+        "prompt": "struct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Compute y = alpha*A*x + beta*y where alpha and beta are scalars, x and y are vectors,\n   and A is a sparse matrix stored in COO format.\n   A has dimensions MxN, x has N values, and y has M values.\n   Example:\n\n   input: alpha=0.5 beta=1.0 A=[{0,1,3}, {1,0,-1}] x=[-4, 2] y=[-1,1]\n   output: y=[2, 3]\n*/\nvoid spmv(double alpha, std::vector<COOElement> const& A, std::vector<double> const& x, double beta, std::vector<double> &y, size_t M, size_t N) {",
+        "outputs": [
+            "\n   for (auto& element : y) {\n      element *= beta;\n   }\n   \n   for (const auto& a_ij : A) {\n      if (a_ij.row < M && a_ij.column < N) {\n         y[a_ij.row] += alpha * a_ij.value * x[a_ij.column];\n      }\n   }\n}",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "sparse_la",
+        "language": "cpp",
+        "name": "48_sparse_la_sparse_axpy",
+        "parallelism_model": "serial",
+        "prompt": "struct Element {\n\tsize_t index;\n  double value;\n};\n\n/* Compute z = alpha*x+y where x and y are sparse vectors. Store the result in the dense vector z.\n   Example:\n   \n   input: x=[{5, 12}, {8, 3}, {12, -1}], y=[{3, 1}, {5, -2}, {7, 1}, {8, -3}], alpha=1\n   output: z=[0, 0, 0, 1, 0, 10, 0, 1, 0, 0, 0, 0, -1]\n*/\nvoid sparseAxpy(double alpha, std::vector<Element> const& x, std::vector<Element> const& y, std::vector<double> &z) {",
+        "outputs": [
+            "\n    size_t xi = 0, yi = 0;\n\n    while (xi < x.size() && yi < y.size()) {\n        if (x[xi].index < y[yi].index) {\n            z[x[xi].index] += alpha * x[xi].value;\n            ++xi;\n        } else if (x[xi].index > y[yi].index) {\n            z[y[yi].index] += y[yi].value;\n            ++yi;\n        } else {\n            z[x[xi].index] += alpha * x[xi].value + y[yi].value;\n            ++xi;\n            ++yi;\n        }\n    }\n\n    while (xi < x.size()) {\n        z[x[xi].index] += alpha * x[xi].value;\n        ++xi;\n    }\n\n    while (yi < y.size()) {\n        z[y[yi].index] += y[yi].value;\n        ++yi;\n    }\n}",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "sparse_la",
+        "language": "cpp",
+        "name": "45_sparse_la_sparse_solve",
+        "parallelism_model": "serial",
+        "prompt": "struct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Solve the sparse linear system Ax=b for x.\n   A is a sparse NxN matrix in COO format. x and b are dense vectors with N elements.\n   Example:\n   \n   input: A=[{0,0,1}, {0,1,1}, {1,1,-2}] b=[1,4]\n   output: x=[3,-2]\n*/\nvoid solveLinearSystem(std::vector<COOElement> const& A, std::vector<double> const& b, std::vector<double> &x, size_t N) {",
+        "outputs": [
+            "\n   std::vector<std::vector<double>> matrix(N, std::vector<double>(N, 0.0));   \n   std::vector<double> b_copy = b;\n\n   // Fill the matrix with the values from A\n   for (const auto& element : A) {\n      matrix[element.row][element.column] = element.value;\n   }\n\n   // Initialize x with the size N\n   x.assign(N, 0.0);\n\n   // Perform Gaussian elimination\n   for (size_t i = 0; i < N; ++i) {\n      // Find pivot\n      double maxEl = std::abs(matrix[i][i]);\n      size_t maxRow = i;\n      for (size_t k = i + 1; k < N; ++k) {\n         if (std::abs(matrix[k][i]) > maxEl) {\n               maxEl = std::abs(matrix[k][i]);\n               maxRow = k;\n         }\n      }\n\n      // Swap maximum row with current row (column by column)\n      for (size_t k = i; k < N; ++k) {\n         std::swap(matrix[maxRow][k], matrix[i][k]);\n      }\n      std::swap(b_copy[maxRow], b_copy[i]);\n\n      // Make all rows below this one 0 in the current column\n      for (size_t k = i + 1; k < N; ++k) {\n         double c = -matrix[k][i] / matrix[i][i];\n         for (size_t j = i; j < N; ++j) {\n               if (i == j) {\n                  matrix[k][j] = 0;\n               } else {\n                  matrix[k][j] += c * matrix[i][j];\n               }\n         }\n         b_copy[k] += c * b_copy[i];\n      }\n   }\n\n   // Solve equation Ax=b for an upper triangular matrix A\n   for (int i = N - 1; i >= 0; --i) {\n      x[i] = b_copy[i] / matrix[i][i];\n      for (int k = i - 1; k >= 0; --k) {\n         b_copy[k] -= matrix[k][i] * x[i];\n      }\n   }\n}",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "sparse_la",
+        "language": "cpp",
+        "name": "49_sparse_la_sparse_lu_decomp",
+        "parallelism_model": "serial",
+        "prompt": "struct COOElement {\n   size_t row, column;\n   double value;\n};\n\n/* Factorize the sparse matrix A into A=LU where L is a lower triangular matrix and U is an upper triangular matrix.\n   A is a sparse NxN matrix stored in COO format.\n   Example:\n\n   input: A=[{0,0,4}, {0,1,3}, {1,0,6}, {1,1,3}]\n   output: L=[{0,0,1},{1,0,1.5}, {1,1,1}] U=[{0,0,4}, {0,1,3}, {1,1,-1.5}]\n*/\nvoid luFactorize(std::vector<COOElement> const& A, std::vector<double> &L, std::vector<double> &U, size_t N) {",
+        "outputs": [
+            "\n   std::vector<std::vector<double>> fullA(N, std::vector<double>(N, 0));\n   for (const auto& element : A) {\n      fullA[element.row][element.column] = element.value;\n   }\n   \n   // LU factorization algorithm\n   for (size_t i = 0; i < N; ++i) {\n      for (size_t j = 0; j < N; ++j) {\n         if (j >= i) {\n               U[i * N + j] = fullA[i][j];\n               for (size_t k = 0; k < i; ++k) {\n                  U[i * N + j] -= L[i * N + k] * U[k * N + j];\n               }\n         }\n         if (i > j) {\n               L[i * N + j] = fullA[i][j] / U[j * N + j];\n               for (size_t k = 0; k < j; ++k) {\n                  L[i * N + j] -= L[i * N + k] * U[k * N + j] / U[j * N + j];\n               }\n         }\n      }\n      L[i * N + i] = 1;\n   }\n}",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "stencil",
+        "language": "cpp",
+        "name": "50_stencil_xor_kernel",
+        "parallelism_model": "serial",
+        "prompt": "/* Set every cell's value to 1 if it has exactly one neighbor that's a 1. Otherwise set it to 0.\n   Note that we only consider neighbors and not input_{i,j} when computing output_{i,j}.\n   input and output are NxN grids of ints in row-major.\n   Example:\n\n   input: [[0, 1, 1, 0],\n           [1, 0, 0, 0],\n           [0, 0, 0, 0],\n           [0, 1, 0, 0]\n   output: [[0, 0, 1, 1],\n            [1, 0, 0, 1],\n            [0, 0, 1, 0],\n            [1, 0, 1, 0]]\n*/\nvoid cellsXOR(std::vector<int> const& input, std::vector<int> &output, size_t N) {",
+        "outputs": [
+            "\n    for (size_t i = 0; i < N; ++i) {\n        for (size_t j = 0; j < N; ++j) {\n            int count = 0;\n            if (i > 0 && input[(i-1)*N + j] == 1) ++count;\n            if (i < N-1 && input[(i+1)*N + j] == 1) ++count;\n            if (j > 0 && input[i*N + j-1] == 1) ++count;\n            if (j < N-1 && input[i*N + j+1] == 1) ++count;\n            output[i*N + j] = (count == 1) ? 1 : 0;\n        }\n    }\n}\n",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "stencil",
+        "language": "cpp",
+        "name": "51_stencil_edge_kernel",
+        "parallelism_model": "serial",
+        "prompt": "const int edgeKernel[3][3] = {{-1, -1, -1}, {-1, 8, -1}, {-1, -1, -1}};\n\n/* Convolve the edge kernel with a grayscale image. Each pixel will be replaced with\n   the dot product of itself and its neighbors with the edge kernel.\n   Use a value of 0 for pixels outside the image's boundaries and clip outputs between 0 and 255.\n   imageIn and imageOut are NxN grayscale images stored in row-major.\n   Store the output of the computation in imageOut.\n   Example:\n\n   input: [[112, 118, 141, 152],\n           [93, 101, 119, 203],\n           [45, 17, 16, 232],\n           [82, 31, 49, 101]]\n   output: [[255, 255, 255, 255],\n            [255, 147, 0, 255],\n            [36, 0, 0, 255],\n            [255, 39, 0, 255]]\n*/\nvoid convolveKernel(std::vector<int> const& imageIn, std::vector<int> &imageOut, size_t N) {",
+        "outputs": [
+            "\n    for (size_t i = 0; i < N; i++) {\n        for (size_t j = 0; j < N; j++){\n            int sum = 0;\n            for (int k = -1; k < 2; k++) {\n                for (int l = -1; l < 2; l++){\n                    int x = i + k;\n                    int y = j + l;\n                    if ((x < 0) || (x >= N) || (y < 0) || (y >= N)) {\n                        sum += 0;\n                    } else {\n                        sum += imageIn[x * N + y] * edgeKernel[k + 1][l + 1];\n                    }\n                }\n            }\n            if (sum < 0) {\n                imageOut[i * N + j] = 0;\n            } else if (sum > 255) {\n                imageOut[i * N + j] = 255;\n            } else {\n                imageOut[i * N + j] = sum;\n            }\n        }\n    }\n}\n",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "stencil",
+        "language": "cpp",
+        "name": "53_stencil_2d_jacobi_5-point_stencil",
+        "parallelism_model": "serial",
+        "prompt": "/* Compute one iteration of a 5-point 2D jacobi stencil on `input`. Store the results in `output`.\n   Each element of `input` will be averaged with its four neighbors and stored in the corresponding element of `output`.\n   i.e. output_{i,j} = (input_{i,j-1} + input_{i,j+1} + input_{i-1,j} + input_{i+1,j} + input_{i,j})/5\n   Replace with 0 when reading past the boundaries of `input`.\n   `input` and `output` are NxN grids stored in row-major.\n   Example:\n\n   input: [[3, 4, 1], [0, 1, 7], [5, 3, 2]]\n   output: [[1.4, 1.8, 2.4],[1.8, 3, 2.2], [1.6, 2.2, 2.4]]\n*/\nvoid jacobi2D(std::vector<double> const& input, std::vector<double> &output, size_t N) {",
+        "outputs": [
+            "\n    for (size_t i = 0; i < N; i++) {\n        for (size_t j = 0; j < N; j++) {\n            double sum = 0;\n            if (i > 0) {\n                sum += input[(i - 1) * N + j];\n            }\n            if (i < N - 1) {\n                sum += input[(i + 1) * N + j];\n            }\n            if (j > 0) {\n                sum += input[i * N + (j - 1)];\n            }\n            if (j < N - 1) {\n                sum += input[i * N + (j + 1)];\n            }\n            sum += input[i * N + j];\n            output[i * N + j] = sum / 5.0;\n        }\n    }\n}\n",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "stencil",
+        "language": "cpp",
+        "name": "52_stencil_1d_jacobi_3-point_stencil",
+        "parallelism_model": "serial",
+        "prompt": "/* Compute one iteration of a 3-point 1D jacobi stencil on `input`. Store the results in `output`.\n   Each element of `input` will be averaged with its two neighbors and stored in the corresponding element of `output`.\n   i.e. output[i] = (input[i-1]+input[i]+input[i+1])/3\n   Replace with 0 when reading past the boundaries of `input`.\n   Example:\n\n   input: [9, -6, -1, 2, 3]\n   output: [1, 2/3, -5/3, 4/3, 5/3]\n*/\nvoid jacobi1D(std::vector<double> const& input, std::vector<double> &output) {",
+        "outputs": [
+            "\n    for (size_t i = 0; i < input.size(); i++) {\n        double sum = 0.0;\n        if (i > 0) {\n            sum += input[i - 1];\n        }\n        if (i < input.size() - 1) {\n            sum += input[i + 1];\n        }\n        sum += input[i];\n        output[i] = sum / 3.0;\n    }\n}\n",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "stencil",
+        "language": "cpp",
+        "name": "54_stencil_game_of_life",
+        "parallelism_model": "serial",
+        "prompt": "/* Simulate one generation of Game of Life on `input`. Store the results in `output`.\n   A cell is 1 if it is alive and 0 if it is dead.\n   If a live cell has fewer than 2 live neighbors then it dies.\n   If a live cell has 2 or 3 live neighbors then it lives on.\n   If a live cell has more than 3 live neighbords then it dies.\n   If a cell is dead and has exactly 3 live neighbors then it becomes alive.\n   `input` and `output` are NxN grids stored in row-major.\n   Example:\n\n   input:  [[0, 0, 0, 0, 0],\n\t\t\t\t\t  [0, 1, 0, 0, 0],\n            [0, 1, 1, 0, 0],\n            [0, 0, 1, 1, 0],\n            [0, 1, 0, 0, 0]]\n   output: [[0, 0, 0, 0, 0],\n\t\t\t\t\t  [0, 1, 1, 0, 0],\n            [0, 1, 0, 1, 0],\n            [0, 0, 0, 1, 0],\n            [0, 0, 1, 0, 0]]\n*/\nvoid gameOfLife(std::vector<int> const& input, std::vector<int> &output, size_t N) {",
+        "outputs": [
+            "\n    for (size_t i = 0; i < N; i++) {\n        for (size_t j = 0; j < N; j++) {\n            int sum = 0;\n            if (i > 0) {\n                sum += input[(i - 1) * N + j];\n            }\n            if (i < N - 1) {\n                sum += input[(i + 1) * N + j];\n            }\n            if (j > 0) {\n                sum += input[i * N + (j - 1)];\n            }\n            if (j < N - 1) {\n                sum += input[i * N + (j + 1)];\n            }\n            if (i > 0 && j > 0) {\n                sum += input[(i - 1) * N + (j - 1)];\n            }\n            if (i > 0 && j < N - 1) {\n                sum += input[(i - 1) * N + (j + 1)];\n            }\n            if (i < N - 1 && j > 0) {\n                sum += input[(i + 1) * N + (j - 1)];\n            }\n            if (i < N - 1 && j < N - 1) {\n                sum += input[(i + 1) * N + (j + 1)];\n            }\n            if (input[i * N + j] == 1) {\n                if (sum < 2) {\n                    output[i * N + j] = 0;\n                } else if (sum == 2 || sum == 3) {\n                    output[i * N + j] = 1;\n                } else {\n                    output[i * N + j] = 0;\n                }\n            } else {\n                if (sum == 3) {\n                    output[i * N + j] = 1;\n                } else {\n                    output[i * N + j] = 0;\n                }\n            }\n        }\n    }\n}\n",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "histogram",
+        "language": "cpp",
+        "name": "20_histogram_pixel_histogram",
+        "parallelism_model": "serial",
+        "prompt": "/* Count the number of pixels in image with each grayscale intensity.\n   The vector `image` is a grayscale image with values 0-255.\n   Store the results in `bins`.\n   Example:\n   \n   input: image=[2, 116, 201, 11, 92, 92, 201, 4, 2]\n   output: [0, 0, 2, 0, 1, ...]\n*/\n void pixelCounts(std::vector<int> const& image, std::array<size_t, 256> &bins) {",
+        "outputs": [
+            "\n   for (int i = 0; i < image.size(); i += 1) {\n      bins[image[i]] += 1;\n   }\n}\n\n\n#if defined(USE_CUDA)\n// fix the issue where atomicAdd is not defined for size_t\nstatic_assert(sizeof(size_t) == sizeof(unsigned long long), \"size_t is not 64 bits\");\n\n__device__ __forceinline__ void atomicAdd(size_t* address, size_t val) {\n   atomicAdd(reinterpret_cast<unsigned long long*>(address), val);\n}\n#endif",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "histogram",
+        "language": "cpp",
+        "name": "24_histogram_count_quartile",
+        "parallelism_model": "serial",
+        "prompt": "/* Count the number of doubles in the vector x that have a fractional part \n   in [0, 0.25), [0.25, 0.5), [0.5, 0.75), and [0.75, 1). Store the counts in `bins`.\n   Examples:\n\n   input: [7.8, 4.2, 9.1, 7.6, 0.27, 1.5, 3.8]\n   output: [2, 1, 2, 2]\n\n   input: [1.9, 0.2, 0.6, 10.1, 7.4]\n   output: [2, 1, 1, 1]\n*/\nvoid countQuartiles(std::vector<double> const& x, std::array<size_t, 4> &bins) {",
+        "outputs": [
+            "\n   for (int i = 0; i < x.size(); i += 1) {\n      const double val = x[i];\n      const double frac = val - (int) val;\n      if (frac < 0.25) {\n         bins[0] += 1;\n      } else if (frac < 0.5) {\n         bins[1] += 1;\n      } else if (frac < 0.75) {\n         bins[2] += 1;\n      } else {\n         bins[3] += 1;\n      }\n   }\n}\n\n#if defined(USE_CUDA)\n// fix the issue where atomicAdd is not defined for size_t\nstatic_assert(sizeof(size_t) == sizeof(unsigned long long), \"size_t is not 64 bits\");\n\n__device__ __forceinline__ void atomicAdd(size_t* address, size_t val) {\n   atomicAdd(reinterpret_cast<unsigned long long*>(address), val);\n}\n#endif",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "histogram",
+        "language": "cpp",
+        "name": "22_histogram_count_quadrants",
+        "parallelism_model": "serial",
+        "prompt": "struct Point {\n   double x, y;\n};\n\n/* Count the number of cartesian points in each quadrant. The vector points contains a list of `Point` objects.\n   Store the counts in `bins`.\n   Example:\n\n   input: [{x=1.5, y=0.1}, {x=-3, y=1.1}, {x=5, y=9}, {x=1.5, y=-1}, {x=3, y=-7}, {x=0.1, y=2}]\n   output: [3, 1, 0, 2]\n*/\nvoid countQuadrants(std::vector<Point> const& points, std::array<size_t, 4> &bins) {",
+        "outputs": [
+            "\n   for (auto const& point : points) {\n      if (point.x >= 0 && point.y >= 0) {\n            bins[0] += 1;\n      } else if (point.x < 0 && point.y >= 0) {\n            bins[1] += 1;\n      } else if (point.x < 0 && point.y < 0) {\n            bins[2] += 1;\n      } else if (point.x >= 0 && point.y < 0) {\n            bins[3] += 1;\n      }\n   }\n}",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "histogram",
+        "language": "cpp",
+        "name": "23_histogram_first_letter_counts",
+        "parallelism_model": "serial",
+        "prompt": "/* For each letter in the alphabet, count the number of strings in the vector s that start with that letter.\n   Assume all strings are in lower case. Store the output in `bins` array.\n   Example:\n\n   input: [\"dog\", \"cat\", \"xray\", \"cow\", \"code\", \"type\", \"flower\"]\n   output: [0, 0, 3, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0]\n*/\nvoid firstLetterCounts(std::vector<std::string> const& s, std::array<size_t, 26> &bins) {",
+        "outputs": [
+            "\n   for (int i = 0; i < s.size(); i += 1) {\n      const char c = s[i][0];\n      const int index = c - 'a';\n      bins[index] += 1;\n   }\n}\n\n#if defined(USE_CUDA)\n// fix the issue where atomicAdd is not defined for size_t\nstatic_assert(sizeof(size_t) == sizeof(unsigned long long), \"size_t is not 64 bits\");\n\n__device__ __forceinline__ void atomicAdd(size_t* address, size_t val) {\n   atomicAdd(reinterpret_cast<unsigned long long*>(address), val);\n}\n#endif",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "histogram",
+        "language": "cpp",
+        "name": "21_histogram_bin_0-100",
+        "parallelism_model": "serial",
+        "prompt": "/* Vector x contains values between 0 and 100, inclusive. Count the number of\n   values in [0,10), [10, 20), [20, 30), ... and store the counts in `bins`.\n   Example:\n\n   input: [7, 32, 95, 12, 39, 32, 11, 71, 70, 66]\n   output: [1, 2, 0, 3, 0, 0, 1, 2, 0, 1]\n*/\nvoid binsBy10Count(std::vector<double> const& x, std::array<size_t, 10> &bins) {",
+        "outputs": [
+            "\n   for (size_t i = 0; i < x.size(); i += 1) {\n      size_t bin = static_cast<size_t>(x[i] / 10);\n      bin = std::min(bin, bins.size() - 1);\n      bins[bin] += 1;\n   }\n}\n\n\n#if defined(USE_CUDA)\n// fix the issue where atomicAdd is not defined for size_t\nstatic_assert(sizeof(size_t) == sizeof(unsigned long long), \"size_t is not 64 bits\");\n\n__device__ __forceinline__ void atomicAdd(size_t* address, size_t val) {\n   atomicAdd(reinterpret_cast<unsigned long long*>(address), val);\n}\n#endif",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "search",
+        "language": "cpp",
+        "name": "39_search_xor_contains",
+        "parallelism_model": "serial",
+        "prompt": "/* Return true if `val` is only in one of vectors x or y.\n   Return false if it is in both or neither.\n   Examples:\n\n   input: x=[1,8,4,3,2], y=[3,4,4,1,1,7], val=7\n   output: true\n\n   input: x=[1,8,4,3,2], y=[3,4,4,1,1,7], val=1\n   output: false\n*/\nbool xorContains(std::vector<int> const& x, std::vector<int> const& y, int val) {",
+        "outputs": [
+            "\n   const bool foundInX = std::find(x.begin(), x.end(), val) != x.end();\n   const bool foundInY = std::find(y.begin(), y.end(), val) != y.end();\n\n   return foundInX ^ foundInY;\n}\n",
+            " return 0; }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "search",
+        "language": "cpp",
+        "name": "37_search_find_the_closest_number_to_pi",
+        "parallelism_model": "serial",
+        "prompt": "/* Return the index of the value in the vector x that is closest to the math constant PI.\n   Use M_PI for the value of PI.\n   Example:\n\n   input: [9.18, 3.05, 7.24, 11.3, -166.49, 2.1]\n   output: 1\n*/\nsize_t findClosestToPi(std::vector<double> const& x) {",
+        "outputs": [
+            "\n   size_t index = 0;\n   double min = std::abs(x[0] - M_PI);\n   for (size_t i = 1; i < x.size(); ++i) {\n      double diff = std::abs(x[i] - M_PI);\n      if (diff < min) {\n            min = diff;\n            index = i;\n      }\n   }\n   return index;\n}",
+            " return 0; }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "search",
+        "language": "cpp",
+        "name": "38_search_find_the_first_even_number",
+        "parallelism_model": "serial",
+        "prompt": "/* Return the index of the first even number in the vector x.\n   Examples:\n\n   input: [7, 3, 9, 5, 5, 7, 2, 9, 12, 11]\n   output: 6\n\n   input: [3, 8, 9, 9, 3, 4, 8, 6]\n   output: 1\n*/\nsize_t findFirstEven(std::vector<int> const& x) {",
+        "outputs": [
+            "\n   for (size_t i = 0; i < x.size(); i += 1) {\n      if (x[i] % 2 == 0) {\n            return i;\n      }\n   }\n   return x.size();\n}",
+            " return 0; }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "search",
+        "language": "cpp",
+        "name": "35_search_search_for_last_struct_by_key",
+        "parallelism_model": "serial",
+        "prompt": "struct Book {\n   std::string title;\n   int pages;\n};\n\n/* Return the index of the last Book item in the vector books where Book.pages is less than 100.\n\t Example:\n\n   input: [{title=\"Green Eggs and Ham\", pages=72}, {title=\"gulliver's travels\", pages=362}, {title=\"Stories of Your Life\", pages=54}, {title=\"Hamilton\", pages=818}]\n   output: 2\n*/\nsize_t findLastShortBook(std::vector<Book> const& books) {",
+        "outputs": [
+            "\n    for (int i = books.size() - 1; i >= 0; i--) {\n        if (books[i].pages < 100) {\n            return i;\n        }\n    }\n    return books.size();\n}",
+            " return 0; }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "search",
+        "language": "cpp",
+        "name": "36_search_check_if_array_contains_value",
+        "parallelism_model": "serial",
+        "prompt": "/* Return true if the vector x contains the value `target`. Return false otherwise.\n   Examples:\n\n   input: x=[1, 8, 2, 6, 4, 6], target=3\n   output: false\n   \n   input: x=[1, 8, 2, 6, 4, 6], target=8\n   output: true\n*/\nbool contains(std::vector<int> const& x, int target) {",
+        "outputs": [
+            "\n    return std::find(x.begin(), x.end(), target) != x.end();\n}",
+            " return 0; }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "fft",
+        "language": "cpp",
+        "name": "05_fft_inverse_fft",
+        "parallelism_model": "serial",
+        "prompt": "/* forward declare fft. computes fourier transform in-place */\nvoid fft(std::vector<std::complex<double>> &x);\n\n/* Compute the inverse fourier transform of x in-place.\n   Example:\n   \n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{0.5,0}, {0.125,0.301777}, {0,-0}, {0.125,0.0517767}, {0,-0}, {0.125,-0.0517767}, {0,-0}, {0.125,-0.301777}]\n*/\nvoid ifft(std::vector<std::complex<double>> &x) {",
+        "outputs": [
+            "\n   // conjugate the complex numbers\n   std::transform(x.begin(), x.end(), x.begin(), [](auto const& val) { return std::conj(val); });\n\n   // forward fft\n   fft( x );\n\n   // conjugate the complex numbers again\n   std::transform(x.begin(), x.end(), x.begin(), [](auto const& val) { return std::conj(val); });\n\n   // scale the numbers\n   std::transform(x.begin(), x.end(), x.begin(), [&](std::complex<double> c) { return c / static_cast<double>(x.size()); });\n}\n\n#if defined(USE_CUDA)\n// a lot of model outputs assume this is defined for some reason, so just define it\n__device__ DOUBLE_COMPLEX_T cexp(DOUBLE_COMPLEX_T arg) {\n   DOUBLE_COMPLEX_T res;\n   float s, c;\n   float e = expf(arg.x);\n   sincosf(arg.y, &s, &c);\n   res.x = c * e;\n   res.y = s * e;\n   return res;\n}\n\n__device__ DOUBLE_COMPLEX_T cuCexp(DOUBLE_COMPLEX_T arg) {\n   return cexp(arg);\n}\n\n__device__ DOUBLE_COMPLEX_T hipCexp(DOUBLE_COMPLEX_T arg) {\n   return cexp(arg);\n}\n#endif",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "fft",
+        "language": "cpp",
+        "name": "08_fft_split_fft",
+        "parallelism_model": "serial",
+        "prompt": "/* Compute the fourier transform of x. Store real part of results in r and imaginary in i.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: r: [4, 1, 0, 1, 0, 1, 0, 1] i: [0, -2.41421, 0, -0.414214, 0, 0.414214, 0, 2.41421]\n*/\nvoid fft(std::vector<std::complex<double>> const& x, std::vector<double> &r, std::vector<double> &i) {",
+        "outputs": [
+            "\n\tstd::vector<std::complex<double>> x_copy = x;\n\t// DFT\n\tunsigned int N = x_copy.size(), k = N, n;\n\tdouble thetaT = 3.14159265358979323846264338328L / N;\n\tstd::complex<double> phiT = std::complex<double>(std::cos(thetaT), -std::sin(thetaT)), T;\n\twhile (k > 1) {\n\t\tn = k;\n\t\tk >>= 1;\n\t\tphiT = phiT * phiT;\n\t\tT = 1.0L;\n\t\tfor (unsigned int l = 0; l < k; l++)\n\t\t{\n\t\t\tfor (unsigned int a = l; a < N; a += n)\n\t\t\t{\n\t\t\t\tunsigned int b = a + k;\n\t\t\t\tstd::complex<double> t = x_copy[a] - x_copy[b];\n\t\t\t\tx_copy[a] += x_copy[b];\n\t\t\t\tx_copy[b] = t * T;\n\t\t\t}\n\t\t\tT *= phiT;\n\t\t}\n\t}\n\t// Decimate\n\tunsigned int m = (unsigned int)std::log2(N);\n\tfor (unsigned int a = 0; a < N; a++)\n\t{\n\t\tunsigned int b = a;\n\t\t// Reverse bits\n\t\tb = (((b & 0xaaaaaaaa) >> 1) | ((b & 0x55555555) << 1));\n\t\tb = (((b & 0xcccccccc) >> 2) | ((b & 0x33333333) << 2));\n\t\tb = (((b & 0xf0f0f0f0) >> 4) | ((b & 0x0f0f0f0f) << 4));\n\t\tb = (((b & 0xff00ff00) >> 8) | ((b & 0x00ff00ff) << 8));\n\t\tb = ((b >> 16) | (b << 16)) >> (32 - m);\n\t\tif (b > a)\n\t\t{\n\t\t\tstd::complex<double> t = x_copy[a];\n\t\t\tx_copy[a] = x_copy[b];\n\t\t\tx_copy[b] = t;\n\t\t}\n\t}\n\n   // split into real and imaginary parts\n   for (size_t j = 0; j < x_copy.size(); j += 1) {\n      r[j] = x_copy[j].real();\n      i[j] = x_copy[j].imag();\n   }\n}\n\nvoid fftCooleyTookey(std::vector<std::complex<double>> &x) {\n    const size_t N = x.size();\n    if (N <= 1) return;\n\n    // divide\n    std::vector<std::complex<double>> even = std::vector<std::complex<double>>(N/2);\n\tstd::vector<std::complex<double>> odd = std::vector<std::complex<double>>(N/2);\n\n\tfor (size_t j = 0; j < N/2; ++j) {\n\t\teven[j] = x[j*2];\n\t\todd[j] = x[j*2+1];\n\t}\n\n    // conquer\n    fftCooleyTookey(even);\n    fftCooleyTookey(odd);\n\n    // combine\n    for (size_t k = 0; k < N/2; ++k) {\n        std::complex<double> t = std::polar(1.0, -2 * M_PI * k / N) * odd[k];\n        x[k    ] = even[k] + t;\n        x[k+N/2] = even[k] - t;\n    }\n}\n\n#if defined(USE_CUDA)\n// a lot of model outputs assume this is defined for some reason, so just define it\n__device__ DOUBLE_COMPLEX_T cexp(DOUBLE_COMPLEX_T arg) {\n   DOUBLE_COMPLEX_T res;\n   float s, c;\n   float e = expf(arg.x);\n   sincosf(arg.y, &s, &c);\n   res.x = c * e;\n   res.y = s * e;\n   return res;\n}\n\n__device__ DOUBLE_COMPLEX_T cuCexp(DOUBLE_COMPLEX_T arg) {\n   return cexp(arg);\n}\n\n__device__ DOUBLE_COMPLEX_T hipCexp(DOUBLE_COMPLEX_T arg) {\n   return cexp(arg);\n}\n#endif",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "fft",
+        "language": "cpp",
+        "name": "07_fft_fft_conjugate",
+        "parallelism_model": "serial",
+        "prompt": "/* Compute the fourier transform of x in-place. Return the imaginary conjugate of each value.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.41421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fftConjugate(std::vector<std::complex<double>> &x) {",
+        "outputs": [
+            "\n\t// DFT\n\tunsigned int N = x.size(), k = N, n;\n\tdouble thetaT = 3.14159265358979323846264338328L / N;\n\tstd::complex<double> phiT = std::complex<double>(std::cos(thetaT), -std::sin(thetaT)), T;\n\twhile (k > 1) {\n\t\tn = k;\n\t\tk >>= 1;\n\t\tphiT = phiT * phiT;\n\t\tT = 1.0L;\n\t\tfor (unsigned int l = 0; l < k; l++) {\n\t\t\tfor (unsigned int a = l; a < N; a += n) {\n\t\t\t\tunsigned int b = a + k;\n\t\t\t\tstd::complex<double> t = x[a] - x[b];\n\t\t\t\tx[a] += x[b];\n\t\t\t\tx[b] = t * T;\n\t\t\t}\n\t\t\tT *= phiT;\n\t\t}\n\t}\n\t// Decimate\n\tunsigned int m = (unsigned int)std::log2(N);\n\tfor (unsigned int a = 0; a < N; a++)\n\t{\n\t\tunsigned int b = a;\n\t\t// Reverse bits\n\t\tb = (((b & 0xaaaaaaaa) >> 1) | ((b & 0x55555555) << 1));\n\t\tb = (((b & 0xcccccccc) >> 2) | ((b & 0x33333333) << 2));\n\t\tb = (((b & 0xf0f0f0f0) >> 4) | ((b & 0x0f0f0f0f) << 4));\n\t\tb = (((b & 0xff00ff00) >> 8) | ((b & 0x00ff00ff) << 8));\n\t\tb = ((b >> 16) | (b << 16)) >> (32 - m);\n\t\tif (b > a)\n\t\t{\n\t\t\tstd::complex<double> t = x[a];\n\t\t\tx[a] = x[b];\n\t\t\tx[b] = t;\n\t\t}\n\t}\n\n\t// conjugate\n\tfor (size_t i = 0; i < x.size(); i += 1) {\n\t\tx[i] = std::conj(x[i]);\n\t}\n}\n\nvoid fftCooleyTookey(std::vector<std::complex<double>>& x) {\n    const size_t N = x.size();\n    if (N <= 1) return;\n\n    // divide\n    std::vector<std::complex<double>> even = std::vector<std::complex<double>>(N/2);\n\tstd::vector<std::complex<double>> odd = std::vector<std::complex<double>>(N/2);\n\n\tfor (size_t i = 0; i < N/2; ++i) {\n\t\teven[i] = x[i*2];\n\t\todd[i] = x[i*2+1];\n\t}\n\n    // conquer\n    fftCooleyTookey(even);\n    fftCooleyTookey(odd);\n\n    // combine\n    for (size_t k = 0; k < N/2; ++k) {\n        std::complex<double> t = std::polar(1.0, -2 * M_PI * k / N) * odd[k];\n        x[k    ] = even[k] + t;\n        x[k+N/2] = even[k] - t;\n    }\n\n\t// conjugate\n\tfor (size_t i = 0; i < x.size(); i += 1) {\n\t\tx[i] = std::conj(x[i]);\n\t}\n}\n\n#if defined(USE_CUDA)\n// a lot of model outputs assume this is defined for some reason, so just define it\n__device__ DOUBLE_COMPLEX_T cexp(DOUBLE_COMPLEX_T arg) {\n   DOUBLE_COMPLEX_T res;\n   float s, c;\n   float e = expf(arg.x);\n   sincosf(arg.y, &s, &c);\n   res.x = c * e;\n   res.y = s * e;\n   return res;\n}\n\n__device__ DOUBLE_COMPLEX_T cuCexp(DOUBLE_COMPLEX_T arg) {\n   return cexp(arg);\n}\n\n__device__ DOUBLE_COMPLEX_T hipCexp(DOUBLE_COMPLEX_T arg) {\n   return cexp(arg);\n}\n#endif",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "fft",
+        "language": "cpp",
+        "name": "09_fft_fft_out_of_place",
+        "parallelism_model": "serial",
+        "prompt": "/* Compute the fourier transform of x. Store the result in output.\n   Example:\n\n   input: [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]\n   output: [{4,0}, {1,-2.42421}, {0,0}, {1,-0.414214}, {0,0}, {1,0.414214}, {0,0}, {1,2.41421}]\n*/\nvoid fft(std::vector<std::complex<double>> const& x, std::vector<std::complex<double>> &output) {",
+        "outputs": [
+            "\n   output = x;\n\n   // DFT\n\tunsigned int N = output.size(), k = N, n;\n\tdouble thetaT = 3.14159265358979323846264338328L / N;\n\tstd::complex<double> phiT = std::complex<double>(std::cos(thetaT), -std::sin(thetaT)), T;\n\twhile (k > 1) {\n\t\tn = k;\n\t\tk >>= 1;\n\t\tphiT = phiT * phiT;\n\t\tT = 1.0L;\n\t\tfor (unsigned int l = 0; l < k; l++)\n\t\t{\n\t\t\tfor (unsigned int a = l; a < N; a += n)\n\t\t\t{\n\t\t\t\tunsigned int b = a + k;\n\t\t\t\tstd::complex<double> t = output[a] - output[b];\n\t\t\t\toutput[a] += output[b];\n\t\t\t\toutput[b] = t * T;\n\t\t\t}\n\t\t\tT *= phiT;\n\t\t}\n\t}\n\t// Decimate\n\tunsigned int m = (unsigned int)std::log2(N);\n\tfor (unsigned int a = 0; a < N; a++) {\n\t\tunsigned int b = a;\n\t\t// Reverse bits\n\t\tb = (((b & 0xaaaaaaaa) >> 1) | ((b & 0x55555555) << 1));\n\t\tb = (((b & 0xcccccccc) >> 2) | ((b & 0x33333333) << 2));\n\t\tb = (((b & 0xf0f0f0f0) >> 4) | ((b & 0x0f0f0f0f) << 4));\n\t\tb = (((b & 0xff00ff00) >> 8) | ((b & 0x00ff00ff) << 8));\n\t\tb = ((b >> 16) | (b << 16)) >> (32 - m);\n\t\tif (b > a) {\n\t\t\tstd::complex<double> t = output[a];\n\t\t\toutput[a] = output[b];\n\t\t\toutput[b] = t;\n\t\t}\n\t}\n}\n\nvoid fftCooleyTookey(std::vector<std::complex<double>> &x) {\n    const size_t N = x.size();\n    if (N <= 1) return;\n\n    // divide\n    std::vector<std::complex<double>> even = std::vector<std::complex<double>>(N/2);\n\tstd::vector<std::complex<double>> odd = std::vector<std::complex<double>>(N/2);\n\n\tfor (size_t j = 0; j < N/2; ++j) {\n\t\teven[j] = x[j*2];\n\t\todd[j] = x[j*2+1];\n\t}\n\n    // conquer\n    fftCooleyTookey(even);\n    fftCooleyTookey(odd);\n\n    // combine\n    for (size_t k = 0; k < N/2; ++k) {\n        std::complex<double> t = std::polar(1.0, -2 * M_PI * k / N) * odd[k];\n        x[k    ] = even[k] + t;\n        x[k+N/2] = even[k] - t;\n    }\n}\n\n#if defined(USE_CUDA)\n// a lot of model outputs assume this is defined for some reason, so just define it\n__device__ DOUBLE_COMPLEX_T cexp(DOUBLE_COMPLEX_T arg) {\n   DOUBLE_COMPLEX_T res;\n   float s, c;\n   float e = expf(arg.x);\n   sincosf(arg.y, &s, &c);\n   res.x = c * e;\n   res.y = s * e;\n   return res;\n}\n\n__device__ DOUBLE_COMPLEX_T cuCexp(DOUBLE_COMPLEX_T arg) {\n   return cexp(arg);\n}\n\n__device__ DOUBLE_COMPLEX_T hipCexp(DOUBLE_COMPLEX_T arg) {\n   return cexp(arg);\n}\n#endif",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "fft",
+        "language": "cpp",
+        "name": "06_fft_dft",
+        "parallelism_model": "serial",
+        "prompt": "/* Compute the discrete fourier transform of x. Store the result in output.\n   Example:\n\n   input: [1, 4, 9, 16]\n   output: [30+0i, -8-12i, -10-0i, -8+12i]\n*/\nvoid dft(std::vector<double> const& x, std::vector<std::complex<double>> &output) {",
+        "outputs": [
+            "\n   int N = x.size();\n   output.resize(N, std::complex<double>(0, 0)); // Resize the output vector and initialize with 0\n\n   for (int k = 0; k < N; k++) { // For each output element\n      std::complex<double> sum(0, 0);\n      for (int n = 0; n < N; n++) { // For each input element\n         double angle = 2 * M_PI * n * k / N;\n         std::complex<double> c(std::cos(angle), -std::sin(angle)); // Euler's formula\n         sum += x[n] * c;\n      }\n      output[k] = sum;\n   }\n}\n\n\n#if defined(USE_CUDA)\n// a lot of model outputs assume this is defined for some reason, so just define it\n__device__ DOUBLE_COMPLEX_T cexp(DOUBLE_COMPLEX_T arg) {\n   DOUBLE_COMPLEX_T res;\n   float s, c;\n   float e = expf(arg.x);\n   sincosf(arg.y, &s, &c);\n   res.x = c * e;\n   res.y = s * e;\n   return res;\n}\n\n__device__ DOUBLE_COMPLEX_T cuCexp(DOUBLE_COMPLEX_T arg) {\n   return cexp(arg);\n}\n\n__device__ DOUBLE_COMPLEX_T hipCexp(DOUBLE_COMPLEX_T arg) {\n   return cexp(arg);\n}\n#endif",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "33_scan_reverse_prefix_sum",
+        "parallelism_model": "serial",
+        "prompt": "/* Compute the reverse prefix sum of the vector x into output.\n   Examples:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [2, 8, 14, 18, 25, 26]\n\n   input: [3, 3, 7, 1, -2]\n   output: [-2, -1, 6, 9, 12]\n*/\nvoid reversePrefixSum(std::vector<int> const& x, std::vector<int> &output) {",
+        "outputs": [
+            "\n    std::vector<int> reverseX;\n    for (int i = x.size() - 1; i >= 0; i--) {\n        reverseX.push_back(x[i]);\n    }\n    std::inclusive_scan(reverseX.begin(), reverseX.end(), output.begin());\n}\n",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "30_scan_prefix_sum",
+        "parallelism_model": "serial",
+        "prompt": "/* Compute the prefix sum of the vector x into output.\n   Example:\n   \n   input: [1, 7, 4, 6, 6, 2]\n   output: [1, 8, 12, 18, 24, 26]\n*/\nvoid prefixSum(std::vector<double> const& x, std::vector<double> &output) {",
+        "outputs": [
+            "\n    std::inclusive_scan(x.begin(), x.end(), output.begin());\n}\n",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "34_scan_largest_contiguous_subarray_sum",
+        "parallelism_model": "serial",
+        "prompt": "/* Return the largest sum of any contiguous subarray in the vector x.\n   i.e. if x=[\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4] then [4, \u22121, 2, 1] is the contiguous\n   subarray with the largest sum of 6.\n   Example:\n\n   input: [\u22122, 1, \u22123, 4, \u22121, 2, 1, \u22125, 4]\n   output: 6\n*/\nint maximumSubarray(std::vector<int> const& x) {",
+        "outputs": [
+            "\n    int largestSum = std::numeric_limits<int>::lowest();\n    for (int i = 0; i < x.size(); i++) {\n        int currSum = 0;\n        for (int j = i; j < x.size(); j++) {\n            currSum += x[j];\n            if (currSum > largestSum) largestSum = currSum;\n        }\n    }\n    return largestSum;\n}\n",
+            " return 0; }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "32_scan_sum_of_prefix_sum_array",
+        "parallelism_model": "serial",
+        "prompt": "/* Compute the prefix sum array of the vector x and return its sum.\n   Example:\n\n   input: [-7, 2, 1, 9, 4, 8]\n   output: 15\n*/\ndouble sumOfPrefixSum(std::vector<double> const& x) {",
+        "outputs": [
+            "\n    std::vector<double> prefixSum(x.size());\n    std::inclusive_scan(x.begin(), x.end(), prefixSum.begin());\n    return std::accumulate(prefixSum.begin(), prefixSum.end(), 0.0);\n}\n",
+            " return 0; }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "scan",
+        "language": "cpp",
+        "name": "31_scan_scan_with_min_function",
+        "parallelism_model": "serial",
+        "prompt": "/* Replace the i-th element of the vector x with the minimum value from indices 0 through i.\n   Examples:\n\n   input: [8, 6, -1, 7, 3, 4, 4]\n   output: [8, 6, -1, -1, -1, -1, -1]\n\n   input: [5, 4, 6, 4, 3, 6, 1, 1]\n   output: [5, 4, 4, 4, 3, 3, 1, 1]\n*/\nvoid partialMinimums(std::vector<float> &x) {",
+        "outputs": [
+            "\n    std::inclusive_scan(x.begin(), x.end(), x.begin(), [] (const float &x, const float &y) {\n                                                           return std::min(x, y);\n                                                       },\n        std::numeric_limits<float>::max());\n}\n",
+            " }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "graph",
+        "language": "cpp",
+        "name": "17_graph_highest_degree",
+        "parallelism_model": "serial",
+        "prompt": "/* Compute the highest node degree in the undirected graph. The graph is defined in the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 3\n*/\nint maxDegree(std::vector<int> const& A, size_t N) {",
+        "outputs": [
+            "\n   int maxDegree = 0;\n   for (int i = 0; i < N; i += 1) {\n      int degree = 0;\n      for (int j = 0; j < N; j += 1) {\n         degree += A[i * N + j];\n      }\n      maxDegree = std::max(maxDegree, degree);\n   }\n   return maxDegree;\n}",
+            " return 0; }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "graph",
+        "language": "cpp",
+        "name": "16_graph_largest_component",
+        "parallelism_model": "serial",
+        "prompt": "/* Return the number of vertices in the largest component of the undirected graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint largestComponent(std::vector<int> const& A, size_t N) {",
+        "outputs": [
+            "\n   std::vector<bool> visited(N, false);\n   int maxCount = 0;\n   for (int i = 0; i < N; i += 1) {\n      if (!visited[i]) {\n         int count = 0;\n         dfs(A, i, N, visited, count);\n         maxCount = std::max(maxCount, count);\n      }\n   }\n   return maxCount;\n}",
+            " return 0; }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "graph",
+        "language": "cpp",
+        "name": "19_graph_shortest_path",
+        "parallelism_model": "serial",
+        "prompt": "/* Return the length of the shortest path from source to dest in the undirected graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n   Example:\n\n\t input: [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]], source=0, dest=3\n   output: 2\n*/\nint shortestPathLength(std::vector<int> const& A, size_t N, int source, int dest) {",
+        "outputs": [
+            "\n   std::vector<bool> visited(N, false);\n   std::queue<std::pair<int, int>> queue;\n   visited[source] = true;\n   queue.push({source, 0});\n\n   while (!queue.empty()) {\n      auto [current, pathLength] = queue.front();\n      queue.pop();\n\n      if (current == dest) {\n         return pathLength;\n      }\n\n      // Check all adjacent vertices\n      for (int i = 0; i < N; ++i) {\n         if (A[current*N + i] && !visited[i]) {\n               visited[i] = true;\n               queue.push({i, pathLength + 1});\n         }\n      }\n   }\n\n   return std::numeric_limits<int>::max();\n}",
+            " return 0; }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "graph",
+        "language": "cpp",
+        "name": "15_graph_edge_count",
+        "parallelism_model": "serial",
+        "prompt": "/* Count the number of edges in the directed graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A represents a directed graph.\n   Example:\n\n\t input: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 0]]\n   output: 6\n*/\nint edgeCount(std::vector<int> const& A, size_t N) {",
+        "outputs": [
+            "\n   int count = 0;\n   for (int i = 0; i < N; i += 1) {\n      for (int j = 0; j < N; j += 1) {\n         if (A[i * N + j] == 1) {\n            count += 1;\n         }\n      }\n   }\n   return count;\n}",
+            " return 0; }",
+            " undefinedFunction(); }"
+        ]
+    },
+    {
+        "problem_type": "graph",
+        "language": "cpp",
+        "name": "18_graph_count_components",
+        "parallelism_model": "serial",
+        "prompt": "/* Count the number of connected components in the undirected graph defined by the adjacency matrix A.\n   A is an NxN adjacency matrix stored in row-major. A is an undirected graph.\n   Example:\n\n\t input: [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\n   output: 2\n*/\nint componentCount(std::vector<int> const& A, size_t N) {",
+        "outputs": [
+            "\n   std::vector<bool> visited(N, false);\n   int count = 0;\n   for (int i = 0; i < N; i += 1) {\n      if (!visited[i]) {\n         dfs(A, i, N, visited);\n         count += 1;\n      }\n   }\n   return count;\n}",
+            " return 0; }",
             " undefinedFunction(); }"
         ]
     }
