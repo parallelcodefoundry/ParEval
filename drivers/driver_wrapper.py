@@ -215,15 +215,15 @@ class DriverWrapper(ABC):
 
     def test_all_outputs_in_prompt(self, prompt: dict) -> dict:
         """ Run all the generated outputs in the given prompt. """
-        root = prompt["language"]
+        lang = prompt["language"]
         type = prompt["problem_type"]
         name = prompt["name"]
         ext = LANGUAGE_EXTENSIONS[prompt["language"]]
-        if root == "cpp" and self.parallelism_model in ["cuda", "hip"]:
+        if lang == "cpp" and self.parallelism_model in ["cuda", "hip"]:
             ext = ".cu"
-        driver_root = f"{name}"
+        driver_dirname = f"{name}"
         driver_base = DRIVER_MAP[self.parallelism_model]
-        test_driver_file = os.path.join(root, "benchmarks", type, driver_root, driver_base + ext)
+        test_driver_file = os.path.join(lang, "benchmarks", type, driver_dirname, driver_base + ext)
         problem_size = self.problem_sizes.get(name, {}).get(self.parallelism_model, "(1<<18)")
 
         outputs = []
