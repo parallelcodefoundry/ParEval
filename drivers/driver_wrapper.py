@@ -167,6 +167,7 @@ class DriverWrapper(ABC):
         self, 
         parallelism_model: str = "serial", 
         launch_configs: dict = {"format": "{exec_path} {args}", "params": [{}]},
+        build_configs: Optional[dict] = None,
         problem_sizes: dict = {},
         scratch_dir: Optional[PathLike] = None,
         build_timeout: int = 20,
@@ -180,6 +181,7 @@ class DriverWrapper(ABC):
         self.validator = VALIDATORS[parallelism_model]
         self.scratch_dir = scratch_dir
         self.launch_configs = launch_configs[parallelism_model]
+        self.build_configs = build_configs
         self.problem_sizes = problem_sizes
         self.build_timeout = build_timeout
         self.run_timeout = run_timeout

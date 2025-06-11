@@ -32,6 +32,8 @@ def get_args():
     parser.add_argument("--scratch-dir", type=str, help="If provided, put scratch files here.")
     parser.add_argument("--launch-configs", type=str, default="launch-configs.json", 
         help="config for how to run samples.")
+    parser.add_argument("--build-configs", type=str, default="build-configs.json",
+        help="config for how to build samples. If not provided, will use the default build settings for each model.")
     parser.add_argument("--problem-sizes", type=str, default="problem-sizes.json", 
         help="config for how to run samples.")
     parser.add_argument("--yes-to-all", action="store_true", help="If provided, automatically answer yes to all prompts.")
@@ -102,6 +104,10 @@ def main():
     launch_configs = load_json(args.launch_configs)
     logging.info(f"Loaded launch configs from {args.launch_configs}.")
 
+    # load build configs
+    build_configs = load_json(args.build_configs)
+    logging.info(f"Loaded build configs from {args.build_configs}.")
+
     # load problem sizes
     problem_sizes = load_json(args.problem_sizes)
     logging.info(f"Loaded problem sizes from {args.problem_sizes}.")
@@ -139,6 +145,7 @@ def main():
             prompt, 
             args.scratch_dir, 
             launch_configs, 
+            build_configs,
             problem_sizes,
             args.dry, 
             display_build_errors=args.log_build_errors,

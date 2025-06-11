@@ -57,6 +57,8 @@ class CppDriverWrapper(DriverWrapper):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        self.build_configs = self.build_configs or COMPILER_SETTINGS
         self.model_driver_file = os.path.join("cpp", "models", DRIVER_MAP[self.parallelism_model])
 
     def write_source(self, content: str, fpath: PathLike) -> bool:
@@ -125,7 +127,7 @@ class CppDriverWrapper(DriverWrapper):
 
             # compile and run the output
             exec_path = os.path.join(tmpdir, "a.out")
-            compiler_kwargs = copy.deepcopy(COMPILER_SETTINGS[self.parallelism_model])
+            compiler_kwargs = copy.deepcopy(self.build_configs[self.parallelism_model])
             compiler_kwargs["problem_size"] = problem_size  # for kokkos
             compiler_kwargs["CXXFLAGS"] += f" -I{tmpdir} -DDRIVER_PROBLEM_SIZE=\"{problem_size}\""
             build_result = self.compile(self.model_driver_file, test_driver_file, output_path=exec_path, **compiler_kwargs)
