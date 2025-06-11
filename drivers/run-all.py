@@ -5,10 +5,10 @@
 """
 # std imports
 from argparse import ArgumentParser
+import contextlib
 import json
 import logging
 import os
-import tempfile
 from typing import Optional
 
 # tpl imports
@@ -30,6 +30,7 @@ def get_args():
     parser.add_argument("input_json", type=str, help="Input JSON file containing the test cases.")
     parser.add_argument("-o", "--output", type=str, help="Output JSON file containing the results.")
     parser.add_argument("--scratch-dir", type=str, help="If provided, put scratch files here.")
+    parser.add_argument("--driver-root", type=str, help="Where to look for the driver files, if not in cwd.")
     parser.add_argument("--launch-configs", type=str, default="launch-configs.json", 
         help="config for how to run samples.")
     parser.add_argument("--build-configs", type=str, default="build-configs.json",
@@ -58,7 +59,15 @@ def get_args():
     parser.add_argument("--log-runs", action="store_true", help="Display the stderr and stdout of runs.")
     return parser.parse_args()
 
-def get_driver(prompt: dict, scratch_dir: Optional[os.PathLike], launch_configs: dict, build_configs: dict, problem_sizes: dict, dry: bool, **kwargs) -> DriverWrapper:
+def get_driver(
+    prompt: dict, 
+    scratch_dir: Optional[os.PathLike], 
+    launch_configs: dict, 
+    build_configs: dict, 
+    problem_sizes: dict, 
+    dry: bool, 
+    **kwargs
+) -> DriverWrapper:
     """ Get the language drive wrapper for this prompt """
     driver_cls = LANGUAGE_DRIVERS[prompt["language"]]
     return driver_cls(parallelism_model=prompt["parallelism_model"], launch_configs=launch_configs, 
@@ -112,6 +121,17 @@ def main():
     problem_sizes = load_json(args.problem_sizes)
     logging.info(f"Loaded problem sizes from {args.problem_sizes}.")
 
+    # set driver root; If provided, use user argument. If it's not provided, then check if the PAREVAL_ROOT environment
+    # variable is set, then use "${PAREVAL_ROOT}/drivers" as the root. If neither is set, then use the location of 
+    # this script as the root.
+    if args.driver_root:
+        DRIVER_ROOT = args.driver_root
+    elif "PAREVAL_ROOT" in os.environ:
+        DRIVER_ROOT = os.path.join(os.environ["PAREVAL_ROOT"], "drivers")
+    else:
+        DRIVER_ROOT = os.path.dirname(os.path.abspath(__file__))
+    logging.info(f"Using driver root: {DRIVER_ROOT}")
+
     # gather the list of parallelism models to test
     models_to_test = args.include_models if args.include_models else ["serial", "omp", "mpi", "mpi+omp", "kokkos", "cuda", "hip"]
     if args.exclude_models:
@@ -152,9 +172,11 @@ def main():
             display_runs=args.log_runs,
             early_exit_runs=args.early_exit_runs,
             build_timeout=args.build_timeout,
-            run_timeout=args.run_timeout
+            run_timeout=args.run_timeout,
         )
-        driver.test_all_outputs_in_prompt(prompt)
+
+        with contextlib.chdir(DRIVER_ROOT):
+            driver.test_all_outputs_in_prompt(prompt)
 
         # go ahead and write out outputs now
         if args.output and args.output != '-':
