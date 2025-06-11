@@ -58,11 +58,11 @@ def get_args():
     parser.add_argument("--log-runs", action="store_true", help="Display the stderr and stdout of runs.")
     return parser.parse_args()
 
-def get_driver(prompt: dict, scratch_dir: Optional[os.PathLike], launch_configs: dict, problem_sizes: dict, dry: bool, **kwargs) -> DriverWrapper:
+def get_driver(prompt: dict, scratch_dir: Optional[os.PathLike], launch_configs: dict, build_configs: dict, problem_sizes: dict, dry: bool, **kwargs) -> DriverWrapper:
     """ Get the language drive wrapper for this prompt """
     driver_cls = LANGUAGE_DRIVERS[prompt["language"]]
     return driver_cls(parallelism_model=prompt["parallelism_model"], launch_configs=launch_configs, 
-        problem_sizes=problem_sizes, scratch_dir=scratch_dir, dry=dry, **kwargs)
+        build_configs=build_configs, problem_sizes=problem_sizes, scratch_dir=scratch_dir, dry=dry, **kwargs)
 
 def already_has_results(prompt: dict) -> bool:
     """ Check if a prompt already has results stored in it. """
