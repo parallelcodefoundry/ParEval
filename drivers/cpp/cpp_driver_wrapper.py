@@ -41,7 +41,7 @@ COMPILER_SETTINGS = {
 def build_kokkos(driver_src: PathLike, output_root: PathLike, problem_size: str = "(1<<20)"):
     """ Custom steps for the Kokkos programs, since they require cmake """
     # cp cmake file into the output directory
-    cmake_path = "cpp/KokkosCMakeLists.txt"
+    cmake_path = os.path.join("cpp", "KokkosCMakeLists.txt")
     cmake_dest = os.path.join(output_root, "CMakeLists.txt")
     run_command(f"cp {cmake_path} {cmake_dest}", dry=False)
 
