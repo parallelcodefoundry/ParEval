@@ -22,6 +22,11 @@ def clean_output(prompt: str, output: str) -> str:
     if output.strip().startswith(last_line_of_prompt):
         output = output.replace(last_line_of_prompt, '', 1)
 
+    # we expect outputs to not start with the opening { bracket. We add that later in the drivers;
+    # remove it here if present
+    if output.strip().startswith('{'):
+        output = output.replace('{', '', 1)
+
     if has_balanced_brackets("{" + output + "}"):
         output = output + '}'
 
