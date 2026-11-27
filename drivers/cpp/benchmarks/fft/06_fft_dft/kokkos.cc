@@ -42,6 +42,7 @@ Context *init() {
     ctx->x_host.resize(DRIVER_PROBLEM_SIZE);
     ctx->output_host.resize(DRIVER_PROBLEM_SIZE);
     ctx->x = Kokkos::View<double*>("xNonConst", DRIVER_PROBLEM_SIZE);
+    ctx->output = Kokkos::View<Kokkos::complex<double>*>("output", DRIVER_PROBLEM_SIZE);
 
     reset(ctx);
     return ctx;

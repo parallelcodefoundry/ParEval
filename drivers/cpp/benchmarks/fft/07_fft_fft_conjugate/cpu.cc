@@ -75,7 +75,7 @@ bool validate(Context *ctx) {
 
         // compute correct result
         std::vector<std::complex<double>> correct = x;
-        fftCooleyTookey(correct);
+        correctFft(correct);
 
         // compute test result
         std::vector<std::complex<double>> test = x;
