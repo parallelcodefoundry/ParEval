@@ -90,7 +90,7 @@ bool validate(Context *ctx) {
         // compute test result
         countQuartiles(x, test);
         
-        for (int j = 0; j < 10; j += 1) {
+        for (int j = 0; j < 4; j += 1) {
             if (correct[j] != test[j]) {
                 return false;
             }

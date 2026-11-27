@@ -31,12 +31,13 @@ struct Context {
     Kokkos::View<Element*> x, y;
     Kokkos::View<double*> z;
     Kokkos::View<const Element*> x_const, y_const;
-    std::vector<Element> xHost, yHost, zHost;
+    std::vector<Element> xHost, yHost;
+    std::vector<double> zHost;
     size_t N;
 };
 
 void reset(Context *ctx) {
-    for (size_t i = 0; i < x.size(); i++) {
+    for (size_t i = 0; i < ctx->xHost.size(); i++) {
         ctx->xHost[i] = {rand() % ctx->N, (rand() / (double) RAND_MAX) * 2.0 - 1.0};
         ctx->yHost[i] = {rand() % ctx->N, (rand() / (double) RAND_MAX) * 2.0 - 1.0};
     }
@@ -95,14 +96,14 @@ bool validate(Context *ctx) {
 
     std::vector<Element> xHost(nVals);
     std::vector<Element> yHost(nVals);
-    std::vector<Element> correct(TEST_SIZE), test(TEST_SIZE);
+    std::vector<double> correct(TEST_SIZE), test(TEST_SIZE);
 
     const size_t numTries = MAX_VALIDATION_ATTEMPTS;
     for (int trialIter = 0; trialIter < numTries; trialIter += 1) {
         // set up input
         double alpha = (rand() / (double) RAND_MAX) * 2.0 - 1.0;
         for (size_t i = 0; i < x.size(); i++) {
-            xHost[i] = {rand() % ctx->N, (rand() / (double) RAND_MAX) * 2.0 - 1.0};
+            xHost[i] = {rand() % TEST_SIZE, (rand() / (double) RAND_MAX) * 2.0 - 1.0};
         }
         std::sort(xHost.begin(), xHost.end(), [](Element const& a, Element const& b) {
             return a.index < b.index;
@@ -113,7 +114,7 @@ bool validate(Context *ctx) {
         Kokkos::View<const Element*> x_const = x;
 
         for (size_t i = 0; i < y.size(); i++) {
-            yHost[i] = {rand() % ctx->N, (rand() / (double) RAND_MAX) * 2.0 - 1.0};
+            yHost[i] = {rand() % TEST_SIZE, (rand() / (double) RAND_MAX) * 2.0 - 1.0};
         }
         std::sort(yHost.begin(), yHost.end(), [](Element const& a, Element const& b) {
             return a.index < b.index;
@@ -130,7 +131,7 @@ bool validate(Context *ctx) {
         correctSparseAxpy(alpha, xHost, yHost, correct);
 
         // compute test result
-        sparseAxpy(alpha, x, y, z);
+        sparseAxpy(alpha, x_const, y_const, z);
 
         copyViewToVector(z, test);
         
